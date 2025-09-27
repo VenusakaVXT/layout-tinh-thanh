@@ -1,0 +1,185 @@
+<!-- Việc Làm Đề Xuất -->
+<section class="py-12 md:py-16 bg-white" x-data="viecLamDeXuatComponent()">
+  <div class="container mx-auto px-4">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <a href="/viec-lam">
+          <h2
+            class="text-xl md:text-2xl md:text-3xl font-bold text-gray-900 mb-2 hover:text-blue-600 transition-colors">
+            Việc Làm Đề Xuất
+          </h2>
+        </a>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="/viec-lam" class="hidden md:block">
+          <button class="btn-secondary btn-sm md:btn-md flex items-center">
+            Xem tất cả
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-arrow-right w-4 h-4 ml-2">
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+          </button>
+        </a>
+        <div class="flex gap-2">
+          <button @click="prevSlide()" :disabled="isPrevDisabled()"
+            class="btn-outline-primary btn-sm w-10 h-10 p-0 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-chevron-left w-4 h-4">
+              <path d="m15 18-6-6 6-6"></path>
+            </svg>
+          </button>
+          <button @click="nextSlide()" :disabled="isNextDisabled()"
+            class="btn-outline-primary btn-sm w-10 h-10 p-0 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-chevron-right w-4 h-4">
+              <path d="m9 18 6-6-6-6"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="relative">
+      <div class="overflow-hidden">
+        <div class="flex transition-transform duration-500 ease-in-out" x-ref="slideContainer"
+          style="transform: translateX(0%);">
+          <template x-for="slide in totalSlides" :key="slide">
+            <div class="w-full flex-shrink-0">
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <template x-for="job in jobs.slice(slide * itemsPerSlide, (slide + 1) * itemsPerSlide)" :key="job.id">
+                  <div
+                    class="rounded-lg border text-card-foreground shadow-sm hover:shadow-lg transition-shadow bg-white card-hover">
+                    <div class="p-4">
+                      <div class="h-[62px] flex items-start justify-between mb-3">
+                        <div class="flex items-start gap-3 flex-1">
+                          <a :href="`/doanh-nghiep/${job.company.toLowerCase().replace(/\s+/g, '-')}`">
+                            <img src="/placeholder.svg?height=60&width=60" :alt="job.company"
+                              class="w-12 h-12 object-cover rounded-lg flex-shrink-0 hover:opacity-90 transition-opacity">
+                          </a>
+                          <div class="flex-1 min-w-0">
+                            <h3 class="font-semibold text-gray-900 line-clamp-1 mb-1">
+                              <a :href="`/viec-lam/${job.id}`" class="hover:text-blue-600 transition-colors"
+                                x-text="job.title"></a>
+                            </h3>
+                            <div class="text-sm text-gray-600 mb-2 line-clamp-1">
+                              <a :href="`/doanh-nghiep/${job.company.toLowerCase().replace(/\s+/g, '-')}`"
+                                class="hover:text-blue-600 transition-colors" x-text="job.company"></a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="flex flex-col items-end gap-1">
+                          <div class="flex items-center gap-1">
+                            <div x-show="job.featured"
+                              class="inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-orange-500 text-white">
+                              Nổi bật
+                            </div>
+                            <div x-show="job.urgent"
+                              class="inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-secondary bg-red-500 text-white">
+                              Khẩn cấp
+                            </div>
+                          </div>
+                          <div class="text-xs text-gray-500" x-text="job.date"></div>
+                        </div>
+                      </div>
+                      <div class="space-y-2 mb-3">
+                        <div class="flex items-center gap-4 text-sm">
+                          <div class="flex items-center text-green-600 font-medium">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round" class="lucide lucide-dollar-sign w-4 h-4 mr-1">
+                              <line x1="12" x2="12" y1="2" y2="22"></line>
+                              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                            <span x-text="job.salary"></span>
+                          </div>
+                          <div class="flex items-center text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4 mr-1">
+                              <path
+                                d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
+                              </path>
+                              <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <span class="line-clamp-1" x-text="job.location"></span>
+                          </div>
+                        </div>
+                        <div class="flex items-center gap-4 text-sm text-gray-500">
+                          <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round" class="lucide lucide-briefcase w-4 h-4 mr-1">
+                              <rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect>
+                              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                            </svg>
+                            <span x-text="getJobTypeLabel(job.jobType)"></span>
+                          </div>
+                          <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round" class="lucide lucide-clock w-4 h-4 mr-1">
+                              <circle cx="12" cy="12" r="10"></circle>
+                              <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <span x-text="job.experience"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="flex flex-wrap gap-1 mb-3">
+                        <template x-for="skill in job.skills.slice(0, 3)" :key="skill">
+                          <div
+                            class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-secondary bg-gray-100 text-gray-700 text-xs"
+                            x-text="skill"></div>
+                        </template>
+                        <div x-show="job.skills.length > 3"
+                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-secondary bg-gray-100 text-gray-700 text-xs">
+                          +<span x-text="job.skills.length - 3"></span>
+                        </div>
+                      </div>
+                      <div class="flex items-center justify-between text-xs text-gray-500">
+                        <span x-text="job.date"></span>
+                        <div class="flex items-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-eye w-3 h-3 mr-1">
+                            <path
+                              d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0">
+                            </path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                          </svg>
+                          <span x-text="job.views"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-center mt-6 gap-2">
+      <template x-for="dot in getPaginationDots()" :key="dot">
+        <button @click="goToSlide(dot)" class="w-2 h-2 rounded-full transition-colors"
+          :class="isDotActive(dot) ? 'bg-blue-500' : 'bg-gray-300'"></button>
+      </template>
+    </div>
+    <div class="text-center mt-8 flex justify-center block md:hidden">
+      <a href="/viec-lam">
+        <button class="btn-primary flex items-center">
+          Tất Cả Việc Làm
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-arrow-right w-4 h-4 ml-2">
+            <path d="M5 12h14"></path>
+            <path d="m12 5 7 7-7 7"></path>
+          </svg>
+        </button>
+      </a>
+    </div>
+  </div>
+</section>

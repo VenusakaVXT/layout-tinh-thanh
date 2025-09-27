@@ -1,0 +1,92 @@
+<section class="py-12 md:py-16 bg-gray-50" x-data="newsComponent()">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-8">
+      <h2 class="text-xl md:text-2xl md:text-3xl font-bold text-gray-900 mb-4">Tin Tức Bình Dương</h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">Cập nhật những tin tức mới nhất về du lịch, ẩm thực và văn hóa tỉnh
+        Bình Dương</p>
+    </div>
+    <div class="flex items-center justify-between mb-8">
+      <div></div>
+      <div class="flex gap-2"><button
+          class="btn-outline-primary btn-sm w-10 h-10 p-0 flex items-center justify-center" @click="prevSlide()"><svg
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-chevron-left w-4 h-4">
+            <path d="m15 18-6-6 6-6"></path>
+          </svg></button><button class="btn-outline-primary btn-sm w-10 h-10 p-0 flex items-center justify-center"
+          @click="nextSlide()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-chevron-right w-4 h-4">
+            <path d="m9 18 6-6-6-6"></path>
+          </svg></button></div>
+    </div>
+    <div class="overflow-hidden">
+      <div class="carousel-container flex transition-transform duration-500 ease-in-out"
+        style="transform: translateX(0%);">
+        <template x-for="(slide, slideIndex) in totalSlides" :key="slideIndex">
+          <div class="w-full flex-shrink-0">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <template x-for="newsItem in getCurrentSlideNews()" :key="newsItem.id">
+                <div
+                  class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow group card-hover">
+                  <div class="p-0">
+                    <div class="relative">
+                      <a :href="`/tin-tuc/${newsItem.id}`">
+                        <img :src="newsItem.image" :alt="newsItem.title"
+                          class="w-full h-48 object-cover rounded-t-lg group-hover:opacity-90 transition-opacity">
+                      </a>
+                    </div>
+                    <div class="p-4">
+                      <div class="flex items-center gap-2 mb-3">
+                        <a :href="`/tin-tuc/danh-muc/${newsItem.categorySlug}`">
+                          <div
+                            class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary"
+                            :class="getCategoryColor(newsItem.category)" x-text="newsItem.category"></div>
+                        </a>
+                      </div>
+                      <h3 class="font-semibold text-gray-900 line-clamp-2 mb-2 leading-6">
+                        <a :href="`/tin-tuc/${newsItem.id}`" class="hover:text-blue-600 transition-colors"
+                          x-text="newsItem.title"></a>
+                      </h3>
+                      <p class="text-sm text-gray-600 line-clamp-3 mb-3" x-text="newsItem.excerpt"></p>
+                      <div class="flex items-center justify-between text-xs text-gray-500">
+                        <span x-text="formatDate(newsItem.publishedAt)"></span>
+                        <div class="flex items-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="lucide lucide-eye w-3 h-3 mr-1">
+                            <path
+                              d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0">
+                            </path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                          </svg>
+                          <span x-text="newsItem.views"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+    <div class="flex justify-center mt-6 gap-2">
+      <template x-for="(slide, index) in totalSlides" :key="index">
+        <button class="w-2 h-2 rounded-full transition-colors"
+          :class="currentSlide === index ? 'bg-blue-500' : 'bg-gray-300'" @click="goToSlide(index)">
+        </button>
+      </template>
+    </div>
+  </div>
+  <div class="text-center mt-8"><a href="/tin-tuc"><button
+        class="justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 btn-primary flex items-center mx-auto">Xem
+        Thêm Tin Tức<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="lucide lucide-arrow-right w-4 h-4 ml-2">
+          <path d="M5 12h14"></path>
+          <path d="m12 5 7 7-7 7"></path>
+        </svg></button></a></div>
+  </div>
+</section>
