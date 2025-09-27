@@ -190,10 +190,12 @@ function registerReviewsToggle(Alpine) {
     _btn: null,
 
     init() {
-      // locate review items: prefer direct children with the provided layout class
-      let items = Array.from(this.$el.querySelectorAll(':scope > .border-b.pb-4'));
+      // locate review items: in our markup, review rows are direct children of the `.space-y-4` wrapper
+      // fall back to searching directly on the current element if that wrapper isn't present
+      const list = this.$el.querySelector('.space-y-4') || this.$el;
+      let items = Array.from(list.querySelectorAll(':scope > .border-b.pb-4'));
       if (!items.length) {
-        // fallback: any child with .review-item
+        // fallback: any child with .review-item (supports older/alternate markup)
         items = Array.from(this.$el.querySelectorAll('.review-item'));
       }
       this._items = items;
