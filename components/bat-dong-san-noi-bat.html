@@ -1,118 +1,118 @@
 <section class="py-12 md:py-16 bg-gray-50" x-data="featuredPropertiesComponent()">
-    <div class="container mx-auto px-4">
-      <div class="flex items-center justify-between mb-6"><a href="/bat-dong-san">
-          <h2 class="text-xl md:text-2xl font-bold text-gray-900 title-section-hover">
-            Bất Động Sản Nổi Bật
-          </h2>
-        </a>
-        <div class="flex items-center gap-4"><a href="/bat-dong-san" class="hidden md:block"><button
-              class="btn-secondary btn-sm md:btn-md flex items-center rounded-lg">Xem tất cả<svg
-                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="lucide lucide-arrow-right w-4 h-4 ml-2">
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg></button></a>
-          <div class="flex gap-2"><button
-              class="btn-outline-primary btn-sm w-10 h-10 p-0 flex items-center justify-center"
-              @click="prevSlide()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="lucide lucide-chevron-left w-4 h-4">
-                <path d="m15 18-6-6 6-6"></path>
-              </svg></button><button class="btn-outline-primary btn-sm w-10 h-10 p-0 flex items-center justify-center"
-              @click="nextSlide()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="lucide lucide-chevron-right w-4 h-4">
-                <path d="m9 18 6-6-6-6"></path>
-              </svg></button></div>
-        </div>
+  <div class="container mx-auto px-4">
+    <div class="flex items-center justify-between mb-6"><a href="/bat-dong-san">
+        <h2 class="text-xl md:text-2xl font-bold text-gray-900 title-section-hover">
+          Bất Động Sản Nổi Bật
+        </h2>
+      </a>
+      <div class="flex items-center gap-4"><a href="/bat-dong-san" class="hidden md:block"><button
+            class="btn-secondary btn-sm md:btn-md flex items-center rounded-lg">Xem tất cả<svg
+              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-arrow-right w-4 h-4 ml-2">
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg></button></a>
+        <div class="flex gap-2"><button
+            class="btn-outline-primary btn-sm w-10 h-10 p-0 flex items-center justify-center"
+            @click="prevSlide()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-chevron-left w-4 h-4">
+              <path d="m15 18-6-6 6-6"></path>
+            </svg></button><button class="btn-outline-primary btn-sm w-10 h-10 p-0 flex items-center justify-center"
+            @click="nextSlide()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-chevron-right w-4 h-4">
+              <path d="m9 18 6-6-6-6"></path>
+            </svg></button></div>
       </div>
-      <div class="relative overflow-hidden">
-        <div class="carousel-container flex transition-transform duration-500 ease-in-out"
-          style="transform: translateX(0%);">
-          <template x-for="(slide, slideIndex) in totalSlides" :key="slideIndex">
-            <div class="w-full flex-shrink-0">
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-                <template x-for="property in getCurrentSlideProperties()" :key="property.id">
-                  <div class="px-2">
-                    <div
-                      class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col card-hover">
-                      <div class="p-0 h-full flex flex-col">
-                        <div class="relative">
-                          <a :href="`/bat-dong-san/${property.id}`">
-                            <img :src="property.image" :alt="property.title"
-                              class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity">
-                          </a>
-                          <div x-show="property.hot"
-                            class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default absolute top-2 right-2"
-                            :class="getHotBadgeClass()">
-                            Hot
-                          </div>
-                          <div
-                            class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary absolute top-2 left-2"
-                            :class="getStatusBadgeClass(property.status)">
-                            <span x-text="property.status"></span>
-                          </div>
+    </div>
+    <div class="relative overflow-hidden">
+      <div class="carousel-container flex transition-transform duration-500 ease-in-out"
+        style="transform: translateX(0%);">
+        <template x-for="(slide, slideIndex) in totalSlides" :key="slideIndex">
+          <div class="w-full flex-shrink-0">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+              <template x-for="property in getCurrentSlideProperties()" :key="property.id">
+                <div class="px-2">
+                  <div
+                    class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col card-hover">
+                    <div class="p-0 h-full flex flex-col">
+                      <div class="relative">
+                        <a :href="`/bat-dong-san/${property.id}`">
+                          <img :src="property.image" :alt="property.title"
+                            class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity">
+                        </a>
+                        <div x-show="property.hot"
+                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default absolute top-2 right-2"
+                          :class="getHotBadgeClass()">
+                          Hot
                         </div>
-                        <div class="p-4 flex-1 flex flex-col">
-                          <div class="h-12 mb-2 flex items-start">
-                            <h3 class="font-semibold text-gray-900 line-clamp-2 leading-6 text-sm">
-                              <a :href="`/bat-dong-san/${property.id}`" class="hover:text-blue-600 transition-colors"
-                                x-text="property.title"></a>
-                            </h3>
-                          </div>
-                          <div class="flex items-center text-sm text-gray-500 mb-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                              stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4 mr-1 flex-shrink-0">
-                              <path
-                                d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
-                              </path>
-                              <circle cx="12" cy="10" r="3"></circle>
-                            </svg>
-                            <span class="line-clamp-1">
-                              <a :href="`/bat-dong-san/khu-vuc/${property.location.toLowerCase().replace(/[,\s]+/g, '-')}`"
-                                class="hover:text-blue-600 transition-colors" x-text="property.location"></a>
+                        <div
+                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary absolute top-2 left-2"
+                          :class="getStatusBadgeClass(property.status)">
+                          <span x-text="property.status"></span>
+                        </div>
+                      </div>
+                      <div class="p-4 flex-1 flex flex-col">
+                        <div class="h-12 mb-2 flex items-start">
+                          <h3 class="font-semibold text-gray-900 line-clamp-2 leading-6 text-sm">
+                            <a :href="`/bat-dong-san/${property.id}`" class="hover:text-blue-600 transition-colors"
+                              x-text="property.title"></a>
+                          </h3>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500 mb-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4 mr-1 flex-shrink-0">
+                            <path
+                              d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
+                            </path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                          </svg>
+                          <span class="line-clamp-1">
+                            <a :href="`/bat-dong-san/khu-vuc/${property.location.toLowerCase().replace(/[,\s]+/g, '-')}`"
+                              class="hover:text-blue-600 transition-colors" x-text="property.location"></a>
+                          </span>
+                        </div>
+                        <div class="flex items-center justify-between mb-3">
+                          <div class="text-lg font-bold text-blue-600" x-text="property.price"></div>
+                          <div class="text-sm text-gray-500" x-text="property.area"></div>
+                        </div>
+                        <div class="h-5 mt-auto">
+                          <div class="flex items-center gap-4 text-sm text-gray-500">
+                            <span x-show="property.bedrooms > 0" x-text="`${property.bedrooms} PN`"></span>
+                            <span x-show="property.bathrooms > 0" x-text="`${property.bathrooms} WC`"></span>
+                            <span class="capitalize">
+                              <a :href="`/bat-dong-san/loai-hinh/${property.type.toLowerCase().replace(/\s+/g, '-')}`"
+                                class="hover:text-blue-600 transition-colors" x-text="property.type"></a>
                             </span>
-                          </div>
-                          <div class="flex items-center justify-between mb-3">
-                            <div class="text-lg font-bold text-blue-600" x-text="property.price"></div>
-                            <div class="text-sm text-gray-500" x-text="property.area"></div>
-                          </div>
-                          <div class="h-5 mt-auto">
-                            <div class="flex items-center gap-4 text-sm text-gray-500">
-                              <span x-show="property.bedrooms > 0" x-text="`${property.bedrooms} PN`"></span>
-                              <span x-show="property.bathrooms > 0" x-text="`${property.bathrooms} WC`"></span>
-                              <span class="capitalize">
-                                <a :href="`/bat-dong-san/loai-hinh/${property.type.toLowerCase().replace(/\s+/g, '-')}`"
-                                  class="hover:text-blue-600 transition-colors" x-text="property.type"></a>
-                              </span>
-                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </template>
-              </div>
+                </div>
+              </template>
             </div>
-          </template>
-        </div>
+          </div>
+        </template>
       </div>
     </div>
-    <div class="flex justify-center mt-6 gap-2">
-      <template x-for="(slide, index) in totalSlides" :key="index">
-        <button class="w-2 h-2 rounded-full transition-colors"
-          :class="currentSlide === index ? 'bg-blue-500' : 'bg-gray-300'" @click="goToSlide(index)">
-        </button>
-      </template>
-    </div>
-    <div class="text-center mt-8 flex justify-center block md:hidden"><a href="/real-estate"><button
-          class="btn-primary flex items-center">Xem Thêm Bài Viết<svg xmlns="http://www.w3.org/2000/svg" width="24"
-            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4 ml-2">
-            <path d="M5 12h14"></path>
-            <path d="m12 5 7 7-7 7"></path>
-          </svg></button></a></div>
-    </div>
+  </div>
+  <div class="flex justify-center mt-6 gap-2">
+    <template x-for="(slide, index) in totalSlides" :key="index">
+      <button class="w-2 h-2 rounded-full transition-colors"
+        :class="currentSlide === index ? 'bg-blue-500' : 'bg-gray-300'" @click="goToSlide(index)">
+      </button>
+    </template>
+  </div>
+  <div class="text-center mt-8 flex justify-center block md:hidden"><a href="/real-estate"><button
+        class="btn-primary flex items-center">Xem Thêm Bài Viết<svg xmlns="http://www.w3.org/2000/svg" width="24"
+          height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4 ml-2">
+          <path d="M5 12h14"></path>
+          <path d="m12 5 7 7-7 7"></path>
+        </svg></button></a></div>
+  </div>
 </section>
