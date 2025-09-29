@@ -15,6 +15,18 @@ document.addEventListener('alpine:init', () => {
 
     // Counter animation
     statsAnimated: false,
+    counterValues: {
+      communes: 0,
+      locations: 0,
+      businesses: 0,
+      support: 0
+    },
+    finalValues: {
+      communes: 95,
+      locations: 9,
+      businesses: 500,
+      support: 24
+    },
 
     // Sample data
     featuredLocations: [
@@ -125,6 +137,33 @@ document.addEventListener('alpine:init', () => {
       return this.showAllCommunes ? this.communes : this.communes.slice(0, 12);
     },
 
+    get supportDisplay() {
+      return this.counterValues.support + '/7';
+    },
+
+    get filteredLocations() {
+      let filtered = this.featuredLocations;
+
+      if (this.searchTerm) {
+        const searchLower = this.searchTerm.toLowerCase();
+        filtered = filtered.filter(location =>
+          location.name.toLowerCase().includes(searchLower) ||
+          location.address.toLowerCase().includes(searchLower) ||
+          location.description.toLowerCase().includes(searchLower)
+        );
+      }
+
+      if (this.selectedCategory !== 'all') {
+        filtered = filtered.filter(location => location.category === this.selectedCategory);
+      }
+
+      return filtered;
+    },
+
+    get filteredLocationsCount() {
+      return this.filteredLocations.length;
+    },
+
     // Methods
     init() {
       this.updateCardsPerSlide();
@@ -147,8 +186,33 @@ document.addEventListener('alpine:init', () => {
 
       setTimeout(() => {
         this.statsAnimated = true;
-        // Counter animation will be handled by CSS or additional JS
+        this.animateCounter('communes', this.finalValues.communes, 2000);
+        this.animateCounter('locations', this.finalValues.locations, 2000);
+        this.animateCounter('businesses', this.finalValues.businesses, 2000);
+        this.animateCounter('support', this.finalValues.support, 2000);
       }, 500);
+    },
+
+    animateCounter(key, targetValue, duration) {
+      const startTime = Date.now();
+      const startValue = 0;
+
+      const updateCounter = () => {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        // Easing function for smooth animation
+        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+        const currentValue = Math.floor(startValue + (targetValue - startValue) * easeOutQuart);
+
+        this.counterValues[key] = currentValue;
+
+        if (progress < 1) {
+          requestAnimationFrame(updateCounter);
+        }
+      };
+
+      requestAnimationFrame(updateCounter);
     },
 
     search() {

@@ -214,100 +214,55 @@ document.addEventListener('alpine:init', () => {
     }));
 
     // ===========================================
-    // REAL ESTATE SLIDER COMPONENT
+    // REAL ESTATE CAROUSEL COMPONENT
     // ===========================================
-    Alpine.data('realEstateSliderComponent', () => ({
+    Alpine.data('realEstateCarousel', () => ({
         currentSlide: 0,
-        totalSlides: 0,
-        itemsPerSlide: 5, // Số items hiển thị trên mỗi slide
-        totalItems: 0,
+        totalSlides: 2, // 10 items / 5 items per slide = 2 slides
+        itemsPerSlide: 5,
+        totalItems: 10,
         isTransitioning: false,
 
         init() {
-            // Tính toán số slide dựa trên số items
-            this.calculateSlides();
-
-            // Khởi tạo Lucide icons
-            this.$nextTick(() => {
-                lucide.createIcons();
-            });
-        },
-
-        calculateSlides() {
-            // Đếm số items trong slider
-            const sliderContainer = this.$el.querySelector('.real-estate-slider-container');
-            if (sliderContainer) {
-                const items = sliderContainer.querySelectorAll('.real-estate-item');
-                this.totalItems = items.length;
-                this.totalSlides = Math.ceil(this.totalItems / this.itemsPerSlide);
-
-                // Cập nhật width của container dựa trên số slides
-                const containerWidth = this.totalSlides * 100;
-                sliderContainer.style.width = `${containerWidth}%`;
-
-                // Cập nhật width của mỗi slide
-                const slideWidth = 100 / this.totalSlides;
-                const slides = sliderContainer.querySelectorAll('.flex-shrink-0');
-                slides.forEach(slide => {
-                    slide.style.width = `${slideWidth}%`;
-                });
-
-                console.log(`Real Estate Slider: ${this.totalItems} items, ${this.totalSlides} slides, ${this.itemsPerSlide} items per slide`);
-            }
+            console.log('Real Estate Carousel component initialized.');
+            this.updateCarousel();
         },
 
         nextSlide() {
             if (this.isTransitioning) return;
 
-            if (this.currentSlide < this.totalSlides - 1) {
-                this.isTransitioning = true;
-                this.currentSlide++;
-                this.updateSliderPosition();
-
-                // Reset transition flag after animation
-                setTimeout(() => {
-                    this.isTransitioning = false;
-                }, 500);
-            }
-        },
-
-        prevSlide() {
-            if (this.isTransitioning) return;
-
-            if (this.currentSlide > 0) {
-                this.isTransitioning = true;
-                this.currentSlide--;
-                this.updateSliderPosition();
-
-                // Reset transition flag after animation
-                setTimeout(() => {
-                    this.isTransitioning = false;
-                }, 500);
-            }
-        },
-
-        goToSlide(slideIndex) {
-            if (this.isTransitioning || slideIndex === this.currentSlide) return;
-
             this.isTransitioning = true;
-            this.currentSlide = slideIndex;
-            this.updateSliderPosition();
+            this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+            this.updateCarousel();
 
-            // Reset transition flag after animation
             setTimeout(() => {
                 this.isTransitioning = false;
             }, 500);
         },
 
-        updateSliderPosition() {
-            const sliderContainer = this.$el.querySelector('.real-estate-slider-container');
-            if (sliderContainer) {
-                const translateX = -(this.currentSlide * 100);
-                sliderContainer.style.transform = `translateX(${translateX}%)`;
-            }
+        prevSlide() {
+            if (this.isTransitioning) return;
+
+            this.isTransitioning = true;
+            this.currentSlide = this.currentSlide === 0 ? this.totalSlides - 1 : this.currentSlide - 1;
+            this.updateCarousel();
+
+            setTimeout(() => {
+                this.isTransitioning = false;
+            }, 500);
         },
 
-        // Kiểm tra xem có thể next/prev không
+        updateCarousel() {
+            const carouselContainer = this.$el.querySelector('.flex.transition-transform');
+            if (!carouselContainer) return;
+
+            // Each item is 10% width, so 5 items = 50% per slide
+            const translateX = -this.currentSlide * 50;
+            carouselContainer.style.transform = `translateX(${translateX}%)`;
+
+            console.log(`Carousel moved to slide ${this.currentSlide + 1}/${this.totalSlides}, translateX: ${translateX}%`);
+        },
+
         canNext() {
             return this.currentSlide < this.totalSlides - 1;
         },
@@ -316,21 +271,310 @@ document.addEventListener('alpine:init', () => {
             return this.currentSlide > 0;
         },
 
-        // Lấy class cho button prev/next
-        getPrevButtonClass() {
-            const baseClass = "btn-outline-primary btn-sm w-10 h-10 p-0 flex items-center justify-center";
-            return this.canPrev() ? baseClass : baseClass + " opacity-50 cursor-not-allowed";
-        },
-
         getNextButtonClass() {
-            const baseClass = "btn-outline-primary btn-sm w-10 h-10 p-0 flex items-center justify-center";
-            return this.canNext() ? baseClass : baseClass + " opacity-50 cursor-not-allowed";
+            const baseClass = 'btn-outline-primary btn-sm w-10 h-10 p-0 flex items-center justify-center';
+            return this.canNext() ? baseClass : baseClass + ' opacity-50 cursor-not-allowed';
         },
 
-        // Lấy class cho dot pagination
-        getDotClass(index) {
-            const baseClass = "w-2 h-2 rounded-full transition-colors cursor-pointer";
-            return index === this.currentSlide ? baseClass + " bg-blue-500" : baseClass + " bg-gray-300";
+        getPrevButtonClass() {
+            const baseClass = 'btn-outline-primary btn-sm w-10 h-10 p-0 flex items-center justify-center';
+            return this.canPrev() ? baseClass : baseClass + ' opacity-50 cursor-not-allowed';
+        },
+
+        goToSlide(slideIndex) {
+            if (this.isTransitioning || slideIndex < 0 || slideIndex >= this.totalSlides) return;
+
+            this.isTransitioning = true;
+            this.currentSlide = slideIndex;
+            this.updateCarousel();
+
+            setTimeout(() => {
+                this.isTransitioning = false;
+            }, 500);
+        }
+    }));
+
+    // ===========================================
+    // JOB CAROUSEL COMPONENT
+    // ===========================================
+    Alpine.data('viecLamDeXuatComponent', () => ({
+        currentSlide: 0,
+        totalSlides: 3, // 15 items / 5 items per slide = 3 slides
+        itemsPerSlide: 5,
+        totalItems: 15,
+        isTransitioning: false,
+
+        init() {
+            console.log('Job Carousel component initialized.');
+            this.updateCarousel();
+        },
+
+        nextSlide() {
+            if (this.isTransitioning) return;
+
+            this.isTransitioning = true;
+            this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+            this.updateCarousel();
+
+            setTimeout(() => {
+                this.isTransitioning = false;
+            }, 500);
+        },
+
+        prevSlide() {
+            if (this.isTransitioning) return;
+
+            this.isTransitioning = true;
+            this.currentSlide = this.currentSlide === 0 ? this.totalSlides - 1 : this.currentSlide - 1;
+            this.updateCarousel();
+
+            setTimeout(() => {
+                this.isTransitioning = false;
+            }, 500);
+        },
+
+        updateCarousel() {
+            const carouselContainer = this.$el.querySelector('.flex.transition-transform');
+            if (!carouselContainer) return;
+
+            // Each slide is 100% width, so we move by 100% per slide
+            const translateX = -this.currentSlide * 100;
+            carouselContainer.style.transform = `translateX(${translateX}%)`;
+
+            console.log(`Job carousel moved to slide ${this.currentSlide + 1}/${this.totalSlides}, translateX: ${translateX}%`);
+        },
+
+        isNextDisabled() {
+            return this.currentSlide >= this.totalSlides - 1;
+        },
+
+        isPrevDisabled() {
+            return this.currentSlide <= 0;
+        },
+
+        goToSlide(slideIndex) {
+            if (this.isTransitioning || slideIndex < 0 || slideIndex >= this.totalSlides) return;
+
+            this.isTransitioning = true;
+            this.currentSlide = slideIndex;
+            this.updateCarousel();
+
+            setTimeout(() => {
+                this.isTransitioning = false;
+            }, 500);
+        }
+    }));
+
+    // ===========================================
+    // DICH VU CAROUSEL COMPONENT
+    // ===========================================
+    Alpine.data('dichVuCarousel', () => ({
+        currentSlide: 0,
+        totalSlides: 2, // 8 items / 4 items per slide = 2 slides (or 2 slides with 5 items each)
+        itemsPerSlide: 4,
+        totalItems: 8,
+        isTransitioning: false,
+
+        init() {
+            console.log('Dich Vu Carousel component initialized.');
+            this.updateCarousel();
+        },
+
+        nextSlide() {
+            if (this.isTransitioning) return;
+
+            this.isTransitioning = true;
+            this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+            this.updateCarousel();
+
+            setTimeout(() => {
+                this.isTransitioning = false;
+            }, 500);
+        },
+
+        prevSlide() {
+            if (this.isTransitioning) return;
+
+            this.isTransitioning = true;
+            this.currentSlide = this.currentSlide === 0 ? this.totalSlides - 1 : this.currentSlide - 1;
+            this.updateCarousel();
+
+            setTimeout(() => {
+                this.isTransitioning = false;
+            }, 500);
+        },
+
+        updateCarousel() {
+            const carouselContainer = this.$el.querySelector('.flex.transition-transform');
+            if (!carouselContainer) return;
+
+            // Each slide is 100% width, so we move by 100% per slide
+            const translateX = -this.currentSlide * 100;
+            carouselContainer.style.transform = `translateX(${translateX}%)`;
+
+            console.log(`Dich Vu carousel moved to slide ${this.currentSlide + 1}/${this.totalSlides}, translateX: ${translateX}%`);
+        },
+
+        isNextDisabled() {
+            return this.currentSlide >= this.totalSlides - 1;
+        },
+
+        isPrevDisabled() {
+            return this.currentSlide <= 0;
+        },
+
+        goToSlide(slideIndex) {
+            if (this.isTransitioning || slideIndex < 0 || slideIndex >= this.totalSlides) return;
+
+            this.isTransitioning = true;
+            this.currentSlide = slideIndex;
+            this.updateCarousel();
+
+            setTimeout(() => {
+                this.isTransitioning = false;
+            }, 500);
+        }
+    }));
+
+    // ===========================================
+    // DOANH NGHIEP CAROUSEL COMPONENT
+    // ===========================================
+    Alpine.data('doanhNghiepCarousel', () => ({
+        currentSlide: 0,
+        totalSlides: 2, // 6 items / 3 items per slide = 2 slides (or 2 slides with 5 items each)
+        itemsPerSlide: 3,
+        totalItems: 6,
+        isTransitioning: false,
+
+        init() {
+            console.log('Doanh Nghiep Carousel component initialized.');
+            this.updateCarousel();
+        },
+
+        nextSlide() {
+            if (this.isTransitioning) return;
+
+            this.isTransitioning = true;
+            this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+            this.updateCarousel();
+
+            setTimeout(() => {
+                this.isTransitioning = false;
+            }, 500);
+        },
+
+        prevSlide() {
+            if (this.isTransitioning) return;
+
+            this.isTransitioning = true;
+            this.currentSlide = this.currentSlide === 0 ? this.totalSlides - 1 : this.currentSlide - 1;
+            this.updateCarousel();
+
+            setTimeout(() => {
+                this.isTransitioning = false;
+            }, 500);
+        },
+
+        updateCarousel() {
+            const carouselContainer = this.$el.querySelector('.flex.transition-transform');
+            if (!carouselContainer) return;
+
+            // Each slide is 100% width, so we move by 100% per slide
+            const translateX = -this.currentSlide * 100;
+            carouselContainer.style.transform = `translateX(${translateX}%)`;
+
+            console.log(`Doanh Nghiep carousel moved to slide ${this.currentSlide + 1}/${this.totalSlides}, translateX: ${translateX}%`);
+        },
+
+        isNextDisabled() {
+            return this.currentSlide >= this.totalSlides - 1;
+        },
+
+        isPrevDisabled() {
+            return this.currentSlide <= 0;
+        },
+
+        goToSlide(slideIndex) {
+            if (this.isTransitioning || slideIndex < 0 || slideIndex >= this.totalSlides) return;
+
+            this.isTransitioning = true;
+            this.currentSlide = slideIndex;
+            this.updateCarousel();
+
+            setTimeout(() => {
+                this.isTransitioning = false;
+            }, 500);
+        }
+    }));
+
+    // ===========================================
+    // DICH VU CONG TRUC TUYEN CAROUSEL COMPONENT
+    // ===========================================
+    Alpine.data('dichVuCongTrucTuyenCarousel', () => ({
+        currentSlide: 0,
+        totalSlides: 2, // 12 items / 6 items per slide = 2 slides
+        itemsPerSlide: 6,
+        totalItems: 12,
+        isTransitioning: false,
+
+        init() {
+            console.log('Dich Vu Cong Truc Tuyen Carousel component initialized.');
+            this.updateCarousel();
+        },
+
+        nextSlide() {
+            if (this.isTransitioning) return;
+
+            this.isTransitioning = true;
+            this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+            this.updateCarousel();
+
+            setTimeout(() => {
+                this.isTransitioning = false;
+            }, 500);
+        },
+
+        prevSlide() {
+            if (this.isTransitioning) return;
+
+            this.isTransitioning = true;
+            this.currentSlide = this.currentSlide === 0 ? this.totalSlides - 1 : this.currentSlide - 1;
+            this.updateCarousel();
+
+            setTimeout(() => {
+                this.isTransitioning = false;
+            }, 500);
+        },
+
+        updateCarousel() {
+            const carouselContainer = this.$el.querySelector('.flex.transition-transform');
+            if (!carouselContainer) return;
+
+            // Each slide is 100% width, so we move by 100% per slide
+            const translateX = -this.currentSlide * 100;
+            carouselContainer.style.transform = `translateX(${translateX}%)`;
+
+            console.log(`Dich Vu Cong Truc Tuyen carousel moved to slide ${this.currentSlide + 1}/${this.totalSlides}, translateX: ${translateX}%`);
+        },
+
+        isNextDisabled() {
+            return this.currentSlide >= this.totalSlides - 1;
+        },
+
+        isPrevDisabled() {
+            return this.currentSlide <= 0;
+        },
+
+        goToSlide(slideIndex) {
+            if (this.isTransitioning || slideIndex < 0 || slideIndex >= this.totalSlides) return;
+
+            this.isTransitioning = true;
+            this.currentSlide = slideIndex;
+            this.updateCarousel();
+
+            setTimeout(() => {
+                this.isTransitioning = false;
+            }, 500);
         }
     }));
 
@@ -404,100 +648,6 @@ document.addEventListener('alpine:init', () => {
         }
     }));
 
-    // ===========================================
-    // VIỆC LÀM ĐỀ XUẤT SLIDER COMPONENT
-    // ===========================================
-    Alpine.data('viecLamDeXuatComponent', () => ({
-        currentSlide: 0,
-        totalSlides: 3, // Có 3 slides dựa trên HTML
-        isTransitioning: false,
-
-        init() {
-            console.log('Việc Làm Đề Xuất component initialized.');
-
-            // Khởi tạo Lucide icons
-            this.$nextTick(() => {
-                lucide.createIcons();
-            });
-        },
-
-        nextSlide() {
-            if (this.isTransitioning) return;
-
-            if (this.currentSlide < this.totalSlides - 1) {
-                this.isTransitioning = true;
-                this.currentSlide++;
-                this.updateSliderPosition();
-
-                // Reset transition flag after animation
-                setTimeout(() => {
-                    this.isTransitioning = false;
-                }, 500);
-            }
-        },
-
-        prevSlide() {
-            if (this.isTransitioning) return;
-
-            if (this.currentSlide > 0) {
-                this.isTransitioning = true;
-                this.currentSlide--;
-                this.updateSliderPosition();
-
-                // Reset transition flag after animation
-                setTimeout(() => {
-                    this.isTransitioning = false;
-                }, 500);
-            }
-        },
-
-        goToSlide(slideIndex) {
-            if (this.isTransitioning || slideIndex === this.currentSlide) return;
-
-            this.isTransitioning = true;
-            this.currentSlide = slideIndex;
-            this.updateSliderPosition();
-
-            // Reset transition flag after animation
-            setTimeout(() => {
-                this.isTransitioning = false;
-            }, 500);
-        },
-
-        updateSliderPosition() {
-            const sliderContainer = this.$el.querySelector('.flex.transition-transform');
-            if (sliderContainer) {
-                const translateX = -(this.currentSlide * 100);
-                sliderContainer.style.transform = `translateX(${translateX}%)`;
-            }
-        },
-
-        // Kiểm tra xem có thể next/prev không
-        isNextDisabled() {
-            return this.currentSlide >= this.totalSlides - 1 || this.isTransitioning;
-        },
-
-        isPrevDisabled() {
-            return this.currentSlide <= 0 || this.isTransitioning;
-        },
-
-        // Lấy class cho button prev/next
-        getPrevButtonClass() {
-            const baseClass = "btn-outline-primary btn-sm w-10 h-10 p-0 flex items-center justify-center";
-            return this.isPrevDisabled() ? baseClass + " opacity-50 cursor-not-allowed" : baseClass;
-        },
-
-        getNextButtonClass() {
-            const baseClass = "btn-outline-primary btn-sm w-10 h-10 p-0 flex items-center justify-center";
-            return this.isNextDisabled() ? baseClass + " opacity-50 cursor-not-allowed" : baseClass;
-        },
-
-        // Lấy class cho dot pagination
-        getDotClass(index) {
-            const baseClass = "w-2 h-2 rounded-full transition-colors cursor-pointer";
-            return index === this.currentSlide ? baseClass + " bg-blue-500" : baseClass + " bg-gray-300";
-        }
-    }));
 
     // ===========================================
     // HOMEPAGE MAIN COMPONENT
@@ -583,5 +733,508 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize scroll animations
     window.HomepageUtils.animateOnScroll();
-});
 
+    // Fallback for real estate carousel if Alpine.js is not available
+    const realEstateCarouselContainer = document.querySelector('[x-data*="realEstateCarousel"]');
+    if (realEstateCarouselContainer && !realEstateCarouselContainer.__x) {
+        console.log('Initializing fallback real estate carousel logic');
+
+        let currentSlide = 0;
+        const totalSlides = 2;
+        let isTransitioning = false;
+
+        const carouselElement = realEstateCarouselContainer.querySelector('.flex.transition-transform');
+        const prevButton = realEstateCarouselContainer.querySelector('button[\\@click*="prevSlide"]');
+        const nextButton = realEstateCarouselContainer.querySelector('button[\\@click*="nextSlide"]');
+
+        function updateCarousel() {
+            if (!carouselElement) return;
+            const translateX = -currentSlide * 50;
+            carouselElement.style.transform = `translateX(${translateX}%)`;
+            console.log(`Fallback real estate carousel moved to slide ${currentSlide + 1}/${totalSlides}`);
+        }
+
+        function canNext() {
+            return currentSlide < totalSlides - 1;
+        }
+
+        function canPrev() {
+            return currentSlide > 0;
+        }
+
+        function updateButtons() {
+            if (prevButton) {
+                prevButton.disabled = !canPrev();
+                prevButton.classList.toggle('opacity-50', !canPrev());
+                prevButton.classList.toggle('cursor-not-allowed', !canPrev());
+            }
+            if (nextButton) {
+                nextButton.disabled = !canNext();
+                nextButton.classList.toggle('opacity-50', !canNext());
+                nextButton.classList.toggle('cursor-not-allowed', !canNext());
+            }
+        }
+
+        function nextSlide() {
+            if (isTransitioning || !canNext()) return;
+            isTransitioning = true;
+            currentSlide++;
+            updateCarousel();
+            updateButtons();
+            setTimeout(() => { isTransitioning = false; }, 500);
+        }
+
+        function prevSlide() {
+            if (isTransitioning || !canPrev()) return;
+            isTransitioning = true;
+            currentSlide--;
+            updateCarousel();
+            updateButtons();
+            setTimeout(() => { isTransitioning = false; }, 500);
+        }
+
+        // Add event listeners
+        if (prevButton) {
+            prevButton.addEventListener('click', prevSlide);
+        }
+        if (nextButton) {
+            nextButton.addEventListener('click', nextSlide);
+        }
+
+        // Initialize
+        updateCarousel();
+        updateButtons();
+    }
+
+    // Fallback for job carousel if Alpine.js is not available
+    const jobCarouselContainer = document.querySelector('[x-data*="viecLamDeXuatComponent"]');
+    if (jobCarouselContainer && !jobCarouselContainer.__x) {
+        console.log('Initializing fallback job carousel logic');
+
+        let currentSlide = 0;
+        const totalSlides = 3;
+        let isTransitioning = false;
+
+        const carouselElement = jobCarouselContainer.querySelector('.flex.transition-transform');
+        const prevButton = jobCarouselContainer.querySelector('button[\\@click*="prevSlide"]');
+        const nextButton = jobCarouselContainer.querySelector('button[\\@click*="nextSlide"]');
+
+        function updateCarousel() {
+            if (!carouselElement) return;
+            const translateX = -currentSlide * 100;
+            carouselElement.style.transform = `translateX(${translateX}%)`;
+            console.log(`Fallback job carousel moved to slide ${currentSlide + 1}/${totalSlides}`);
+        }
+
+        function canNext() {
+            return currentSlide < totalSlides - 1;
+        }
+
+        function canPrev() {
+            return currentSlide > 0;
+        }
+
+        function updateButtons() {
+            if (prevButton) {
+                prevButton.disabled = !canPrev();
+                prevButton.classList.toggle('opacity-50', !canPrev());
+                prevButton.classList.toggle('cursor-not-allowed', !canPrev());
+            }
+            if (nextButton) {
+                nextButton.disabled = !canNext();
+                nextButton.classList.toggle('opacity-50', !canNext());
+                nextButton.classList.toggle('cursor-not-allowed', !canNext());
+            }
+        }
+
+        function nextSlide() {
+            if (isTransitioning || !canNext()) return;
+            isTransitioning = true;
+            currentSlide++;
+            updateCarousel();
+            updateButtons();
+            updateDots();
+            setTimeout(() => { isTransitioning = false; }, 500);
+        }
+
+        function prevSlide() {
+            if (isTransitioning || !canPrev()) return;
+            isTransitioning = true;
+            currentSlide--;
+            updateCarousel();
+            updateButtons();
+            updateDots();
+            setTimeout(() => { isTransitioning = false; }, 500);
+        }
+
+        // Add event listeners
+        if (prevButton) {
+            prevButton.addEventListener('click', prevSlide);
+        }
+        if (nextButton) {
+            nextButton.addEventListener('click', nextSlide);
+        }
+
+        // Initialize
+        updateCarousel();
+        updateButtons();
+
+        // Create dots pagination fallback
+        const dotsContainer = jobCarouselContainer.querySelector('.flex.justify-center.mt-6.gap-2');
+        if (dotsContainer && !dotsContainer.querySelector('button[data-dot]')) {
+            // Clear existing dots
+            dotsContainer.innerHTML = '';
+
+            // Create dots
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'w-2 h-2 rounded-full transition-colors';
+                dot.setAttribute('data-dot', i);
+                dot.style.backgroundColor = i === currentSlide ? '#3b82f6' : '#d1d5db';
+
+                dot.addEventListener('click', () => {
+                    if (isTransitioning) return;
+                    isTransitioning = true;
+                    currentSlide = i;
+                    updateCarousel();
+                    updateButtons();
+                    updateDots();
+                    setTimeout(() => { isTransitioning = false; }, 500);
+                });
+
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function updateDots() {
+            const dots = dotsContainer.querySelectorAll('button[data-dot]');
+            dots.forEach((dot, index) => {
+                dot.style.backgroundColor = index === currentSlide ? '#3b82f6' : '#d1d5db';
+            });
+        }
+    }
+
+    // Fallback for Dich Vu Carousel
+    const dichVuCarouselContainer = document.querySelector('[x-data*="dichVuCarousel"]');
+    if (dichVuCarouselContainer && !dichVuCarouselContainer.__x) {
+        console.log('Initializing fallback dich vu carousel logic');
+
+        let currentSlide = 0;
+        const totalSlides = 2; // 8 items / 4 items per slide = 2 slides
+        let isTransitioning = false;
+
+        const carouselElement = dichVuCarouselContainer.querySelector('.flex.transition-transform');
+        const prevButton = dichVuCarouselContainer.querySelector('button[\\@click*="prevSlide"]');
+        const nextButton = dichVuCarouselContainer.querySelector('button[\\@click*="nextSlide"]');
+
+        function updateCarousel() {
+            if (!carouselElement) return;
+            const translateX = -currentSlide * 100;
+            carouselElement.style.transform = `translateX(${translateX}%)`;
+            console.log(`Fallback dich vu carousel moved to slide ${currentSlide + 1}/${totalSlides}`);
+        }
+
+        function canNext() {
+            return currentSlide < totalSlides - 1;
+        }
+
+        function canPrev() {
+            return currentSlide > 0;
+        }
+
+        function updateButtons() {
+            if (prevButton) {
+                prevButton.disabled = !canPrev();
+                prevButton.classList.toggle('opacity-50', !canPrev());
+                prevButton.classList.toggle('cursor-not-allowed', !canPrev());
+            }
+            if (nextButton) {
+                nextButton.disabled = !canNext();
+                nextButton.classList.toggle('opacity-50', !canNext());
+                nextButton.classList.toggle('cursor-not-allowed', !canNext());
+            }
+        }
+
+        function nextSlide() {
+            if (isTransitioning || !canNext()) return;
+            isTransitioning = true;
+            currentSlide++;
+            updateCarousel();
+            updateButtons();
+            updateDots();
+            setTimeout(() => { isTransitioning = false; }, 500);
+        }
+
+        function prevSlide() {
+            if (isTransitioning || !canPrev()) return;
+            isTransitioning = true;
+            currentSlide--;
+            updateCarousel();
+            updateButtons();
+            updateDots();
+            setTimeout(() => { isTransitioning = false; }, 500);
+        }
+
+        // Add event listeners
+        if (prevButton) {
+            prevButton.addEventListener('click', prevSlide);
+        }
+        if (nextButton) {
+            nextButton.addEventListener('click', nextSlide);
+        }
+
+        // Initialize
+        updateCarousel();
+        updateButtons();
+
+        // Create dots pagination fallback
+        const dotsContainer = dichVuCarouselContainer.querySelector('.flex.justify-center.mt-6.gap-2');
+        if (dotsContainer && !dotsContainer.querySelector('button[data-dot]')) {
+            // Clear existing dots
+            dotsContainer.innerHTML = '';
+
+            // Create dots
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'w-2 h-2 rounded-full transition-colors';
+                dot.setAttribute('data-dot', i);
+                dot.style.backgroundColor = i === currentSlide ? '#3b82f6' : '#d1d5db';
+
+                dot.addEventListener('click', () => {
+                    if (isTransitioning) return;
+                    isTransitioning = true;
+                    currentSlide = i;
+                    updateCarousel();
+                    updateButtons();
+                    updateDots();
+                    setTimeout(() => { isTransitioning = false; }, 500);
+                });
+
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function updateDots() {
+            const dots = dotsContainer.querySelectorAll('button[data-dot]');
+            dots.forEach((dot, index) => {
+                dot.style.backgroundColor = index === currentSlide ? '#3b82f6' : '#d1d5db';
+            });
+        }
+    }
+
+    // Fallback for Doanh Nghiep Carousel
+    const doanhNghiepCarouselContainer = document.querySelector('[x-data*="doanhNghiepCarousel"]');
+    if (doanhNghiepCarouselContainer && !doanhNghiepCarouselContainer.__x) {
+        console.log('Initializing fallback doanh nghiep carousel logic');
+
+        let currentSlide = 0;
+        const totalSlides = 2; // 6 items / 3 items per slide = 2 slides
+        let isTransitioning = false;
+
+        const carouselElement = doanhNghiepCarouselContainer.querySelector('.flex.transition-transform');
+        const prevButton = doanhNghiepCarouselContainer.querySelector('button[\\@click*="prevSlide"]');
+        const nextButton = doanhNghiepCarouselContainer.querySelector('button[\\@click*="nextSlide"]');
+
+        function updateCarousel() {
+            if (!carouselElement) return;
+            const translateX = -currentSlide * 100;
+            carouselElement.style.transform = `translateX(${translateX}%)`;
+            console.log(`Fallback doanh nghiep carousel moved to slide ${currentSlide + 1}/${totalSlides}`);
+        }
+
+        function canNext() {
+            return currentSlide < totalSlides - 1;
+        }
+
+        function canPrev() {
+            return currentSlide > 0;
+        }
+
+        function updateButtons() {
+            if (prevButton) {
+                prevButton.disabled = !canPrev();
+                prevButton.classList.toggle('opacity-50', !canPrev());
+                prevButton.classList.toggle('cursor-not-allowed', !canPrev());
+            }
+            if (nextButton) {
+                nextButton.disabled = !canNext();
+                nextButton.classList.toggle('opacity-50', !canNext());
+                nextButton.classList.toggle('cursor-not-allowed', !canNext());
+            }
+        }
+
+        function nextSlide() {
+            if (isTransitioning || !canNext()) return;
+            isTransitioning = true;
+            currentSlide++;
+            updateCarousel();
+            updateButtons();
+            updateDots();
+            setTimeout(() => { isTransitioning = false; }, 500);
+        }
+
+        function prevSlide() {
+            if (isTransitioning || !canPrev()) return;
+            isTransitioning = true;
+            currentSlide--;
+            updateCarousel();
+            updateButtons();
+            updateDots();
+            setTimeout(() => { isTransitioning = false; }, 500);
+        }
+
+        // Add event listeners
+        if (prevButton) {
+            prevButton.addEventListener('click', prevSlide);
+        }
+        if (nextButton) {
+            nextButton.addEventListener('click', nextSlide);
+        }
+
+        // Initialize
+        updateCarousel();
+        updateButtons();
+
+        // Create dots pagination fallback
+        const dotsContainer = doanhNghiepCarouselContainer.querySelector('.flex.justify-center.mt-6.gap-2');
+        if (dotsContainer && !dotsContainer.querySelector('button[data-dot]')) {
+            // Clear existing dots
+            dotsContainer.innerHTML = '';
+
+            // Create dots
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'w-2 h-2 rounded-full transition-colors';
+                dot.setAttribute('data-dot', i);
+                dot.style.backgroundColor = i === currentSlide ? '#3b82f6' : '#d1d5db';
+
+                dot.addEventListener('click', () => {
+                    if (isTransitioning) return;
+                    isTransitioning = true;
+                    currentSlide = i;
+                    updateCarousel();
+                    updateButtons();
+                    updateDots();
+                    setTimeout(() => { isTransitioning = false; }, 500);
+                });
+
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function updateDots() {
+            const dots = dotsContainer.querySelectorAll('button[data-dot]');
+            dots.forEach((dot, index) => {
+                dot.style.backgroundColor = index === currentSlide ? '#3b82f6' : '#d1d5db';
+            });
+        }
+    }
+
+    // Fallback for Dich Vu Cong Truc Tuyen Carousel
+    const dichVuCongTrucTuyenCarouselContainer = document.querySelector('[x-data*="dichVuCongTrucTuyenCarousel"]');
+    if (dichVuCongTrucTuyenCarouselContainer && !dichVuCongTrucTuyenCarouselContainer.__x) {
+        console.log('Initializing fallback dich vu cong truc tuyen carousel logic');
+
+        let currentSlide = 0;
+        const totalSlides = 2; // 12 items / 6 items per slide = 2 slides
+        let isTransitioning = false;
+
+        const carouselElement = dichVuCongTrucTuyenCarouselContainer.querySelector('.flex.transition-transform');
+        const prevButton = dichVuCongTrucTuyenCarouselContainer.querySelector('button[\\@click*="prevSlide"]');
+        const nextButton = dichVuCongTrucTuyenCarouselContainer.querySelector('button[\\@click*="nextSlide"]');
+
+        function updateCarousel() {
+            if (!carouselElement) return;
+            const translateX = -currentSlide * 100;
+            carouselElement.style.transform = `translateX(${translateX}%)`;
+            console.log(`Fallback dich vu cong truc tuyen carousel moved to slide ${currentSlide + 1}/${totalSlides}`);
+        }
+
+        function canNext() {
+            return currentSlide < totalSlides - 1;
+        }
+
+        function canPrev() {
+            return currentSlide > 0;
+        }
+
+        function updateButtons() {
+            if (prevButton) {
+                prevButton.disabled = !canPrev();
+                prevButton.classList.toggle('opacity-50', !canPrev());
+                prevButton.classList.toggle('cursor-not-allowed', !canPrev());
+            }
+            if (nextButton) {
+                nextButton.disabled = !canNext();
+                nextButton.classList.toggle('opacity-50', !canNext());
+                nextButton.classList.toggle('cursor-not-allowed', !canNext());
+            }
+        }
+
+        function nextSlide() {
+            if (isTransitioning || !canNext()) return;
+            isTransitioning = true;
+            currentSlide++;
+            updateCarousel();
+            updateButtons();
+            updateDots();
+            setTimeout(() => { isTransitioning = false; }, 500);
+        }
+
+        function prevSlide() {
+            if (isTransitioning || !canPrev()) return;
+            isTransitioning = true;
+            currentSlide--;
+            updateCarousel();
+            updateButtons();
+            updateDots();
+            setTimeout(() => { isTransitioning = false; }, 500);
+        }
+
+        // Add event listeners
+        if (prevButton) {
+            prevButton.addEventListener('click', prevSlide);
+        }
+        if (nextButton) {
+            nextButton.addEventListener('click', nextSlide);
+        }
+
+        // Initialize
+        updateCarousel();
+        updateButtons();
+
+        // Create dots pagination fallback
+        const dotsContainer = dichVuCongTrucTuyenCarouselContainer.querySelector('.flex.justify-center.mt-6.gap-2');
+        if (dotsContainer && !dotsContainer.querySelector('button[data-dot]')) {
+            // Clear existing dots
+            dotsContainer.innerHTML = '';
+
+            // Create dots
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'w-2 h-2 rounded-full transition-colors';
+                dot.setAttribute('data-dot', i);
+                dot.style.backgroundColor = i === currentSlide ? '#3b82f6' : '#d1d5db';
+
+                dot.addEventListener('click', () => {
+                    if (isTransitioning) return;
+                    isTransitioning = true;
+                    currentSlide = i;
+                    updateCarousel();
+                    updateButtons();
+                    updateDots();
+                    setTimeout(() => { isTransitioning = false; }, 500);
+                });
+
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function updateDots() {
+            const dots = dotsContainer.querySelectorAll('button[data-dot]');
+            dots.forEach((dot, index) => {
+                dot.style.backgroundColor = index === currentSlide ? '#3b82f6' : '#d1d5db';
+            });
+        }
+    }
+});
