@@ -2353,6 +2353,7 @@ body {
   opacity: 0.5;
 }
 
+/* Group */
 .group:hover .group-hover\:scale-105 {
   --tw-scale-x: 1.05;
   --tw-scale-y: 1.05;
@@ -2368,6 +2369,7 @@ body {
   opacity: 0.9;
 }
 
+/* Prose */
 .prose {
   color: #374151;
   max-width: 65ch;
@@ -2550,6 +2552,50 @@ body {
   font-size: 0.875em;
   line-height: 1.4285714;
   margin-top: 0.8571429em;
+}
+
+/* Filter dropdown */
+/* Custom dropdown styling */
+.filter-dropdown .dropdown-button {
+  transition: all 0.2s ease-in-out;
+}
+
+.filter-dropdown .dropdown-button:hover {
+  border-color: #9ca3af;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.filter-dropdown .dropdown-button:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.filter-dropdown .dropdown-menu {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.filter-dropdown .dropdown-item {
+  transition: all 0.15s ease-in-out;
+}
+
+.filter-dropdown .dropdown-item:hover {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+}
+
+.filter-dropdown .dropdown-item.selected {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+.filter-dropdown .chevron-icon {
+  transition: transform 0.2s ease-in-out;
+}
+
+.filter-dropdown .chevron-icon.rotated {
+  transform: rotate(180deg);
 }
 
 @media (min-width: 640px) {

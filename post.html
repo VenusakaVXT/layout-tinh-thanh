@@ -17,11 +17,6 @@
     .hidden {
       display: none;
     }
-
-    /* Alpine.js x-cloak directive */
-    [x-cloak] {
-      display: none !important;
-    }
   </style>
   <style type="text/tailwindcss">
 
@@ -95,6 +90,15 @@
             .container {
             max-width: 1536px;
             }
+        }
+
+        /* Title section */
+        .title-section {
+            @apply bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent;
+        }
+
+        .title-section-hover {
+            @apply hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:bg-clip-text hover:text-transparent hover:transition-colors;
         }
 
         /* Button Styles */
@@ -1174,7 +1178,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body x-data="chiTietViecLamComponent()" x-init="init()">
+<body>
   <!-- Header -->
   <header class="bg-white/80 backdrop-blur-sm border-b border-gray-100 sticky top-0 z-50" x-data="headerComponent()">
     <div class="container">
@@ -2493,1109 +2497,486 @@
 
   <!-- Main Content Area -->
   <div class="min-h-screen bg-gray-50">
-    <div class="bg-white border-b">
-      <div class="container mx-auto px-4 py-3">
-        <nav class="flex items-center space-x-2 text-sm text-gray-600"><a class="hover:text-blue-600" href="/">Trang
-            chủ</a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="lucide lucide-chevron-right w-4 h-4">
-            <path d="m9 18 6-6-6-6"></path>
-          </svg><a class="hover:text-blue-600" href="/viec-lam">Việc làm</a><svg xmlns="http://www.w3.org/2000/svg"
-            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4">
-            <path d="m9 18 6-6-6-6"></path>
-          </svg><span class="text-gray-900 font-medium line-clamp-1">Kỹ sư Phần mềm Senior</span></nav>
-      </div>
-    </div>
     <div class="container mx-auto px-4 py-8">
-      <div class="grid lg:grid-cols-12 gap-8">
-        <div class="lg:col-span-8 space-y-8">
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
-            <div class="p-6">
-              <div class="flex items-start gap-4 mb-6"><a
-                  href="/doanh-nghiep/công-ty-tnhh-samsung-electronics-việt-nam"><img
-                    src=./public/images/placeholder.svg?height=60&amp;width=60"
-                    alt="Công ty TNHH Samsung Electronics Việt Nam"
-                    class="w-16 h-16 rounded-lg object-cover hover:opacity-90 transition-opacity"></a>
-                <div class="flex-1">
-                  <div class="flex items-center gap-2 mb-2">
-                    <h1 class="text-2xl md:text-3xl font-bold text-gray-900">Kỹ sư Phần mềm Senior</h1>
-                    <div
-                      class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-blue-500 text-white">
-                      Nổi bật</div>
-                  </div><a class="text-lg text-blue-600 hover:text-blue-800 font-medium mb-3 block"
-                    href="/doanh-nghiep/công-ty-tnhh-samsung-electronics-việt-nam">Công ty TNHH Samsung Electronics Việt
-                    Nam</a>
-                  <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-4">
-                    <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4 mr-1">
-                        <path
-                          d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
-                        </path>
-                        <circle cx="12" cy="10" r="3"></circle>
-                      </svg>KCN VSIP I, Thuận An</div>
-                    <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="lucide lucide-dollar-sign w-4 h-4 mr-1">
-                        <line x1="12" x2="12" y1="2" y2="22"></line>
-                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                      </svg><span class="font-semibold text-green-600">Thỏa thuận</span></div>
-                    <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="lucide lucide-clock w-4 h-4 mr-1">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <polyline points="12 6 12 12 16 14"></polyline>
-                      </svg>Toàn thời gian</div>
-                    <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="lucide lucide-trending-up w-4 h-4 mr-1">
-                        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
-                        <polyline points="16 7 22 7 22 13"></polyline>
-                      </svg>Senior</div>
-                    <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="lucide lucide-briefcase w-4 h-4 mr-1">
-                        <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                        <rect width="20" height="14" x="2" y="6" rx="2"></rect>
-                      </svg>3-5 năm</div>
-                    <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="lucide lucide-building2 w-4 h-4 mr-1">
-                        <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path>
-                        <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path>
-                        <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path>
-                        <path d="M10 6h4"></path>
-                        <path d="M10 10h4"></path>
-                        <path d="M10 14h4"></path>
-                        <path d="M10 18h4"></path>
-                      </svg>Onsite</div>
-                  </div>
-                  <div class="flex flex-wrap gap-2 mb-4">
-                    <div
-                      class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-blue-100 text-blue-700">
-                      React</div>
-                    <div
-                      class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-blue-100 text-blue-700">
-                      Node.js</div>
-                    <div
-                      class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-blue-100 text-blue-700">
-                      JavaScript</div>
-                    <div
-                      class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-blue-100 text-blue-700">
-                      TypeScript</div>
-                  </div>
-                </div>
-              </div>
-              <div class="flex flex-wrap items-center gap-3 overflow-auto"> <button @click="openApplyJobModal()"
-                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 btn-primary flex-1 md:flex-none"
-                  type="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-send w-4 h-4 mr-2">
-                    <path
-                      d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z">
-                    </path>
-                    <path d="m21.854 2.147-10.94 10.939"></path>
-                  </svg>Ứng tuyển ngay</button><button
-                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"><svg
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-bookmark w-4 h-4 mr-2">
-                    <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path>
-                  </svg>Lưu việc</button><button
-                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"><svg
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-share2 w-4 h-4 mr-2">
-                    <circle cx="18" cy="5" r="3"></circle>
-                    <circle cx="6" cy="12" r="3"></circle>
-                    <circle cx="18" cy="19" r="3"></circle>
-                    <line x1="8.59" x2="15.42" y1="13.51" y2="17.49"></line>
-                    <line x1="15.41" x2="8.59" y1="6.51" y2="10.49"></line>
-                  </svg>Chia sẻ</button><button
-                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"><svg
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-flag w-4 h-4 mr-2">
-                    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
-                    <line x1="4" x2="4" y1="22" y2="15"></line>
-                  </svg>Báo cáo</button></div>
-              <div class="flex items-center gap-6 mt-6 pt-6 border-t text-sm text-gray-600">
-                <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="lucide lucide-eye w-4 h-4 mr-1">
-                    <path
-                      d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0">
-                    </path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                  </svg>245<!-- --> lượt xem</div>
-                <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="lucide lucide-calendar w-4 h-4 mr-1">
-                    <path d="M8 2v4"></path>
-                    <path d="M16 2v4"></path>
-                    <rect width="18" height="18" x="3" y="4" rx="2"></rect>
-                    <path d="M3 10h18"></path>
-                  </svg>Đăng <!-- -->21/12/2024</div>
-                <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="lucide lucide-circle-alert w-4 h-4 mr-1 text-red-500">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="12" x2="12" y1="8" y2="12"></line>
-                    <line x1="12" x2="12.01" y1="16" y2="16"></line>
-                  </svg><span class="text-red-600 font-medium">Còn <!-- -->0<!-- --> ngày</span></div>
-              </div>
+      <div class="mb-8">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-4"><button
+              class="justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 flex items-center space-x-2"><svg
+                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-arrow-left w-4 h-4">
+                <path d="m12 19-7-7 7-7"></path>
+                <path d="M19 12H5"></path>
+              </svg><span>Quay lại</span></button>
+            <div>
+              <h1 class="text-2xl font-bold text-gray-900">Tạo Bài Đăng Mới</h1>
+              <p class="text-gray-600">Chia sẻ nội dung với cộng đồng Bình Dương</p>
             </div>
           </div>
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
-            <div class="flex flex-col space-y-1.5 p-6">
-              <div class="text-2xl font-semibold leading-none tracking-tight flex items-center"><svg
-                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-file-text w-5 h-5 mr-2">
-                  <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
-                  <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
-                  <path d="M10 9H8"></path>
-                  <path d="M16 13H8"></path>
-                  <path d="M16 17H8"></path>
-                </svg>Mô tả công việc</div>
-            </div>
-            <div class="p-6 pt-0 space-y-6">
-              <div>
-                <p class="text-gray-700 leading-relaxed">Phát triển và bảo trì các ứng dụng web sử dụng React và
-                  Node.js. Làm việc trong môi trường Agile với đội ngũ quốc tế.</p>
-              </div>
-              <div>
-                <h4 class="font-semibold mb-3 flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-target w-4 h-4 mr-2">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <circle cx="12" cy="12" r="6"></circle>
-                    <circle cx="12" cy="12" r="2"></circle>
-                  </svg>Trách nhiệm công việc</h4>
-                <ul class="space-y-2">
-                  <li class="flex items-start gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="lucide lucide-circle-check-big w-4 h-4 text-green-500 mt-0.5 flex-shrink-0">
-                      <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
-                      <path d="m9 11 3 3L22 4"></path>
-                    </svg><span class="text-gray-700">Tốt nghiệp Đại học chuyên ngành CNTT</span></li>
-                  <li class="flex items-start gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="lucide lucide-circle-check-big w-4 h-4 text-green-500 mt-0.5 flex-shrink-0">
-                      <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
-                      <path d="m9 11 3 3L22 4"></path>
-                    </svg><span class="text-gray-700">Kinh nghiệm 3+ năm với React/Node.js</span></li>
-                  <li class="flex items-start gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="lucide lucide-circle-check-big w-4 h-4 text-green-500 mt-0.5 flex-shrink-0">
-                      <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
-                      <path d="m9 11 3 3L22 4"></path>
-                    </svg><span class="text-gray-700">Tiếng Anh giao tiếp tốt</span></li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-semibold mb-3 flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-graduation-cap w-4 h-4 mr-2">
-                    <path
-                      d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z">
-                    </path>
-                    <path d="M22 10v6"></path>
-                    <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path>
-                  </svg>Yêu cầu ứng viên</h4>
-                <ul class="space-y-2">
-                  <li class="flex items-start gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="lucide lucide-circle-check-big w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0">
-                      <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
-                      <path d="m9 11 3 3L22 4"></path>
-                    </svg><span class="text-gray-700">Tốt nghiệp Đại học chuyên ngành CNTT</span></li>
-                  <li class="flex items-start gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="lucide lucide-circle-check-big w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0">
-                      <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
-                      <path d="m9 11 3 3L22 4"></path>
-                    </svg><span class="text-gray-700">Kinh nghiệm 3+ năm với React/Node.js</span></li>
-                  <li class="flex items-start gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="lucide lucide-circle-check-big w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0">
-                      <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
-                      <path d="m9 11 3 3L22 4"></path>
-                    </svg><span class="text-gray-700">Tiếng Anh giao tiếp tốt</span></li>
-                </ul>
-              </div>
+          <div class="flex items-center space-x-3"><img src="/placeholder.svg?height=40&amp;width=40"
+              class="w-10 h-10 rounded-full">
+            <div class="hidden sm:block">
+              <p class="font-medium text-gray-900"></p>
+              <p class="text-sm text-gray-500">Thành viên</p>
             </div>
           </div>
-          <div
-            class="rounded-lg border bg-card text-card-foreground shadow-sm bg-gradient-to-r from-blue-50 to-purple-50 border-blue-200">
-            <div class="p-6">
-              <div class="text-center">
-                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4"><svg
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-file-text w-8 h-8 text-blue-600">
-                    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
-                    <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
-                    <path d="M10 9H8"></path>
-                    <path d="M16 13H8"></path>
-                    <path d="M16 17H8"></path>
-                  </svg></div>
-                <h3 class="text-xl font-bold text-gray-900 mb-2">Chưa có CV? Tạo CV Online ngay!</h3>
-                <p class="text-gray-600 mb-6 max-w-md mx-auto">Tạo CV chuyên nghiệp trong vài phút với các mẫu CV được
-                  thiết kế bởi chuyên gia HR</p>
-                <div class="flex flex-col sm:flex-row gap-3 justify-center items-center"><a class="w-full"
-                    href="/viec-lam/mau-cv"><button
-                      class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 btn-primary w-full"><svg
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-file-text w-4 h-4 mr-2">
-                        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
-                        <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
-                        <path d="M10 9H8"></path>
-                        <path d="M16 13H8"></path>
-                        <path d="M16 17H8"></path>
-                      </svg>Tạo CV miễn phí</button></a><a class="w-full" href="/tin-tuc/huong-dan-viet-cv"><button
-                      class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 bg-transparent w-full"><svg
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-eye w-4 h-4 mr-2">
-                        <path
-                          d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0">
-                        </path>
-                        <circle cx="12" cy="12" r="3"></circle>
-                      </svg>Hướng dẫn viết CV</button></a></div>
-                <div class="flex items-center justify-center gap-6 mt-6 text-sm text-gray-600">
-                  <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                      stroke-linejoin="round" class="lucide lucide-circle-check-big w-4 h-4 text-green-500 mr-1">
-                      <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
-                      <path d="m9 11 3 3L22 4"></path>
-                    </svg><span>100% miễn phí</span></div>
-                  <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                      stroke-linejoin="round" class="lucide lucide-circle-check-big w-4 h-4 text-green-500 mr-1">
-                      <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
-                      <path d="m9 11 3 3L22 4"></path>
-                    </svg><span>Mẫu chuyên nghiệp</span></div>
-                  <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                      stroke-linejoin="round" class="lucide lucide-circle-check-big w-4 h-4 text-green-500 mr-1">
-                      <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
-                      <path d="m9 11 3 3L22 4"></path>
-                    </svg><span>Tải xuống PDF</span></div>
-                </div>
-              </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <div class="lg:col-span-3">
+          <div class="rounded-lg border bg-card text-card-foreground shadow-lg">
+            <div class="flex flex-col space-y-1.5 p-6 border-b">
+              <div class="font-semibold tracking-tight text-xl">Chọn Loại Nội Dung</div>
             </div>
-          </div>
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
-            <div class="flex flex-col space-y-1.5 p-6">
-              <div class="text-2xl font-semibold leading-none tracking-tight flex items-center"><svg
-                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-award w-5 h-5 mr-2">
-                  <path
-                    d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526">
-                  </path>
-                  <circle cx="12" cy="8" r="6"></circle>
-                </svg>Quyền lợi được hưởng</div>
-            </div>
-            <div class="p-6 pt-0">
-              <div class="grid md:grid-cols-2 gap-4">
-                <div class="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
-                  <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0"><svg
+            <div class="p-0">
+              <div class="border-b">
+                <div
+                  class="flex flex-nowrap gap-0 overflow-x-auto scrollbar-hide touch-pan-x overscroll-x-contain snap-x snap-mandatory [-webkit-overflow-scrolling:touch]">
+                  <button
+                    class="flex flex-col sm:flex-row sm:flex-nowrap items-center space-y-1 sm:space-y-0 sm:space-x-3 px-4 sm:px-[16px] py-4 text-sm font-medium whitespace-nowrap transition-colors border-b-2 snap-start flex-none min-w-[100px] md:min-w-[140px] lg:min-w-[125px] md:h-14 text-blue-600 border-blue-600 bg-blue-50"><svg
                       xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                       stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-dollar-sign w-4 h-4 text-green-600">
-                      <line x1="12" x2="12" y1="2" y2="22"></line>
-                      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                    </svg></div><span class="text-gray-700">Lương tháng 13, 14</span>
-                </div>
-                <div class="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
-                  <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0"><svg
+                      class="lucide lucide-file-text w-5 h-5">
+                      <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                      <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                      <path d="M10 9H8"></path>
+                      <path d="M16 13H8"></path>
+                      <path d="M16 17H8"></path>
+                    </svg>
+                    <div class="text-center sm:text-left">
+                      <div class="font-medium text-xs sm:text-sm truncate">Trạng thái</div>
+                      <div class="text-xs text-gray-400 hidden xl:block truncate">Chia sẻ suy nghĩ của bạn</div>
+                    </div>
+                  </button><button
+                    class="flex flex-col sm:flex-row sm:flex-nowrap items-center space-y-1 sm:space-y-0 sm:space-x-3 px-4 sm:px-[16px] py-4 text-sm font-medium whitespace-nowrap transition-colors border-b-2 snap-start flex-none min-w-[100px] md:min-w-[140px] lg:min-w-[125px] md:h-14 text-gray-500 border-transparent hover:text-gray-700 hover:bg-gray-50"><svg
                       xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                       stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-shield w-4 h-4 text-green-600">
+                      class="lucide lucide-newspaper w-5 h-5">
                       <path
-                        d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z">
+                        d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2">
                       </path>
-                    </svg></div><span class="text-gray-700">Bảo hiểm sức khỏe cao cấp</span>
-                </div>
-                <div class="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
-                  <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0"><svg
+                      <path d="M18 14h-8"></path>
+                      <path d="M15 18h-5"></path>
+                      <path d="M10 6h8v4h-8V6Z"></path>
+                    </svg>
+                    <div class="text-center sm:text-left">
+                      <div class="font-medium text-xs sm:text-sm truncate">Tin tức</div>
+                      <div class="text-xs text-gray-400 hidden xl:block truncate">Đăng tin tức mới nhất</div>
+                    </div>
+                  </button><button
+                    class="flex flex-col sm:flex-row sm:flex-nowrap items-center space-y-1 sm:space-y-0 sm:space-x-3 px-4 sm:px-[16px] py-4 text-sm font-medium whitespace-nowrap transition-colors border-b-2 snap-start flex-none min-w-[100px] md:min-w-[140px] lg:min-w-[125px] md:h-14 text-gray-500 border-transparent hover:text-gray-700 hover:bg-gray-50"><svg
                       xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                       stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-car w-4 h-4 text-green-600">
-                      <path
-                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
-                      </path>
-                      <circle cx="7" cy="17" r="2"></circle>
-                      <path d="M9 17h6"></path>
-                      <circle cx="17" cy="17" r="2"></circle>
-                    </svg></div><span class="text-gray-700">Du lịch công ty hàng năm</span>
-                </div>
-                <div class="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
-                  <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0"><svg
+                      class="lucide lucide-briefcase w-5 h-5">
+                      <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                      <rect width="20" height="14" x="2" y="6" rx="2"></rect>
+                    </svg>
+                    <div class="text-center sm:text-left">
+                      <div class="font-medium text-xs sm:text-sm truncate">Việc làm</div>
+                      <div class="text-xs text-gray-400 hidden xl:block truncate">Tuyển dụng nhân tài</div>
+                    </div>
+                  </button><button
+                    class="flex flex-col sm:flex-row sm:flex-nowrap items-center space-y-1 sm:space-y-0 sm:space-x-3 px-4 sm:px-[16px] py-4 text-sm font-medium whitespace-nowrap transition-colors border-b-2 snap-start flex-none min-w-[100px] md:min-w-[140px] lg:min-w-[125px] md:h-14 text-gray-500 border-transparent hover:text-gray-700 hover:bg-gray-50"><svg
                       xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                       stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-coffee w-4 h-4 text-green-600">
-                      <path d="M10 2v2"></path>
-                      <path d="M14 2v2"></path>
-                      <path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1">
-                      </path>
-                      <path d="M6 2v2"></path>
-                    </svg></div><span class="text-gray-700">Đào tạo nâng cao kỹ năng</span>
-                </div>
-                <div class="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
-                  <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0"><svg
-                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-house w-4 h-4 text-green-600">
+                      class="lucide lucide-house w-5 h-5">
                       <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
                       <path
                         d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z">
                       </path>
-                    </svg></div><span class="text-gray-700">Môi trường làm việc hiện đại</span>
-                </div>
+                    </svg>
+                    <div class="text-center sm:text-left">
+                      <div class="font-medium text-xs sm:text-sm truncate">Nhà đất</div>
+                      <div class="text-xs text-gray-400 hidden xl:block truncate">Mua bán, cho thuê BĐS</div>
+                    </div>
+                  </button><button
+                    class="flex flex-col sm:flex-row sm:flex-nowrap items-center space-y-1 sm:space-y-0 sm:space-x-3 px-4 sm:px-[16px] py-4 text-sm font-medium whitespace-nowrap transition-colors border-b-2 snap-start flex-none min-w-[100px] md:min-w-[140px] lg:min-w-[125px] md:h-14 text-gray-500 border-transparent hover:text-gray-700 hover:bg-gray-50"><svg
+                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="lucide lucide-settings w-5 h-5">
+                      <path
+                        d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z">
+                      </path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    <div class="text-center sm:text-left">
+                      <div class="font-medium text-xs sm:text-sm truncate">Dịch vụ</div>
+                      <div class="text-xs text-gray-400 hidden xl:block truncate">Cung cấp dịch vụ chuyên nghiệp</div>
+                    </div>
+                  </button></div>
+              </div>
+              <div class="p-6">
+                <form class="space-y-6">
+                  <div class="space-y-2"><label
+                      class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      for="content">Nội dung *</label><textarea
+                      class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm min-h-[120px] resize-none"
+                      id="content" placeholder="Bạn đang nghĩ gì?" required=""></textarea>
+                    <div class="flex justify-between text-sm text-gray-500"><span>Tối thiểu 10 ký
+                        tự</span><span>0/2000</span></div>
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-2"><label
+                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Cảm
+                        xúc</label><button type="button" role="combobox" aria-controls="radix-:rd5:"
+                        aria-expanded="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder=""
+                        class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1"><span
+                          style="pointer-events: none;">Chọn cảm xúc</span><svg xmlns="http://www.w3.org/2000/svg"
+                          width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                          stroke-linecap="round" stroke-linejoin="round"
+                          class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
+                          <path d="m6 9 6 6 6-6"></path>
+                        </svg></button><select aria-hidden="true" tabindex="-1"
+                        style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; overflow-wrap: normal;">
+                        <option value="happy">😊 Vui vẻ</option>
+                        <option value="excited">🎉 Hào hứng</option>
+                        <option value="grateful">🙏 Biết ơn</option>
+                        <option value="relaxed">😌 Thư giãn</option>
+                        <option value="motivated">💪 Có động lực</option>
+                        <option value="thoughtful">🤔 Suy nghĩ</option>
+                      </select></div>
+                    <div class="space-y-2"><label
+                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        for="location">Vị trí</label>
+                      <div class="relative"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="lucide lucide-map-pin absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4">
+                          <path
+                            d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
+                          </path>
+                          <circle cx="12" cy="10" r="3"></circle>
+                        </svg><input id="location" placeholder="Thêm vị trí"
+                          class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          type="text" value=""></div>
+                    </div>
+                  </div>
+                  <div class="space-y-3"><label
+                      class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Hình
+                      ảnh</label>
+                    <div class="flex items-center gap-3"><label
+                        class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50 transition-colors"><svg
+                          xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                          class="lucide lucide-camera w-4 h-4">
+                          <path
+                            d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z">
+                          </path>
+                          <circle cx="12" cy="13" r="3"></circle>
+                        </svg><span>Thêm ảnh</span><input multiple="" accept="image/*" class="hidden"
+                          type="file"></label><span class="text-sm text-gray-500">Tối đa 10 ảnh</span></div>
+                  </div>
+                  <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
+                    <div class="p-4 space-y-4">
+                      <div class="flex items-center justify-between"><label
+                          class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                          for="privacy">Quyền riêng tư</label><button type="button" role="combobox"
+                          aria-controls="radix-:rd6:" aria-expanded="false" aria-autocomplete="none" dir="ltr"
+                          data-state="closed"
+                          class="flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1 w-40"><span
+                            style="pointer-events: none;">
+                            <div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe w-4 h-4">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                                <path d="M2 12h20"></path>
+                              </svg><span>Công khai</span></div>
+                          </span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 opacity-50"
+                            aria-hidden="true">
+                            <path d="m6 9 6 6 6-6"></path>
+                          </svg></button><select aria-hidden="true" tabindex="-1"
+                          style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; overflow-wrap: normal;">
+                          <option value="public" selected="">Công khai</option>
+                          <option value="friends">Bạn bè</option>
+                          <option value="private">Riêng tư</option>
+                        </select></div>
+                      <div class="flex items-center justify-between"><label
+                          class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                          for="tag-friends">Gắn thẻ bạn bè</label><button type="button" role="switch"
+                          aria-checked="false" data-state="unchecked" value="on"
+                          class="peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input bg-gray-500"
+                          id="tag-friends"><span data-state="unchecked"
+                            class="pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0"></span></button><input
+                          aria-hidden="true" tabindex="-1" type="checkbox" value="on"
+                          style="transform: translateX(-100%); position: absolute; pointer-events: none; opacity: 0; margin: 0px; width: 44px; height: 24px;">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex justify-end space-x-3"><button
+                      class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
+                      type="button">Lưu nháp</button><button
+                      class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 min-w-[120px]"
+                      type="submit" disabled="">Đăng bài</button></div>
+                </form>
               </div>
             </div>
           </div>
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
-            <div class="flex flex-col space-y-1.5 p-6">
-              <div class="text-2xl font-semibold leading-none tracking-tight flex items-center"><svg
-                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-building w-5 h-5 mr-2">
-                  <rect width="16" height="20" x="4" y="2" rx="2" ry="2"></rect>
-                  <path d="M9 22v-4h6v4"></path>
-                  <path d="M8 6h.01"></path>
-                  <path d="M16 6h.01"></path>
-                  <path d="M12 6h.01"></path>
-                  <path d="M12 10h.01"></path>
-                  <path d="M12 14h.01"></path>
-                  <path d="M16 10h.01"></path>
-                  <path d="M16 14h.01"></path>
-                  <path d="M8 10h.01"></path>
-                  <path d="M8 14h.01"></path>
-                </svg>Điều kiện làm việc</div>
-            </div>
-            <div class="p-6 pt-0">
-              <div class="grid md:grid-cols-2 gap-6">
-                <div class="space-y-4">
-                  <div class="flex items-center justify-between"><span class="text-gray-600">Hình thức làm
-                      việc:</span><span class="font-medium">Toàn thời gian</span></div>
-                  <div class="flex items-center justify-between"><span class="text-gray-600">Cấp bậc:</span><span
-                      class="font-medium">Senior</span></div>
-                  <div class="flex items-center justify-between"><span class="text-gray-600">Kinh nghiệm:</span><span
-                      class="font-medium">3-5 năm</span></div>
+          <div
+            class="rounded-lg border bg-card text-card-foreground shadow-sm mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200">
+            <div class="p-6">
+              <h3 class="font-semibold text-blue-900 mb-3">💡 Mẹo để tạo bài đăng hiệu quả</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-blue-800">
+                <div class="space-y-2">
+                  <p>• Sử dụng tiêu đề thu hút và rõ ràng</p>
+                  <p>• Thêm hình ảnh chất lượng cao</p>
+                  <p>• Cung cấp thông tin đầy đủ và chính xác</p>
                 </div>
-                <div class="space-y-4">
-                  <div class="flex items-center justify-between"><span class="text-gray-600">Địa điểm:</span><span
-                      class="font-medium">KCN VSIP I, Thuận An</span></div>
-                  <div class="flex items-center justify-between"><span class="text-gray-600">Mức lương:</span><span
-                      class="font-medium text-green-600">25-35 triệu VNĐ</span></div>
-                  <div class="flex items-center justify-between"><span class="text-gray-600">Hạn nộp hồ sơ:</span><span
-                      class="font-medium text-red-600">21/01/2025</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
-            <div class="flex flex-col space-y-1.5 p-6">
-              <div class="text-2xl font-semibold leading-none tracking-tight">Việc làm liên quan</div>
-            </div>
-            <div class="p-6 pt-0">
-              <div class="grid md:grid-cols-2 gap-4"><a href="/viec-lam/2">
-                  <div
-                    class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow cursor-pointer card-hover">
-                    <div class="p-4">
-                      <div class="flex items-start gap-3 mb-3"><img
-                          src=./public/images/placeholder.svg?height=60&amp;width=60" alt="Tập đoàn Becamex IDC"
-                          class="w-10 h-10 rounded-lg object-cover">
-                        <div class="flex-1 min-w-0">
-                          <h4 class="font-semibold line-clamp-1 mb-1">Nhân viên Kế toán Tổng hợp</h4>
-                          <p class="text-sm text-gray-600 line-clamp-1">Tập đoàn Becamex IDC</p>
-                        </div>
-                      </div>
-                      <div class="flex items-center gap-4 text-xs text-gray-500 mb-2"><span>TP. Thủ Dầu Một</span><span
-                          class="text-green-600 font-medium">12-18 triệu</span></div>
-                      <div class="flex gap-1">
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-gray-100 text-gray-700 text-xs">
-                          Excel</div>
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-gray-100 text-gray-700 text-xs">
-                          SAP</div>
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-secondary bg-gray-100 text-gray-700 text-xs">
-                          +<!-- -->1</div>
-                      </div>
-                    </div>
-                  </div>
-                </a><a href="/viec-lam/3">
-                  <div
-                    class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow cursor-pointer card-hover">
-                    <div class="p-4">
-                      <div class="flex items-start gap-3 mb-3"><img
-                          src=./public/images/placeholder.svg?height=60&amp;width=60"
-                          alt="Công ty CP Đầu tư Địa ốc Đại Quang Minh" class="w-10 h-10 rounded-lg object-cover">
-                        <div class="flex-1 min-w-0">
-                          <h4 class="font-semibold line-clamp-1 mb-1">Chuyên viên Marketing Digital</h4>
-                          <p class="text-sm text-gray-600 line-clamp-1">Công ty CP Đầu tư Địa ốc Đại Quang Minh</p>
-                        </div>
-                      </div>
-                      <div class="flex items-center gap-4 text-xs text-gray-500 mb-2"><span>TP. Dĩ An</span><span
-                          class="text-green-600 font-medium">15-20 triệu</span></div>
-                      <div class="flex gap-1">
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-gray-100 text-gray-700 text-xs">
-                          Facebook Ads</div>
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-gray-100 text-gray-700 text-xs">
-                          Google Ads</div>
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-secondary bg-gray-100 text-gray-700 text-xs">
-                          +<!-- -->2</div>
-                      </div>
-                    </div>
-                  </div>
-                </a><a href="/viec-lam/4">
-                  <div
-                    class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow cursor-pointer card-hover">
-                    <div class="p-4">
-                      <div class="flex items-start gap-3 mb-3"><img
-                          src=./public/images/placeholder.svg?height=60&amp;width=60"
-                          alt="Công ty TNHH Pouchen Việt Nam" class="w-10 h-10 rounded-lg object-cover">
-                        <div class="flex-1 min-w-0">
-                          <h4 class="font-semibold line-clamp-1 mb-1">Công nhân Sản xuất</h4>
-                          <p class="text-sm text-gray-600 line-clamp-1">Công ty TNHH Pouchen Việt Nam</p>
-                        </div>
-                      </div>
-                      <div class="flex items-center gap-4 text-xs text-gray-500 mb-2"><span>KCN Đồng An</span><span
-                          class="text-green-600 font-medium">8-12 triệu</span></div>
-                      <div class="flex gap-1">
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-gray-100 text-gray-700 text-xs">
-                          Thao tác máy</div>
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-gray-100 text-gray-700 text-xs">
-                          Làm việc nhóm</div>
-                      </div>
-                    </div>
-                  </div>
-                </a><a href="/viec-lam/5">
-                  <div
-                    class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow cursor-pointer card-hover">
-                    <div class="p-4">
-                      <div class="flex items-start gap-3 mb-3"><img
-                          src=./public/images/placeholder.svg?height=60&amp;width=60" alt="Trường Quốc tế Việt Úc"
-                          class="w-10 h-10 rounded-lg object-cover">
-                        <div class="flex-1 min-w-0">
-                          <h4 class="font-semibold line-clamp-1 mb-1">Giáo viên Tiếng Anh</h4>
-                          <p class="text-sm text-gray-600 line-clamp-1">Trường Quốc tế Việt Úc</p>
-                        </div>
-                      </div>
-                      <div class="flex items-center gap-4 text-xs text-gray-500 mb-2"><span>TP. Thủ Dầu Một</span><span
-                          class="text-green-600 font-medium">18-25 triệu</span></div>
-                      <div class="flex gap-1">
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-gray-100 text-gray-700 text-xs">
-                          IELTS</div>
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-gray-100 text-gray-700 text-xs">
-                          TOEFL</div>
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-secondary bg-gray-100 text-gray-700 text-xs">
-                          +<!-- -->1</div>
-                      </div>
-                    </div>
-                  </div>
-                </a><a href="/viec-lam/6">
-                  <div
-                    class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow cursor-pointer card-hover">
-                    <div class="p-4">
-                      <div class="flex items-start gap-3 mb-3"><img
-                          src=./public/images/placeholder.svg?height=60&amp;width=60" alt="Công ty CP Thép Hòa Phát"
-                          class="w-10 h-10 rounded-lg object-cover">
-                        <div class="flex-1 min-w-0">
-                          <h4 class="font-semibold line-clamp-1 mb-1">Nhân viên Kinh doanh B2B</h4>
-                          <p class="text-sm text-gray-600 line-clamp-1">Công ty CP Thép Hòa Phát</p>
-                        </div>
-                      </div>
-                      <div class="flex items-center gap-4 text-xs text-gray-500 mb-2"><span>KCN Mỹ Phước</span><span
-                          class="text-green-600 font-medium">15-30 triệu</span></div>
-                      <div class="flex gap-1">
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-gray-100 text-gray-700 text-xs">
-                          Bán hàng B2B</div>
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-gray-100 text-gray-700 text-xs">
-                          Đàm phán</div>
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-secondary bg-gray-100 text-gray-700 text-xs">
-                          +<!-- -->1</div>
-                      </div>
-                    </div>
-                  </div>
-                </a><a href="/viec-lam/7">
-                  <div
-                    class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow cursor-pointer card-hover">
-                    <div class="p-4">
-                      <div class="flex items-start gap-3 mb-3"><img
-                          src=./public/images/placeholder.svg?height=60&amp;width=60" alt="Công ty TNHH Phần mềm FPT"
-                          class="w-10 h-10 rounded-lg object-cover">
-                        <div class="flex-1 min-w-0">
-                          <h4 class="font-semibold line-clamp-1 mb-1">Lập trình viên Mobile (React Native)</h4>
-                          <p class="text-sm text-gray-600 line-clamp-1">Công ty TNHH Phần mềm FPT</p>
-                        </div>
-                      </div>
-                      <div class="flex items-center gap-4 text-xs text-gray-500 mb-2"><span>TP. Thủ Dầu Một</span><span
-                          class="text-green-600 font-medium">20-28 triệu</span></div>
-                      <div class="flex gap-1">
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-gray-100 text-gray-700 text-xs">
-                          React Native</div>
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-gray-100 text-gray-700 text-xs">
-                          JavaScript</div>
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-secondary bg-gray-100 text-gray-700 text-xs">
-                          +<!-- -->2</div>
-                      </div>
-                    </div>
-                  </div>
-                </a></div>
-              <div class="text-center mt-6"><a href="/viec-lam"><button
-                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">Xem
-                    thêm việc làm<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-chevron-right w-4 h-4 ml-1">
-                      <path d="m9 18 6-6-6-6"></path>
-                    </svg></button></a></div>
-            </div>
-          </div>
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
-            <div class="flex flex-col space-y-1.5 p-6">
-              <div class="text-2xl font-semibold leading-none tracking-tight flex items-center"><svg
-                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-graduation-cap w-5 h-5 mr-2">
-                  <path
-                    d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z">
-                  </path>
-                  <path d="M22 10v6"></path>
-                  <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path>
-                </svg>Mẹo ứng tuyển thành công</div>
-            </div>
-            <div class="p-6 pt-0">
-              <div class="grid md:grid-cols-2 gap-4">
-                <div class="space-y-3">
-                  <div class="flex items-start gap-3 p-3 bg-blue-50 rounded-lg">
-                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0"><svg
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-file-text w-4 h-4 text-blue-600">
-                        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
-                        <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
-                        <path d="M10 9H8"></path>
-                        <path d="M16 13H8"></path>
-                        <path d="M16 17H8"></path>
-                      </svg></div>
-                    <div>
-                      <h5 class="font-medium text-sm mb-1">Tùy chỉnh CV phù hợp</h5>
-                      <p class="text-xs text-gray-600">Điều chỉnh CV để phù hợp với yêu cầu công việc cụ thể</p>
-                    </div>
-                  </div>
-                  <div class="flex items-start gap-3 p-3 bg-green-50 rounded-lg">
-                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0"><svg
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-message-circle w-4 h-4 text-green-600">
-                        <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>
-                      </svg></div>
-                    <div>
-                      <h5 class="font-medium text-sm mb-1">Viết thư xin việc ấn tượng</h5>
-                      <p class="text-xs text-gray-600">Thể hiện sự hiểu biết về công ty và vị trí ứng tuyển</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="space-y-3">
-                  <div class="flex items-start gap-3 p-3 bg-purple-50 rounded-lg">
-                    <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0"><svg
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-clock w-4 h-4 text-purple-600">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <polyline points="12 6 12 12 16 14"></polyline>
-                      </svg></div>
-                    <div>
-                      <h5 class="font-medium text-sm mb-1">Ứng tuyển sớm</h5>
-                      <p class="text-xs text-gray-600">Nộp hồ sơ trong tuần đầu để tăng cơ hội được chú ý</p>
-                    </div>
-                  </div>
-                  <div class="flex items-start gap-3 p-3 bg-orange-50 rounded-lg">
-                    <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0"><svg
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-users w-4 h-4 text-orange-600">
-                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="9" cy="7" r="4"></circle>
-                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                      </svg></div>
-                    <div>
-                      <h5 class="font-medium text-sm mb-1">Chuẩn bị phỏng vấn</h5>
-                      <p class="text-xs text-gray-600">Tìm hiểu về công ty và luyện tập câu hỏi phỏng vấn</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
-            <div class="flex flex-col space-y-1.5 p-6">
-              <div class="text-2xl font-semibold leading-none tracking-tight flex items-center"><svg
-                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-trending-up w-5 h-5 mr-2">
-                  <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
-                  <polyline points="16 7 22 7 22 13"></polyline>
-                </svg>Thông tin lương ngành</div>
-            </div>
-            <div class="p-6 pt-0">
-              <div class="space-y-4">
-                <div class="flex items-center justify-between p-4 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg">
-                  <div>
-                    <h4 class="font-semibold text-gray-900">Mức lương trung bình</h4>
-                    <p class="text-sm text-gray-600">Cho vị trí <!-- -->Senior<!-- --> trong ngành</p>
-                  </div>
-                  <div class="text-right">
-                    <div class="text-2xl font-bold text-green-600">15-25 triệu</div>
-                    <div class="text-xs text-gray-500">VNĐ/tháng</div>
-                  </div>
-                </div>
-                <div class="grid grid-cols-3 gap-4 text-center">
-                  <div class="p-3 bg-gray-50 rounded-lg">
-                    <div class="text-lg font-bold text-gray-900">12-18 triệu</div>
-                    <div class="text-xs text-gray-600">Mức thấp</div>
-                  </div>
-                  <div class="p-3 bg-blue-50 rounded-lg">
-                    <div class="text-lg font-bold text-blue-600">18-25 triệu</div>
-                    <div class="text-xs text-gray-600">Mức trung bình</div>
-                  </div>
-                  <div class="p-3 bg-green-50 rounded-lg">
-                    <div class="text-lg font-bold text-green-600">25-35 triệu</div>
-                    <div class="text-xs text-gray-600">Mức cao</div>
-                  </div>
-                </div>
-                <div class="text-xs text-gray-500 text-center">*Dựa trên 1,234 mẫu lương được báo cáo trong 6 tháng qua
+                <div class="space-y-2">
+                  <p>• Sử dụng từ khóa phù hợp</p>
+                  <p>• Kiểm tra chính tả trước khi đăng</p>
+                  <p>• Tương tác với người dùng khác</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="lg:col-span-4 space-y-6">
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
-            <div class="p-6">
-              <h3 class="font-bold mb-4 text-center">Ứng tuyển nhanh</h3>
-              <div class="space-y-4"> <button @click="openApplyJobModal()"
-                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 btn-primary w-full"
-                  type="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-send w-4 h-4 mr-2">
-                    <path
-                      d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z">
-                    </path>
-                    <path d="m21.854 2.147-10.94 10.939"></path>
-                  </svg>Ứng tuyển ngay</button><button
-                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 w-full bg-transparent"><svg
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-bookmark w-4 h-4 mr-2">
-                    <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path>
-                  </svg>Lưu việc làm</button></div>
-              <div data-orientation="horizontal" role="none" class="shrink-0 bg-border h-[1px] w-full my-4"></div>
-              <div class="text-center text-sm text-gray-600">
-                <div class="flex items-center justify-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-circle-alert w-4 h-4 mr-1 text-red-500">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="12" x2="12" y1="8" y2="12"></line>
-                    <line x1="12" x2="12.01" y1="16" y2="16"></line>
-                  </svg><span class="text-red-600 font-medium">Còn <!-- -->0<!-- --> ngày để ứng tuyển</span></div>
-                <p>Hạn nộp: <!-- -->21/01/2025</p>
-              </div>
-            </div>
-          </div>
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
-            <div class="p-6">
-              <div class="flex items-center gap-3 mb-4"><a
-                  href="/doanh-nghiep/công-ty-tnhh-samsung-electronics-việt-nam"><img
-                    src=./public/images/placeholder.svg?height=60&amp;width=60"
-                    alt="Công ty TNHH Samsung Electronics Việt Nam"
-                    class="w-12 h-12 rounded-lg object-cover hover:opacity-90 transition-opacity"></a>
-                <div><a class="font-bold text-gray-900 hover:text-blue-600 transition-colors"
-                    href="/doanh-nghiep/công-ty-tnhh-samsung-electronics-việt-nam">Công ty TNHH Samsung Electronics Việt
-                    Nam</a>
-                  <p class="text-sm text-gray-600">Công ty công nghệ</p>
-                </div>
-              </div>
-              <div class="space-y-3 text-sm">
-                <div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="lucide lucide-mail w-4 h-4 text-gray-500">
-                    <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-                  </svg><span>hr@company.com</span></div>
-                <div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="lucide lucide-phone w-4 h-4 text-gray-500">
-                    <path
-                      d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
-                    </path>
-                  </svg><span>0123 456 789</span></div>
-                <div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4 text-gray-500">
-                    <path
-                      d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
-                    </path>
-                    <circle cx="12" cy="10" r="3"></circle>
-                  </svg><span>KCN VSIP I, Thuận An</span></div>
-                <div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="lucide lucide-users w-4 h-4 text-gray-500">
-                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="9" cy="7" r="4"></circle>
-                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                  </svg><span>1000+ nhân viên</span></div>
-                <div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="lucide lucide-globe w-4 h-4 text-gray-500">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
-                    <path d="M2 12h20"></path>
-                  </svg><a href="#" class="text-blue-600 hover:underline">Website công ty</a></div>
-              </div>
-              <div data-orientation="horizontal" role="none" class="shrink-0 bg-border h-[1px] w-full my-4"></div>
-              <div class="space-y-2"><a href="/doanh-nghiep/công-ty-tnhh-samsung-electronics-việt-nam"><button
-                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 w-full bg-transparent"><svg
+        <div class="lg:col-span-1">
+          <div class="space-y-4">
+            <div class="rounded-lg bg-card shadow-sm bg-gradient-to-r from-blue-600 to-purple-600 text-white border-0">
+              <div class="p-6">
+                <div class="flex items-center space-x-3 mb-4">
+                  <div class="w-[4rem] h-12 bg-white/20 rounded-full flex items-center justify-center"><svg
                       xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                       stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-building w-4 h-4 mr-2">
-                      <rect width="16" height="20" x="4" y="2" rx="2" ry="2"></rect>
-                      <path d="M9 22v-4h6v4"></path>
-                      <path d="M8 6h.01"></path>
-                      <path d="M16 6h.01"></path>
-                      <path d="M12 6h.01"></path>
-                      <path d="M12 10h.01"></path>
-                      <path d="M12 14h.01"></path>
-                      <path d="M16 10h.01"></path>
-                      <path d="M16 14h.01"></path>
-                      <path d="M8 10h.01"></path>
-                      <path d="M8 14h.01"></path>
-                    </svg>Xem trang công ty</button></a><button
-                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 w-full bg-transparent"><svg
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-briefcase w-4 h-4 mr-2">
-                    <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                    <rect width="20" height="14" x="2" y="6" rx="2"></rect>
-                  </svg>Việc làm khác (<!-- -->6<!-- -->)</button></div>
-            </div>
-          </div>
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
-            <div class="p-6">
-              <h3 class="font-bold mb-4">Thống kê việc làm</h3>
-              <div class="space-y-3">
-                <div class="flex items-center justify-between"><span class="text-sm text-gray-600">Lượt xem:</span><span
-                    class="font-medium">245</span></div>
-                <div class="flex items-center justify-between"><span class="text-sm text-gray-600">Ứng viên:</span><span
-                    class="font-medium">23 người</span></div>
-                <div class="flex items-center justify-between"><span class="text-sm text-gray-600">Đã lưu:</span><span
-                    class="font-medium">156 lần</span></div>
-                <div class="flex items-center justify-between"><span class="text-sm text-gray-600">Mức độ cạnh
-                    tranh:</span>
-                  <div
-                    class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-orange-100 text-orange-700">
-                    Trung bình</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
-            <div class="p-6">
-              <h3 class="font-bold mb-4">Việc làm tương tự</h3>
-              <div class="space-y-4"><a href="/viec-lam/9">
-                  <div
-                    class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-md transition-shadow cursor-pointer mb-1.5 card-hover">
-                    <div class="p-3 mb-4">
-                      <div class="flex items-start gap-3 mb-3"><img
-                          src=./public/images/placeholder.svg?height=60&amp;width=60" alt="Công ty TNHH Denso Việt Nam"
-                          class="w-10 h-10 rounded-lg object-cover">
-                        <div class="flex-1 min-w-0">
-                          <h4 class="font-semibold line-clamp-1 mb-1 text-sm">Kỹ sư Cơ khí</h4>
-                          <p class="text-xs text-gray-600 line-clamp-1">Công ty TNHH Denso Việt Nam</p>
-                        </div>
-                      </div>
-                      <div class="flex items-center gap-4 text-xs text-gray-500 mb-2"><span>KCN VSIP II</span><span
-                          class="text-green-600 font-medium">18-25 triệu</span></div>
-                      <div class="flex gap-1">
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-gray-100 text-gray-700 text-xs">
-                          AutoCAD</div>
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-gray-100 text-gray-700 text-xs">
-                          SolidWorks</div>
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-secondary bg-gray-100 text-gray-700 text-xs">
-                          +<!-- -->1</div>
-                      </div>
-                    </div>
-                  </div>
-                </a><a href="/viec-lam/13">
-                  <div
-                    class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-md transition-shadow cursor-pointer mb-1.5 card-hover">
-                    <div class="p-3 mb-4">
-                      <div class="flex items-start gap-3 mb-3"><img
-                          src=./public/images/placeholder.svg?height=60&amp;width=60"
-                          alt="Bệnh viện Đa khoa Quốc tế Becamex" class="w-10 h-10 rounded-lg object-cover">
-                        <div class="flex-1 min-w-0">
-                          <h4 class="font-semibold line-clamp-1 mb-1 text-sm">Bác sĩ Đa khoa</h4>
-                          <p class="text-xs text-gray-600 line-clamp-1">Bệnh viện Đa khoa Quốc tế Becamex</p>
-                        </div>
-                      </div>
-                      <div class="flex items-center gap-4 text-xs text-gray-500 mb-2"><span>TP. Thủ Dầu Một</span><span
-                          class="text-green-600 font-medium">25-40 triệu</span></div>
-                      <div class="flex gap-1">
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-gray-100 text-gray-700 text-xs">
-                          Khám bệnh</div>
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-gray-100 text-gray-700 text-xs">
-                          Chẩn đoán</div>
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-secondary bg-gray-100 text-gray-700 text-xs">
-                          +<!-- -->1</div>
-                      </div>
-                    </div>
-                  </div>
-                </a><a href="/viec-lam/15">
-                  <div
-                    class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-md transition-shadow cursor-pointer mb-1.5 card-hover">
-                    <div class="p-3 mb-4">
-                      <div class="flex items-start gap-3 mb-3"><img
-                          src=./public/images/placeholder.svg?height=60&amp;width=60"
-                          alt="Công ty TNHH Jabil Circuit Việt Nam" class="w-10 h-10 rounded-lg object-cover">
-                        <div class="flex-1 min-w-0">
-                          <h4 class="font-semibold line-clamp-1 mb-1 text-sm">Kỹ thuật viên Điện tử</h4>
-                          <p class="text-xs text-gray-600 line-clamp-1">Công ty TNHH Jabil Circuit Việt Nam</p>
-                        </div>
-                      </div>
-                      <div class="flex items-center gap-4 text-xs text-gray-500 mb-2"><span>KCN VSIP I</span><span
-                          class="text-green-600 font-medium">10-16 triệu</span></div>
-                      <div class="flex gap-1">
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-gray-100 text-gray-700 text-xs">
-                          Điện tử</div>
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-gray-100 text-gray-700 text-xs">
-                          SMT</div>
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-secondary bg-gray-100 text-gray-700 text-xs">
-                          +<!-- -->1</div>
-                      </div>
-                    </div>
-                  </div>
-                </a><a href="/viec-lam/8">
-                  <div
-                    class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-md transition-shadow cursor-pointer mb-1.5 card-hover">
-                    <div class="p-3 mb-4">
-                      <div class="flex items-start gap-3 mb-3"><img
-                          src=./public/images/placeholder.svg?height=60&amp;width=60" alt="Tập đoàn Vingroup"
-                          class="w-10 h-10 rounded-lg object-cover">
-                        <div class="flex-1 min-w-0">
-                          <h4 class="font-semibold line-clamp-1 mb-1 text-sm">Nhân viên Nhân sự</h4>
-                          <p class="text-xs text-gray-600 line-clamp-1">Tập đoàn Vingroup</p>
-                        </div>
-                      </div>
-                      <div class="flex items-center gap-4 text-xs text-gray-500 mb-2"><span>TP. Thuận An</span><span
-                          class="text-green-600 font-medium">12-16 triệu</span></div>
-                      <div class="flex gap-1">
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-gray-100 text-gray-700 text-xs">
-                          Tuyển dụng</div>
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-gray-100 text-gray-700 text-xs">
-                          Đào tạo</div>
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-secondary bg-gray-100 text-gray-700 text-xs">
-                          +<!-- -->1</div>
-                      </div>
-                    </div>
-                  </div>
-                </a><a href="/viec-lam/10">
-                  <div
-                    class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-md transition-shadow cursor-pointer mb-1.5 card-hover">
-                    <div class="p-3 mb-4">
-                      <div class="flex items-start gap-3 mb-3"><img
-                          src=./public/images/placeholder.svg?height=60&amp;width=60"
-                          alt="Công ty CP Đầu tư Bất động sản Novaland" class="w-10 h-10 rounded-lg object-cover">
-                        <div class="flex-1 min-w-0">
-                          <h4 class="font-semibold line-clamp-1 mb-1 text-sm">Chuyên viên Pháp chế</h4>
-                          <p class="text-xs text-gray-600 line-clamp-1">Công ty CP Đầu tư Bất động sản Novaland</p>
-                        </div>
-                      </div>
-                      <div class="flex items-center gap-4 text-xs text-gray-500 mb-2"><span>TP. Thủ Dầu Một</span><span
-                          class="text-green-600 font-medium">16-22 triệu</span></div>
-                      <div class="flex gap-1">
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-gray-100 text-gray-700 text-xs">
-                          Luật Dân sự</div>
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-gray-100 text-gray-700 text-xs">
-                          Luật Đất đai</div>
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-secondary bg-gray-100 text-gray-700 text-xs">
-                          +<!-- -->1</div>
-                      </div>
-                    </div>
-                  </div>
-                </a></div>
-              <div class="text-center mt-4"><a href="/viec-lam"><button
-                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 w-full bg-transparent">Xem
-                    thêm</button></a></div>
-            </div>
-          </div>
-          <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-6">
-            <h3 class="text-lg font-semibold mb-2">Đăng ký nhận tin tuyển dụng</h3>
-            <p class="text-gray-600 text-sm mb-4">Nhận thông tin tuyển dụng sớm nhất từ Bình Dương</p>
-            <div class="space-y-3"><input type="email" placeholder="Email của bạn"
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"><button
-                class="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors font-medium">Đăng
-                ký</button></div>
-          </div>
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
-            <div class="p-6">
-              <h3 class="font-bold mb-4">Xu hướng thị trường</h3>
-              <div class="space-y-3">
-                <div class="flex items-center justify-between"><span class="text-sm text-gray-600">Nhu cầu tuyển
-                    dụng:</span>
-                  <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                      stroke-linejoin="round" class="lucide lucide-trending-up w-4 h-4 text-green-500 mr-1">
-                      <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
-                      <polyline points="16 7 22 7 22 13"></polyline>
-                    </svg><span class="text-green-600 font-medium text-sm">Tăng 15%</span></div>
-                </div>
-                <div class="flex items-center justify-between"><span class="text-sm text-gray-600">Mức lương trung
-                    bình:</span>
-                  <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                      stroke-linejoin="round" class="lucide lucide-trending-up w-4 h-4 text-blue-500 mr-1">
-                      <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
-                      <polyline points="16 7 22 7 22 13"></polyline>
-                    </svg><span class="text-blue-600 font-medium text-sm">20 triệu</span></div>
-                </div>
-                <div class="flex items-center justify-between"><span class="text-sm text-gray-600">Cạnh tranh:</span>
-                  <div
-                    class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-orange-100 text-orange-700 text-xs">
-                    Trung bình</div>
-                </div>
-              </div>
-              <div data-orientation="horizontal" role="none" class="shrink-0 bg-border h-[1px] w-full my-4"></div>
-              <div class="text-center"><button
-                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 w-full bg-transparent"><svg
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-trending-up w-4 h-4 mr-2">
-                    <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
-                    <polyline points="16 7 22 7 22 13"></polyline>
-                  </svg>Xem báo cáo ngành</button></div>
-            </div>
-          </div>
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
-            <div class="p-6">
-              <h3 class="font-bold mb-4">Lộ trình sự nghiệp</h3>
-              <div class="space-y-3">
-                <div class="flex items-center gap-3 p-2 bg-green-50 rounded-lg">
-                  <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                      class="lucide lucide-star w-6 h-6">
+                      <path
+                        d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z">
+                      </path>
+                    </svg></div>
                   <div>
-                    <div class="text-sm font-medium">Senior Developer</div>
-                    <div class="text-xs text-gray-600">25-35 triệu</div>
+                    <h3 class="font-bold text-lg">Chào mừng!</h3>
+                    <p class="text-blue-100 text-sm">Chia sẻ nội dung của bạn</p>
                   </div>
                 </div>
-                <div class="flex items-center gap-3 p-2 bg-blue-50 rounded-lg border-2 border-blue-200">
-                  <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-                  <div>
-                    <div class="text-sm font-medium">Mid-level Developer</div>
-                    <div class="text-xs text-gray-600">18-25 triệu (Hiện tại)</div>
-                  </div>
-                </div>
-                <div class="flex items-center gap-3 p-2 bg-gray-50 rounded-lg">
-                  <div class="w-2 h-2 bg-gray-400 rounded-full"></div>
-                  <div>
-                    <div class="text-sm font-medium">Junior Developer</div>
-                    <div class="text-xs text-gray-600">12-18 triệu</div>
-                  </div>
-                </div>
+                <p class="text-sm text-blue-100 leading-relaxed">Tạo và chia sẻ nội dung chất lượng để kết nối với cộng
+                  đồng Bình Dương</p>
               </div>
-              <div class="text-center mt-4"><button
-                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 w-full bg-transparent"><svg
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-target w-4 h-4 mr-2">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <circle cx="12" cy="12" r="6"></circle>
-                    <circle cx="12" cy="12" r="2"></circle>
-                  </svg>Xem lộ trình chi tiết</button></div>
             </div>
-          </div>
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
-            <div class="p-6">
-              <h3 class="font-bold mb-4">Đánh giá kỹ năng</h3>
-              <p class="text-sm text-gray-600 mb-4">Kiểm tra mức độ phù hợp của bạn với vị trí này</p>
-              <div class="space-y-3">
-                <div class="flex items-center justify-between"><span class="text-sm">React</span>
-                  <div class="flex items-center gap-2">
-                    <div class="w-16 h-2 bg-gray-200 rounded-full">
-                      <div class="h-2 bg-blue-500 rounded-full" style="width:61%"></div>
-                    </div><span class="text-xs text-gray-500">61<!-- -->%</span>
+            <div
+              class="rounded-lg bg-card text-card-foreground shadow-sm border-0 overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer group">
+              <div class="p-0">
+                <div class="bg-gradient-to-r from-pink-500 to-rose-500 p-4 text-white">
+                  <div class="flex items-start justify-between mb-3">
+                    <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-message-circle w-5 h-5">
+                        <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>
+                      </svg></div>
+                    <div
+                      class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-zap w-3 h-3">
+                        <path
+                          d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z">
+                        </path>
+                      </svg></div>
                   </div>
-                </div>
-                <div class="flex items-center justify-between"><span class="text-sm">Node.js</span>
-                  <div class="flex items-center gap-2">
-                    <div class="w-16 h-2 bg-gray-200 rounded-full">
-                      <div class="h-2 bg-blue-500 rounded-full" style="width:62%"></div>
-                    </div><span class="text-xs text-gray-500">62<!-- -->%</span>
-                  </div>
-                </div>
-                <div class="flex items-center justify-between"><span class="text-sm">JavaScript</span>
-                  <div class="flex items-center gap-2">
-                    <div class="w-16 h-2 bg-gray-200 rounded-full">
-                      <div class="h-2 bg-blue-500 rounded-full" style="width:63%"></div>
-                    </div><span class="text-xs text-gray-500">63<!-- -->%</span>
-                  </div>
+                  <h4 class="font-semibold text-sm mb-1">Trò Chuyện &amp; Kết Bạn</h4>
+                  <p class="text-xs text-white/80 mb-3 leading-relaxed">Kết nối với cộng đồng Bình Dương</p><button
+                    class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-full transition-colors">Bắt đầu trò
+                    chuyện</button>
                 </div>
               </div>
-              <div class="text-center mt-4"><button
-                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 w-full bg-transparent"><svg
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-award w-4 h-4 mr-2">
+            </div>
+            <div
+              class="rounded-lg bg-card text-card-foreground shadow-sm border-0 overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer group">
+              <div class="p-0">
+                <div class="bg-gradient-to-r from-blue-500 to-cyan-500 p-4 text-white">
+                  <div class="flex items-start justify-between mb-3">
+                    <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-newspaper w-5 h-5">
+                        <path
+                          d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2">
+                        </path>
+                        <path d="M18 14h-8"></path>
+                        <path d="M15 18h-5"></path>
+                        <path d="M10 6h8v4h-8V6Z"></path>
+                      </svg></div>
+                    <div
+                      class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-zap w-3 h-3">
+                        <path
+                          d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z">
+                        </path>
+                      </svg></div>
+                  </div>
+                  <h4 class="font-semibold text-sm mb-1">Đăng Tin Tức</h4>
+                  <p class="text-xs text-white/80 mb-3 leading-relaxed">Chia sẻ tin tức mới nhất</p><button
+                    class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-full transition-colors">Tạo tin
+                    tức</button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="rounded-lg bg-card text-card-foreground shadow-sm border-0 overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer group">
+              <div class="p-0">
+                <div class="bg-gradient-to-r from-green-500 to-emerald-500 p-4 text-white">
+                  <div class="flex items-start justify-between mb-3">
+                    <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-briefcase w-5 h-5">
+                        <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                        <rect width="20" height="14" x="2" y="6" rx="2"></rect>
+                      </svg></div>
+                    <div
+                      class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-zap w-3 h-3">
+                        <path
+                          d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z">
+                        </path>
+                      </svg></div>
+                  </div>
+                  <h4 class="font-semibold text-sm mb-1">Đăng Việc Làm</h4>
+                  <p class="text-xs text-white/80 mb-3 leading-relaxed">Tuyển dụng nhân tài</p><button
+                    class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-full transition-colors">Đăng tuyển
+                    dụng</button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="rounded-lg bg-card text-card-foreground shadow-sm border-0 overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer group">
+              <div class="p-0">
+                <div class="bg-gradient-to-r from-orange-500 to-red-500 p-4 text-white">
+                  <div class="flex items-start justify-between mb-3">
+                    <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-house w-5 h-5">
+                        <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
+                        <path
+                          d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z">
+                        </path>
+                      </svg></div>
+                    <div
+                      class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-zap w-3 h-3">
+                        <path
+                          d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z">
+                        </path>
+                      </svg></div>
+                  </div>
+                  <h4 class="font-semibold text-sm mb-1">Đăng Bất Động Sản</h4>
+                  <p class="text-xs text-white/80 mb-3 leading-relaxed">Mua bán, cho thuê nhà đất</p><button
+                    class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-full transition-colors">Đăng
+                    BĐS</button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="rounded-lg bg-card text-card-foreground shadow-sm border-0 overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer group">
+              <div class="p-0">
+                <div class="bg-gradient-to-r from-purple-500 to-indigo-500 p-4 text-white">
+                  <div class="flex items-start justify-between mb-3">
+                    <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-settings w-5 h-5">
+                        <path
+                          d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z">
+                        </path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                      </svg></div>
+                    <div
+                      class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-zap w-3 h-3">
+                        <path
+                          d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z">
+                        </path>
+                      </svg></div>
+                  </div>
+                  <h4 class="font-semibold text-sm mb-1">Đăng Dịch Vụ</h4>
+                  <p class="text-xs text-white/80 mb-3 leading-relaxed">Cung cấp dịch vụ chuyên nghiệp</p><button
+                    class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-full transition-colors">Đăng dịch
+                    vụ</button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="rounded-lg bg-card text-card-foreground shadow-sm border-0 overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer group">
+              <div class="p-0">
+                <div class="bg-gradient-to-r from-yellow-500 to-orange-500 p-4 text-white">
+                  <div class="flex items-start justify-between mb-3">
+                    <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-trending-up w-5 h-5">
+                        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                        <polyline points="16 7 22 7 22 13"></polyline>
+                      </svg></div>
+                    <div
+                      class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-zap w-3 h-3">
+                        <path
+                          d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z">
+                        </path>
+                      </svg></div>
+                  </div>
+                  <h4 class="font-semibold text-sm mb-1">Xu Hướng Hot</h4>
+                  <p class="text-xs text-white/80 mb-3 leading-relaxed">Theo dõi các chủ đề nổi bật</p><button
+                    class="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-full transition-colors">Xem xu
+                    hướng</button>
+                </div>
+              </div>
+            </div>
+            <div class="rounded-lg bg-card shadow-sm bg-gradient-to-r from-emerald-500 to-teal-500 text-white border-0">
+              <div class="p-4">
+                <div class="flex items-center space-x-2 mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-5 h-5">
                     <path
-                      d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526">
+                      d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z">
                     </path>
-                    <circle cx="12" cy="8" r="6"></circle>
-                  </svg>Làm bài test kỹ năng</button></div>
+                  </svg>
+                  <h4 class="font-semibold text-sm">Mẹo Hay</h4>
+                </div>
+                <ul class="text-xs space-y-2 text-emerald-100">
+                  <li>• Sử dụng hình ảnh chất lượng cao</li>
+                  <li>• Viết tiêu đề thu hút</li>
+                  <li>• Thêm hashtag phù hợp</li>
+                  <li>• Tương tác với cộng đồng</li>
+                </ul>
+              </div>
+            </div>
+            <div class="rounded-lg bg-card shadow-sm bg-gradient-to-r from-slate-600 to-slate-700 text-white border-0">
+              <div class="p-4">
+                <h4 class="font-semibold text-sm mb-3">Thống Kê Hôm Nay</h4>
+                <div class="grid grid-cols-2 gap-3">
+                  <div class="text-center">
+                    <div class="text-lg font-bold">1.2K</div>
+                    <div class="text-xs text-slate-300">Bài đăng</div>
+                  </div>
+                  <div class="text-center">
+                    <div class="text-lg font-bold">856</div>
+                    <div class="text-xs text-slate-300">Người dùng</div>
+                  </div>
+                  <div class="text-center">
+                    <div class="text-lg font-bold">2.4K</div>
+                    <div class="text-xs text-slate-300">Tương tác</div>
+                  </div>
+                  <div class="text-center">
+                    <div class="text-lg font-bold">95%</div>
+                    <div class="text-xs text-slate-300">Hài lòng</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -3701,123 +3082,6 @@
       </div>
     </div>
   </footer>
-
-  <!-- Modal Apply Job -->
-  <div x-show="showApplyJobModal" x-cloak x-transition:enter="transition ease-out duration-300"
-    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-    x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100"
-    x-transition:leave-end="opacity-0" @click="closeApplyJobModal()"
-    class="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-    <div @click.stop class="bg-white rounded-lg max-w-2xl w-full p-6">
-      <div class="flex flex-col space-y-1.5 text-center sm:text-left mb-4">
-        <h2 class="text-lg font-semibold leading-none tracking-tight">Ứng tuyển: Kỹ sư Phần mềm Senior</h2>
-        <p class="text-sm text-muted-foreground">Điền thông tin của bạn để ứng tuyển vào vị trí này tại Công ty TNHH
-          Samsung Electronics Việt Nam</p>
-      </div>
-      <div class="space-y-4">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div>
-            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              for="fullName">Họ và tên *</label>
-            <input
-              class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-              id="fullName" placeholder="Nguyễn Văn A" value="">
-          </div>
-          <div>
-            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              for="phone">Số điện thoại *</label>
-            <input
-              class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-              id="phone" placeholder="0123456789" value="">
-          </div>
-          <div>
-            <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              for="email">Email *</label>
-            <input
-              class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-              id="email" placeholder="example@email.com" type="email" value="">
-          </div>
-        </div>
-        <div class="space-y-2">
-          <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Chọn
-            CV trong thư viện của tôi</label>
-          <div class="space-y-4">
-            <div>
-              <div class="text-sm text-muted-foreground mb-2">CV Online</div>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                <button type="button" class="border rounded-lg p-2 text-left hover:bg-gray-50 transition">
-                  <div class="font-medium line-clamp-1">CV Frontend – Nguyễn Văn A</div>
-                  <div class="text-xs text-muted-foreground">Mẫu: CV Hiện Đại - Xanh Mint</div>
-                </button>
-                <button type="button" class="border rounded-lg p-2 text-left hover:bg-gray-50 transition">
-                  <div class="font-medium line-clamp-1">CV Product Manager</div>
-                  <div class="text-xs text-muted-foreground">Mẫu: CV Đơn Giản - Xanh Dương</div>
-                </button>
-                <button type="button" class="border rounded-lg p-2 text-left hover:bg-gray-50 transition">
-                  <div class="font-medium line-clamp-1">CV Frontend – Nguyễn Văn A</div>
-                  <div class="text-xs text-muted-foreground">Mẫu: CV Hiện Đại - Xanh Mint</div>
-                </button>
-                <button type="button" class="border rounded-lg p-2 text-left hover:bg-gray-50 transition">
-                  <div class="font-medium line-clamp-1">CV Product Manager</div>
-                  <div class="text-xs text-muted-foreground">Mẫu: CV Đơn Giản - Xanh Dương</div>
-                </button>
-              </div>
-            </div>
-            <div>
-              <div class="text-sm text-muted-foreground mb-2">CV đã tải lên</div>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                <button type="button" class="border rounded-lg p-2 text-left hover:bg-gray-50 transition">
-                  <div class="font-medium line-clamp-1">VoXuanTuanCV_vi.pdf</div>
-                  <div class="text-xs text-muted-foreground">Cập nhật: 29/6/2025</div>
-                </button>
-                <button type="button" class="border rounded-lg p-2 text-left hover:bg-gray-50 transition">
-                  <div class="font-medium line-clamp-1">VoXuanTuanCV_en.pdf</div>
-                  <div class="text-xs text-muted-foreground">Cập nhật: 3/8/2025</div>
-                </button>
-              </div>
-            </div>
-            <div class="text-center text-xs text-muted-foreground">— hoặc —</div>
-            <div class="space-y-2">
-              <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                for="resume">Tải CV từ máy</label>
-              <input
-                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-                id="resume" accept=".pdf,.doc,.docx" type="file">
-              <div class="text-xs text-muted-foreground">Hỗ trợ PDF, DOC, DOCX (≤ 5MB)</div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            for="coverLetter">Thư xin việc</label>
-          <textarea
-            class="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-            id="coverLetter" placeholder="Viết vài dòng về bản thân và lý do bạn phù hợp với vị trí này..."
-            rows="4"></textarea>
-        </div>
-        <div class="flex gap-3 pt-4">
-          <button @click="closeApplyJobModal()"
-            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 btn-primary flex-1">Gửi
-            hồ sơ</button>
-          <button @click="closeApplyJobModal()"
-            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">Hủy</button>
-        </div>
-      </div>
-      <button @click="closeApplyJobModal()" type="button"
-        class="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-          class="lucide lucide-x h-4 w-4">
-          <path d="M18 6 6 18"></path>
-          <path d="m6 6 12 12"></path>
-        </svg>
-        <span class="sr-only">Close</span>
-      </button>
-    </div>
-  </div>
-
-  <!-- Chi tiết Việc làm Component JS -->
-  <script src="js/chi-tiet-viec-lam.js"></script>
 
   <!-- Initialize Lucide Icons -->
   <script>

@@ -1,6 +1,5 @@
 // Homepage Alpine.js Components
 // Chứa tất cả components cho trang home: Hero Section, Post Box, Stats, v.v.
-
 document.addEventListener('alpine:init', () => {
 
     // ===========================================
@@ -648,6 +647,86 @@ document.addEventListener('alpine:init', () => {
         }
     }));
 
+    // ===========================================
+    // PHONE CONTACT TOGGLE COMPONENT
+    // ===========================================
+    Alpine.data('phoneContactToggle', () => ({
+        isExpanded: false,
+        initialItems: 8,
+        totalItems: 22,
+
+        init() {
+            console.log('Phone Contact Toggle component initialized.');
+            this.hideAdditionalItems();
+        },
+
+        toggleExpanded() {
+            this.isExpanded = !this.isExpanded;
+
+            if (this.isExpanded) {
+                this.showAllItems();
+            } else {
+                this.hideAdditionalItems();
+            }
+        },
+
+        hideAdditionalItems() {
+            const allItems = this.$el.querySelectorAll('.grid > div');
+            allItems.forEach((item, index) => {
+                if (index >= this.initialItems) {
+                    item.style.display = 'none';
+                } else {
+                    item.style.display = 'block';
+                }
+            });
+        },
+
+        showAllItems() {
+            const allItems = this.$el.querySelectorAll('.grid > div');
+            allItems.forEach((item) => {
+                item.style.display = 'block';
+            });
+        },
+
+        getButtonText() {
+            return this.isExpanded ? 'Thu gọn' : `Xem Thêm (${this.totalItems - this.initialItems} số khác)`;
+        },
+
+        getButtonIcon() {
+            return this.isExpanded ? 'lucide-chevron-up' : 'lucide-chevron-down';
+        }
+    }));
+
+    // ===========================================
+    // DEVELOPMENT HISTORY TOGGLE COMPONENT
+    // ===========================================
+    Alpine.data('developmentHistoryToggle', () => ({
+        isExpanded: true,
+
+        init() {
+            console.log('Development History Toggle component initialized.');
+            console.log('Initial state - isExpanded:', this.isExpanded);
+        },
+
+        toggleExpanded() {
+            console.log('Toggle clicked - before:', this.isExpanded);
+            this.isExpanded = !this.isExpanded;
+            console.log('Toggle clicked - after:', this.isExpanded);
+        },
+
+        getIconClass() {
+            const iconClass = this.isExpanded ? 'lucide-chevron-up' : 'lucide-chevron-down';
+            console.log('getIconClass called - isExpanded:', this.isExpanded, 'iconClass:', iconClass);
+            return iconClass;
+        },
+
+        getHistoryClass() {
+            const historyClass = this.isExpanded ? 'block' : 'hidden';
+            console.log('getHistoryClass called - isExpanded:', this.isExpanded, 'historyClass:', historyClass);
+            return historyClass;
+        }
+    }));
+
 
     // ===========================================
     // HOMEPAGE MAIN COMPONENT
@@ -781,6 +860,7 @@ document.addEventListener('DOMContentLoaded', () => {
             currentSlide++;
             updateCarousel();
             updateButtons();
+            updateDots();
             setTimeout(() => { isTransitioning = false; }, 500);
         }
 
@@ -790,6 +870,17 @@ document.addEventListener('DOMContentLoaded', () => {
             currentSlide--;
             updateCarousel();
             updateButtons();
+            updateDots();
+            setTimeout(() => { isTransitioning = false; }, 500);
+        }
+
+        function goToSlide(slideIndex) {
+            if (isTransitioning || slideIndex < 0 || slideIndex >= totalSlides) return;
+            isTransitioning = true;
+            currentSlide = slideIndex;
+            updateCarousel();
+            updateButtons();
+            updateDots();
             setTimeout(() => { isTransitioning = false; }, 500);
         }
 
@@ -801,9 +892,38 @@ document.addEventListener('DOMContentLoaded', () => {
             nextButton.addEventListener('click', nextSlide);
         }
 
+        // Create dots pagination fallback
+        const dotsContainer = realEstateCarouselContainer.querySelector('.flex.justify-center.mt-6.gap-2');
+        if (dotsContainer && !dotsContainer.querySelector('button[data-dot]')) {
+            // Clear existing dots
+            dotsContainer.innerHTML = '';
+
+            // Create dots
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'w-2 h-2 rounded-full transition-colors';
+                dot.setAttribute('data-dot', i);
+                dot.style.backgroundColor = i === currentSlide ? '#3b82f6' : '#d1d5db';
+
+                dot.addEventListener('click', () => {
+                    goToSlide(i);
+                });
+
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function updateDots() {
+            const dots = dotsContainer.querySelectorAll('button[data-dot]');
+            dots.forEach((dot, index) => {
+                dot.style.backgroundColor = index === currentSlide ? '#3b82f6' : '#d1d5db';
+            });
+        }
+
         // Initialize
         updateCarousel();
         updateButtons();
+        updateDots();
     }
 
     // Fallback for job carousel if Alpine.js is not available
@@ -1145,7 +1265,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function updateCarousel() {
             if (!carouselElement) return;
-            const translateX = -currentSlide * 100;
+            // Each slide shows 6 items, total 12 items = 2 slides
+            // Each item is 8.33333% width, so 6 items = 50% per slide
+            // Container width is 200%, so we move by 50% per slide
+            const translateX = -currentSlide * 50;
             carouselElement.style.transform = `translateX(${translateX}%)`;
             console.log(`Fallback dich vu cong truc tuyen carousel moved to slide ${currentSlide + 1}/${totalSlides}`);
         }
@@ -1236,5 +1359,131 @@ document.addEventListener('DOMContentLoaded', () => {
                 dot.style.backgroundColor = index === currentSlide ? '#3b82f6' : '#d1d5db';
             });
         }
+    }
+
+    // Fallback for Phone Contact Toggle
+    const phoneContactContainer = document.querySelector('[x-data*="phoneContactToggle"]');
+    if (phoneContactContainer && !phoneContactContainer.__x) {
+        console.log('Initializing fallback phone contact toggle logic');
+
+        let isExpanded = false;
+        const initialItems = 8;
+        const totalItems = 22;
+
+        const toggleButton = phoneContactContainer.querySelector('button[\\@click*="toggleExpanded"]');
+        const allItems = phoneContactContainer.querySelectorAll('.grid > div');
+
+        function hideAdditionalItems() {
+            allItems.forEach((item, index) => {
+                if (index >= initialItems) {
+                    item.style.display = 'none';
+                } else {
+                    item.style.display = 'block';
+                }
+            });
+        }
+
+        function showAllItems() {
+            allItems.forEach((item) => {
+                item.style.display = 'block';
+            });
+        }
+
+        function updateButton() {
+            if (!toggleButton) return;
+
+            const buttonText = isExpanded ? 'Thu gọn' : `Xem Thêm (${totalItems - initialItems} số khác)`;
+            const iconClass = isExpanded ? 'lucide-chevron-up' : 'lucide-chevron-down';
+
+            // Update button text - chỉ cập nhật nếu không có x-text
+            const textSpan = toggleButton.querySelector('span[x-text]');
+            if (textSpan) {
+                // Nếu có x-text, chỉ cập nhật nội dung span
+                textSpan.textContent = buttonText;
+            } else {
+                // Nếu không có x-text, cập nhật text node
+                const textNode = toggleButton.childNodes[0];
+                if (textNode && textNode.nodeType === Node.TEXT_NODE) {
+                    textNode.textContent = buttonText;
+                }
+            }
+
+            // Update icon
+            const icon = toggleButton.querySelector('svg');
+            if (icon) {
+                icon.className = `lucide ${iconClass} w-4 h-4 ml-2`;
+            }
+        }
+
+        function toggleExpanded() {
+            isExpanded = !isExpanded;
+
+            if (isExpanded) {
+                showAllItems();
+            } else {
+                hideAdditionalItems();
+            }
+
+            updateButton();
+        }
+
+        // Add event listener
+        if (toggleButton) {
+            toggleButton.addEventListener('click', toggleExpanded);
+        }
+
+        // Initialize
+        hideAdditionalItems();
+        updateButton();
+    }
+
+    // Fallback for Development History Toggle
+    const developmentHistoryContainer = document.querySelector('[x-data*="developmentHistoryToggle"]');
+    if (developmentHistoryContainer && !developmentHistoryContainer.__x) {
+        console.log('Initializing fallback development history toggle logic');
+
+        let isExpanded = true;
+
+        const toggleButton = developmentHistoryContainer.querySelector('button[\\@click*="toggleExpanded"]');
+        const historyContent = developmentHistoryContainer.querySelector('.space-y-2');
+
+        function updateButton() {
+            if (!toggleButton) return;
+
+            const iconClass = isExpanded ? 'lucide-chevron-up' : 'lucide-chevron-down';
+
+            // Update icon
+            const icon = toggleButton.querySelector('svg');
+            if (icon) {
+                icon.className = `lucide ${iconClass} w-4 h-4`;
+            }
+        }
+
+        function updateContent() {
+            if (!historyContent) return;
+
+            if (isExpanded) {
+                historyContent.classList.remove('hidden');
+                historyContent.classList.add('block');
+            } else {
+                historyContent.classList.remove('block');
+                historyContent.classList.add('hidden');
+            }
+        }
+
+        function toggleExpanded() {
+            isExpanded = !isExpanded;
+            updateButton();
+            updateContent();
+        }
+
+        // Add event listener
+        if (toggleButton) {
+            toggleButton.addEventListener('click', toggleExpanded);
+        }
+
+        // Initialize
+        updateButton();
+        updateContent();
     }
 });
