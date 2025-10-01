@@ -133,92 +133,53 @@ document.addEventListener('alpine:init', () => {
     }
   }));
 
-  // Alpine.js component for image viewer modal functionality
-  Alpine.data('imageViewerComponent', () => ({
-    // Modal state
+  Alpine.data('gallery', () => ({
     isOpen: false,
+    images: [],
     currentIndex: 0,
-    currentImageSrc: '',
-    currentImageAlt: '',
-    totalImages: 9, // Total number of images
+    postTitle: '',
 
-    // Initialize component
-    init() {
-      console.log('Image viewer component initialized');
-      this.setupEventListeners();
+    // mở album chung
+    openModal(el, index) {
+      this.images = [...this.$refs.albumGrid.querySelectorAll("img")].map(img => ({
+        src: img.getAttribute("src"),
+        alt: img.getAttribute("alt")
+      }))
+      this.currentIndex = index
+      this.isOpen = true
     },
 
-    // Setup event listeners
-    setupEventListeners() {
-      // Close modal on escape key
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && this.isOpen) {
-          this.closeModal();
-        }
-      });
+    // mở gallery riêng trong post
+    openPostGallery(el, index) {
+      const galleryRoot = el.closest(".post-gallery")
+      const post = galleryRoot.closest(".rounded-lg.border")
+
+      // Tìm tiêu đề trong post (có thể là tên người đăng hoặc tiêu đề bài viết)
+      const titleElement = post.querySelector("h3.font-semibold")
+      this.postTitle = titleElement ? `Ảnh của ${titleElement.textContent.trim()}` : 'Ảnh'
+
+      this.images = [...galleryRoot.querySelectorAll("img")].map(img => ({
+        src: img.getAttribute("src"),
+        alt: img.getAttribute("alt")
+      }))
+      this.currentIndex = index
+      this.isOpen = true
     },
 
-    // Method to open modal with specific image
-    openModal(index, src, alt) {
-      console.log('Opening modal with index:', index, 'src:', src, 'alt:', alt);
-      this.currentIndex = index;
-      this.currentImageSrc = src;
-      this.currentImageAlt = alt;
-      this.isOpen = true;
-      document.body.style.overflow = 'hidden'; // Prevent background scrolling
-    },
-
-    // Method to close modal
     closeModal() {
-      console.log('Closing modal');
-      this.isOpen = false;
-      document.body.style.overflow = 'auto'; // Restore scrolling
+      this.isOpen = false
     },
 
-    // Method to go to previous image
-    previousImage() {
-      if (this.currentIndex > 0) {
-        this.currentIndex--;
-        this.updateCurrentImage();
-      }
+    next() {
+      this.currentIndex = (this.currentIndex + 1) % this.images.length
     },
 
-    // Method to go to next image
-    nextImage() {
-      if (this.currentIndex < this.totalImages - 1) {
-        this.currentIndex++;
-        this.updateCurrentImage();
-      }
+    prev() {
+      this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length
     },
 
-    // Method to go to specific image
-    goToImage(index) {
-      this.currentIndex = index;
-      this.updateCurrentImage();
+    setIndex(index) {
+      this.currentIndex = index
     },
-
-    // Method to update current image based on index
-    updateCurrentImage() {
-      const imageElement = document.querySelector(`[data-image-index="${this.currentIndex}"]`);
-      if (imageElement) {
-        this.currentImageSrc = imageElement.src;
-        this.currentImageAlt = imageElement.alt;
-      }
-    },
-
-    // Method to get current page info
-    getCurrentPage() {
-      return `${this.currentIndex + 1} / ${this.totalImages}`;
-    },
-
-    // Method to check if previous button should be disabled
-    isPreviousDisabled() {
-      return this.currentIndex === 0;
-    },
-
-    // Method to check if next button should be disabled
-    isNextDisabled() {
-      return this.currentIndex === this.totalImages - 1;
-    }
-  }));
+  }))
 });
