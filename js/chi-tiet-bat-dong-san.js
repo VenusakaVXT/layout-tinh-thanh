@@ -14,6 +14,9 @@ function chiTietBatDongSanComponent() {
     // Reviews toggle
     showAllReviews: false,
 
+    // Loan percentage input/range sync
+    loanPercentage: 70,
+
     // Modal tour 360
     showTour360Modal: false,
 
@@ -131,6 +134,25 @@ function chiTietBatDongSanComponent() {
         month: '2-digit',
         year: 'numeric'
       });
+    },
+
+    // Loan percentage methods
+    updateLoanPercentageFromNumber() {
+      // Validate and constrain the value
+      if (this.loanPercentage < 10) {
+        this.loanPercentage = 10;
+      } else if (this.loanPercentage > 90) {
+        this.loanPercentage = 90;
+      }
+    },
+
+    onNumberInput(event) {
+      this.loanPercentage = parseInt(event.target.value) || 10;
+      this.updateLoanPercentageFromNumber();
+    },
+
+    onRangeInput(event) {
+      this.loanPercentage = parseInt(event.target.value);
     }
   };
 }

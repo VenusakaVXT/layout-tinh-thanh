@@ -18,21 +18,8 @@ function newsFilters() {
     totalPages: 1,
     startItem: 0,
     endItem: 0,
-    categories: [
-      'Tất cả danh mục',
-      'Kinh tế',
-      'Chính trị',
-      'Văn hóa',
-      'Giao thông',
-      'Giáo dục'
-    ],
-    timeRanges: ['Tất cả', 'Hôm nay', 'Tuần này', 'Tháng này'],
-    selectedCategory: 'Tất cả danh mục',
-    selectedTime: 'Tất cả',
     // sort dropdown
     showSortDropdown: false,
-    sorts: ['Mới nhất', 'Cũ nhất', 'Xem nhiều', 'Nổi bật', 'Tên A-Z', 'Tên Z-A'],
-    selectedSort: 'Mới nhất',
 
     // actions
     toggleCategory() {
@@ -56,6 +43,9 @@ function newsFilters() {
     selectCategory(cat) {
       this.selectedCategory = cat;
       this.showCategoryDropdown = false;
+      // Update display text
+      const categorySpan = document.querySelector('[x-data*="newsFilters"] .category-display');
+      if (categorySpan) categorySpan.textContent = cat;
       // dispatch custom event so other scripts can react
       window.dispatchEvent(new CustomEvent('news:category-changed', { detail: { category: cat } }));
       this.currentPage = 1;
@@ -65,6 +55,9 @@ function newsFilters() {
     selectTime(t) {
       this.selectedTime = t;
       this.showTimeDropdown = false;
+      // Update display text
+      const timeSpan = document.querySelector('[x-data*="newsFilters"] .time-display');
+      if (timeSpan) timeSpan.textContent = t;
       window.dispatchEvent(new CustomEvent('news:time-changed', { detail: { time: t } }));
       this.currentPage = 1;
       this.ensureItems();
@@ -73,6 +66,9 @@ function newsFilters() {
     selectSort(s) {
       this.selectedSort = s;
       this.showSortDropdown = false;
+      // Update display text
+      const sortSpan = document.querySelector('[x-data*="newsFilters"] .sort-display');
+      if (sortSpan) sortSpan.textContent = s;
       console.debug('newsFilters: selectSort ->', s);
       window.dispatchEvent(new CustomEvent('news:sort-changed', { detail: { sort: s } }));
       this.currentPage = 1;
@@ -156,24 +152,27 @@ function newsFilters() {
         // filter
         let list = this._items.slice();
         // category
-        if (this.selectedCategory && !/tất cả/i.test(this.selectedCategory)) {
-          list = list.filter(i => i.category && i.category.toLowerCase() === this.selectedCategory.toLowerCase());
+        const currentCategory = this.selectedCategory || 'Tất cả danh mục';
+        if (currentCategory && !/tất cả/i.test(currentCategory)) {
+          list = list.filter(i => i.category && i.category.toLowerCase() === currentCategory.toLowerCase());
         }
         // time
-        if (this.selectedTime && !/tất cả/i.test(this.selectedTime)) {
-          if (/hôm nay/i.test(this.selectedTime)) {
+        const currentTime = this.selectedTime || 'Tất cả';
+        if (currentTime && !/tất cả/i.test(currentTime)) {
+          if (/hôm nay/i.test(currentTime)) {
             list = list.filter(i => i.date && this._isSameDay(i.date, now));
-          } else if (/tuần/i.test(this.selectedTime)) {
+          } else if (/tuần/i.test(currentTime)) {
             const weekAgo = new Date(now.getTime() - (7 * 24 * 60 * 60 * 1000));
             list = list.filter(i => i.date && i.date >= weekAgo);
-          } else if (/tháng/i.test(this.selectedTime)) {
+          } else if (/tháng/i.test(currentTime)) {
             const monthAgo = new Date(now.getTime() - (30 * 24 * 60 * 60 * 1000));
             list = list.filter(i => i.date && i.date >= monthAgo);
           }
         }
 
         // sort
-        const sortKey = (this.selectedSort || '').toLowerCase();
+        const currentSort = this.selectedSort || 'Mới nhất';
+        const sortKey = currentSort.toLowerCase();
         if (/mới nhất/.test(sortKey)) {
           list.sort((a, b) => (b.date || 0) - (a.date || 0));
         } else if (/cũ nhất/.test(sortKey)) {

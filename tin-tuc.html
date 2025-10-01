@@ -17,10 +17,6 @@
     .hidden {
       display: none;
     }
-
-    [x-cloak] {
-      display: none !important;
-    }
   </style>
   <style type="text/tailwindcss">
 
@@ -2518,7 +2514,7 @@
             <button type="button" @click="toggleCategory()" aria-haspopup="listbox"
               :aria-expanded="showCategoryDropdown"
               class="flex h-10 w-full items-center justify-between rounded-md border border-input px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 bg-white text-gray-900">
-              <span style="pointer-events:none" x-text="selectedCategory"></span>
+               <span class="category-display" style="pointer-events:none">Tất cả danh mục</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                 class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
@@ -2527,12 +2523,15 @@
             </button>
 
             <!-- Category Dropdown -->
-            <div x-show="showCategoryDropdown" x-transition
+            <div x-show="showCategoryDropdown" x-transition x-cloak
               class="absolute mt-2 right-0 left-0 z-50 bg-white text-gray-900 rounded shadow-lg max-h-60 overflow-auto">
               <ul role="listbox" class="py-1">
-                <template x-for="cat in categories" :key="cat">
-                  <li @click="selectCategory(cat)" class="px-3 py-2 hover:bg-gray-100 cursor-pointer" x-text="cat"></li>
-                </template>
+                <li @click="selectCategory('Tất cả danh mục')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer">Tất cả danh mục</li>
+                <li @click="selectCategory('Kinh tế')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer">Kinh tế</li>
+                <li @click="selectCategory('Chính trị')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer">Chính trị</li>
+                <li @click="selectCategory('Văn hóa')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer">Văn hóa</li>
+                <li @click="selectCategory('Giao thông')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer">Giao thông</li>
+                <li @click="selectCategory('Giáo dục')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer">Giáo dục</li>
               </ul>
             </div>
           </div>
@@ -2541,7 +2540,7 @@
           <div class="relative">
             <button type="button" @click="toggleTime()" aria-haspopup="listbox" :aria-expanded="showTimeDropdown"
               class="flex h-10 w-full items-center justify-between rounded-md border border-input px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 bg-white text-gray-900">
-              <span style="pointer-events:none" x-text="selectedTime"></span>
+               <span class="time-display" style="pointer-events:none">Tất cả</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                 class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
@@ -2550,12 +2549,13 @@
             </button>
 
             <!-- Time Dropdown -->
-            <div x-show="showTimeDropdown" x-transition
+            <div x-show="showTimeDropdown" x-transition x-cloak
               class="absolute mt-2 right-0 left-0 z-50 bg-white text-gray-900 rounded shadow-lg">
               <ul role="listbox" class="py-1">
-                <template x-for="t in timeRanges" :key="t">
-                  <li @click="selectTime(t)" class="px-3 py-2 hover:bg-gray-100 cursor-pointer" x-text="t"></li>
-                </template>
+                <li @click="selectTime('Tất cả')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer">Tất cả</li>
+                <li @click="selectTime('Hôm nay')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer">Hôm nay</li>
+                <li @click="selectTime('Tuần này')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer">Tuần này</li>
+                <li @click="selectTime('Tháng này')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer">Tháng này</li>
               </ul>
             </div>
           </div>
@@ -2585,7 +2585,7 @@
           <div class="flex items-center gap-4 relative">
             <button type="button" @click="toggleSort()" :aria-expanded="showSortDropdown" aria-haspopup="listbox"
               class="flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1 w-40">
-              <span style="pointer-events:none" x-text="selectedSort"></span>
+              <span class="sort-display" style="pointer-events:none">Mới nhất</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                 class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
@@ -2597,9 +2597,12 @@
             <div x-cloak x-show="showSortDropdown" x-transition data-sort-menu style="display:none"
               class="absolute mt-2 right-0 z-50 bg-white text-gray-900 rounded shadow-lg w-40">
               <ul role="listbox" class="py-1">
-                <template x-for="s in sorts" :key="s">
-                  <li @click="selectSort(s)" class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm" x-text="s"></li>
-                </template>
+                <li @click="selectSort('Mới nhất')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm">Mới nhất</li>
+                <li @click="selectSort('Cũ nhất')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm">Cũ nhất</li>
+                <li @click="selectSort('Xem nhiều')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm">Xem nhiều</li>
+                <li @click="selectSort('Nổi bật')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm">Nổi bật</li>
+                <li @click="selectSort('Tên A-Z')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm">Tên A-Z</li>
+                <li @click="selectSort('Tên Z-A')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm">Tên Z-A</li>
               </ul>
             </div>
           </div>
@@ -3533,7 +3536,7 @@
               class="text-left p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors text-sm">Dân
               Sinh</button></div>
         </div>
-        <div class="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg p-6">
+        <form class="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg p-6">
           <h3 class="font-bold text-lg mb-2 flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -3548,7 +3551,7 @@
               class="flex h-10 w-full rounded-md border border-input px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm bg-white text-gray-900"
               placeholder="Email của bạn"><button
               class="btn-sm w-full bg-white text-green-600 hover:bg-gray-100 rounded-lg">Đăng Ký</button></div>
-        </div>
+        </form>
         <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg p-6">
           <h3 class="font-bold text-lg mb-4">Liên Hệ</h3>
           <div class="space-y-3 text-sm">

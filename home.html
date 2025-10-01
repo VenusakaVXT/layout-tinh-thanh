@@ -1718,7 +1718,7 @@
         </div>
 
         <!-- Mobile Menu Overlay -->
-        <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-300"
+        <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-100"
             x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
             x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100"
             x-transition:leave-end="opacity-0" class="fixed inset-0 z-50 lg:hidden hidden"
@@ -1726,7 +1726,7 @@
             <div class="fixed inset-0 bg-black/50" @click="closeMobileMenu()" style="height: 100vh; height: 100dvh;">
             </div>
             <div class="fixed right-0 top-0 h-screen w-80 bg-white shadow-xl" x-show="mobileMenuOpen"
-                x-transition:enter="transition ease-out duration-300" x-transition:enter-start="translate-x-full"
+                x-transition:enter="transition ease-out duration-100" x-transition:enter-start="translate-x-full"
                 x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in duration-200"
                 x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full"
                 style="height: 100vh; height: 100dvh;">
@@ -2262,7 +2262,7 @@
         </div>
 
         <!-- Auth Modal -->
-        <div x-show="isAuthModalOpen" x-transition:enter="transition ease-out duration-300"
+        <div x-show="isAuthModalOpen" x-transition:enter="transition ease-out duration-100"
             x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
             x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100"
             x-transition:leave-end="opacity-0" class="modal-overlay hidden" @click="closeAuthModal()"

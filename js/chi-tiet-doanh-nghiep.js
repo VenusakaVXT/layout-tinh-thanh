@@ -29,10 +29,10 @@ document.addEventListener('alpine:init', () => {
     years: 0,
 
     init() {
-      this.animateCounter('employees', 160000, 2000);
-      this.animateCounter('exportValue', 65, 2000);
-      this.animateCounter('factories', 8, 1500);
-      this.animateCounter('years', 29, 2000);
+      this.animateCounter('employees', 160000, 1000);
+      this.animateCounter('exportValue', 65, 1000);
+      this.animateCounter('factories', 8, 1000);
+      this.animateCounter('years', 29, 1000);
     },
 
     animateCounter(property, target, duration) {
