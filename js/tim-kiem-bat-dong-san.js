@@ -43,7 +43,7 @@ document.addEventListener('alpine:init', () => {
     amenitySlugToNameMap: {},
     currentPage: 1,
     totalPages: 5,
-
+    currentView: 'grid', // 'grid' or 'list'
 
     init() {
       // Get keyword from URL params on page load
@@ -800,6 +800,23 @@ document.addEventListener('alpine:init', () => {
 
     isNextDisabled() {
       return this.currentPage >= this.totalPages;
+    },
+
+    // View switching functions
+    switchToGridView() {
+      this.currentView = 'grid';
+    },
+
+    switchToListView() {
+      this.currentView = 'list';
+    },
+
+    isGridView() {
+      return this.currentView === 'grid';
+    },
+
+    isListView() {
+      return this.currentView === 'list';
     }
   }));
 });

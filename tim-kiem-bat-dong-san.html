@@ -3949,18 +3949,9 @@
             </div>
           </div>
         </div>
-        <div class="flex-1 min-w-0" style="overflow-anchor:none">
+        <div class="flex-1 min-w-0" style="overflow-anchor:none" x-data="realEstateSearch">
           <div class="space-y-2 sm:space-y-4">
-            <div x-data="realEstateSearch"
-              @province-selected="selectedProvince = $event.detail.province; selectedDistrict = ''"
-              @district-selected="selectedDistrict = $event.detail.district"
-              @real-estate-type-selected="selectedRealEstateType = $event.detail.type"
-              @form-type-selected="selectedFormType = $event.detail.type"
-              @bedrooms-selected="selectedBedrooms = $event.detail.bedrooms"
-              @bathrooms-selected="selectedBathrooms = $event.detail.bathrooms"
-              @direction-selected="selectedDirection = $event.detail.direction"
-              @amenities-selected="selectedAmenities = $event.detail.amenities"
-              class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 p-2 sm:p-4 bg-white rounded-lg border">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 p-2 sm:p-4 bg-white rounded-lg border">
               <div class="flex items-center gap-2 sm:gap-4">
                 <p class="text-xs sm:text-sm text-gray-600">
                   Hiển thị <span class="font-semibold">1</span> -
@@ -3989,7 +3980,9 @@
                   </button>
                   <div class="flex border rounded-md">
                     <button
-                      class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary hover:bg-primary/90 rounded-md px-3 rounded-r-none h-8 text-xs btn-primary">
+                      @click="switchToGridView()"
+                      :class="isGridView() ? 'bg-primary hover:bg-primary/90 btn-primary text-white' : 'hover:bg-accent hover:text-accent-foreground'"
+                      class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 rounded-md px-3 rounded-r-none h-8 text-xs">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-grid3x3 w-3 h-3">
@@ -4001,7 +3994,9 @@
                       </svg>
                     </button>
                     <button
-                      class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground rounded-md px-3 rounded-l-none h-8 text-xs">
+                      @click="switchToListView()"
+                      :class="isListView() ? 'bg-primary hover:bg-primary/90 btn-primary text-white' : 'hover:bg-accent hover:text-accent-foreground'"
+                      class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 rounded-md px-3 rounded-l-none h-8 text-xs">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-list w-3 h-3">
@@ -4184,7 +4179,7 @@
           </div>
           <div class="mt-4 sm:mt-6">
             <!-- Grid View -->
-            <div id="real-estate-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
+            <div id="real-estate-grid" x-show="isGridView()" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
               <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-all duration-300 group cursor-pointer">
                 <div class="p-0">
@@ -5939,7 +5934,7 @@
             </div>
 
             <!-- List View -->
-            <div id="real-estate-list" class="space-y-2 sm:space-y-4">
+            <div id="real-estate-list" x-show="isListView()" class="space-y-2 sm:space-y-4">
               <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-all duration-300 group cursor-pointer">
                 <div class="p-0 flex items-stretch">

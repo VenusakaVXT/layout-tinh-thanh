@@ -12,6 +12,21 @@ document.addEventListener('alpine:init', () => {
     selectedRefundPolicy: '',
     showRefundPolicyDropdown: false,
     minRating: 0,
+    isRatingDragging: false,
+    selectedFeatures: [],
+    selectedIntegrations: [],
+    selectedDeliveryType: '',
+    showDeliveryTypeDropdown: false,
+    selectedSLA: '',
+    showSLADropdown: false,
+    selectedSort: '',
+    showSortDropdown: false,
+    selectedPageSize: 12,
+    showPageSizeDropdown: false,
+    contractTerm: '',
+    currentPage: 1,
+    totalPages: 5,
+    
     categoryMap: {
       'Tất cả danh mục': '',
       'Hỗ trợ khách hàng': 'ho-tro-khach-hang',
@@ -37,6 +52,46 @@ document.addEventListener('alpine:init', () => {
       '45 ngày hoàn tiền': '45-ngay-hoan-tien',
       '60 ngày hoàn tiền': '60-ngay-hoan-tien',
       '90 ngày hoàn tiền': '90-ngay-hoan-tien'
+    },
+    featuresMap: {
+      'Hỗ trợ 24/7': 'ho-tro-24-7',
+      'API tích hợp': 'api-tich-hop',
+      'Dashboard quản lý': 'dashboard-quan-ly',
+      'Báo cáo thống kê': 'bao-cao-thong-ke',
+      'Thông báo tự động': 'thong-bao-tu-dong',
+      'Lưu trữ điện tử': 'luu-tru-dien-tu',
+      'Tìm kiếm nâng cao': 'tim-kiem-nang-cao',
+      'Xuất báo cáo': 'xuat-bao-cao'
+    },
+    integrationsMap: {
+      'SMS': 'sms',
+      'Email': 'email',
+      'Zalo': 'zalo',
+      'Facebook': 'facebook',
+      'REST API': 'rest-api',
+      'Banking API': 'banking-api',
+      'Digital signature': 'digital-signature',
+      'Payment gateway': 'payment-gateway'
+    },
+    deliveryTypeMap: {
+      'Tất cả': '',
+      'Trực tuyến': 'truc-tuyen',
+      'Tại chỗ': 'tai-cho',
+      'Kết hợp': 'ket-hop'
+    },
+    slaMap: {
+      'Tất cả': '',
+      '24/7': '24-7',
+      'Giờ hành chính': 'gio-hanh-chinh'
+    },
+    sortMap: {
+      'Liên quan': 'relevance',
+      'Mới nhất': 'newest',
+      'Giá cao → thấp': 'price-desc',
+      'Giá thấp → cao': 'price-asc',
+      'Đánh giá cao → thấp': 'rating-desc',
+      'Đánh giá thấp → cao': 'rating-asc',
+      'Phổ biến': 'popular'
     },
 
     init() {
@@ -90,6 +145,94 @@ document.addEventListener('alpine:init', () => {
       // Initialize min rating
       const minRatingParam = urlParams.get('min-rating');
       this.minRating = minRatingParam ? parseFloat(minRatingParam) : 0;
+
+      // Initialize features
+      const featuresParam = urlParams.get('featureds');
+      this.selectedFeatures = []; // Always start with empty array
+
+      if (featuresParam) {
+        const featureSlugs = featuresParam.split(',');
+
+        // Convert slugs back to display names
+        for (const slug of featureSlugs) {
+          const trimmedSlug = slug.trim();
+          for (const [displayName, featureSlug] of Object.entries(this.featuresMap)) {
+            if (featureSlug === trimmedSlug) {
+              this.selectedFeatures.push(displayName);
+              break;
+            }
+          }
+        }
+      }
+
+      // Initialize integrations
+      const integrationsParam = urlParams.get('integrations');
+      this.selectedIntegrations = []; // Always start with empty array
+
+      if (integrationsParam) {
+        const integrationSlugs = integrationsParam.split(',');
+
+        // Convert slugs back to display names
+        for (const slug of integrationSlugs) {
+          const trimmedSlug = slug.trim();
+          for (const [displayName, integrationSlug] of Object.entries(this.integrationsMap)) {
+            if (integrationSlug === trimmedSlug) {
+              this.selectedIntegrations.push(displayName);
+              break;
+            }
+          }
+        }
+      }
+
+      // Initialize delivery type
+      const deliveryTypeParam = urlParams.get('delivery-type');
+      if (deliveryTypeParam) {
+        // Find delivery type name from slug
+        const deliveryTypeName = Object.keys(this.deliveryTypeMap).find(name =>
+          this.deliveryTypeMap[name] === deliveryTypeParam
+        );
+        this.selectedDeliveryType = deliveryTypeName || '';
+      } else {
+        this.selectedDeliveryType = '';
+      }
+
+      // Initialize SLA
+      const slaParam = urlParams.get('sla');
+      if (slaParam) {
+        // Find SLA name from slug
+        const slaName = Object.keys(this.slaMap).find(name =>
+          this.slaMap[name] === slaParam
+        );
+        this.selectedSLA = slaName || '';
+      } else {
+        this.selectedSLA = '';
+      }
+
+      // Initialize sort
+      const sortParam = urlParams.get('sort');
+      if (sortParam) {
+        // Find sort name from slug
+        const sortName = Object.keys(this.sortMap).find(name =>
+          this.sortMap[name] === sortParam
+        );
+        this.selectedSort = sortName || 'Liên quan';
+      } else {
+        this.selectedSort = 'Liên quan';
+      }
+
+      // Initialize page size
+      const pageSizeParam = urlParams.get('page-size');
+      this.selectedPageSize = pageSizeParam ? parseInt(pageSizeParam) : 12;
+
+      // Initialize contract term
+      this.contractTerm = urlParams.get('contract-term') || '';
+
+      // Initialize pagination
+      const pageParam = urlParams.get('page');
+      this.currentPage = pageParam ? parseInt(pageParam) : 1;
+
+      // Update applied filters after initialization
+      this.updateAppliedFilters();
     },
 
     handleSearch(event) {
@@ -160,6 +303,15 @@ document.addEventListener('alpine:init', () => {
       this.hasTrial = false;
       this.selectedRefundPolicy = '';
       this.minRating = 0;
+      this.isRatingDragging = false;
+      this.selectedFeatures = [];
+      this.selectedIntegrations = [];
+      this.selectedDeliveryType = '';
+      this.selectedSLA = '';
+      this.selectedSort = 'Liên quan';
+      this.selectedPageSize = 12;
+      this.contractTerm = '';
+      this.currentPage = 1;
 
       const url = new URL(window.location);
       url.searchParams.delete('keyword');
@@ -170,8 +322,17 @@ document.addEventListener('alpine:init', () => {
       url.searchParams.delete('has-trial');
       url.searchParams.delete('refund-policy');
       url.searchParams.delete('min-rating');
+      url.searchParams.delete('featureds');
+      url.searchParams.delete('integrations');
+      url.searchParams.delete('delivery-type');
+      url.searchParams.delete('sla');
+      url.searchParams.delete('sort');
+      url.searchParams.delete('page-size');
+      url.searchParams.delete('contract-term');
+      url.searchParams.delete('page');
 
       window.history.pushState({}, '', url);
+      this.updateAppliedFilters();
     },
 
     getCategoryDisplayValue() {
@@ -324,7 +485,305 @@ document.addEventListener('alpine:init', () => {
       return this.minRating.toFixed(1);
     },
 
-    get appliedFilters() {
+    // Rating slider functions
+    getRatingPercentage() {
+      return (this.minRating / 5) * 100;
+    },
+
+    onRatingDragStart() {
+      this.isRatingDragging = true;
+    },
+
+    onRatingDragEnd() {
+      this.isRatingDragging = false;
+      this.updateMinRatingInURL();
+    },
+
+    onRatingChange(event) {
+      const value = parseFloat(event.target.value);
+      this.minRating = Math.max(0, Math.min(5, value));
+    },
+
+    onRatingMouseMove(event) {
+      if (!this.isRatingDragging) return;
+
+      const slider = event.currentTarget;
+      const rect = slider.getBoundingClientRect();
+      const percentage = Math.max(0, Math.min(100, ((event.clientX - rect.left) / rect.width) * 100));
+      const value = Math.round((percentage / 100) * 50) / 10; // Round to 1 decimal place
+      this.minRating = Math.max(0, Math.min(5, value));
+    },
+
+    onRatingMouseUp() {
+      if (this.isRatingDragging) {
+        this.isRatingDragging = false;
+        this.updateMinRatingInURL();
+      }
+    },
+
+    // Features functions
+    toggleFeature(featureName) {
+      if (this.selectedFeatures.includes(featureName)) {
+        this.selectedFeatures = this.selectedFeatures.filter(feature => feature !== featureName);
+      } else {
+        this.selectedFeatures.push(featureName);
+      }
+
+      this.updateFeaturesInURL();
+      this.updateAppliedFilters();
+    },
+
+    updateFeaturesInURL() {
+      const url = new URL(window.location);
+
+      if (this.selectedFeatures.length > 0) {
+        const featureSlugs = this.selectedFeatures.map(feature => this.featuresMap[feature]);
+        url.searchParams.set('featureds', featureSlugs.join(','));
+      } else {
+        url.searchParams.delete('featureds');
+      }
+
+      window.history.pushState({}, '', url);
+    },
+
+    removeFeature(featureName) {
+      this.selectedFeatures = this.selectedFeatures.filter(feature => feature !== featureName);
+      this.updateFeaturesInURL();
+      this.updateAppliedFilters();
+    },
+
+    isFeatureSelected(featureName) {
+      return this.selectedFeatures.includes(featureName);
+    },
+
+    // Integrations functions
+    toggleIntegration(integrationName) {
+      if (this.selectedIntegrations.includes(integrationName)) {
+        this.selectedIntegrations = this.selectedIntegrations.filter(integration => integration !== integrationName);
+      } else {
+        this.selectedIntegrations.push(integrationName);
+      }
+
+      this.updateIntegrationsInURL();
+      this.updateAppliedFilters();
+    },
+
+    updateIntegrationsInURL() {
+      const url = new URL(window.location);
+
+      if (this.selectedIntegrations.length > 0) {
+        const integrationSlugs = this.selectedIntegrations.map(integration => this.integrationsMap[integration]);
+        url.searchParams.set('integrations', integrationSlugs.join(','));
+      } else {
+        url.searchParams.delete('integrations');
+      }
+
+      window.history.pushState({}, '', url);
+    },
+
+    removeIntegration(integrationName) {
+      this.selectedIntegrations = this.selectedIntegrations.filter(integration => integration !== integrationName);
+      this.updateIntegrationsInURL();
+      this.updateAppliedFilters();
+    },
+
+    isIntegrationSelected(integrationName) {
+      return this.selectedIntegrations.includes(integrationName);
+    },
+
+    // Delivery type functions
+    toggleDeliveryTypeDropdown() {
+      this.showDeliveryTypeDropdown = !this.showDeliveryTypeDropdown;
+    },
+
+    selectDeliveryType(deliveryTypeName) {
+      this.selectedDeliveryType = deliveryTypeName;
+      this.showDeliveryTypeDropdown = false;
+      this.updateDeliveryTypeInURL();
+      this.updateAppliedFilters();
+    },
+
+    updateDeliveryTypeInURL() {
+      const url = new URL(window.location);
+
+      const deliveryTypeSlug = this.deliveryTypeMap[this.selectedDeliveryType];
+      if (deliveryTypeSlug) {
+        url.searchParams.set('delivery-type', deliveryTypeSlug);
+      } else {
+        url.searchParams.delete('delivery-type');
+      }
+
+      window.history.pushState({}, '', url);
+    },
+
+    clearDeliveryType() {
+      this.selectedDeliveryType = '';
+      this.updateDeliveryTypeInURL();
+      this.updateAppliedFilters();
+    },
+
+    getDeliveryTypeDisplayValue() {
+      return this.selectedDeliveryType || 'Tất cả';
+    },
+
+    // SLA functions
+    toggleSLADropdown() {
+      this.showSLADropdown = !this.showSLADropdown;
+    },
+
+    selectSLA(slaName) {
+      this.selectedSLA = slaName;
+      this.showSLADropdown = false;
+      this.updateSLAInURL();
+      this.updateAppliedFilters();
+    },
+
+    updateSLAInURL() {
+      const url = new URL(window.location);
+
+      const slaSlug = this.slaMap[this.selectedSLA];
+      if (slaSlug) {
+        url.searchParams.set('sla', slaSlug);
+      } else {
+        url.searchParams.delete('sla');
+      }
+
+      window.history.pushState({}, '', url);
+    },
+
+    clearSLA() {
+      this.selectedSLA = '';
+      this.updateSLAInURL();
+      this.updateAppliedFilters();
+    },
+
+    getSLADisplayValue() {
+      return this.selectedSLA || 'Tất cả';
+    },
+
+    // Sort functions
+    toggleSortDropdown() {
+      this.showSortDropdown = !this.showSortDropdown;
+    },
+
+    selectSort(sortName) {
+      this.selectedSort = sortName;
+      this.showSortDropdown = false;
+      this.updateSortInURL();
+    },
+
+    updateSortInURL() {
+      const url = new URL(window.location);
+
+      const sortSlug = this.sortMap[this.selectedSort];
+      if (sortSlug && sortSlug !== 'relevance') {
+        url.searchParams.set('sort', sortSlug);
+      } else {
+        url.searchParams.delete('sort');
+      }
+
+      window.history.pushState({}, '', url);
+    },
+
+    getSortDisplayValue() {
+      return this.selectedSort || 'Liên quan';
+    },
+
+    // Page size functions
+    togglePageSizeDropdown() {
+      this.showPageSizeDropdown = !this.showPageSizeDropdown;
+    },
+
+    selectPageSize(pageSize) {
+      this.selectedPageSize = pageSize;
+      this.showPageSizeDropdown = false;
+      this.updatePageSizeInURL();
+    },
+
+    updatePageSizeInURL() {
+      const url = new URL(window.location);
+
+      if (this.selectedPageSize && this.selectedPageSize !== 12) {
+        url.searchParams.set('page-size', this.selectedPageSize.toString());
+      } else {
+        url.searchParams.delete('page-size');
+      }
+
+      window.history.pushState({}, '', url);
+    },
+
+    getPageSizeDisplayValue() {
+      return this.selectedPageSize.toString();
+    },
+
+    // Contract term functions
+    updateContractTermInURL() {
+      const url = new URL(window.location);
+
+      if (this.contractTerm && this.contractTerm.trim()) {
+        url.searchParams.set('contract-term', this.contractTerm.trim());
+      } else {
+        url.searchParams.delete('contract-term');
+      }
+
+      window.history.pushState({}, '', url);
+      this.updateAppliedFilters();
+    },
+
+    clearContractTerm() {
+      this.contractTerm = '';
+      this.updateContractTermInURL();
+    },
+
+    // Pagination functions
+    goToPage(page) {
+      if (page >= 1 && page <= this.totalPages) {
+        this.currentPage = page;
+        this.updatePageInURL();
+      }
+    },
+
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+        this.updatePageInURL();
+      }
+    },
+
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+        this.updatePageInURL();
+      }
+    },
+
+    updatePageInURL() {
+      const url = new URL(window.location);
+
+      if (this.currentPage > 1) {
+        url.searchParams.set('page', this.currentPage.toString());
+      } else {
+        url.searchParams.delete('page');
+      }
+
+      window.history.pushState({}, '', url);
+    },
+
+    isPageActive(page) {
+      return this.currentPage === page;
+    },
+
+    isPrevDisabled() {
+      return this.currentPage <= 1;
+    },
+
+    isNextDisabled() {
+      return this.currentPage >= this.totalPages;
+    },
+
+    appliedFilters: [],
+
+    updateAppliedFilters() {
       const filters = [];
 
       if (this.selectedCategory && this.selectedCategory !== 'Tất cả danh mục') {
@@ -371,6 +830,22 @@ document.addEventListener('alpine:init', () => {
         });
       }
 
+      if (this.selectedDeliveryType && this.selectedDeliveryType !== 'Tất cả') {
+        filters.push({
+          type: 'delivery-type',
+          label: this.selectedDeliveryType,
+          clearFn: () => this.clearDeliveryType()
+        });
+      }
+
+      if (this.selectedSLA && this.selectedSLA !== 'Tất cả') {
+        filters.push({
+          type: 'sla',
+          label: this.selectedSLA,
+          clearFn: () => this.clearSLA()
+        });
+      }
+
       if (this.minRating > 0) {
         filters.push({
           type: 'min-rating',
@@ -379,12 +854,38 @@ document.addEventListener('alpine:init', () => {
         });
       }
 
-      return filters;
+      if (this.contractTerm && this.contractTerm.trim()) {
+        filters.push({
+          type: 'contract-term',
+          label: `${this.contractTerm} tháng`,
+          clearFn: () => this.clearContractTerm()
+        });
+      }
+
+      // Add selected features
+      this.selectedFeatures.forEach((feature, index) => {
+        filters.push({
+          type: 'feature',
+          label: feature,
+          clearFn: () => this.removeFeature(feature)
+        });
+      });
+
+      // Add selected integrations
+      this.selectedIntegrations.forEach((integration, index) => {
+        filters.push({
+          type: 'integration',
+          label: integration,
+          clearFn: () => this.removeIntegration(integration)
+        });
+      });
+
+      this.appliedFilters = filters;
     },
 
     // Applied filters functions
     hasActiveFilters() {
-      return this.keyword || this.selectedCategory || this.selectedPackage || this.priceMin || this.priceMax || this.hasTrial || this.selectedRefundPolicy || this.minRating > 0;
+      return this.keyword || this.selectedCategory || this.selectedPackage || this.priceMin || this.priceMax || this.hasTrial || this.selectedRefundPolicy || this.minRating > 0 || this.selectedFeatures.length > 0 || this.selectedIntegrations.length > 0 || (this.selectedDeliveryType && this.selectedDeliveryType !== 'Tất cả') || (this.selectedSLA && this.selectedSLA !== 'Tất cả') || (this.contractTerm && this.contractTerm.trim());
     }
   }));
 });

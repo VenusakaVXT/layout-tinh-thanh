@@ -193,11 +193,13 @@ document.addEventListener('alpine:init', () => {
       this.selectedJobTypes = [];
       this.selectedExperiences = [];
       this.selectedSkills = [];
+      this.salaryMin = 0;
       this.updateLocationsInURL();
       this.updateWorkTypesInURL();
       this.updateJobTypesInURL();
       this.updateExperiencesInURL();
       this.updateSkillsInURL();
+      this.updateSalaryInURL();
     },
 
     // Pagination functions
@@ -316,6 +318,11 @@ document.addEventListener('alpine:init', () => {
 
     getSalaryDisplayValue() {
       return this.salaryMin + ' triệu';
+    },
+
+    removeSalary() {
+      this.salaryMin = 0;
+      this.updateSalaryInURL();
     },
 
     removeLocation(locationName) {

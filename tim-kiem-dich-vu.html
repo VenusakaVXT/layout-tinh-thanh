@@ -2553,7 +2553,7 @@
             <div x-show="hasActiveFilters()" x-cloak class="px-6 pb-4">
               <h3 class="text-sm font-medium text-gray-700 mb-3">Bộ lọc đang áp dụng</h3>
               <div class="flex flex-wrap gap-2">
-                <template x-for="filter in appliedFilters" :key="filter.type">
+                <template x-for="(filter, index) in appliedFilters" :key="filter.type + '-' + index">
                   <div class="inline-flex items-center gap-1 px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
                     <span x-text="filter.label"></span>
                     <button type="button" @click="filter.clearFn()"
@@ -2899,172 +2899,376 @@
                 <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-3 block">
                   Đánh giá tối thiểu: <span x-text="minRatingDisplayValue">0</span> sao
                 </label>
-                <div class="relative flex touch-none select-none items-center w-full">
-                  <!-- Slider Track -->
-                  <div class="relative h-2 w-full grow overflow-hidden rounded-full bg-gray-200">
-                    <!-- Filled portion -->
-                    <div class="absolute h-full bg-blue-500 transition-all duration-200"
-                      :style="`width: ${(minRating / 5) * 100}%`"></div>
+                <div class="relative" @mousemove="onRatingMouseMove($event)" @mouseup="onRatingMouseUp()"
+                  @mouseleave="onRatingMouseUp()">
+                  <!-- Slider track -->
+                  <div class="relative h-2 w-full bg-gray-200 rounded-full">
+                    <!-- Active track (blue part) -->
+                    <div class="absolute h-full bg-blue-500 rounded-full transition-all duration-150"
+                      :style="`width: ${getRatingPercentage()}%`"></div>
+
+                    <!-- Slider handle -->
+                    <div
+                      class="absolute top-1/2 transform -translate-y-1/2 -translate-x-1/2 transition-all duration-150"
+                      :style="`left: ${getRatingPercentage()}%`">
+                      <!-- Handle circle -->
+                      <div
+                        class="h-5 w-5 rounded-full border-2 border-blue-500 bg-white shadow-md cursor-pointer hover:shadow-lg transition-shadow"
+                        @mousedown="onRatingDragStart()" @touchstart="onRatingDragStart()">
                   </div>
 
-                  <!-- Slider Thumb -->
-                  <div
-                    class="absolute h-5 w-5 rounded-full border-2 border-blue-500 bg-white shadow-md cursor-pointer transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2"
-                    :style="`left: calc(${(minRating / 5) * 100}% - 10px)`" tabindex="0" role="slider"
-                    :aria-valuemin="0" :aria-valuemax="5" :aria-valuenow="minRating"
-                    :aria-label="`Minimum rating: ${minRatingDisplayValue} stars`">
+                      <!-- Value display tooltip -->
+                      <div
+                        class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-800 text-white text-xs rounded shadow-lg whitespace-nowrap z-10"
+                        x-show="isRatingDragging || minRating > 0" x-text="minRatingDisplayValue + ' sao'">
+                      </div>
+                    </div>
                   </div>
 
-                  <!-- Hidden input for better accessibility -->
-                  <input type="range" x-model="minRating" @input="updateMinRatingInURL()" min="0" max="5" step="0.1"
-                    class="absolute w-full h-full opacity-0 cursor-pointer"
-                    :aria-label="`Minimum rating slider: ${minRatingDisplayValue} stars`">
+                  <!-- Hidden input for accessibility -->
+                  <input type="range" min="0" max="5" step="0.1" :value="minRating" @input="onRatingChange($event)"
+                    @mouseup="onRatingDragEnd()" @touchend="onRatingDragEnd()"
+                    class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                </div>
+
+                <!-- Min/Max labels -->
+                <div class="flex justify-between text-xs sm:text-sm text-gray-500 mt-2">
+                  <span>0 sao</span>
+                  <span>5 sao</span>
                 </div>
               </div>
               <div class="border border-gray-200 rounded-md p-3">
                 <label
-                  class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-3 block">Tính
-                  năng</label>
+                  class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-3 block">
+                  Tính năng
+                </label>
                 <div class="space-y-2 max-h-40 overflow-y-auto">
-                  <div class="flex items-center space-x-2"><button type="button" role="checkbox" aria-checked="false"
-                      data-state="unchecked" value="on"
-                      class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
-                      id="feature-Hỗ trợ 24/7"></button><label
-                      class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm"
-                      for="feature-Hỗ trợ 24/7">Hỗ trợ 24/7</label></div>
-                  <div class="flex items-center space-x-2"><button type="button" role="checkbox" aria-checked="false"
-                      data-state="unchecked" value="on"
-                      class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
-                      id="feature-API tích hợp"></button><label
-                      class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm"
-                      for="feature-API tích hợp">API tích hợp</label></div>
-                  <div class="flex items-center space-x-2"><button type="button" role="checkbox" aria-checked="false"
-                      data-state="unchecked" value="on"
-                      class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
-                      id="feature-Dashboard quản lý"></button><label
-                      class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm"
-                      for="feature-Dashboard quản lý">Dashboard quản lý</label></div>
-                  <div class="flex items-center space-x-2"><button type="button" role="checkbox" aria-checked="false"
-                      data-state="unchecked" value="on"
-                      class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
-                      id="feature-Báo cáo thống kê"></button><label
-                      class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm"
-                      for="feature-Báo cáo thống kê">Báo cáo thống kê</label></div>
-                  <div class="flex items-center space-x-2"><button type="button" role="checkbox" aria-checked="false"
-                      data-state="unchecked" value="on"
-                      class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
-                      id="feature-Thông báo tự động"></button><label
-                      class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm"
-                      for="feature-Thông báo tự động">Thông báo tự động</label></div>
-                  <div class="flex items-center space-x-2"><button type="button" role="checkbox" aria-checked="false"
-                      data-state="unchecked" value="on"
-                      class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
-                      id="feature-Lưu trữ điện tử"></button><label
-                      class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm"
-                      for="feature-Lưu trữ điện tử">Lưu trữ điện tử</label></div>
-                  <div class="flex items-center space-x-2"><button type="button" role="checkbox" aria-checked="false"
-                      data-state="unchecked" value="on"
-                      class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
-                      id="feature-Tìm kiếm nâng cao"></button><label
-                      class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm"
-                      for="feature-Tìm kiếm nâng cao">Tìm kiếm nâng cao</label></div>
-                  <div class="flex items-center space-x-2"><button type="button" role="checkbox" aria-checked="false"
-                      data-state="unchecked" value="on"
-                      class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
-                      id="feature-Xuất báo cáo"></button><label
-                      class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm"
-                      for="feature-Xuất báo cáo">Xuất báo cáo</label></div>
+                  <div class="flex items-center space-x-2">
+                    <input type="checkbox" 
+                      :checked="isFeatureSelected('Hỗ trợ 24/7')"
+                      @change="toggleFeature('Hỗ trợ 24/7')"
+                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      id="feature-Hỗ trợ 24/7">
+                    <label class="font-medium text-sm cursor-pointer" for="feature-Hỗ trợ 24/7">Hỗ trợ 24/7</label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <input type="checkbox" 
+                      :checked="isFeatureSelected('API tích hợp')"
+                      @change="toggleFeature('API tích hợp')"
+                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      id="feature-API tích hợp">
+                    <label class="font-medium text-sm cursor-pointer" for="feature-API tích hợp">API tích hợp</label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <input type="checkbox" 
+                      :checked="isFeatureSelected('Dashboard quản lý')"
+                      @change="toggleFeature('Dashboard quản lý')"
+                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      id="feature-Dashboard quản lý">
+                    <label class="font-medium text-sm cursor-pointer" for="feature-Dashboard quản lý">Dashboard quản lý</label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <input type="checkbox" 
+                      :checked="isFeatureSelected('Báo cáo thống kê')"
+                      @change="toggleFeature('Báo cáo thống kê')"
+                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      id="feature-Báo cáo thống kê">
+                    <label class="font-medium text-sm cursor-pointer" for="feature-Báo cáo thống kê">Báo cáo thống kê</label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <input type="checkbox" 
+                      :checked="isFeatureSelected('Thông báo tự động')"
+                      @change="toggleFeature('Thông báo tự động')"
+                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      id="feature-Thông báo tự động">
+                    <label class="font-medium text-sm cursor-pointer" for="feature-Thông báo tự động">Thông báo tự động</label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <input type="checkbox" 
+                      :checked="isFeatureSelected('Lưu trữ điện tử')"
+                      @change="toggleFeature('Lưu trữ điện tử')"
+                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      id="feature-Lưu trữ điện tử">
+                    <label class="font-medium text-sm cursor-pointer" for="feature-Lưu trữ điện tử">Lưu trữ điện tử</label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <input type="checkbox" 
+                      :checked="isFeatureSelected('Tìm kiếm nâng cao')"
+                      @change="toggleFeature('Tìm kiếm nâng cao')"
+                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      id="feature-Tìm kiếm nâng cao">
+                    <label class="font-medium text-sm cursor-pointer" for="feature-Tìm kiếm nâng cao">Tìm kiếm nâng cao</label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <input type="checkbox" 
+                      :checked="isFeatureSelected('Xuất báo cáo')"
+                      @change="toggleFeature('Xuất báo cáo')"
+                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      id="feature-Xuất báo cáo">
+                    <label class="font-medium text-sm cursor-pointer" for="feature-Xuất báo cáo">Xuất báo cáo</label>
+                  </div>
                 </div>
               </div>
               <div class="border border-gray-200 rounded-md p-3">
                 <label
-                  class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-3 block">Tích
-                  hợp</label>
+                  class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-3 block">
+                  Tích hợp
+                </label>
                 <div class="space-y-2 max-h-40 overflow-y-auto">
-                  <div class="flex items-center space-x-2"><button type="button" role="checkbox" aria-checked="false"
-                      data-state="unchecked" value="on"
-                      class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
-                      id="integration-SMS"></button><label
-                      class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm"
-                      for="integration-SMS">SMS</label></div>
-                  <div class="flex items-center space-x-2"><button type="button" role="checkbox" aria-checked="false"
-                      data-state="unchecked" value="on"
-                      class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
-                      id="integration-Email"></button><label
-                      class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm"
-                      for="integration-Email">Email</label></div>
-                  <div class="flex items-center space-x-2"><button type="button" role="checkbox" aria-checked="false"
-                      data-state="unchecked" value="on"
-                      class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
-                      id="integration-Zalo"></button><label
-                      class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm"
-                      for="integration-Zalo">Zalo</label></div>
-                  <div class="flex items-center space-x-2"><button type="button" role="checkbox" aria-checked="false"
-                      data-state="unchecked" value="on"
-                      class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
-                      id="integration-Facebook"></button><label
-                      class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm"
-                      for="integration-Facebook">Facebook</label></div>
-                  <div class="flex items-center space-x-2"><button type="button" role="checkbox" aria-checked="false"
-                      data-state="unchecked" value="on"
-                      class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
-                      id="integration-REST API"></button><label
-                      class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm"
-                      for="integration-REST API">REST API</label></div>
-                  <div class="flex items-center space-x-2"><button type="button" role="checkbox" aria-checked="false"
-                      data-state="unchecked" value="on"
-                      class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
-                      id="integration-Banking API"></button><label
-                      class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm"
-                      for="integration-Banking API">Banking API</label></div>
-                  <div class="flex items-center space-x-2"><button type="button" role="checkbox" aria-checked="false"
-                      data-state="unchecked" value="on"
-                      class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
-                      id="integration-Digital signature"></button><label
-                      class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm"
-                      for="integration-Digital signature">Digital signature</label></div>
-                  <div class="flex items-center space-x-2"><button type="button" role="checkbox" aria-checked="false"
-                      data-state="unchecked" value="on"
-                      class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
-                      id="integration-Payment gateway"></button><label
-                      class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm"
-                      for="integration-Payment gateway">Payment gateway</label></div>
+                  <div class="flex items-center space-x-2">
+                    <input type="checkbox" 
+                      :checked="isIntegrationSelected('SMS')"
+                      @change="toggleIntegration('SMS')"
+                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      id="integration-SMS">
+                    <label class="font-medium text-sm cursor-pointer" for="integration-SMS">SMS</label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <input type="checkbox" 
+                      :checked="isIntegrationSelected('Email')"
+                      @change="toggleIntegration('Email')"
+                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      id="integration-Email">
+                    <label class="font-medium text-sm cursor-pointer" for="integration-Email">Email</label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <input type="checkbox" 
+                      :checked="isIntegrationSelected('Zalo')"
+                      @change="toggleIntegration('Zalo')"
+                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      id="integration-Zalo">
+                    <label class="font-medium text-sm cursor-pointer" for="integration-Zalo">Zalo</label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <input type="checkbox" 
+                      :checked="isIntegrationSelected('Facebook')"
+                      @change="toggleIntegration('Facebook')"
+                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      id="integration-Facebook">
+                    <label class="font-medium text-sm cursor-pointer" for="integration-Facebook">Facebook</label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <input type="checkbox" 
+                      :checked="isIntegrationSelected('REST API')"
+                      @change="toggleIntegration('REST API')"
+                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      id="integration-REST API">
+                    <label class="font-medium text-sm cursor-pointer" for="integration-REST API">REST API</label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <input type="checkbox" 
+                      :checked="isIntegrationSelected('Banking API')"
+                      @change="toggleIntegration('Banking API')"
+                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      id="integration-Banking API">
+                    <label class="font-medium text-sm cursor-pointer" for="integration-Banking API">Banking API</label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <input type="checkbox" 
+                      :checked="isIntegrationSelected('Digital signature')"
+                      @change="toggleIntegration('Digital signature')"
+                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      id="integration-Digital signature">
+                    <label class="font-medium text-sm cursor-pointer" for="integration-Digital signature">Digital signature</label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <input type="checkbox" 
+                      :checked="isIntegrationSelected('Payment gateway')"
+                      @change="toggleIntegration('Payment gateway')"
+                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      id="integration-Payment gateway">
+                    <label class="font-medium text-sm cursor-pointer" for="integration-Payment gateway">Payment gateway</label>
+                  </div>
                 </div>
               </div>
               <div>
                 <label
-                  class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-3 block">Hình
-                  thức cung cấp</label>
-                <button type="button" role="combobox" aria-controls="radix-:R19jafnnkq:" aria-expanded="false"
-                  aria-autocomplete="none" dir="ltr" data-state="closed"
-                  class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1">
-                  <span style="pointer-events:none">Tất cả</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
-                    <path d="m6 9 6 6 6-6"></path>
-                  </svg>
-                </button>
+                  class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-3 block">
+                  Hình thức cung cấp
+                </label>
+                <div class="relative">
+                  <button type="button" role="combobox" 
+                    :aria-expanded="showDeliveryTypeDropdown"
+                    @click="toggleDeliveryTypeDropdown()"
+                    class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                    <span x-text="getDeliveryTypeDisplayValue()">Tất cả</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="lucide lucide-chevron-down h-4 w-4 opacity-50 transition-transform"
+                      :class="showDeliveryTypeDropdown ? 'rotate-180' : ''">
+                      <path d="m6 9 6 6 6-6"></path>
+                    </svg>
+                  </button>
+                  
+                  <!-- Dropdown menu -->
+                  <div x-show="showDeliveryTypeDropdown" 
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 scale-95"
+                    x-transition:enter-end="opacity-100 scale-100"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100 scale-100"
+                    x-transition:leave-end="opacity-0 scale-95"
+                    class="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
+                    <ul class="py-1">
+                      <li>
+                        <button type="button" 
+                          @click="selectDeliveryType('Tất cả')"
+                          class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
+                          :class="selectedDeliveryType === 'Tất cả' || selectedDeliveryType === '' ? 'bg-gray-100' : ''">
+                          <svg x-show="selectedDeliveryType === 'Tất cả' || selectedDeliveryType === ''" 
+                            class="w-4 h-4 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          </svg>
+                          <svg x-show="selectedDeliveryType !== 'Tất cả' && selectedDeliveryType !== ''" 
+                            class="w-4 h-4 mr-2 invisible" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          </svg>
+                          Tất cả
+                        </button>
+                      </li>
+                      <li>
+                        <button type="button" 
+                          @click="selectDeliveryType('Trực tuyến')"
+                          class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
+                          :class="selectedDeliveryType === 'Trực tuyến' ? 'bg-gray-100' : ''">
+                          <svg x-show="selectedDeliveryType === 'Trực tuyến'" 
+                            class="w-4 h-4 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          </svg>
+                          <svg x-show="selectedDeliveryType !== 'Trực tuyến'" 
+                            class="w-4 h-4 mr-2 invisible" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          </svg>
+                          Trực tuyến
+                        </button>
+                      </li>
+                      <li>
+                        <button type="button" 
+                          @click="selectDeliveryType('Tại chỗ')"
+                          class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
+                          :class="selectedDeliveryType === 'Tại chỗ' ? 'bg-gray-100' : ''">
+                          <svg x-show="selectedDeliveryType === 'Tại chỗ'" 
+                            class="w-4 h-4 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          </svg>
+                          <svg x-show="selectedDeliveryType !== 'Tại chỗ'" 
+                            class="w-4 h-4 mr-2 invisible" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          </svg>
+                          Tại chỗ
+                        </button>
+                      </li>
+                      <li>
+                        <button type="button" 
+                          @click="selectDeliveryType('Kết hợp')"
+                          class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
+                          :class="selectedDeliveryType === 'Kết hợp' ? 'bg-gray-100' : ''">
+                          <svg x-show="selectedDeliveryType === 'Kết hợp'" 
+                            class="w-4 h-4 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          </svg>
+                          <svg x-show="selectedDeliveryType !== 'Kết hợp'" 
+                            class="w-4 h-4 mr-2 invisible" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          </svg>
+                          Kết hợp
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
-              <div><label
-                  class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-3 block">Thời
-                  hạn hợp đồng (tháng)</label><input type="number"
+              <div>
+                <label
+                  class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-3 block">
+                  Thời hạn hợp đồng (tháng)
+                </label>
+                <input type="number"
+                  x-model="contractTerm"
+                  @blur="updateContractTermInURL()"
+                  @keyup.enter="updateContractTermInURL()"
                   class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-                  min="0" placeholder="Tối đa (tháng)" value=""></div>
+                  min="0" placeholder="Tối đa (tháng)" value="">
+                </div>
               <div>
                 <label
-                  class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-3 block">Cam
-                  kết dịch vụ (SLA)</label>
-                <button type="button" role="combobox" aria-controls="radix-:R1bjafnnkq:" aria-expanded="false"
-                  aria-autocomplete="none" dir="ltr" data-state="closed"
-                  class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1">
-                  <span style="pointer-events:none">Tất cả</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
-                    <path d="m6 9 6 6 6-6"></path>
-                  </svg>
-                </button>
+                  class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-3 block">
+                  Cam kết dịch vụ (SLA)</label>
+                <div class="relative">
+                  <button type="button" role="combobox" 
+                    :aria-expanded="showSLADropdown"
+                    @click="toggleSLADropdown()"
+                    class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                    <span x-text="getSLADisplayValue()">Tất cả</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="lucide lucide-chevron-down h-4 w-4 opacity-50 transition-transform"
+                      :class="showSLADropdown ? 'rotate-180' : ''">
+                      <path d="m6 9 6 6 6-6"></path>
+                    </svg>
+                  </button>
+                  
+                  <!-- Dropdown menu -->
+                  <div x-show="showSLADropdown" 
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 scale-95"
+                    x-transition:enter-end="opacity-100 scale-100"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100 scale-100"
+                    x-transition:leave-end="opacity-0 scale-95"
+                    class="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
+                    <ul class="py-1">
+                      <li>
+                        <button type="button" 
+                          @click="selectSLA('Tất cả')"
+                          class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
+                          :class="selectedSLA === 'Tất cả' || selectedSLA === '' ? 'bg-gray-100' : ''">
+                          <svg x-show="selectedSLA === 'Tất cả' || selectedSLA === ''" 
+                            class="w-4 h-4 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          </svg>
+                          <svg x-show="selectedSLA !== 'Tất cả' && selectedSLA !== ''" 
+                            class="w-4 h-4 mr-2 invisible" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          </svg>
+                          Tất cả
+                        </button>
+                      </li>
+                      <li>
+                        <button type="button" 
+                          @click="selectSLA('24/7')"
+                          class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
+                          :class="selectedSLA === '24/7' ? 'bg-gray-100' : ''">
+                          <svg x-show="selectedSLA === '24/7'" 
+                            class="w-4 h-4 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          </svg>
+                          <svg x-show="selectedSLA !== '24/7'" 
+                            class="w-4 h-4 mr-2 invisible" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          </svg>
+                          24/7
+                        </button>
+                      </li>
+                      <li>
+                        <button type="button" 
+                          @click="selectSLA('Giờ hành chính')"
+                          class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
+                          :class="selectedSLA === 'Giờ hành chính' ? 'bg-gray-100' : ''">
+                          <svg x-show="selectedSLA === 'Giờ hành chính'" 
+                            class="w-4 h-4 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          </svg>
+                          <svg x-show="selectedSLA !== 'Giờ hành chính'" 
+                            class="w-4 h-4 mr-2 invisible" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          </svg>
+                          Giờ hành chính
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -3102,38 +3306,300 @@
                     </svg>
                     Bộ lọc
                   </button>
-                  <button type="button" role="combobox" aria-controls="radix-:R1mdafnnkq:" aria-expanded="false"
-                    aria-autocomplete="none" dir="ltr" data-state="closed"
-                    class="flex items-center justify-between rounded-md border border-input bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1 w-20 h-8 text-sm sm:hidden relative [&amp;&gt;svg]:absolute [&amp;&gt;svg]:right-3 [&amp;&gt;svg]:top-1/2 [&amp;&gt;svg]:-translate-y-1/2 [&amp;&gt;svg]:pointer-events-none">
-                    <span style="pointer-events:none">12</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
-                      <path d="m6 9 6 6 6-6"></path>
-                    </svg>
-                  </button>
+                  <div class="relative sm:hidden">
+                    <button type="button" role="combobox" 
+                      :aria-expanded="showPageSizeDropdown"
+                      @click="togglePageSizeDropdown()"
+                      class="flex items-center justify-between rounded-md border border-input bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-20 h-8 text-sm">
+                      <span x-text="getPageSizeDisplayValue()">12</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-chevron-down h-4 w-4 opacity-50 transition-transform flex-shrink-0"
+                        :class="showPageSizeDropdown ? 'rotate-180' : ''">
+                        <path d="m6 9 6 6 6-6"></path>
+                      </svg>
+                    </button>
+                    
+                    <!-- Page Size Dropdown Menu (Mobile) -->
+                    <div x-show="showPageSizeDropdown" x-cloak
+                      @click.outside="showPageSizeDropdown = false"
+                      x-transition:enter="transition ease-out duration-200"
+                      x-transition:enter-start="opacity-0 scale-95"
+                      x-transition:enter-end="opacity-100 scale-100"
+                      x-transition:leave="transition ease-in duration-150"
+                      x-transition:leave-start="opacity-100 scale-100"
+                      x-transition:leave-end="opacity-0 scale-95"
+                      class="absolute z-50 w-20 mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
+                      <ul class="py-1">
+                        <li>
+                          <button type="button" 
+                            @click="selectPageSize(12)"
+                            class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
+                            :class="selectedPageSize === 12 ? 'bg-gray-100' : ''">
+                            <svg x-show="selectedPageSize === 12" 
+                              class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <svg x-show="selectedPageSize !== 12" 
+                              class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="flex-1">12</span>
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" 
+                            @click="selectPageSize(24)"
+                            class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
+                            :class="selectedPageSize === 24 ? 'bg-gray-100' : ''">
+                            <svg x-show="selectedPageSize === 24" 
+                              class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <svg x-show="selectedPageSize !== 24" 
+                              class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="flex-1">24</span>
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" 
+                            @click="selectPageSize(48)"
+                            class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
+                            :class="selectedPageSize === 48 ? 'bg-gray-100' : ''">
+                            <svg x-show="selectedPageSize === 48" 
+                              class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <svg x-show="selectedPageSize !== 48" 
+                              class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="flex-1">48</span>
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
                 <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
-                  <button type="button" role="combobox" aria-controls="radix-:Rqdafnnkq:" aria-expanded="false"
-                    aria-autocomplete="none" dir="ltr" data-state="closed"
-                    class="flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1 w-full sm:w-40">
-                    <span style="pointer-events:none">Liên quan</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
-                      <path d="m6 9 6 6 6-6"></path>
-                    </svg>
-                  </button>
-                  <button type="button" role="combobox" aria-controls="radix-:R1adafnnkq:" aria-expanded="false"
-                    aria-autocomplete="none" dir="ltr" data-state="closed"
-                    class="items-center justify-between rounded-md border border-input bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1 hidden sm:block w-20 h-10 text-sm relative [&amp;&gt;svg]:absolute [&amp;&gt;svg]:right-3 [&amp;&gt;svg]:top-1/2 [&amp;&gt;svg]:-translate-y-1/2 [&amp;&gt;svg]:pointer-events-none">
-                    <span style="pointer-events:none">12</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
-                      <path d="m6 9 6 6 6-6"></path>
-                    </svg>
-                  </button>
+                  <div class="relative">
+                    <button type="button" role="combobox" 
+                      :aria-expanded="showSortDropdown"
+                      @click="toggleSortDropdown()"
+                      class="flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full sm:w-40">
+                      <span class="truncate" x-text="getSortDisplayValue()">Liên quan</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-chevron-down h-4 w-4 opacity-50 transition-transform flex-shrink-0"
+                        :class="showSortDropdown ? 'rotate-180' : ''">
+                        <path d="m6 9 6 6 6-6"></path>
+                      </svg>
+                    </button>
+                    
+                    <!-- Dropdown menu -->
+                    <div x-show="showSortDropdown" x-cloak
+                      @click.outside="showSortDropdown = false"
+                      x-transition:enter="transition ease-out duration-200"
+                      x-transition:enter-start="opacity-0 scale-95"
+                      x-transition:enter-end="opacity-100 scale-100"
+                      x-transition:leave="transition ease-in duration-150"
+                      x-transition:leave-start="opacity-100 scale-100"
+                      x-transition:leave-end="opacity-0 scale-95"
+                      class="absolute z-50 w-64 mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
+                      <ul class="py-1">
+                        <li>
+                          <button type="button" 
+                            @click="selectSort('Liên quan')"
+                            class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
+                            :class="selectedSort === 'Liên quan' ? 'bg-gray-100' : ''">
+                            <svg x-show="selectedSort === 'Liên quan'" 
+                              class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <svg x-show="selectedSort !== 'Liên quan'" 
+                              class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="flex-1">Liên quan</span>
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" 
+                            @click="selectSort('Mới nhất')"
+                            class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
+                            :class="selectedSort === 'Mới nhất' ? 'bg-gray-100' : ''">
+                            <svg x-show="selectedSort === 'Mới nhất'" 
+                              class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <svg x-show="selectedSort !== 'Mới nhất'" 
+                              class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="flex-1">Mới nhất</span>
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" 
+                            @click="selectSort('Giá cao → thấp')"
+                            class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
+                            :class="selectedSort === 'Giá cao → thấp' ? 'bg-gray-100' : ''">
+                            <svg x-show="selectedSort === 'Giá cao → thấp'" 
+                              class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <svg x-show="selectedSort !== 'Giá cao → thấp'" 
+                              class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="flex-1">Giá cao → thấp</span>
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" 
+                            @click="selectSort('Giá thấp → cao')"
+                            class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
+                            :class="selectedSort === 'Giá thấp → cao' ? 'bg-gray-100' : ''">
+                            <svg x-show="selectedSort === 'Giá thấp → cao'" 
+                              class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <svg x-show="selectedSort !== 'Giá thấp → cao'" 
+                              class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="flex-1">Giá thấp → cao</span>
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" 
+                            @click="selectSort('Đánh giá cao → thấp')"
+                            class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
+                            :class="selectedSort === 'Đánh giá cao → thấp' ? 'bg-gray-100' : ''">
+                            <svg x-show="selectedSort === 'Đánh giá cao → thấp'" 
+                              class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <svg x-show="selectedSort !== 'Đánh giá cao → thấp'" 
+                              class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="flex-1">Đánh giá cao → thấp</span>
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" 
+                            @click="selectSort('Đánh giá thấp → cao')"
+                            class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
+                            :class="selectedSort === 'Đánh giá thấp → cao' ? 'bg-gray-100' : ''">
+                            <svg x-show="selectedSort === 'Đánh giá thấp → cao'" 
+                              class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <svg x-show="selectedSort !== 'Đánh giá thấp → cao'" 
+                              class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="flex-1">Đánh giá thấp → cao</span>
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" 
+                            @click="selectSort('Phổ biến')"
+                            class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
+                            :class="selectedSort === 'Phổ biến' ? 'bg-gray-100' : ''">
+                            <svg x-show="selectedSort === 'Phổ biến'" 
+                              class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <svg x-show="selectedSort !== 'Phổ biến'" 
+                              class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="flex-1">Phổ biến</span>
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="relative hidden sm:block">
+                    <button type="button" role="combobox" 
+                      :aria-expanded="showPageSizeDropdown"
+                      @click="togglePageSizeDropdown()"
+                      class="flex items-center justify-between rounded-md border border-input bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-20 h-10 text-sm">
+                      <span x-text="getPageSizeDisplayValue()">12</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-chevron-down h-4 w-4 opacity-50 transition-transform flex-shrink-0"
+                        :class="showPageSizeDropdown ? 'rotate-180' : ''">
+                        <path d="m6 9 6 6 6-6"></path>
+                      </svg>
+                    </button>
+                    
+                    <!-- Page Size Dropdown Menu -->
+                    <div x-show="showPageSizeDropdown" x-cloak
+                      @click.outside="showPageSizeDropdown = false"
+                      x-transition:enter="transition ease-out duration-200"
+                      x-transition:enter-start="opacity-0 scale-95"
+                      x-transition:enter-end="opacity-100 scale-100"
+                      x-transition:leave="transition ease-in duration-150"
+                      x-transition:leave-start="opacity-100 scale-100"
+                      x-transition:leave-end="opacity-0 scale-95"
+                      class="absolute z-50 w-20 mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
+                      <ul class="py-1">
+                        <li>
+                          <button type="button" 
+                            @click="selectPageSize(12)"
+                            class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
+                            :class="selectedPageSize === 12 ? 'bg-gray-100' : ''">
+                            <svg x-show="selectedPageSize === 12" 
+                              class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <svg x-show="selectedPageSize !== 12" 
+                              class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="flex-1">12</span>
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" 
+                            @click="selectPageSize(24)"
+                            class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
+                            :class="selectedPageSize === 24 ? 'bg-gray-100' : ''">
+                            <svg x-show="selectedPageSize === 24" 
+                              class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <svg x-show="selectedPageSize !== 24" 
+                              class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="flex-1">24</span>
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" 
+                            @click="selectPageSize(48)"
+                            class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
+                            :class="selectedPageSize === 48 ? 'bg-gray-100' : ''">
+                            <svg x-show="selectedPageSize === 48" 
+                              class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <svg x-show="selectedPageSize !== 48" 
+                              class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="flex-1">48</span>
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -3145,7 +3611,7 @@
                 <div class="relative aspect-video overflow-hidden rounded-t-lg">
                   <img alt="Tổng đài 1022 Premium" loading="lazy" decoding="async" data-nimg="fill"
                     class="object-cover group-hover:scale-105 transition-transform duration-300"
-                    src="/placeholder-f7vat.png"
+                    src="./public/images/placeholder.svg"
                     style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
                   <div
                     class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary hover:bg-primary/80 absolute top-2 sm:top-3 left-2 sm:left-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs px-1 py-0">
@@ -3257,7 +3723,7 @@
                 <div class="relative aspect-video overflow-hidden rounded-t-lg">
                   <img alt="Cổng DVC Enterprise" loading="lazy" decoding="async" data-nimg="fill"
                     class="object-cover group-hover:scale-105 transition-transform duration-300"
-                    src="/placeholder-2rgud.png"
+                    src="./public/images/placeholder.svg"
                     style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
                   <div
                     class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 absolute top-2 sm:top-3 right-2 sm:right-3 bg-green-500 text-white text-xs px-1 py-0">
@@ -3352,7 +3818,7 @@
                 <div class="relative aspect-video overflow-hidden rounded-t-lg">
                   <img alt="An ninh trật tự Plus" loading="lazy" decoding="async" data-nimg="fill"
                     class="object-cover group-hover:scale-105 transition-transform duration-300"
-                    src="/placeholder-cgv4o.png"
+                    src="./public/images/placeholder.svg"
                     style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
                   <div
                     class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary hover:bg-primary/80 absolute top-2 sm:top-3 left-2 sm:left-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs px-1 py-0">
@@ -3455,7 +3921,7 @@
                 <div class="relative aspect-video overflow-hidden rounded-t-lg">
                   <img alt="Quy hoạch Pro" loading="lazy" decoding="async" data-nimg="fill"
                     class="object-cover group-hover:scale-105 transition-transform duration-300"
-                    src="/placeholder-kl62y.png"
+                    src="./public/images/placeholder.svg"
                     style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
                   <div
                     class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 absolute top-2 sm:top-3 right-2 sm:right-3 bg-green-500 text-white text-xs px-1 py-0">
@@ -3556,7 +4022,7 @@
                 <div class="relative aspect-video overflow-hidden rounded-t-lg">
                   <img alt="Dân số Digital" loading="lazy" decoding="async" data-nimg="fill"
                     class="object-cover group-hover:scale-105 transition-transform duration-300"
-                    src="/placeholder-lawub.png"
+                    src="./public/images/placeholder.svg"
                     style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
                   <div
                     class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary hover:bg-primary/80 absolute top-2 sm:top-3 left-2 sm:left-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs px-1 py-0">
@@ -3662,7 +4128,7 @@
                 <div class="relative aspect-video overflow-hidden rounded-t-lg">
                   <img alt="Doanh nghiệp Smart" loading="lazy" decoding="async" data-nimg="fill"
                     class="object-cover group-hover:scale-105 transition-transform duration-300"
-                    src="/placeholder-dyzt6.png"
+                    src="./public/images/placeholder.svg"
                     style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
                   <div
                     class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary hover:bg-primary/80 absolute top-2 sm:top-3 left-2 sm:left-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs px-1 py-0">
@@ -3768,7 +4234,7 @@
                 <div class="relative aspect-video overflow-hidden rounded-t-lg">
                   <img alt="Thuế Express" loading="lazy" decoding="async" data-nimg="fill"
                     class="object-cover group-hover:scale-105 transition-transform duration-300"
-                    src="/placeholder-qk1jv.png"
+                    src="./public/images/placeholder.svg"
                     style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
                   <div
                     class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 absolute top-2 sm:top-3 right-2 sm:right-3 bg-green-500 text-white text-xs px-1 py-0">
@@ -3869,7 +4335,7 @@
                 <div class="relative aspect-video overflow-hidden rounded-t-lg">
                   <img alt="Bảo hiểm Connect" loading="lazy" decoding="async" data-nimg="fill"
                     class="object-cover group-hover:scale-105 transition-transform duration-300"
-                    src="/placeholder-bv3ls.png"
+                    src="./public/images/placeholder.svg"
                     style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
                   <div
                     class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary hover:bg-primary/80 absolute top-2 sm:top-3 left-2 sm:left-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs px-1 py-0">
@@ -3975,7 +4441,7 @@
                 <div class="relative aspect-video overflow-hidden rounded-t-lg">
                   <img alt="Dịch vụ Hành chính 9" loading="lazy" decoding="async" data-nimg="fill"
                     class="object-cover group-hover:scale-105 transition-transform duration-300"
-                    src="/placeholder-service.png" style="position: absolute; height: 100%; width: 100%; inset: 0px;">
+                    src="./public/images/placeholder.svg" style="position: absolute; height: 100%; width: 100%; inset: 0px;">
                   <div
                     class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary hover:bg-primary/80 absolute top-2 sm:top-3 left-2 sm:left-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs px-1 py-0">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -4071,7 +4537,7 @@
                 <div class="relative aspect-video overflow-hidden rounded-t-lg"><img alt="Dịch vụ Hành chính 10"
                     loading="lazy" decoding="async" data-nimg="fill"
                     class="object-cover group-hover:scale-105 transition-transform duration-300"
-                    src="/placeholder-service.png" style="position: absolute; height: 100%; width: 100%; inset: 0px;">
+                    src="./public/images/placeholder.svg" style="position: absolute; height: 100%; width: 100%; inset: 0px;">
                 </div>
                 <div class="p-2 sm:p-4 flex-1 flex flex-col">
                   <div class="mb-2 sm:mb-3">
@@ -4162,7 +4628,7 @@
                 <div class="relative aspect-video overflow-hidden rounded-t-lg">
                   <img alt="Dịch vụ Tài chính 11" loading="lazy" decoding="async" data-nimg="fill"
                     class="object-cover group-hover:scale-105 transition-transform duration-300"
-                    src="/placeholder-service.png" style="position: absolute; height: 100%; width: 100%; inset: 0px;">
+                    src="./public/images/placeholder.svg" style="position: absolute; height: 100%; width: 100%; inset: 0px;">
                   <div
                     class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 absolute top-2 sm:top-3 right-2 sm:right-3 bg-green-500 text-white text-xs px-1 py-0">
                     Dùng thử miễn phí</div>
@@ -4256,7 +4722,7 @@
                 <div class="relative aspect-video overflow-hidden rounded-t-lg"><img alt="Dịch vụ Tài chính 12"
                     loading="lazy" decoding="async" data-nimg="fill"
                     class="object-cover group-hover:scale-105 transition-transform duration-300"
-                    src="/placeholder-service.png" style="position: absolute; height: 100%; width: 100%; inset: 0px;">
+                    src="./public/images/placeholder.svg" style="position: absolute; height: 100%; width: 100%; inset: 0px;">
                 </div>
                 <div class="p-2 sm:p-4 flex-1 flex flex-col">
                   <div class="mb-2 sm:mb-3">
@@ -4340,15 +4806,40 @@
             </div>
           </div>
           <div class="flex justify-center mt-6 sm:mt-8 mb-6 sm:mb-12">
-            <div class="flex items-center gap-1 sm:gap-2"><button
-                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2"
-                disabled="">Trước</button><button
-                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700">1</button><button
-                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">2</button><button
-                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">3</button><button
-                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">4</button><button
-                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">5</button><button
-                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">Sau</button>
+            <div class="flex items-center gap-1 sm:gap-2">
+              <button @click="prevPage()" :disabled="isPrevDisabled()"
+                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">
+                Trước
+              </button>
+              <button @click="goToPage(1)"
+                :class="isPageActive(1) ? 'bg-primary text-primary-foreground hover:bg-primary/90 btn-primary' : 'border border-input bg-background hover:bg-accent hover:text-accent-foreground'"
+                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">
+                1
+              </button>
+              <button @click="goToPage(2)"
+                :class="isPageActive(2) ? 'bg-primary text-primary-foreground hover:bg-primary/90 btn-primary' : 'border border-input bg-background hover:bg-accent hover:text-accent-foreground'"
+                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">
+                2
+              </button>
+              <button @click="goToPage(3)"
+                :class="isPageActive(3) ? 'bg-primary text-primary-foreground hover:bg-primary/90 btn-primary' : 'border border-input bg-background hover:bg-accent hover:text-accent-foreground'"
+                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">
+                3
+              </button>
+              <button @click="goToPage(4)"
+                :class="isPageActive(4) ? 'bg-primary text-primary-foreground hover:bg-primary/90 btn-primary' : 'border border-input bg-background hover:bg-accent hover:text-accent-foreground'"
+                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">
+                4
+              </button>
+              <button @click="goToPage(5)"
+                :class="isPageActive(5) ? 'bg-primary text-primary-foreground hover:bg-primary/90 btn-primary' : 'border border-input bg-background hover:bg-accent hover:text-accent-foreground'"
+                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">
+                5
+              </button>
+              <button @click="nextPage()" :disabled="isNextDisabled()"
+                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">
+                Sau
+              </button>
             </div>
           </div>
         </div>
