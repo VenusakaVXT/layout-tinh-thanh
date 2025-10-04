@@ -2529,7 +2529,7 @@
                 <path d="m18 6-12 12"></path>
                 <path d="m6 6 12 12"></path>
               </svg>
-            </button>
+          </button>
           </div>
           <button
             class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 h-8 sm:h-10 text-xs sm:text-sm"
@@ -2703,15 +2703,15 @@
                     for="province">Tỉnh/Thành phố</label>
                   <div class="relative">
                     <button type="button" @click="toggleProvinceDropdown()"
-                      class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1">
+                    class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1">
                       <span x-show="!selectedProvince" class="line-clamp-1">Chọn tỉnh/thành phố</span>
                       <span x-show="selectedProvince" x-text="selectedProvince" class="line-clamp-1"></span>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
-                        <path d="m6 9 6 6 6-6"></path>
-                      </svg>
-                    </button>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
+                      <path d="m6 9 6 6 6-6"></path>
+                    </svg>
+                  </button>
 
                     <!-- Province Dropdown Menu -->
                     <div x-show="showProvinceDropdown" @click.away="showProvinceDropdown = false" x-cloak
@@ -2773,12 +2773,12 @@
                           Tây Ninh
                         </li>
                       </ul>
-                    </div>
-                  </div>
+                </div>
+              </div>
                 </div>
 
                 <!-- Quận/Huyện -->
-                <div>
+              <div>
                   <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium"
                     for="district">Quận/Huyện</label>
                   <div class="relative">
@@ -3434,15 +3434,15 @@
                 </label>
                 <div class="relative">
                   <button type="button" @click="toggleRealEstateTypeDropdown()"
-                    class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1">
+                  class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1">
                     <span x-show="!selectedRealEstateType" class="line-clamp-1">Chọn loại BĐS</span>
                     <span x-show="selectedRealEstateType" x-text="selectedRealEstateType" class="line-clamp-1"></span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
-                      <path d="m6 9 6 6 6-6"></path>
-                    </svg>
-                  </button>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
 
                   <!-- Real Estate Type Dropdown Menu -->
                   <div x-show="showRealEstateTypeDropdown" @click.away="showRealEstateTypeDropdown = false" x-cloak
@@ -3517,15 +3517,15 @@
                   thức</label>
                 <div class="relative">
                   <button type="button" @click="toggleFormTypeDropdown()"
-                    class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1">
+                  class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1">
                     <span x-show="!selectedFormType" class="line-clamp-1">Chọn hình thức</span>
                     <span x-show="selectedFormType" x-text="selectedFormType" class="line-clamp-1"></span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
-                      <path d="m6 9 6 6 6-6"></path>
-                    </svg>
-                  </button>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
 
                   <!-- Form Type Dropdown Menu -->
                   <div x-show="showFormTypeDropdown" @click.away="showFormTypeDropdown = false" x-cloak
@@ -3629,15 +3629,15 @@
                   ngủ (tối thiểu)</label>
                 <div class="relative">
                   <button type="button" @click="toggleBedroomsDropdown()"
-                    class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1">
+                  class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1">
                     <span x-show="!selectedBedrooms" class="line-clamp-1">Chọn số phòng ngủ</span>
                     <span x-show="selectedBedrooms" x-text="selectedBedrooms + '+ phòng'" class="line-clamp-1"></span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
-                      <path d="m6 9 6 6 6-6"></path>
-                    </svg>
-                  </button>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
 
                   <!-- Bedrooms Dropdown Menu -->
                   <div x-show="showBedroomsDropdown" @click.away="showBedroomsDropdown = false" x-cloak
@@ -3702,15 +3702,15 @@
                   thiểu)</label>
                 <div class="relative">
                   <button type="button" @click="toggleBathroomsDropdown()"
-                    class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1">
+                  class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1">
                     <span x-show="!selectedBathrooms" class="line-clamp-1">Chọn số WC</span>
                     <span x-show="selectedBathrooms" x-text="selectedBathrooms + '+ WC'" class="line-clamp-1"></span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
-                      <path d="m6 9 6 6 6-6"></path>
-                    </svg>
-                  </button>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
 
                   <!-- Bathrooms Dropdown Menu -->
                   <div x-show="showBathroomsDropdown" @click.away="showBathroomsDropdown = false" x-cloak
@@ -3766,15 +3766,15 @@
                 </label>
                 <div class="relative">
                   <button type="button" @click="toggleDirectionDropdown()"
-                    class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1">
+                  class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1">
                     <span x-show="!selectedDirection" class="line-clamp-1">Chọn hướng</span>
                     <span x-show="selectedDirection" x-text="getDirectionDisplayValue()" class="line-clamp-1"></span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
-                      <path d="m6 9 6 6 6-6"></path>
-                    </svg>
-                  </button>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
 
                   <!-- Direction Dropdown Menu -->
                   <div x-show="showDirectionDropdown" @click.away="showDirectionDropdown = false" x-cloak
@@ -3873,29 +3873,29 @@
                     <input type="checkbox" :checked="isAmenitySelected('Hồ bơi')" @change="toggleAmenity('Hồ bơi')"
                       class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" id="Hồ bơi">
                     <label class="font-medium text-sm cursor-pointer" for="Hồ bơi">Hồ bơi</label>
-                  </div>
+                </div>
                   <div class="flex items-center space-x-2">
                     <input type="checkbox" :checked="isAmenitySelected('Gym')" @change="toggleAmenity('Gym')"
                       class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" id="Gym">
                     <label class="font-medium text-sm cursor-pointer" for="Gym">Gym</label>
-                  </div>
+              </div>
                   <div class="flex items-center space-x-2">
                     <input type="checkbox" :checked="isAmenitySelected('Công viên')"
                       @change="toggleAmenity('Công viên')"
                       class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" id="Công viên">
                     <label class="font-medium text-sm cursor-pointer" for="Công viên">Công viên</label>
-                  </div>
+            </div>
                   <div class="flex items-center space-x-2">
                     <input type="checkbox" :checked="isAmenitySelected('Siêu thị')" @change="toggleAmenity('Siêu thị')"
                       class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" id="Siêu thị">
                     <label class="font-medium text-sm cursor-pointer" for="Siêu thị">Siêu thị</label>
-                  </div>
+          </div>
                   <div class="flex items-center space-x-2">
                     <input type="checkbox" :checked="isAmenitySelected('Trường học')"
                       @change="toggleAmenity('Trường học')"
                       class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" id="Trường học">
                     <label class="font-medium text-sm cursor-pointer" for="Trường học">Trường học</label>
-                  </div>
+        </div>
                   <div class="flex items-center space-x-2">
                     <input type="checkbox" :checked="isAmenitySelected('Bệnh viện')"
                       @change="toggleAmenity('Bệnh viện')"
@@ -3951,7 +3951,8 @@
         </div>
         <div class="flex-1 min-w-0" style="overflow-anchor:none" x-data="realEstateSearch">
           <div class="space-y-2 sm:space-y-4">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 p-2 sm:p-4 bg-white rounded-lg border">
+            <div
+              class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 p-2 sm:p-4 bg-white rounded-lg border">
               <div class="flex items-center gap-2 sm:gap-4">
                 <p class="text-xs sm:text-sm text-gray-600">
                   Hiển thị <span class="font-semibold">1</span> -
@@ -3979,8 +3980,7 @@
                     Bộ lọc
                   </button>
                   <div class="flex border rounded-md">
-                    <button
-                      @click="switchToGridView()"
+                    <button @click="switchToGridView()"
                       :class="isGridView() ? 'bg-primary hover:bg-primary/90 btn-primary text-white' : 'hover:bg-accent hover:text-accent-foreground'"
                       class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 rounded-md px-3 rounded-r-none h-8 text-xs">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -3993,8 +3993,7 @@
                         <path d="M15 3v18"></path>
                       </svg>
                     </button>
-                    <button
-                      @click="switchToListView()"
+                    <button @click="switchToListView()"
                       :class="isListView() ? 'bg-primary hover:bg-primary/90 btn-primary text-white' : 'hover:bg-accent hover:text-accent-foreground'"
                       class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 rounded-md px-3 rounded-l-none h-8 text-xs">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -4025,26 +4024,26 @@
                   <div class="relative">
                     <button type="button" @click="toggleSortDropdown()"
                       class="flex items-center justify-between rounded-md border border-input bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full sm:w-48 h-8 sm:h-auto text-xs sm:text-sm">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-sliders-horizontal w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2">
-                        <line x1="21" x2="14" y1="4" y2="4"></line>
-                        <line x1="10" x2="3" y1="4" y2="4"></line>
-                        <line x1="21" x2="12" y1="12" y2="12"></line>
-                        <line x1="8" x2="3" y1="12" y2="12"></line>
-                        <line x1="21" x2="16" y1="20" y2="20"></line>
-                        <line x1="12" x2="3" y1="20" y2="20"></line>
-                        <line x1="14" x2="14" y1="2" y2="6"></line>
-                        <line x1="8" x2="8" y1="10" y2="14"></line>
-                        <line x1="16" x2="16" y1="18" y2="22"></line>
-                      </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="lucide lucide-sliders-horizontal w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2">
+                      <line x1="21" x2="14" y1="4" y2="4"></line>
+                      <line x1="10" x2="3" y1="4" y2="4"></line>
+                      <line x1="21" x2="12" y1="12" y2="12"></line>
+                      <line x1="8" x2="3" y1="12" y2="12"></line>
+                      <line x1="21" x2="16" y1="20" y2="20"></line>
+                      <line x1="12" x2="3" y1="20" y2="20"></line>
+                      <line x1="14" x2="14" y1="2" y2="6"></line>
+                      <line x1="8" x2="8" y1="10" y2="14"></line>
+                      <line x1="16" x2="16" y1="18" y2="22"></line>
+                    </svg>
                       <span x-text="getSortLabel()" class="line-clamp-1">Liên quan</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
-                        <path d="m6 9 6 6 6-6"></path>
-                      </svg>
-                    </button>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
+                      <path d="m6 9 6 6 6-6"></path>
+                    </svg>
+                  </button>
 
                     <!-- Sort Dropdown Menu -->
                     <div x-show="showSortDropdown" @click.away="showSortDropdown = false" x-cloak
@@ -4125,13 +4124,13 @@
                     <button type="button" @click="toggleItemsPerPageDropdown()"
                       class="items-center justify-between rounded-md border border-input bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 hidden sm:block w-20 h-8 sm:h-auto text-xs sm:text-sm relative">
                       <span x-text="getItemsPerPageLabel()">12</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-chevron-down h-4 w-4 opacity-50 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
                         aria-hidden="true">
-                        <path d="m6 9 6 6 6-6"></path>
-                      </svg>
-                    </button>
+                      <path d="m6 9 6 6 6-6"></path>
+                    </svg>
+                  </button>
 
                     <!-- Items Per Page Dropdown Menu -->
                     <div x-show="showItemsPerPageDropdown" @click.away="showItemsPerPageDropdown = false" x-cloak
@@ -4171,15 +4170,18 @@
                           48
                         </li>
                       </ul>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
+            </div>
+          </div>
+
+          <!-- Real Estate Search Results -->
           <div class="mt-4 sm:mt-6">
             <!-- Grid View -->
-            <div id="real-estate-grid" x-show="isGridView()" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
+            <div id="real-estate-grid" x-show="isGridView()"
+              class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
               <div
                 class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-all duration-300 group cursor-pointer">
                 <div class="p-0">
@@ -5948,23 +5950,23 @@
                       <div
                         class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary hover:bg-primary/80 bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs px-1 py-0">
                         Nổi bật</div>
-                    </div>
+              </div>
                     <div class="absolute top-2 sm:top-3 right-2 sm:right-3">
                       <div
                         class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-secondary/80 bg-white/90 text-gray-700 text-xs px-1 py-0">
                         Đang bán</div>
-                    </div>
+            </div>
                     <div class="absolute bottom-2 sm:bottom-3 left-2 sm:left-3">
                       <div
                         class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary hover:bg-primary/80 bg-gradient-to-r from-red-500 to-pink-500 text-white animate-pulse text-xs px-1 py-0">
                         🔥 Hot</div>
-                    </div>
+          </div>
                     <div class="absolute bottom-2 sm:bottom-3 right-2 sm:right-3">
                       <div
                         class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 bg-green-500 text-white text-xs px-1 py-0">
                         ✓ Đã xác minh</div>
-                    </div>
-                  </div>
+        </div>
+      </div>
                   <div class="p-3 sm:p-4 flex-1 flex flex-col">
                     <h3
                       class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors text-sm sm:text-base">
@@ -7291,6 +7293,161 @@
               </div>
             </div>
           </div>
+
+          <!-- Real Estate Not Found
+          <div class="mt-4 sm:mt-6">
+            <div class="text-center py-8 sm:py-12">
+              <div class="max-w-md mx-auto">
+                <div
+                  class="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 sm:mb-6 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-search w-8 h-8 sm:w-10 sm:h-10 text-gray-400">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                  </svg></div>
+                <h3 class="text-lg sm:text-xl font-semibold text-gray-900 mb-2">Không tìm thấy kết quả phù hợp</h3>
+                <p class="text-sm sm:text-base text-gray-600 mb-6 sm:mb-8">Hãy thử điều chỉnh bộ lọc hoặc tìm kiếm với
+                  từ khóa khác</p>
+                <div class="space-y-3 sm:space-y-4">
+                  <h4 class="text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-3">Gợi ý tìm kiếm phổ biến:</h4>
+                  <div class="grid grid-cols-2 gap-1 sm:gap-2"><button
+                      class="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input hover:bg-accent hover:text-accent-foreground h-auto p-2 sm:p-3 flex flex-col items-center gap-1 sm:gap-2 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:border-blue-300 bg-transparent"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-building w-4 h-4 sm:w-5 sm:h-5 text-gray-500">
+                        <rect width="16" height="20" x="4" y="2" rx="2" ry="2"></rect>
+                        <path d="M9 22v-4h6v4"></path>
+                        <path d="M8 6h.01"></path>
+                        <path d="M16 6h.01"></path>
+                        <path d="M12 6h.01"></path>
+                        <path d="M12 10h.01"></path>
+                        <path d="M12 14h.01"></path>
+                        <path d="M16 10h.01"></path>
+                        <path d="M16 14h.01"></path>
+                        <path d="M8 10h.01"></path>
+                        <path d="M8 14h.01"></path>
+                      </svg><span class="text-xs text-center">Căn hộ Bình Dương</span></button><button
+                      class="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input hover:bg-accent hover:text-accent-foreground h-auto p-2 sm:p-3 flex flex-col items-center gap-1 sm:gap-2 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:border-blue-300 bg-transparent"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-house w-4 h-4 sm:w-5 sm:h-5 text-gray-500">
+                        <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
+                        <path
+                          d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z">
+                        </path>
+                      </svg><span class="text-xs text-center">Nhà phố Thủ Dầu Một</span></button><button
+                      class="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input hover:bg-accent hover:text-accent-foreground h-auto p-2 sm:p-3 flex flex-col items-center gap-1 sm:gap-2 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:border-blue-300 bg-transparent"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-tree-pine w-4 h-4 sm:w-5 sm:h-5 text-gray-500">
+                        <path
+                          d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z">
+                        </path>
+                        <path d="M12 22v-3"></path>
+                      </svg><span class="text-xs text-center">Biệt thự Lavilla</span></button><button
+                      class="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input hover:bg-accent hover:text-accent-foreground h-auto p-2 sm:p-3 flex flex-col items-center gap-1 sm:gap-2 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:border-blue-300 bg-transparent"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-map-pin w-4 h-4 sm:w-5 sm:h-5 text-gray-500">
+                        <path
+                          d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
+                        </path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                      </svg><span class="text-xs text-center">Đất nền Bàu Bàng</span></button><button
+                      class="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input hover:bg-accent hover:text-accent-foreground h-auto p-2 sm:p-3 flex flex-col items-center gap-1 sm:gap-2 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:border-blue-300 bg-transparent"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-building w-4 h-4 sm:w-5 sm:h-5 text-gray-500">
+                        <rect width="16" height="20" x="4" y="2" rx="2" ry="2"></rect>
+                        <path d="M9 22v-4h6v4"></path>
+                        <path d="M8 6h.01"></path>
+                        <path d="M16 6h.01"></path>
+                        <path d="M12 6h.01"></path>
+                        <path d="M12 10h.01"></path>
+                        <path d="M12 14h.01"></path>
+                        <path d="M16 10h.01"></path>
+                        <path d="M16 14h.01"></path>
+                        <path d="M8 10h.01"></path>
+                        <path d="M8 14h.01"></path>
+                      </svg><span class="text-xs text-center">Shophouse Dĩ An</span></button><button
+                      class="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input hover:bg-accent hover:text-accent-foreground h-auto p-2 sm:p-3 flex flex-col items-center gap-1 sm:gap-2 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:border-blue-300 bg-transparent"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-search w-4 h-4 sm:w-5 sm:h-5 text-gray-500">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.3-4.3"></path>
+                      </svg><span class="text-xs text-center">Bất động sản giá rẻ</span></button></div>
+                </div>
+                <div class="mt-6 sm:mt-8">
+                  <h4 class="text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-3">Khu vực phổ biến:</h4>
+                  <div class="flex flex-wrap justify-center gap-2">
+                    <div
+                      class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 cursor-pointer hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:text-white transition-all text-xs px-1 py-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-map-pin w-3 h-3 mr-1">
+                        <path
+                          d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
+                        </path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                      </svg>TP. Thủ Dầu Một</div>
+                    <div
+                      class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 cursor-pointer hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:text-white transition-all text-xs px-1 py-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-map-pin w-3 h-3 mr-1">
+                        <path
+                          d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
+                        </path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                      </svg>TP. Dĩ An</div>
+                    <div
+                      class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 cursor-pointer hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:text-white transition-all text-xs px-1 py-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-map-pin w-3 h-3 mr-1">
+                        <path
+                          d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
+                        </path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                      </svg>Bến Cát</div>
+                    <div
+                      class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 cursor-pointer hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:text-white transition-all text-xs px-1 py-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-map-pin w-3 h-3 mr-1">
+                        <path
+                          d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
+                        </path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                      </svg>Tân Uyên</div>
+                    <div
+                      class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 cursor-pointer hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:text-white transition-all text-xs px-1 py-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-map-pin w-3 h-3 mr-1">
+                        <path
+                          d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
+                        </path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                      </svg>TP. Thuận An</div>
+                  </div>
+                </div>
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm mt-6 sm:mt-8 text-left">
+                  <div class="p-3 sm:p-4">
+                    <h4 class="font-medium text-gray-900 mb-2 text-sm sm:text-base">💡 Mẹo tìm kiếm hiệu quả:</h4>
+                    <ul class="text-xs sm:text-sm text-gray-600 space-y-1">
+                      <li>• Sử dụng từ khóa ngắn gọn như "căn hộ", "nhà phố"</li>
+                      <li>• Thử tìm theo tên dự án hoặc khu vực</li>
+                      <li>• Điều chỉnh khoảng giá và diện tích phù hợp</li>
+                      <li>• Bỏ bớt một số bộ lọc để mở rộng kết quả</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>-->
         </div>
       </div>
     </div>

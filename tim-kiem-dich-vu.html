@@ -2562,9 +2562,9 @@
                         <path fill-rule="evenodd"
                           d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                           clip-rule="evenodd"></path>
-                      </svg>
+                  </svg>
                     </button>
-                  </div>
+                </div>
                 </template>
               </div>
             </div>
@@ -2775,9 +2775,9 @@
                       <input type="number" x-model="priceMax" @blur="handlePriceBlur()"
                         class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
                         min="0" placeholder="Không giới hạn">
-                    </div>
                   </div>
                 </div>
+              </div>
               </div>
               <div class="flex items-center space-x-2">
                 <input type="checkbox" x-model="hasTrial" @change="updateTrialInURL()"
@@ -2915,7 +2915,7 @@
                       <div
                         class="h-5 w-5 rounded-full border-2 border-blue-500 bg-white shadow-md cursor-pointer hover:shadow-lg transition-shadow"
                         @mousedown="onRatingDragStart()" @touchstart="onRatingDragStart()">
-                  </div>
+                      </div>
 
                       <!-- Value display tooltip -->
                       <div
@@ -2938,70 +2938,66 @@
                 </div>
               </div>
               <div class="border border-gray-200 rounded-md p-3">
-                <label
-                  class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-3 block">
+                <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-3 block">
                   Tính năng
                 </label>
                 <div class="space-y-2 max-h-40 overflow-y-auto">
                   <div class="flex items-center space-x-2">
-                    <input type="checkbox" 
-                      :checked="isFeatureSelected('Hỗ trợ 24/7')"
+                    <input type="checkbox" :checked="isFeatureSelected('Hỗ trợ 24/7')"
                       @change="toggleFeature('Hỗ trợ 24/7')"
                       class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                       id="feature-Hỗ trợ 24/7">
                     <label class="font-medium text-sm cursor-pointer" for="feature-Hỗ trợ 24/7">Hỗ trợ 24/7</label>
                   </div>
                   <div class="flex items-center space-x-2">
-                    <input type="checkbox" 
-                      :checked="isFeatureSelected('API tích hợp')"
+                    <input type="checkbox" :checked="isFeatureSelected('API tích hợp')"
                       @change="toggleFeature('API tích hợp')"
                       class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                       id="feature-API tích hợp">
                     <label class="font-medium text-sm cursor-pointer" for="feature-API tích hợp">API tích hợp</label>
                   </div>
                   <div class="flex items-center space-x-2">
-                    <input type="checkbox" 
-                      :checked="isFeatureSelected('Dashboard quản lý')"
+                    <input type="checkbox" :checked="isFeatureSelected('Dashboard quản lý')"
                       @change="toggleFeature('Dashboard quản lý')"
                       class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                       id="feature-Dashboard quản lý">
-                    <label class="font-medium text-sm cursor-pointer" for="feature-Dashboard quản lý">Dashboard quản lý</label>
+                    <label class="font-medium text-sm cursor-pointer" for="feature-Dashboard quản lý">Dashboard quản
+                      lý</label>
                   </div>
                   <div class="flex items-center space-x-2">
-                    <input type="checkbox" 
-                      :checked="isFeatureSelected('Báo cáo thống kê')"
+                    <input type="checkbox" :checked="isFeatureSelected('Báo cáo thống kê')"
                       @change="toggleFeature('Báo cáo thống kê')"
                       class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                       id="feature-Báo cáo thống kê">
-                    <label class="font-medium text-sm cursor-pointer" for="feature-Báo cáo thống kê">Báo cáo thống kê</label>
+                    <label class="font-medium text-sm cursor-pointer" for="feature-Báo cáo thống kê">Báo cáo thống
+                      kê</label>
                   </div>
                   <div class="flex items-center space-x-2">
-                    <input type="checkbox" 
-                      :checked="isFeatureSelected('Thông báo tự động')"
+                    <input type="checkbox" :checked="isFeatureSelected('Thông báo tự động')"
                       @change="toggleFeature('Thông báo tự động')"
                       class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                       id="feature-Thông báo tự động">
-                    <label class="font-medium text-sm cursor-pointer" for="feature-Thông báo tự động">Thông báo tự động</label>
+                    <label class="font-medium text-sm cursor-pointer" for="feature-Thông báo tự động">Thông báo tự
+                      động</label>
                   </div>
                   <div class="flex items-center space-x-2">
-                    <input type="checkbox" 
-                      :checked="isFeatureSelected('Lưu trữ điện tử')"
+                    <input type="checkbox" :checked="isFeatureSelected('Lưu trữ điện tử')"
                       @change="toggleFeature('Lưu trữ điện tử')"
                       class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                       id="feature-Lưu trữ điện tử">
-                    <label class="font-medium text-sm cursor-pointer" for="feature-Lưu trữ điện tử">Lưu trữ điện tử</label>
+                    <label class="font-medium text-sm cursor-pointer" for="feature-Lưu trữ điện tử">Lưu trữ điện
+                      tử</label>
                   </div>
                   <div class="flex items-center space-x-2">
-                    <input type="checkbox" 
-                      :checked="isFeatureSelected('Tìm kiếm nâng cao')"
+                    <input type="checkbox" :checked="isFeatureSelected('Tìm kiếm nâng cao')"
                       @change="toggleFeature('Tìm kiếm nâng cao')"
                       class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                       id="feature-Tìm kiếm nâng cao">
-                    <label class="font-medium text-sm cursor-pointer" for="feature-Tìm kiếm nâng cao">Tìm kiếm nâng cao</label>
+                    <label class="font-medium text-sm cursor-pointer" for="feature-Tìm kiếm nâng cao">Tìm kiếm nâng
+                      cao</label>
                   </div>
                   <div class="flex items-center space-x-2">
-                    <input type="checkbox" 
-                      :checked="isFeatureSelected('Xuất báo cáo')"
+                    <input type="checkbox" :checked="isFeatureSelected('Xuất báo cáo')"
                       @change="toggleFeature('Xuất báo cáo')"
                       class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                       id="feature-Xuất báo cáo">
@@ -3010,269 +3006,266 @@
                 </div>
               </div>
               <div class="border border-gray-200 rounded-md p-3">
-                <label
-                  class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-3 block">
+                <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-3 block">
                   Tích hợp
                 </label>
                 <div class="space-y-2 max-h-40 overflow-y-auto">
                   <div class="flex items-center space-x-2">
-                    <input type="checkbox" 
-                      :checked="isIntegrationSelected('SMS')"
-                      @change="toggleIntegration('SMS')"
-                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                      id="integration-SMS">
+                    <input type="checkbox" :checked="isIntegrationSelected('SMS')" @change="toggleIntegration('SMS')"
+                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" id="integration-SMS">
                     <label class="font-medium text-sm cursor-pointer" for="integration-SMS">SMS</label>
                   </div>
                   <div class="flex items-center space-x-2">
-                    <input type="checkbox" 
-                      :checked="isIntegrationSelected('Email')"
+                    <input type="checkbox" :checked="isIntegrationSelected('Email')"
                       @change="toggleIntegration('Email')"
-                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                      id="integration-Email">
+                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" id="integration-Email">
                     <label class="font-medium text-sm cursor-pointer" for="integration-Email">Email</label>
                   </div>
                   <div class="flex items-center space-x-2">
-                    <input type="checkbox" 
-                      :checked="isIntegrationSelected('Zalo')"
-                      @change="toggleIntegration('Zalo')"
-                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                      id="integration-Zalo">
+                    <input type="checkbox" :checked="isIntegrationSelected('Zalo')" @change="toggleIntegration('Zalo')"
+                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" id="integration-Zalo">
                     <label class="font-medium text-sm cursor-pointer" for="integration-Zalo">Zalo</label>
                   </div>
                   <div class="flex items-center space-x-2">
-                    <input type="checkbox" 
-                      :checked="isIntegrationSelected('Facebook')"
+                    <input type="checkbox" :checked="isIntegrationSelected('Facebook')"
                       @change="toggleIntegration('Facebook')"
                       class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                       id="integration-Facebook">
                     <label class="font-medium text-sm cursor-pointer" for="integration-Facebook">Facebook</label>
                   </div>
                   <div class="flex items-center space-x-2">
-                    <input type="checkbox" 
-                      :checked="isIntegrationSelected('REST API')"
+                    <input type="checkbox" :checked="isIntegrationSelected('REST API')"
                       @change="toggleIntegration('REST API')"
                       class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                       id="integration-REST API">
                     <label class="font-medium text-sm cursor-pointer" for="integration-REST API">REST API</label>
                   </div>
                   <div class="flex items-center space-x-2">
-                    <input type="checkbox" 
-                      :checked="isIntegrationSelected('Banking API')"
+                    <input type="checkbox" :checked="isIntegrationSelected('Banking API')"
                       @change="toggleIntegration('Banking API')"
                       class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                       id="integration-Banking API">
                     <label class="font-medium text-sm cursor-pointer" for="integration-Banking API">Banking API</label>
                   </div>
                   <div class="flex items-center space-x-2">
-                    <input type="checkbox" 
-                      :checked="isIntegrationSelected('Digital signature')"
+                    <input type="checkbox" :checked="isIntegrationSelected('Digital signature')"
                       @change="toggleIntegration('Digital signature')"
                       class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                       id="integration-Digital signature">
-                    <label class="font-medium text-sm cursor-pointer" for="integration-Digital signature">Digital signature</label>
+                    <label class="font-medium text-sm cursor-pointer" for="integration-Digital signature">Digital
+                      signature</label>
                   </div>
                   <div class="flex items-center space-x-2">
-                    <input type="checkbox" 
-                      :checked="isIntegrationSelected('Payment gateway')"
+                    <input type="checkbox" :checked="isIntegrationSelected('Payment gateway')"
                       @change="toggleIntegration('Payment gateway')"
                       class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                       id="integration-Payment gateway">
-                    <label class="font-medium text-sm cursor-pointer" for="integration-Payment gateway">Payment gateway</label>
+                    <label class="font-medium text-sm cursor-pointer" for="integration-Payment gateway">Payment
+                      gateway</label>
                   </div>
                 </div>
               </div>
               <div>
-                <label
-                  class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-3 block">
+                <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-3 block">
                   Hình thức cung cấp
                 </label>
                 <div class="relative">
-                  <button type="button" role="combobox" 
-                    :aria-expanded="showDeliveryTypeDropdown"
+                  <button type="button" role="combobox" :aria-expanded="showDeliveryTypeDropdown"
                     @click="toggleDeliveryTypeDropdown()"
                     class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
                     <span x-text="getDeliveryTypeDisplayValue()">Tất cả</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                       class="lucide lucide-chevron-down h-4 w-4 opacity-50 transition-transform"
                       :class="showDeliveryTypeDropdown ? 'rotate-180' : ''">
-                      <path d="m6 9 6 6 6-6"></path>
-                    </svg>
-                  </button>
-                  
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+
                   <!-- Dropdown menu -->
-                  <div x-show="showDeliveryTypeDropdown" 
-                    x-transition:enter="transition ease-out duration-200"
-                    x-transition:enter-start="opacity-0 scale-95"
-                    x-transition:enter-end="opacity-100 scale-100"
+                  <div x-show="showDeliveryTypeDropdown" x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
                     x-transition:leave="transition ease-in duration-150"
-                    x-transition:leave-start="opacity-100 scale-100"
-                    x-transition:leave-end="opacity-0 scale-95"
+                    x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
                     class="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
                     <ul class="py-1">
                       <li>
-                        <button type="button" 
-                          @click="selectDeliveryType('Tất cả')"
+                        <button type="button" @click="selectDeliveryType('Tất cả')"
                           class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
                           :class="selectedDeliveryType === 'Tất cả' || selectedDeliveryType === '' ? 'bg-gray-100' : ''">
-                          <svg x-show="selectedDeliveryType === 'Tất cả' || selectedDeliveryType === ''" 
+                          <svg x-show="selectedDeliveryType === 'Tất cả' || selectedDeliveryType === ''"
                             class="w-4 h-4 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            <path fill-rule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clip-rule="evenodd"></path>
                           </svg>
-                          <svg x-show="selectedDeliveryType !== 'Tất cả' && selectedDeliveryType !== ''" 
+                          <svg x-show="selectedDeliveryType !== 'Tất cả' && selectedDeliveryType !== ''"
                             class="w-4 h-4 mr-2 invisible" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            <path fill-rule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clip-rule="evenodd"></path>
                           </svg>
                           Tất cả
                         </button>
                       </li>
                       <li>
-                        <button type="button" 
-                          @click="selectDeliveryType('Trực tuyến')"
+                        <button type="button" @click="selectDeliveryType('Trực tuyến')"
                           class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
                           :class="selectedDeliveryType === 'Trực tuyến' ? 'bg-gray-100' : ''">
-                          <svg x-show="selectedDeliveryType === 'Trực tuyến'" 
-                            class="w-4 h-4 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          <svg x-show="selectedDeliveryType === 'Trực tuyến'" class="w-4 h-4 mr-2 text-blue-600"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clip-rule="evenodd"></path>
                           </svg>
-                          <svg x-show="selectedDeliveryType !== 'Trực tuyến'" 
-                            class="w-4 h-4 mr-2 invisible" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          <svg x-show="selectedDeliveryType !== 'Trực tuyến'" class="w-4 h-4 mr-2 invisible"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clip-rule="evenodd"></path>
                           </svg>
                           Trực tuyến
                         </button>
                       </li>
                       <li>
-                        <button type="button" 
-                          @click="selectDeliveryType('Tại chỗ')"
+                        <button type="button" @click="selectDeliveryType('Tại chỗ')"
                           class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
                           :class="selectedDeliveryType === 'Tại chỗ' ? 'bg-gray-100' : ''">
-                          <svg x-show="selectedDeliveryType === 'Tại chỗ'" 
-                            class="w-4 h-4 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          <svg x-show="selectedDeliveryType === 'Tại chỗ'" class="w-4 h-4 mr-2 text-blue-600"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clip-rule="evenodd"></path>
                           </svg>
-                          <svg x-show="selectedDeliveryType !== 'Tại chỗ'" 
-                            class="w-4 h-4 mr-2 invisible" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          <svg x-show="selectedDeliveryType !== 'Tại chỗ'" class="w-4 h-4 mr-2 invisible"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clip-rule="evenodd"></path>
                           </svg>
                           Tại chỗ
                         </button>
                       </li>
                       <li>
-                        <button type="button" 
-                          @click="selectDeliveryType('Kết hợp')"
+                        <button type="button" @click="selectDeliveryType('Kết hợp')"
                           class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
                           :class="selectedDeliveryType === 'Kết hợp' ? 'bg-gray-100' : ''">
-                          <svg x-show="selectedDeliveryType === 'Kết hợp'" 
-                            class="w-4 h-4 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          <svg x-show="selectedDeliveryType === 'Kết hợp'" class="w-4 h-4 mr-2 text-blue-600"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clip-rule="evenodd"></path>
                           </svg>
-                          <svg x-show="selectedDeliveryType !== 'Kết hợp'" 
-                            class="w-4 h-4 mr-2 invisible" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          <svg x-show="selectedDeliveryType !== 'Kết hợp'" class="w-4 h-4 mr-2 invisible"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clip-rule="evenodd"></path>
                           </svg>
                           Kết hợp
                         </button>
                       </li>
                     </ul>
-                  </div>
+              </div>
                 </div>
               </div>
               <div>
-                <label
-                  class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-3 block">
+                <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-3 block">
                   Thời hạn hợp đồng (tháng)
                 </label>
-                <input type="number"
-                  x-model="contractTerm"
-                  @blur="updateContractTermInURL()"
+                <input type="number" x-model="contractTerm" @blur="updateContractTermInURL()"
                   @keyup.enter="updateContractTermInURL()"
                   class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
                   min="0" placeholder="Tối đa (tháng)" value="">
-                </div>
+              </div>
               <div>
-                <label
-                  class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-3 block">
+                <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-3 block">
                   Cam kết dịch vụ (SLA)</label>
                 <div class="relative">
-                  <button type="button" role="combobox" 
-                    :aria-expanded="showSLADropdown"
-                    @click="toggleSLADropdown()"
+                  <button type="button" role="combobox" :aria-expanded="showSLADropdown" @click="toggleSLADropdown()"
                     class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
                     <span x-text="getSLADisplayValue()">Tất cả</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                       class="lucide lucide-chevron-down h-4 w-4 opacity-50 transition-transform"
                       :class="showSLADropdown ? 'rotate-180' : ''">
-                      <path d="m6 9 6 6 6-6"></path>
-                    </svg>
-                  </button>
-                  
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+
                   <!-- Dropdown menu -->
-                  <div x-show="showSLADropdown" 
-                    x-transition:enter="transition ease-out duration-200"
-                    x-transition:enter-start="opacity-0 scale-95"
-                    x-transition:enter-end="opacity-100 scale-100"
+                  <div x-show="showSLADropdown" x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
                     x-transition:leave="transition ease-in duration-150"
-                    x-transition:leave-start="opacity-100 scale-100"
-                    x-transition:leave-end="opacity-0 scale-95"
+                    x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
                     class="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
                     <ul class="py-1">
                       <li>
-                        <button type="button" 
-                          @click="selectSLA('Tất cả')"
+                        <button type="button" @click="selectSLA('Tất cả')"
                           class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
                           :class="selectedSLA === 'Tất cả' || selectedSLA === '' ? 'bg-gray-100' : ''">
-                          <svg x-show="selectedSLA === 'Tất cả' || selectedSLA === ''" 
+                          <svg x-show="selectedSLA === 'Tất cả' || selectedSLA === ''"
                             class="w-4 h-4 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            <path fill-rule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clip-rule="evenodd"></path>
                           </svg>
-                          <svg x-show="selectedSLA !== 'Tất cả' && selectedSLA !== ''" 
-                            class="w-4 h-4 mr-2 invisible" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          <svg x-show="selectedSLA !== 'Tất cả' && selectedSLA !== ''" class="w-4 h-4 mr-2 invisible"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clip-rule="evenodd"></path>
                           </svg>
                           Tất cả
                         </button>
                       </li>
                       <li>
-                        <button type="button" 
-                          @click="selectSLA('24/7')"
+                        <button type="button" @click="selectSLA('24/7')"
                           class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
                           :class="selectedSLA === '24/7' ? 'bg-gray-100' : ''">
-                          <svg x-show="selectedSLA === '24/7'" 
-                            class="w-4 h-4 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          <svg x-show="selectedSLA === '24/7'" class="w-4 h-4 mr-2 text-blue-600" fill="currentColor"
+                            viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clip-rule="evenodd"></path>
                           </svg>
-                          <svg x-show="selectedSLA !== '24/7'" 
-                            class="w-4 h-4 mr-2 invisible" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          <svg x-show="selectedSLA !== '24/7'" class="w-4 h-4 mr-2 invisible" fill="currentColor"
+                            viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clip-rule="evenodd"></path>
                           </svg>
                           24/7
                         </button>
                       </li>
                       <li>
-                        <button type="button" 
-                          @click="selectSLA('Giờ hành chính')"
+                        <button type="button" @click="selectSLA('Giờ hành chính')"
                           class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
                           :class="selectedSLA === 'Giờ hành chính' ? 'bg-gray-100' : ''">
-                          <svg x-show="selectedSLA === 'Giờ hành chính'" 
-                            class="w-4 h-4 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          <svg x-show="selectedSLA === 'Giờ hành chính'" class="w-4 h-4 mr-2 text-blue-600"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clip-rule="evenodd"></path>
                           </svg>
-                          <svg x-show="selectedSLA !== 'Giờ hành chính'" 
-                            class="w-4 h-4 mr-2 invisible" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                          <svg x-show="selectedSLA !== 'Giờ hành chính'" class="w-4 h-4 mr-2 invisible"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clip-rule="evenodd"></path>
                           </svg>
                           Giờ hành chính
                         </button>
                       </li>
                     </ul>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </div>
+          </div>
+        </div>
+
+        <!-- Services Search Results -->
         <div class="lg:col-span-3 space-y-4 sm:space-y-6">
           <div class="space-y-2 sm:space-y-4">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4">
@@ -3307,74 +3300,79 @@
                     Bộ lọc
                   </button>
                   <div class="relative sm:hidden">
-                    <button type="button" role="combobox" 
-                      :aria-expanded="showPageSizeDropdown"
+                    <button type="button" role="combobox" :aria-expanded="showPageSizeDropdown"
                       @click="togglePageSizeDropdown()"
                       class="flex items-center justify-between rounded-md border border-input bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-20 h-8 text-sm">
                       <span x-text="getPageSizeDisplayValue()">12</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-chevron-down h-4 w-4 opacity-50 transition-transform flex-shrink-0"
                         :class="showPageSizeDropdown ? 'rotate-180' : ''">
-                        <path d="m6 9 6 6 6-6"></path>
-                      </svg>
-                    </button>
-                    
+                      <path d="m6 9 6 6 6-6"></path>
+                    </svg>
+                  </button>
+
                     <!-- Page Size Dropdown Menu (Mobile) -->
-                    <div x-show="showPageSizeDropdown" x-cloak
-                      @click.outside="showPageSizeDropdown = false"
+                    <div x-show="showPageSizeDropdown" x-cloak @click.outside="showPageSizeDropdown = false"
                       x-transition:enter="transition ease-out duration-200"
-                      x-transition:enter-start="opacity-0 scale-95"
-                      x-transition:enter-end="opacity-100 scale-100"
+                      x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
                       x-transition:leave="transition ease-in duration-150"
-                      x-transition:leave-start="opacity-100 scale-100"
-                      x-transition:leave-end="opacity-0 scale-95"
+                      x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
                       class="absolute z-50 w-20 mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
                       <ul class="py-1">
                         <li>
-                          <button type="button" 
-                            @click="selectPageSize(12)"
+                          <button type="button" @click="selectPageSize(12)"
                             class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
                             :class="selectedPageSize === 12 ? 'bg-gray-100' : ''">
-                            <svg x-show="selectedPageSize === 12" 
-                              class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            <svg x-show="selectedPageSize === 12" class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0"
+                              fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
-                            <svg x-show="selectedPageSize !== 12" 
-                              class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            <svg x-show="selectedPageSize !== 12" class="w-4 h-4 mr-2 invisible flex-shrink-0"
+                              fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
                             <span class="flex-1">12</span>
                           </button>
                         </li>
                         <li>
-                          <button type="button" 
-                            @click="selectPageSize(24)"
+                          <button type="button" @click="selectPageSize(24)"
                             class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
                             :class="selectedPageSize === 24 ? 'bg-gray-100' : ''">
-                            <svg x-show="selectedPageSize === 24" 
-                              class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            <svg x-show="selectedPageSize === 24" class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0"
+                              fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
-                            <svg x-show="selectedPageSize !== 24" 
-                              class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            <svg x-show="selectedPageSize !== 24" class="w-4 h-4 mr-2 invisible flex-shrink-0"
+                              fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
                             <span class="flex-1">24</span>
                           </button>
                         </li>
                         <li>
-                          <button type="button" 
-                            @click="selectPageSize(48)"
+                          <button type="button" @click="selectPageSize(48)"
                             class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
                             :class="selectedPageSize === 48 ? 'bg-gray-100' : ''">
-                            <svg x-show="selectedPageSize === 48" 
-                              class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            <svg x-show="selectedPageSize === 48" class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0"
+                              fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
-                            <svg x-show="selectedPageSize !== 48" 
-                              class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            <svg x-show="selectedPageSize !== 48" class="w-4 h-4 mr-2 invisible flex-shrink-0"
+                              fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
                             <span class="flex-1">48</span>
                           </button>
@@ -3385,138 +3383,155 @@
                 </div>
                 <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
                   <div class="relative">
-                    <button type="button" role="combobox" 
-                      :aria-expanded="showSortDropdown"
+                    <button type="button" role="combobox" :aria-expanded="showSortDropdown"
                       @click="toggleSortDropdown()"
                       class="flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full sm:w-40">
                       <span class="truncate" x-text="getSortDisplayValue()">Liên quan</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-chevron-down h-4 w-4 opacity-50 transition-transform flex-shrink-0"
                         :class="showSortDropdown ? 'rotate-180' : ''">
-                        <path d="m6 9 6 6 6-6"></path>
-                      </svg>
-                    </button>
-                    
+                      <path d="m6 9 6 6 6-6"></path>
+                    </svg>
+                  </button>
+
                     <!-- Dropdown menu -->
-                    <div x-show="showSortDropdown" x-cloak
-                      @click.outside="showSortDropdown = false"
+                    <div x-show="showSortDropdown" x-cloak @click.outside="showSortDropdown = false"
                       x-transition:enter="transition ease-out duration-200"
-                      x-transition:enter-start="opacity-0 scale-95"
-                      x-transition:enter-end="opacity-100 scale-100"
+                      x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
                       x-transition:leave="transition ease-in duration-150"
-                      x-transition:leave-start="opacity-100 scale-100"
-                      x-transition:leave-end="opacity-0 scale-95"
+                      x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
                       class="absolute z-50 w-64 mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
                       <ul class="py-1">
                         <li>
-                          <button type="button" 
-                            @click="selectSort('Liên quan')"
+                          <button type="button" @click="selectSort('Liên quan')"
                             class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
                             :class="selectedSort === 'Liên quan' ? 'bg-gray-100' : ''">
-                            <svg x-show="selectedSort === 'Liên quan'" 
-                              class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            <svg x-show="selectedSort === 'Liên quan'" class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0"
+                              fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
-                            <svg x-show="selectedSort !== 'Liên quan'" 
-                              class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            <svg x-show="selectedSort !== 'Liên quan'" class="w-4 h-4 mr-2 invisible flex-shrink-0"
+                              fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
                             <span class="flex-1">Liên quan</span>
                           </button>
                         </li>
                         <li>
-                          <button type="button" 
-                            @click="selectSort('Mới nhất')"
+                          <button type="button" @click="selectSort('Mới nhất')"
                             class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
                             :class="selectedSort === 'Mới nhất' ? 'bg-gray-100' : ''">
-                            <svg x-show="selectedSort === 'Mới nhất'" 
-                              class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            <svg x-show="selectedSort === 'Mới nhất'" class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0"
+                              fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
-                            <svg x-show="selectedSort !== 'Mới nhất'" 
-                              class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            <svg x-show="selectedSort !== 'Mới nhất'" class="w-4 h-4 mr-2 invisible flex-shrink-0"
+                              fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
                             <span class="flex-1">Mới nhất</span>
                           </button>
                         </li>
                         <li>
-                          <button type="button" 
-                            @click="selectSort('Giá cao → thấp')"
+                          <button type="button" @click="selectSort('Giá cao → thấp')"
                             class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
                             :class="selectedSort === 'Giá cao → thấp' ? 'bg-gray-100' : ''">
-                            <svg x-show="selectedSort === 'Giá cao → thấp'" 
+                            <svg x-show="selectedSort === 'Giá cao → thấp'"
                               class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
-                            <svg x-show="selectedSort !== 'Giá cao → thấp'" 
-                              class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            <svg x-show="selectedSort !== 'Giá cao → thấp'" class="w-4 h-4 mr-2 invisible flex-shrink-0"
+                              fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
                             <span class="flex-1">Giá cao → thấp</span>
                           </button>
                         </li>
                         <li>
-                          <button type="button" 
-                            @click="selectSort('Giá thấp → cao')"
+                          <button type="button" @click="selectSort('Giá thấp → cao')"
                             class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
                             :class="selectedSort === 'Giá thấp → cao' ? 'bg-gray-100' : ''">
-                            <svg x-show="selectedSort === 'Giá thấp → cao'" 
+                            <svg x-show="selectedSort === 'Giá thấp → cao'"
                               class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
-                            <svg x-show="selectedSort !== 'Giá thấp → cao'" 
-                              class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            <svg x-show="selectedSort !== 'Giá thấp → cao'" class="w-4 h-4 mr-2 invisible flex-shrink-0"
+                              fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
                             <span class="flex-1">Giá thấp → cao</span>
                           </button>
                         </li>
                         <li>
-                          <button type="button" 
-                            @click="selectSort('Đánh giá cao → thấp')"
+                          <button type="button" @click="selectSort('Đánh giá cao → thấp')"
                             class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
                             :class="selectedSort === 'Đánh giá cao → thấp' ? 'bg-gray-100' : ''">
-                            <svg x-show="selectedSort === 'Đánh giá cao → thấp'" 
+                            <svg x-show="selectedSort === 'Đánh giá cao → thấp'"
                               class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
-                            <svg x-show="selectedSort !== 'Đánh giá cao → thấp'" 
+                            <svg x-show="selectedSort !== 'Đánh giá cao → thấp'"
                               class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
                             <span class="flex-1">Đánh giá cao → thấp</span>
                           </button>
                         </li>
                         <li>
-                          <button type="button" 
-                            @click="selectSort('Đánh giá thấp → cao')"
+                          <button type="button" @click="selectSort('Đánh giá thấp → cao')"
                             class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
                             :class="selectedSort === 'Đánh giá thấp → cao' ? 'bg-gray-100' : ''">
-                            <svg x-show="selectedSort === 'Đánh giá thấp → cao'" 
+                            <svg x-show="selectedSort === 'Đánh giá thấp → cao'"
                               class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
-                            <svg x-show="selectedSort !== 'Đánh giá thấp → cao'" 
+                            <svg x-show="selectedSort !== 'Đánh giá thấp → cao'"
                               class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
                             <span class="flex-1">Đánh giá thấp → cao</span>
                           </button>
                         </li>
                         <li>
-                          <button type="button" 
-                            @click="selectSort('Phổ biến')"
+                          <button type="button" @click="selectSort('Phổ biến')"
                             class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
                             :class="selectedSort === 'Phổ biến' ? 'bg-gray-100' : ''">
-                            <svg x-show="selectedSort === 'Phổ biến'" 
-                              class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            <svg x-show="selectedSort === 'Phổ biến'" class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0"
+                              fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
-                            <svg x-show="selectedSort !== 'Phổ biến'" 
-                              class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            <svg x-show="selectedSort !== 'Phổ biến'" class="w-4 h-4 mr-2 invisible flex-shrink-0"
+                              fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
                             <span class="flex-1">Phổ biến</span>
                           </button>
@@ -3525,85 +3540,93 @@
                     </div>
                   </div>
                   <div class="relative hidden sm:block">
-                    <button type="button" role="combobox" 
-                      :aria-expanded="showPageSizeDropdown"
+                    <button type="button" role="combobox" :aria-expanded="showPageSizeDropdown"
                       @click="togglePageSizeDropdown()"
                       class="flex items-center justify-between rounded-md border border-input bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-20 h-10 text-sm">
                       <span x-text="getPageSizeDisplayValue()">12</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-chevron-down h-4 w-4 opacity-50 transition-transform flex-shrink-0"
                         :class="showPageSizeDropdown ? 'rotate-180' : ''">
-                        <path d="m6 9 6 6 6-6"></path>
-                      </svg>
-                    </button>
-                    
+                      <path d="m6 9 6 6 6-6"></path>
+                    </svg>
+                  </button>
+
                     <!-- Page Size Dropdown Menu -->
-                    <div x-show="showPageSizeDropdown" x-cloak
-                      @click.outside="showPageSizeDropdown = false"
+                    <div x-show="showPageSizeDropdown" x-cloak @click.outside="showPageSizeDropdown = false"
                       x-transition:enter="transition ease-out duration-200"
-                      x-transition:enter-start="opacity-0 scale-95"
-                      x-transition:enter-end="opacity-100 scale-100"
+                      x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
                       x-transition:leave="transition ease-in duration-150"
-                      x-transition:leave-start="opacity-100 scale-100"
-                      x-transition:leave-end="opacity-0 scale-95"
+                      x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
                       class="absolute z-50 w-20 mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
                       <ul class="py-1">
                         <li>
-                          <button type="button" 
-                            @click="selectPageSize(12)"
+                          <button type="button" @click="selectPageSize(12)"
                             class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
                             :class="selectedPageSize === 12 ? 'bg-gray-100' : ''">
-                            <svg x-show="selectedPageSize === 12" 
-                              class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            <svg x-show="selectedPageSize === 12" class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0"
+                              fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
-                            <svg x-show="selectedPageSize !== 12" 
-                              class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            <svg x-show="selectedPageSize !== 12" class="w-4 h-4 mr-2 invisible flex-shrink-0"
+                              fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
                             <span class="flex-1">12</span>
                           </button>
                         </li>
                         <li>
-                          <button type="button" 
-                            @click="selectPageSize(24)"
+                          <button type="button" @click="selectPageSize(24)"
                             class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
                             :class="selectedPageSize === 24 ? 'bg-gray-100' : ''">
-                            <svg x-show="selectedPageSize === 24" 
-                              class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            <svg x-show="selectedPageSize === 24" class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0"
+                              fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
-                            <svg x-show="selectedPageSize !== 24" 
-                              class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            <svg x-show="selectedPageSize !== 24" class="w-4 h-4 mr-2 invisible flex-shrink-0"
+                              fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
                             <span class="flex-1">24</span>
                           </button>
                         </li>
                         <li>
-                          <button type="button" 
-                            @click="selectPageSize(48)"
+                          <button type="button" @click="selectPageSize(48)"
                             class="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 flex items-center"
                             :class="selectedPageSize === 48 ? 'bg-gray-100' : ''">
-                            <svg x-show="selectedPageSize === 48" 
-                              class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            <svg x-show="selectedPageSize === 48" class="w-4 h-4 mr-2 text-blue-600 flex-shrink-0"
+                              fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
-                            <svg x-show="selectedPageSize !== 48" 
-                              class="w-4 h-4 mr-2 invisible flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            <svg x-show="selectedPageSize !== 48" class="w-4 h-4 mr-2 invisible flex-shrink-0"
+                              fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"></path>
                             </svg>
                             <span class="flex-1">48</span>
                           </button>
                         </li>
                       </ul>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
+            </div>
+          </div>
+
+          <div>
+            <!-- Services List -->
           <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-6">
             <div
               class="rounded-lg border bg-card text-card-foreground shadow-sm group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full">
@@ -3611,7 +3634,7 @@
                 <div class="relative aspect-video overflow-hidden rounded-t-lg">
                   <img alt="Tổng đài 1022 Premium" loading="lazy" decoding="async" data-nimg="fill"
                     class="object-cover group-hover:scale-105 transition-transform duration-300"
-                    src="./public/images/placeholder.svg"
+                      src="./public/images/placeholder.svg"
                     style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
                   <div
                     class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary hover:bg-primary/80 absolute top-2 sm:top-3 left-2 sm:left-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs px-1 py-0">
@@ -3634,7 +3657,8 @@
                       class="font-semibold text-sm sm:text-lg text-gray-900 mb-1 line-clamp-2 group-hover:text-blue-600 transition-colors">
                       Tổng đài 1022 Premium</h3>
                     <p class="text-xs sm:text-sm text-gray-600 mb-1 sm:mb-2">Sở Thông tin và Truyền thông</p>
-                    <p class="text-xs sm:text-sm text-gray-700 line-clamp-2">Dịch vụ hỗ trợ 24/7 các vấn đề dân sinh với
+                      <p class="text-xs sm:text-sm text-gray-700 line-clamp-2">Dịch vụ hỗ trợ 24/7 các vấn đề dân sinh
+                        với
                       tính năng nâng cao</p>
                   </div>
                   <div class="flex items-center gap-1 sm:gap-2 mb-2 sm:mb-3">
@@ -3723,7 +3747,7 @@
                 <div class="relative aspect-video overflow-hidden rounded-t-lg">
                   <img alt="Cổng DVC Enterprise" loading="lazy" decoding="async" data-nimg="fill"
                     class="object-cover group-hover:scale-105 transition-transform duration-300"
-                    src="./public/images/placeholder.svg"
+                      src="./public/images/placeholder.svg"
                     style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
                   <div
                     class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 absolute top-2 sm:top-3 right-2 sm:right-3 bg-green-500 text-white text-xs px-1 py-0">
@@ -3735,7 +3759,8 @@
                       class="font-semibold text-sm sm:text-lg text-gray-900 mb-1 line-clamp-2 group-hover:text-blue-600 transition-colors">
                       Cổng DVC Enterprise</h3>
                     <p class="text-xs sm:text-sm text-gray-600 mb-1 sm:mb-2">Bộ Nội vụ</p>
-                    <p class="text-xs sm:text-sm text-gray-700 line-clamp-2">Giải pháp dịch vụ công toàn diện cho doanh
+                      <p class="text-xs sm:text-sm text-gray-700 line-clamp-2">Giải pháp dịch vụ công toàn diện cho
+                        doanh
                       nghiệp</p>
                   </div>
                   <div class="flex items-center gap-1 sm:gap-2 mb-2 sm:mb-3">
@@ -3818,7 +3843,7 @@
                 <div class="relative aspect-video overflow-hidden rounded-t-lg">
                   <img alt="An ninh trật tự Plus" loading="lazy" decoding="async" data-nimg="fill"
                     class="object-cover group-hover:scale-105 transition-transform duration-300"
-                    src="./public/images/placeholder.svg"
+                      src="./public/images/placeholder.svg"
                     style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
                   <div
                     class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary hover:bg-primary/80 absolute top-2 sm:top-3 left-2 sm:left-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs px-1 py-0">
@@ -3921,7 +3946,7 @@
                 <div class="relative aspect-video overflow-hidden rounded-t-lg">
                   <img alt="Quy hoạch Pro" loading="lazy" decoding="async" data-nimg="fill"
                     class="object-cover group-hover:scale-105 transition-transform duration-300"
-                    src="./public/images/placeholder.svg"
+                      src="./public/images/placeholder.svg"
                     style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
                   <div
                     class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 absolute top-2 sm:top-3 right-2 sm:right-3 bg-green-500 text-white text-xs px-1 py-0">
@@ -4022,7 +4047,7 @@
                 <div class="relative aspect-video overflow-hidden rounded-t-lg">
                   <img alt="Dân số Digital" loading="lazy" decoding="async" data-nimg="fill"
                     class="object-cover group-hover:scale-105 transition-transform duration-300"
-                    src="./public/images/placeholder.svg"
+                      src="./public/images/placeholder.svg"
                     style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
                   <div
                     class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary hover:bg-primary/80 absolute top-2 sm:top-3 left-2 sm:left-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs px-1 py-0">
@@ -4128,7 +4153,7 @@
                 <div class="relative aspect-video overflow-hidden rounded-t-lg">
                   <img alt="Doanh nghiệp Smart" loading="lazy" decoding="async" data-nimg="fill"
                     class="object-cover group-hover:scale-105 transition-transform duration-300"
-                    src="./public/images/placeholder.svg"
+                      src="./public/images/placeholder.svg"
                     style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
                   <div
                     class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary hover:bg-primary/80 absolute top-2 sm:top-3 left-2 sm:left-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs px-1 py-0">
@@ -4234,7 +4259,7 @@
                 <div class="relative aspect-video overflow-hidden rounded-t-lg">
                   <img alt="Thuế Express" loading="lazy" decoding="async" data-nimg="fill"
                     class="object-cover group-hover:scale-105 transition-transform duration-300"
-                    src="./public/images/placeholder.svg"
+                      src="./public/images/placeholder.svg"
                     style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
                   <div
                     class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 absolute top-2 sm:top-3 right-2 sm:right-3 bg-green-500 text-white text-xs px-1 py-0">
@@ -4246,7 +4271,8 @@
                       class="font-semibold text-sm sm:text-lg text-gray-900 mb-1 line-clamp-2 group-hover:text-blue-600 transition-colors">
                       Thuế Express</h3>
                     <p class="text-xs sm:text-sm text-gray-600 mb-1 sm:mb-2">Cục Thuế tỉnh</p>
-                    <p class="text-xs sm:text-sm text-gray-700 line-clamp-2">Khai báo và nộp thuế trực tuyến nhanh chóng
+                      <p class="text-xs sm:text-sm text-gray-700 line-clamp-2">Khai báo và nộp thuế trực tuyến nhanh
+                        chóng
                     </p>
                   </div>
                   <div class="flex items-center gap-1 sm:gap-2 mb-2 sm:mb-3">
@@ -4335,7 +4361,7 @@
                 <div class="relative aspect-video overflow-hidden rounded-t-lg">
                   <img alt="Bảo hiểm Connect" loading="lazy" decoding="async" data-nimg="fill"
                     class="object-cover group-hover:scale-105 transition-transform duration-300"
-                    src="./public/images/placeholder.svg"
+                      src="./public/images/placeholder.svg"
                     style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;">
                   <div
                     class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary hover:bg-primary/80 absolute top-2 sm:top-3 left-2 sm:left-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs px-1 py-0">
@@ -4358,7 +4384,8 @@
                       class="font-semibold text-sm sm:text-lg text-gray-900 mb-1 line-clamp-2 group-hover:text-blue-600 transition-colors">
                       Bảo hiểm Connect</h3>
                     <p class="text-xs sm:text-sm text-gray-600 mb-1 sm:mb-2">Bảo hiểm xã hội tỉnh</p>
-                    <p class="text-xs sm:text-sm text-gray-700 line-clamp-2">Quản lý thủ tục bảo hiểm xã hội trực tuyến
+                      <p class="text-xs sm:text-sm text-gray-700 line-clamp-2">Quản lý thủ tục bảo hiểm xã hội trực
+                        tuyến
                     </p>
                   </div>
                   <div class="flex items-center gap-1 sm:gap-2 mb-2 sm:mb-3">
@@ -4441,7 +4468,8 @@
                 <div class="relative aspect-video overflow-hidden rounded-t-lg">
                   <img alt="Dịch vụ Hành chính 9" loading="lazy" decoding="async" data-nimg="fill"
                     class="object-cover group-hover:scale-105 transition-transform duration-300"
-                    src="./public/images/placeholder.svg" style="position: absolute; height: 100%; width: 100%; inset: 0px;">
+                      src="./public/images/placeholder.svg"
+                      style="position: absolute; height: 100%; width: 100%; inset: 0px;">
                   <div
                     class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary hover:bg-primary/80 absolute top-2 sm:top-3 left-2 sm:left-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs px-1 py-0">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -4463,7 +4491,8 @@
                       class="font-semibold text-sm sm:text-lg text-gray-900 mb-1 line-clamp-2 group-hover:text-blue-600 transition-colors">
                       Dịch vụ Hành chính 9</h3>
                     <p class="text-xs sm:text-sm text-gray-600 mb-1 sm:mb-2">Nhà cung cấp 9</p>
-                    <p class="text-xs sm:text-sm text-gray-700 line-clamp-2">Mô tả chi tiết cho dịch vụ Hành chính 9 với
+                      <p class="text-xs sm:text-sm text-gray-700 line-clamp-2">Mô tả chi tiết cho dịch vụ Hành chính 9
+                        với
                       nhiều tính năng hiện đại.</p>
                   </div>
                   <div class="flex items-center gap-1 sm:gap-2 mb-2 sm:mb-3">
@@ -4537,7 +4566,8 @@
                 <div class="relative aspect-video overflow-hidden rounded-t-lg"><img alt="Dịch vụ Hành chính 10"
                     loading="lazy" decoding="async" data-nimg="fill"
                     class="object-cover group-hover:scale-105 transition-transform duration-300"
-                    src="./public/images/placeholder.svg" style="position: absolute; height: 100%; width: 100%; inset: 0px;">
+                      src="./public/images/placeholder.svg"
+                      style="position: absolute; height: 100%; width: 100%; inset: 0px;">
                 </div>
                 <div class="p-2 sm:p-4 flex-1 flex flex-col">
                   <div class="mb-2 sm:mb-3">
@@ -4628,7 +4658,8 @@
                 <div class="relative aspect-video overflow-hidden rounded-t-lg">
                   <img alt="Dịch vụ Tài chính 11" loading="lazy" decoding="async" data-nimg="fill"
                     class="object-cover group-hover:scale-105 transition-transform duration-300"
-                    src="./public/images/placeholder.svg" style="position: absolute; height: 100%; width: 100%; inset: 0px;">
+                      src="./public/images/placeholder.svg"
+                      style="position: absolute; height: 100%; width: 100%; inset: 0px;">
                   <div
                     class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 absolute top-2 sm:top-3 right-2 sm:right-3 bg-green-500 text-white text-xs px-1 py-0">
                     Dùng thử miễn phí</div>
@@ -4639,7 +4670,8 @@
                       class="font-semibold text-sm sm:text-lg text-gray-900 mb-1 line-clamp-2 group-hover:text-blue-600 transition-colors">
                       Dịch vụ Tài chính 11</h3>
                     <p class="text-xs sm:text-sm text-gray-600 mb-1 sm:mb-2">Nhà cung cấp 11</p>
-                    <p class="text-xs sm:text-sm text-gray-700 line-clamp-2">Mô tả chi tiết cho dịch vụ Tài chính 11 với
+                      <p class="text-xs sm:text-sm text-gray-700 line-clamp-2">Mô tả chi tiết cho dịch vụ Tài chính 11
+                        với
                       nhiều tính năng hiện đại.</p>
                   </div>
                   <div class="flex items-center gap-1 sm:gap-2 mb-2 sm:mb-3">
@@ -4722,7 +4754,8 @@
                 <div class="relative aspect-video overflow-hidden rounded-t-lg"><img alt="Dịch vụ Tài chính 12"
                     loading="lazy" decoding="async" data-nimg="fill"
                     class="object-cover group-hover:scale-105 transition-transform duration-300"
-                    src="./public/images/placeholder.svg" style="position: absolute; height: 100%; width: 100%; inset: 0px;">
+                      src="./public/images/placeholder.svg"
+                      style="position: absolute; height: 100%; width: 100%; inset: 0px;">
                 </div>
                 <div class="p-2 sm:p-4 flex-1 flex flex-col">
                   <div class="mb-2 sm:mb-3">
@@ -4730,7 +4763,8 @@
                       class="font-semibold text-sm sm:text-lg text-gray-900 mb-1 line-clamp-2 group-hover:text-blue-600 transition-colors">
                       Dịch vụ Tài chính 12</h3>
                     <p class="text-xs sm:text-sm text-gray-600 mb-1 sm:mb-2">Nhà cung cấp 12</p>
-                    <p class="text-xs sm:text-sm text-gray-700 line-clamp-2">Mô tả chi tiết cho dịch vụ Tài chính 12 với
+                      <p class="text-xs sm:text-sm text-gray-700 line-clamp-2">Mô tả chi tiết cho dịch vụ Tài chính 12
+                        với
                       nhiều tính năng hiện đại.</p>
                   </div>
                   <div class="flex items-center gap-1 sm:gap-2 mb-2 sm:mb-3">
@@ -4805,43 +4839,115 @@
               </div>
             </div>
           </div>
+
+            <!-- Pagination -->
           <div class="flex justify-center mt-6 sm:mt-8 mb-6 sm:mb-12">
-            <div class="flex items-center gap-1 sm:gap-2">
-              <button @click="prevPage()" :disabled="isPrevDisabled()"
-                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">
-                Trước
-              </button>
-              <button @click="goToPage(1)"
-                :class="isPageActive(1) ? 'bg-primary text-primary-foreground hover:bg-primary/90 btn-primary' : 'border border-input bg-background hover:bg-accent hover:text-accent-foreground'"
-                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">
-                1
-              </button>
-              <button @click="goToPage(2)"
-                :class="isPageActive(2) ? 'bg-primary text-primary-foreground hover:bg-primary/90 btn-primary' : 'border border-input bg-background hover:bg-accent hover:text-accent-foreground'"
-                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">
-                2
-              </button>
-              <button @click="goToPage(3)"
-                :class="isPageActive(3) ? 'bg-primary text-primary-foreground hover:bg-primary/90 btn-primary' : 'border border-input bg-background hover:bg-accent hover:text-accent-foreground'"
-                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">
-                3
-              </button>
-              <button @click="goToPage(4)"
-                :class="isPageActive(4) ? 'bg-primary text-primary-foreground hover:bg-primary/90 btn-primary' : 'border border-input bg-background hover:bg-accent hover:text-accent-foreground'"
-                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">
-                4
-              </button>
-              <button @click="goToPage(5)"
-                :class="isPageActive(5) ? 'bg-primary text-primary-foreground hover:bg-primary/90 btn-primary' : 'border border-input bg-background hover:bg-accent hover:text-accent-foreground'"
-                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">
-                5
-              </button>
-              <button @click="nextPage()" :disabled="isNextDisabled()"
-                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">
-                Sau
-              </button>
+              <div class="flex items-center gap-1 sm:gap-2">
+                <button @click="prevPage()" :disabled="isPrevDisabled()"
+                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">
+                  Trước
+                </button>
+                <button @click="goToPage(1)"
+                  :class="isPageActive(1) ? 'bg-primary text-primary-foreground hover:bg-primary/90 btn-primary' : 'border border-input bg-background hover:bg-accent hover:text-accent-foreground'"
+                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">
+                  1
+                </button>
+                <button @click="goToPage(2)"
+                  :class="isPageActive(2) ? 'bg-primary text-primary-foreground hover:bg-primary/90 btn-primary' : 'border border-input bg-background hover:bg-accent hover:text-accent-foreground'"
+                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">
+                  2
+                </button>
+                <button @click="goToPage(3)"
+                  :class="isPageActive(3) ? 'bg-primary text-primary-foreground hover:bg-primary/90 btn-primary' : 'border border-input bg-background hover:bg-accent hover:text-accent-foreground'"
+                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">
+                  3
+                </button>
+                <button @click="goToPage(4)"
+                  :class="isPageActive(4) ? 'bg-primary text-primary-foreground hover:bg-primary/90 btn-primary' : 'border border-input bg-background hover:bg-accent hover:text-accent-foreground'"
+                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">
+                  4
+                </button>
+                <button @click="goToPage(5)"
+                  :class="isPageActive(5) ? 'bg-primary text-primary-foreground hover:bg-primary/90 btn-primary' : 'border border-input bg-background hover:bg-accent hover:text-accent-foreground'"
+                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">
+                  5
+                </button>
+                <button @click="nextPage()" :disabled="isNextDisabled()"
+                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 sm:h-auto text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">
+                  Sau
+                </button>
             </div>
           </div>
+        </div>
+
+          <!-- Services Not Found
+          <div class="rounded-lg bg-card text-card-foreground shadow-sm border-dashed border-2 border-gray-200">
+            <div class="p-4 sm:p-8 text-center">
+              <div class="flex flex-col items-center space-y-3 sm:space-y-4">
+                <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gray-100 rounded-full flex items-center justify-center"><svg
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-search w-6 h-6 sm:w-8 sm:h-8 text-gray-400">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                  </svg></div>
+                <div class="space-y-1 sm:space-y-2">
+                  <h3 class="text-base sm:text-lg font-medium text-gray-900">Không tìm thấy dịch vụ phù hợp</h3>
+                  <p class="text-sm sm:text-base text-gray-600 max-w-md">Hãy thử điều chỉnh từ khóa tìm kiếm hoặc bộ lọc
+                    để tìm được dịch vụ bạn cần</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                  <button @click="clearAllFilters()"
+                    class="justify-center whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input hover:bg-accent hover:text-accent-foreground px-4 py-2 flex items-center gap-2 bg-transparent h-8 sm:h-auto text-xs sm:text-sm"><svg
+                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="lucide lucide-refresh-cw w-3 h-3 sm:w-4 sm:h-4">
+                      <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+                      <path d="M21 3v5h-5"></path>
+                      <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+                      <path d="M8 16H3v5"></path>
+                    </svg>Xóa bộ lọc</button></div>
+                <div class="space-y-2 sm:space-y-3 w-full max-w-md">
+                  <div class="flex items-center gap-2 text-xs sm:text-sm text-gray-600"><svg
+                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="lucide lucide-lightbulb w-3 h-3 sm:w-4 sm:h-4">
+                      <path
+                        d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5">
+                      </path>
+                      <path d="M9 18h6"></path>
+                      <path d="M10 22h4"></path>
+                    </svg><span>Gợi ý tìm kiếm:</span></div>
+                  <div class="flex flex-wrap gap-1 sm:gap-2 justify-center">
+                    <div
+                      class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 cursor-pointer hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:text-white transition-all text-xs px-1 py-0">
+                      Tổng đài</div>
+                    <div
+                      class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 cursor-pointer hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:text-white transition-all text-xs px-1 py-0">
+                      Dịch vụ công</div>
+                    <div
+                      class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 cursor-pointer hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:text-white transition-all text-xs px-1 py-0">
+                      Bảo hiểm</div>
+                    <div
+                      class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 cursor-pointer hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:text-white transition-all text-xs px-1 py-0">
+                      Thuế</div>
+                    <div
+                      class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 cursor-pointer hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:text-white transition-all text-xs px-1 py-0">
+                      Doanh nghiệp</div>
+                    <div
+                      class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 cursor-pointer hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:text-white transition-all text-xs px-1 py-0">
+                      Quy hoạch</div>
+                    <div
+                      class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 cursor-pointer hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:text-white transition-all text-xs px-1 py-0">
+                      An ninh</div>
+                    <div
+                      class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 cursor-pointer hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:text-white transition-all text-xs px-1 py-0">
+                      Dân số</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>-->
         </div>
       </div>
     </div>
