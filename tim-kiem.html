@@ -2513,7 +2513,7 @@
   </header>
 
   <!-- Main Content Area -->
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-gray-50" x-data="searchApp">
     <div class="sticky top-0 z-40 bg-white border-b shadow-sm">
       <div class="container mx-auto px-4 py-4">
         <div class="flex flex-col sm:flex-row sm:items-center gap-4">
@@ -2535,61 +2535,82 @@
           <div dir="ltr" data-orientation="horizontal">
             <div role="tablist" aria-orientation="horizontal"
               class="inline-flex items-center justify-center rounded-md bg-muted p-1 text-muted-foreground w-max min-w-full lg:w-auto lg:grid-cols-none lg:flex h-auto"
-              tabindex="0" data-orientation="horizontal" style="outline:none"><button type="button" role="tab"
-                aria-selected="true" aria-controls="radix-:R4qfnkq:-content-all" data-state="active"
-                id="radix-:R4qfnkq:-trigger-all"
+              tabindex="0" data-orientation="horizontal" style="outline:none">
+              <button type="button" role="tab" aria-selected="true"
+                aria-controls="radix-:R4qfnkq:-content-all" data-state="active" id="radix-:R4qfnkq:-trigger-all"
                 class="justify-center rounded-sm px-3 font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm flex items-center gap-1 sm:gap-2 whitespace-nowrap text-xs sm:text-sm py-2 min-w-fit"
-                tabindex="0" data-orientation="horizontal" data-radix-collection-item=""><span>Tất cả</span>
+                tabindex="0" data-orientation="horizontal" data-radix-collection-item=""
+                @click="switchTab('all')"
+                :class="{ 'bg-background text-foreground shadow-sm !rounded-md': activeTab === 'all' }"><span>Tất cả</span>
                 <div
                   class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 text-xs flex-shrink-0">
                   226</div>
-              </button><button type="button" role="tab" aria-selected="false"
+              </button>
+              <button type="button" role="tab" aria-selected="false"
                 aria-controls="radix-:R4qfnkq:-content-jobs" data-state="inactive" id="radix-:R4qfnkq:-trigger-jobs"
                 class="justify-center rounded-sm px-3 font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm flex items-center gap-1 sm:gap-2 whitespace-nowrap text-xs sm:text-sm py-2 min-w-fit"
-                tabindex="-1" data-orientation="horizontal" data-radix-collection-item=""><span>Việc làm</span>
+                tabindex="-1" data-orientation="horizontal" data-radix-collection-item=""
+                @click="switchTab('jobs')"
+                :class="{ 'bg-background text-foreground shadow-sm !rounded-md': activeTab === 'jobs' }"><span>Việc làm</span>
                 <div
                   class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 text-xs flex-shrink-0">
                   60</div>
-              </button><button type="button" role="tab" aria-selected="false"
+              </button>
+              <button type="button" role="tab" aria-selected="false"
                 aria-controls="radix-:R4qfnkq:-content-estates" data-state="inactive"
                 id="radix-:R4qfnkq:-trigger-estates"
                 class="justify-center rounded-sm px-3 font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm flex items-center gap-1 sm:gap-2 whitespace-nowrap text-xs sm:text-sm py-2 min-w-fit"
-                tabindex="-1" data-orientation="horizontal" data-radix-collection-item=""><span>Bất động sản</span>
+                tabindex="-1" data-orientation="horizontal" data-radix-collection-item=""
+                @click="switchTab('estates')"
+                :class="{ 'bg-background text-foreground shadow-sm !rounded-md': activeTab === 'estates' }"><span>Bất động sản</span>
                 <div
                   class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 text-xs flex-shrink-0">
                   50</div>
-              </button><button type="button" role="tab" aria-selected="false"
+              </button>
+              <button type="button" role="tab" aria-selected="false"
                 aria-controls="radix-:R4qfnkq:-content-services" data-state="inactive"
                 id="radix-:R4qfnkq:-trigger-services"
                 class="justify-center rounded-sm px-3 font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm flex items-center gap-1 sm:gap-2 whitespace-nowrap text-xs sm:text-sm py-2 min-w-fit"
-                tabindex="-1" data-orientation="horizontal" data-radix-collection-item=""><span>Dịch vụ</span>
+                tabindex="-1" data-orientation="horizontal" data-radix-collection-item=""
+                @click="switchTab('services')"
+                :class="{ 'bg-background text-foreground shadow-sm !rounded-md': activeTab === 'services' }"><span>Dịch vụ</span>
                 <div
                   class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 text-xs flex-shrink-0">
                   7</div>
-              </button><button type="button" role="tab" aria-selected="false"
+              </button>
+              <button type="button" role="tab" aria-selected="false"
                 aria-controls="radix-:R4qfnkq:-content-companies" data-state="inactive"
                 id="radix-:R4qfnkq:-trigger-companies"
                 class="justify-center rounded-sm px-3 font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm flex items-center gap-1 sm:gap-2 whitespace-nowrap text-xs sm:text-sm py-2 min-w-fit"
-                tabindex="-1" data-orientation="horizontal" data-radix-collection-item=""><span>Doanh nghiệp</span>
+                tabindex="-1" data-orientation="horizontal" data-radix-collection-item=""
+                @click="switchTab('companies')"
+                :class="{ 'bg-background text-foreground shadow-sm !rounded-md': activeTab === 'companies' }"><span>Doanh nghiệp</span>
                 <div
                   class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 text-xs flex-shrink-0">
                   4</div>
-              </button><button type="button" role="tab" aria-selected="false"
+              </button>
+              <button type="button" role="tab" aria-selected="false"
                 aria-controls="radix-:R4qfnkq:-content-news" data-state="inactive" id="radix-:R4qfnkq:-trigger-news"
                 class="justify-center rounded-sm px-3 font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm flex items-center gap-1 sm:gap-2 whitespace-nowrap text-xs sm:text-sm py-2 min-w-fit"
-                tabindex="-1" data-orientation="horizontal" data-radix-collection-item=""><span>Tin tức</span>
+                tabindex="-1" data-orientation="horizontal" data-radix-collection-item=""
+                @click="switchTab('news')"
+                :class="{ 'bg-background text-foreground shadow-sm !rounded-md': activeTab === 'news' }"><span>Tin tức</span>
                 <div
                   class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 text-xs flex-shrink-0">
                   55</div>
-              </button><button type="button" role="tab" aria-selected="false"
+              </button>
+              <button type="button" role="tab" aria-selected="false"
                 aria-controls="radix-:R4qfnkq:-content-locations" data-state="inactive"
                 id="radix-:R4qfnkq:-trigger-locations"
                 class="justify-center rounded-sm px-3 font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm flex items-center gap-1 sm:gap-2 whitespace-nowrap text-xs sm:text-sm py-2 min-w-fit"
-                tabindex="-1" data-orientation="horizontal" data-radix-collection-item=""><span>Địa điểm</span>
+                tabindex="-1" data-orientation="horizontal" data-radix-collection-item=""
+                @click="switchTab('locations')"
+                :class="{ 'bg-background text-foreground shadow-sm !rounded-md': activeTab === 'locations' }"><span>Địa điểm</span>
                 <div
                   class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 text-xs flex-shrink-0">
                   50</div>
-              </button></div>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -2600,23 +2621,28 @@
           <div class="sticky top-32">
             <div class="space-y-6">
               <div class="flex items-center justify-between">
-                <h3 class="text-lg font-semibold">Bộ lọc</h3><button
+                <h3 class="text-lg font-semibold">Bộ lọc</h3>                
+                <button
+                  @click="clearAllFilters()"
                   class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-9 rounded-md px-3 text-red-600 hover:text-red-700 hover:bg-red-50"><svg
                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="lucide lucide-x w-4 h-4 mr-1">
                     <path d="M18 6 6 18"></path>
                     <path d="m6 6 12 12"></path>
-                  </svg>Xóa bộ lọc</button>
+                  </svg>
+                  Xóa bộ lọc
+                </button>
               </div>
 
-              <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
+              <div id="common-filter" class="rounded-lg border bg-card text-card-foreground shadow-sm">
                 <div class="flex flex-col space-y-1.5 p-6 pb-3">
                   <div class="font-semibold tracking-tight text-base">Bộ lọc chung</div>
                 </div>
                 <div class="p-6 pt-0">
                   <div class="space-y-4">
-                    <div><label
+                    <div class="relative">
+                      <label
                         class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-2 block"
                         for="location"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                           viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -2625,10 +2651,146 @@
                             d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
                           </path>
                           <circle cx="12" cy="10" r="3"></circle>
-                        </svg>Địa điểm</label><input
+                        </svg>
+                        Địa điểm
+                      </label>
+                      <div class="relative">
+                      <input
                         class="flex h-10 rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm w-full"
-                        id="location" placeholder="Nhập địa điểm..." value=""></div>
-                    <div><label
+                          id="location" placeholder="Nhập địa điểm..." value="" 
+                          autocomplete="off"
+                          autocorrect="off"
+                          autocapitalize="off"
+                          spellcheck="false"
+                          x-model="locationSearch" 
+                          @focus="showLocationDropdown = true"
+                          @blur="setTimeout(() => { showLocationDropdown = false; handleLocationBlur(); }, 200)">
+                        
+                        <!-- Dropdown menu -->
+                        <div x-show="showLocationDropdown" 
+                             x-transition:enter="transition ease-out duration-200"
+                             x-transition:enter-start="opacity-0 scale-95"
+                             x-transition:enter-end="opacity-100 scale-100"
+                             x-transition:leave="transition ease-in duration-150"
+                             x-transition:leave-start="opacity-100 scale-100"
+                             x-transition:leave-end="opacity-0 scale-95"
+                             class="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-auto"
+                             style="display: none;">
+                          <ul class="py-1">
+                            <li x-show="shouldShowLocation('TP. Thủ Dầu Một')">
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                @click="selectLocation('TP. Thủ Dầu Một')">
+                                TP. Thủ Dầu Một
+                              </button>
+                            </li>
+                            <li x-show="shouldShowLocation('TP. Dĩ An')">
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                @click="selectLocation('TP. Dĩ An')">
+                                TP. Dĩ An
+                              </button>
+                            </li>
+                            <li x-show="shouldShowLocation('TP. Thuận An')">
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                @click="selectLocation('TP. Thuận An')">
+                                TP. Thuận An
+                              </button>
+                            </li>
+                            <li x-show="shouldShowLocation('TP. Tân Uyên')">
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                @click="selectLocation('TP. Tân Uyên')">
+                                TP. Tân Uyên
+                              </button>
+                            </li>
+                            <li x-show="shouldShowLocation('Thị xã Bến Cát')">
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                @click="selectLocation('Thị xã Bến Cát')">
+                                Thị xã Bến Cát
+                              </button>
+                            </li>
+                            <li x-show="shouldShowLocation('Huyện Bắc Tân Uyên')">
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                @click="selectLocation('Huyện Bắc Tân Uyên')">
+                                Huyện Bắc Tân Uyên
+                              </button>
+                            </li>
+                            <li x-show="shouldShowLocation('Huyện Dầu Tiếng')">
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                @click="selectLocation('Huyện Dầu Tiếng')">
+                                Huyện Dầu Tiếng
+                              </button>
+                            </li>
+                            <li x-show="shouldShowLocation('Huyện Phú Giáo')">
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                @click="selectLocation('Huyện Phú Giáo')">
+                                Huyện Phú Giáo
+                              </button>
+                            </li>
+                            <li x-show="shouldShowLocation('KCN Mỹ Phước')">
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                @click="selectLocation('KCN Mỹ Phước')">
+                                KCN Mỹ Phước
+                              </button>
+                            </li>
+                            <li x-show="shouldShowLocation('KCN Sóng Thần')">
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                @click="selectLocation('KCN Sóng Thần')">
+                                KCN Sóng Thần
+                              </button>
+                            </li>
+                            <li x-show="shouldShowLocation('KCN Bàu Bàng')">
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                @click="selectLocation('KCN Bàu Bàng')">
+                                KCN Bàu Bàng
+                              </button>
+                            </li>
+                            <li x-show="shouldShowLocation('KCN Việt Hương')">
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                @click="selectLocation('KCN Việt Hương')">
+                                KCN Việt Hương
+                              </button>
+                            </li>
+                            <li x-show="shouldShowLocation('KCN Đồng An')">
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                @click="selectLocation('KCN Đồng An')">
+                                KCN Đồng An
+                              </button>
+                            </li>
+                            <li x-show="shouldShowLocation('KCN Tân Đông Hiệp')">
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                @click="selectLocation('KCN Tân Đông Hiệp')">
+                                KCN Tân Đông Hiệp
+                              </button>
+                            </li>
+                            <li x-show="shouldShowLocation('KCN Bình Dương')">
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                @click="selectLocation('KCN Bình Dương')">
+                                KCN Bình Dương
+                              </button>
+                            </li>
+                            <li x-show="!hasMatchingLocations()" class="px-4 py-2 text-sm text-gray-500">
+                              Không tìm thấy địa điểm
+                            </li>
+                          </ul>
+                    </div>
+                      </div>
+                    </div>
+                    <div class="relative">
+                      <label
                         class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-2 block"><svg
                           xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -2637,16 +2799,98 @@
                           <path d="M16 2v4"></path>
                           <rect width="18" height="18" x="3" y="4" rx="2"></rect>
                           <path d="M3 10h18"></path>
-                        </svg>Thời gian</label><button type="button" role="combobox" aria-controls="radix-:R2kjafnkq:"
-                        aria-expanded="false" aria-autocomplete="none" dir="ltr" data-state="closed"
-                        class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1"
-                        data-placeholder=""><span style="pointer-events:none">Chọn thời gian</span><svg
-                          xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        </svg>Thời gian</label>
+                      
+                      <div class="relative">
+                        <button type="button" 
+                                class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                @click="showTimeDropdown = !showTimeDropdown"
+                                @blur="setTimeout(() => showTimeDropdown = false, 200)">
+                          <span x-text="selectedTime || 'Tất cả'">Tất cả</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                           class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
                           <path d="m6 9 6 6 6-6"></path>
-                        </svg></button></div>
-                    <div><label
+                          </svg>
+                        </button>
+                        
+                        <!-- Dropdown menu -->
+                        <div x-show="showTimeDropdown" 
+                             x-transition:enter="transition ease-out duration-200"
+                             x-transition:enter-start="opacity-0 scale-95"
+                             x-transition:enter-end="opacity-100 scale-100"
+                             x-transition:leave="transition ease-in duration-150"
+                             x-transition:leave-start="opacity-100 scale-100"
+                             x-transition:leave-end="opacity-0 scale-95"
+                             class="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg"
+                             style="display: none;">
+                          <ul class="py-1">
+                            <li>
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                                @click="selectTime('Tất cả')">
+                                <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                  <svg x-show="selectedTime === 'Tất cả'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                  </svg>
+                                </div>
+                                <span class="flex-1">Tất cả</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                                @click="selectTime('Hôm nay')">
+                                <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                  <svg x-show="selectedTime === 'Hôm nay'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                  </svg>
+                                </div>
+                                <span class="flex-1">Hôm nay</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                                @click="selectTime('Tuần này')">
+                                <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                  <svg x-show="selectedTime === 'Tuần này'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                  </svg>
+                                </div>
+                                <span class="flex-1">Tuần này</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                                @click="selectTime('Tháng này')">
+                                <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                  <svg x-show="selectedTime === 'Tháng này'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                  </svg>
+                                </div>
+                                <span class="flex-1">Tháng này</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                                @click="selectTime('3 tháng qua')">
+                                <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                  <svg x-show="selectedTime === '3 tháng qua'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                  </svg>
+                                </div>
+                                <span class="flex-1">3 tháng qua</span>
+                              </button>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="relative">
+                      <label
                         class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-2 block"><svg
                           xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -2654,48 +2898,1780 @@
                           <path
                             d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z">
                           </path>
-                        </svg>Đánh giá tối thiểu</label><button type="button" role="combobox"
-                        aria-controls="radix-:R2sjafnkq:" aria-expanded="false" aria-autocomplete="none" dir="ltr"
-                        data-state="closed"
-                        class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1"><span
-                          style="pointer-events:none">Tất cả</span><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                          height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                          stroke-linecap="round" stroke-linejoin="round"
+                        </svg>Đánh giá tối thiểu</label>
+                      
+                      <div class="relative">
+                        <button type="button" 
+                                class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                @click="showRatingDropdown = !showRatingDropdown"
+                                @blur="setTimeout(() => showRatingDropdown = false, 200)">
+                          <span x-text="selectedRating || 'Tất cả'">Tất cả</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                           class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
                           <path d="m6 9 6 6 6-6"></path>
-                        </svg></button></div>
+                          </svg>
+                        </button>
+                        
+                        <!-- Dropdown menu -->
+                        <div x-show="showRatingDropdown" 
+                             x-transition:enter="transition ease-out duration-200"
+                             x-transition:enter-start="opacity-0 scale-95"
+                             x-transition:enter-end="opacity-100 scale-100"
+                             x-transition:leave="transition ease-in duration-150"
+                             x-transition:leave-start="opacity-100 scale-100"
+                             x-transition:leave-end="opacity-0 scale-95"
+                             class="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg"
+                             style="display: none;">
+                          <ul class="py-1">
+                            <li>
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                                @click="selectRating('Tất cả')">
+                                <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                  <svg x-show="selectedRating === 'Tất cả'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                  </svg>
+                                </div>
+                                <span class="flex-1">Tất cả</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                                @click="selectRating('1+ sao')">
+                                <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                  <svg x-show="selectedRating === '1+ sao'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                  </svg>
+                                </div>
+                                <span class="flex-1">1+ sao</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                                @click="selectRating('2+ sao')">
+                                <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                  <svg x-show="selectedRating === '2+ sao'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                  </svg>
+                                </div>
+                                <span class="flex-1">2+ sao</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                                @click="selectRating('3+ sao')">
+                                <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                  <svg x-show="selectedRating === '3+ sao'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                  </svg>
+                                </div>
+                                <span class="flex-1">3+ sao</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                                @click="selectRating('4+ sao')">
+                                <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                  <svg x-show="selectedRating === '4+ sao'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                  </svg>
+                                </div>
+                                <span class="flex-1">4+ sao</span>
+                              </button>
+                            </li>
+                            <li>
+                              <button type="button"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                                @click="selectRating('5 sao')">
+                                <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                  <svg x-show="selectedRating === '5 sao'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                    <path d="M20 6 9 17l-5-5"></path>
+                                  </svg>
+                                </div>
+                                <span class="flex-1">5 sao</span>
+                              </button>
+                            </li>
+                          </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+              </div>
+
+              <div id="job-filter" class="rounded-lg border bg-card text-card-foreground shadow-sm hidden">
+                <div class="flex flex-col space-y-1.5 p-6 pb-3">
+                  <div class="font-semibold tracking-tight text-base">Bộ lọc việc làm</div>
+                </div>
+                <div class="p-6 pt-0">
+                  <div class="space-y-4">
+                    <div>
+                      <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-2 block">Loại công việc</label>
+                      <div class="relative">
+                        <button 
+                          type="button" 
+                          @click="showJobTypeDropdown = !showJobTypeDropdown" 
+                          @blur="setTimeout(() => showJobTypeDropdown = false, 200)"
+                          class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                          <span x-text="selectedJobType">Tất cả</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
+                            <path d="m6 9 6 6 6-6"></path>
+                          </svg>
+                        </button>
+                        
+                        <!-- Dropdown menu -->
+                        <div 
+                          x-show="showJobTypeDropdown" 
+                          x-transition:enter="transition ease-out duration-200"
+                          x-transition:enter-start="opacity-0 scale-95"
+                          x-transition:enter-end="opacity-100 scale-100"
+                          x-transition:leave="transition ease-in duration-75"
+                          x-transition:leave-start="opacity-100 scale-100"
+                          x-transition:leave-end="opacity-0 scale-95"
+                          class="absolute z-50 w-full mt-1 bg-popover text-popover-foreground border rounded-md shadow-md"
+                        >
+                          <ul class="p-1 bg-white rounded-md shadow-md">
+                            <li 
+                              @click="selectJobType('Tất cả')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedJobType === 'Tất cả'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Tất cả
+                            </li>
+                            <li 
+                              @click="selectJobType('Toàn thời gian')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedJobType === 'Toàn thời gian'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Toàn thời gian
+                            </li>
+                            <li 
+                              @click="selectJobType('Bán thời gian')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedJobType === 'Bán thời gian'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Bán thời gian
+                            </li>
+                            <li 
+                              @click="selectJobType('Hợp đồng')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedJobType === 'Hợp đồng'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Hợp đồng
+                            </li>
+                            <li 
+                              @click="selectJobType('Thực tập')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedJobType === 'Thực tập'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Thực tập
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-2 block">Kinh nghiệm</label>
+                      <div class="relative">
+                        <button 
+                          type="button" 
+                          @click="showExperienceDropdown = !showExperienceDropdown" 
+                          @blur="setTimeout(() => showExperienceDropdown = false, 200)"
+                          class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                          <span x-text="selectedExperience">Tất cả</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
+                            <path d="m6 9 6 6 6-6"></path>
+                          </svg>
+                        </button>
+                        
+                        <!-- Dropdown menu -->
+                        <div 
+                          x-show="showExperienceDropdown" 
+                          x-transition:enter="transition ease-out duration-200"
+                          x-transition:enter-start="opacity-0 scale-95"
+                          x-transition:enter-end="opacity-100 scale-100"
+                          x-transition:leave="transition ease-in duration-75"
+                          x-transition:leave-start="opacity-100 scale-100"
+                          x-transition:leave-end="opacity-0 scale-95"
+                          class="absolute z-50 w-full mt-1 bg-popover text-popover-foreground border rounded-md shadow-md"
+                        >
+                          <ul class="p-1 bg-white rounded-md shadow-md">
+                            <li 
+                              @click="selectExperience('Tất cả')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedExperience === 'Tất cả'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Tất cả
+                            </li>
+                            <li 
+                              @click="selectExperience('0-1 năm')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedExperience === '0-1 năm'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              0-1 năm
+                            </li>
+                            <li 
+                              @click="selectExperience('1-3 năm')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedExperience === '1-3 năm'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              1-3 năm
+                            </li>
+                            <li 
+                              @click="selectExperience('3-5 năm')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedExperience === '3-5 năm'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              3-5 năm
+                            </li>
+                            <li 
+                              @click="selectExperience('5+ năm')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedExperience === '5+ năm'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              5+ năm
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-2 block">Mức lương (triệu VND)</label>
+                      <input 
+                        type="number" 
+                        x-model="salaryValue"
+                        @blur="handleSalaryBlur()"
+                        placeholder="Nhập mức lương..."
+                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="real-estate-filter" class="rounded-lg border bg-card text-card-foreground shadow-sm hidden">
+                <div class="flex flex-col space-y-1.5 p-6 pb-3">
+                  <div class="font-semibold tracking-tight text-base">Bộ lọc bất động sản</div>
+                </div>
+                <div class="p-6 pt-0">
+                  <div class="space-y-4">
+                    <div>
+                      <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-2 block">Loại bất động sản</label>
+                      <div class="relative">
+                        <button 
+                          type="button" 
+                          @click="showRealEstateTypeDropdown = !showRealEstateTypeDropdown" 
+                          @blur="setTimeout(() => showRealEstateTypeDropdown = false, 200)"
+                          class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                          <span x-text="selectedRealEstateType">Tất cả</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
+                            <path d="m6 9 6 6 6-6"></path>
+                          </svg>
+                        </button>
+                        
+                        <!-- Dropdown menu -->
+                        <div 
+                          x-show="showRealEstateTypeDropdown" 
+                          x-transition:enter="transition ease-out duration-200"
+                          x-transition:enter-start="opacity-0 scale-95"
+                          x-transition:enter-end="opacity-100 scale-100"
+                          x-transition:leave="transition ease-in duration-75"
+                          x-transition:leave-start="opacity-100 scale-100"
+                          x-transition:leave-end="opacity-0 scale-95"
+                          class="absolute z-50 w-full mt-1 bg-popover text-popover-foreground border rounded-md shadow-md"
+                        >
+                          <ul class="p-1 bg-white rounded-md shadow-md">
+                            <li 
+                              @click="selectRealEstateType('Tất cả')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedRealEstateType === 'Tất cả'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Tất cả
+                            </li>
+                            <li 
+                              @click="selectRealEstateType('Chung cư')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedRealEstateType === 'Chung cư'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Chung cư
+                            </li>
+                            <li 
+                              @click="selectRealEstateType('Nhà riêng')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedRealEstateType === 'Nhà riêng'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Nhà riêng
+                            </li>
+                            <li 
+                              @click="selectRealEstateType('Biệt thự')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedRealEstateType === 'Biệt thự'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Biệt thự
+                            </li>
+                            <li 
+                              @click="selectRealEstateType('Đất nền')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedRealEstateType === 'Đất nền'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Đất nền
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-2 block">Số phòng ngủ</label>
+                      <div class="relative">
+                        <button 
+                          type="button" 
+                          @click="showBedroomsDropdown = !showBedroomsDropdown" 
+                          @blur="setTimeout(() => showBedroomsDropdown = false, 200)"
+                          class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                          <span x-text="selectedBedrooms">Tất cả</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
+                            <path d="m6 9 6 6 6-6"></path>
+                          </svg>
+                        </button>
+                        
+                        <!-- Dropdown menu -->
+                        <div 
+                          x-show="showBedroomsDropdown" 
+                          x-transition:enter="transition ease-out duration-200"
+                          x-transition:enter-start="opacity-0 scale-95"
+                          x-transition:enter-end="opacity-100 scale-100"
+                          x-transition:leave="transition ease-in duration-75"
+                          x-transition:leave-start="opacity-100 scale-100"
+                          x-transition:leave-end="opacity-0 scale-95"
+                          class="absolute z-50 w-full mt-1 bg-popover text-popover-foreground border rounded-md shadow-md"
+                        >
+                          <ul class="p-1 bg-white rounded-md shadow-md">
+                            <li 
+                              @click="selectBedrooms('Tất cả')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedBedrooms === 'Tất cả'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Tất cả
+                            </li>
+                            <li 
+                              @click="selectBedrooms('1 phòng')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedBedrooms === '1 phòng'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              1 phòng
+                            </li>
+                            <li 
+                              @click="selectBedrooms('2 phòng')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedBedrooms === '2 phòng'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              2 phòng
+                            </li>
+                            <li 
+                              @click="selectBedrooms('3 phòng')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedBedrooms === '3 phòng'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              3 phòng
+                            </li>
+                            <li 
+                              @click="selectBedrooms('4+ phòng')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedBedrooms === '4+ phòng'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              4+ phòng
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-2 block">Diện tích (m²)</label>
+                      <input 
+                        type="number" 
+                        x-model="areaValue"
+                        @blur="handleAreaBlur()"
+                        placeholder="Nhập diện tích..."
+                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="service-filter" class="rounded-lg border bg-card text-card-foreground shadow-sm hidden">
+                <div class="flex flex-col space-y-1.5 p-6 pb-3">
+                  <div class="font-semibold tracking-tight text-base">Bộ lọc dịch vụ</div>
+                </div>
+                <div class="p-6 pt-0">
+                  <div class="space-y-4">
+                    <div>
+                      <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-2 block">Loại dịch vụ</label>
+                      <div class="relative">
+                        <button 
+                          type="button" 
+                          @click="showServiceTypeDropdown = !showServiceTypeDropdown" 
+                          @blur="setTimeout(() => showServiceTypeDropdown = false, 200)"
+                          class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                          <span x-text="selectedServiceType">Tất cả</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
+                            <path d="m6 9 6 6 6-6"></path>
+                          </svg>
+                        </button>
+                        
+                        <!-- Dropdown menu -->
+                        <div 
+                          x-show="showServiceTypeDropdown" 
+                          x-transition:enter="transition ease-out duration-200"
+                          x-transition:enter-start="opacity-0 scale-95"
+                          x-transition:enter-end="opacity-100 scale-100"
+                          x-transition:leave="transition ease-in duration-75"
+                          x-transition:leave-start="opacity-100 scale-100"
+                          x-transition:leave-end="opacity-0 scale-95"
+                          class="absolute z-50 w-full mt-1 bg-popover text-popover-foreground border rounded-md shadow-md"
+                        >
+                          <ul class="p-1 bg-white rounded-md shadow-md">
+                            <li 
+                              @click="selectServiceType('Tất cả')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedServiceType === 'Tất cả'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Tất cả
+                            </li>
+                            <li 
+                              @click="selectServiceType('Phần mềm')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedServiceType === 'Phần mềm'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Phần mềm
+                            </li>
+                            <li 
+                              @click="selectServiceType('Tư vấn')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedServiceType === 'Tư vấn'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Tư vấn
+                            </li>
+                            <li 
+                              @click="selectServiceType('Thiết kế')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedServiceType === 'Thiết kế'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Thiết kế
+                            </li>
+                            <li 
+                              @click="selectServiceType('Marketing')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedServiceType === 'Marketing'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Marketing
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-2 block">Gói dịch vụ</label>
+                      <div class="relative">
+                        <button 
+                          type="button" 
+                          @click="showServicePackageDropdown = !showServicePackageDropdown" 
+                          @blur="setTimeout(() => showServicePackageDropdown = false, 200)"
+                          class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                          <span x-text="selectedServicePackage">Tất cả</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
+                            <path d="m6 9 6 6 6-6"></path>
+                          </svg>
+                        </button>
+                        
+                        <!-- Dropdown menu -->
+                        <div 
+                          x-show="showServicePackageDropdown" 
+                          x-transition:enter="transition ease-out duration-200"
+                          x-transition:enter-start="opacity-0 scale-95"
+                          x-transition:enter-end="opacity-100 scale-100"
+                          x-transition:leave="transition ease-in duration-75"
+                          x-transition:leave-start="opacity-100 scale-100"
+                          x-transition:leave-end="opacity-0 scale-95"
+                          class="absolute z-50 w-full mt-1 bg-popover text-popover-foreground border rounded-md shadow-md"
+                        >
+                          <ul class="p-1 bg-white rounded-md shadow-md">
+                            <li 
+                              @click="selectServicePackage('Tất cả')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedServicePackage === 'Tất cả'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Tất cả
+                            </li>
+                            <li 
+                              @click="selectServicePackage('Miễn phí')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedServicePackage === 'Miễn phí'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Miễn phí
+                            </li>
+                            <li 
+                              @click="selectServicePackage('Cơ bản')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedServicePackage === 'Cơ bản'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Cơ bản
+                            </li>
+                            <li 
+                              @click="selectServicePackage('Cao cấp')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedServicePackage === 'Cao cấp'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Cao cấp
+                            </li>
+                            <li 
+                              @click="selectServicePackage('Doanh nghiệp')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedServicePackage === 'Doanh nghiệp'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Doanh nghiệp
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="company-filter" class="rounded-lg border bg-card text-card-foreground shadow-sm hidden">
+                <div class="flex flex-col space-y-1.5 p-6 pb-3">
+                  <div class="font-semibold tracking-tight text-base">Bộ lọc doanh nghiệp</div>
+                </div>
+                <div class="p-6 pt-0">
+                  <div class="space-y-4">
+                    <div>
+                      <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-2 block">Ngành nghề</label>
+                      <div class="relative">
+                        <button 
+                          type="button" 
+                          @click="showIndustryDropdown = !showIndustryDropdown" 
+                          @blur="setTimeout(() => showIndustryDropdown = false, 200)"
+                          class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                          <span x-text="selectedIndustry">Tất cả</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
+                            <path d="m6 9 6 6 6-6"></path>
+                          </svg>
+                        </button>
+                        
+                        <!-- Dropdown menu -->
+                        <div 
+                          x-show="showIndustryDropdown" 
+                          x-transition:enter="transition ease-out duration-200"
+                          x-transition:enter-start="opacity-0 scale-95"
+                          x-transition:enter-end="opacity-100 scale-100"
+                          x-transition:leave="transition ease-in duration-75"
+                          x-transition:leave-start="opacity-100 scale-100"
+                          x-transition:leave-end="opacity-0 scale-95"
+                          class="absolute z-50 w-full mt-1 bg-popover text-popover-foreground border rounded-md shadow-md"
+                        >
+                          <ul class="p-1 bg-white rounded-md shadow-md">
+                            <li 
+                              @click="selectIndustry('Tất cả')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedIndustry === 'Tất cả'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Tất cả
+                            </li>
+                            <li 
+                              @click="selectIndustry('Công nghệ')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedIndustry === 'Công nghệ'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Công nghệ
+                            </li>
+                            <li 
+                              @click="selectIndustry('Tài chính')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedIndustry === 'Tài chính'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Tài chính
+                            </li>
+                            <li 
+                              @click="selectIndustry('Y tế')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedIndustry === 'Y tế'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Y tế
+                            </li>
+                            <li 
+                              @click="selectIndustry('Giáo dục')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedIndustry === 'Giáo dục'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Giáo dục
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-2 block">Quy mô công ty</label>
+                      <div class="relative">
+                        <button 
+                          type="button" 
+                          @click="showCompanySizeDropdown = !showCompanySizeDropdown" 
+                          @blur="setTimeout(() => showCompanySizeDropdown = false, 200)"
+                          class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                          <span x-text="selectedCompanySize">Tất cả</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
+                            <path d="m6 9 6 6 6-6"></path>
+                          </svg>
+                        </button>
+                        
+                        <!-- Dropdown menu -->
+                        <div 
+                          x-show="showCompanySizeDropdown" 
+                          x-transition:enter="transition ease-out duration-200"
+                          x-transition:enter-start="opacity-0 scale-95"
+                          x-transition:enter-end="opacity-100 scale-100"
+                          x-transition:leave="transition ease-in duration-75"
+                          x-transition:leave-start="opacity-100 scale-100"
+                          x-transition:leave-end="opacity-0 scale-95"
+                          class="absolute z-50 w-full mt-1 bg-popover text-popover-foreground border rounded-md shadow-md"
+                        >
+                          <ul class="p-1 bg-white rounded-md shadow-md">
+                            <li 
+                              @click="selectCompanySize('Tất cả')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedCompanySize === 'Tất cả'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Tất cả
+                            </li>
+                            <li 
+                              @click="selectCompanySize('1-10 nhân viên')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedCompanySize === '1-10 nhân viên'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              1-10 nhân viên
+                            </li>
+                            <li 
+                              @click="selectCompanySize('11-50 nhân viên')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedCompanySize === '11-50 nhân viên'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              11-50 nhân viên
+                            </li>
+                            <li 
+                              @click="selectCompanySize('51-200 nhân viên')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedCompanySize === '51-200 nhân viên'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              51-200 nhân viên
+                            </li>
+                            <li 
+                              @click="selectCompanySize('200+ nhân viên')"
+                              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                            >
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedCompanySize === '200+ nhân viên'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              200+ nhân viên
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="news-filter" class="rounded-lg border bg-card text-card-foreground shadow-sm hidden">
+                <div class="flex flex-col space-y-1.5 p-6 pb-3">
+                  <div class="font-semibold tracking-tight text-base">Bộ lọc tin tức</div>
+                </div>
+                <div class="p-6 pt-0">
+                  <div class="space-y-4">
+                    <div>
+                      <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-2 block">Danh mục tin tức</label>
+                      <div class="relative">
+                        <button type="button" @click="toggleNewsCategoryDropdown()" role="combobox" :aria-expanded="showNewsCategoryDropdown" aria-autocomplete="none" dir="ltr" :data-state="showNewsCategoryDropdown ? 'open' : 'closed'" class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1">
+                          <span style="pointer-events: none;" x-text="selectedNewsCategory">Tất cả</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 opacity-50 transition-transform duration-200" :class="{ 'rotate-180': showNewsCategoryDropdown }" aria-hidden="true">
+                            <path d="m6 9 6 6 6-6"></path>
+                          </svg>
+                        </button>
+                        <div x-show="showNewsCategoryDropdown" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="absolute z-50 w-full mt-1 bg-popover text-popover-foreground border rounded-md shadow-md" style="display: none;">
+                          <ul class="p-1 bg-white rounded-md shadow-md">
+                            <li @click="selectNewsCategory('Tất cả', '')" class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedNewsCategory === 'Tất cả'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Tất cả
+                            </li>
+                            <li @click="selectNewsCategory('Tin địa phương', 'tin-dia-phuong')" class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedNewsCategory === 'Tin địa phương'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Tin địa phương
+                            </li>
+                            <li @click="selectNewsCategory('Kinh doanh', 'kinh-doanh')" class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedNewsCategory === 'Kinh doanh'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Kinh doanh
+                            </li>
+                            <li @click="selectNewsCategory('Công nghệ', 'cong-nghe')" class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedNewsCategory === 'Công nghệ'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Công nghệ
+                            </li>
+                            <li @click="selectNewsCategory('Đời sống', 'doi-song')" class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedNewsCategory === 'Đời sống'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Đời sống
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-2 block">Nguồn tin</label>
+                      <div class="relative">
+                        <button type="button" @click="toggleNewsSourceDropdown()" role="combobox" :aria-expanded="showNewsSourceDropdown" aria-autocomplete="none" dir="ltr" :data-state="showNewsSourceDropdown ? 'open' : 'closed'" class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1">
+                          <span style="pointer-events: none;" x-text="selectedNewsSource">Tất cả</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 opacity-50 transition-transform duration-200" :class="{ 'rotate-180': showNewsSourceDropdown }" aria-hidden="true">
+                            <path d="m6 9 6 6 6-6"></path>
+                          </svg>
+                        </button>
+                        <div x-show="showNewsSourceDropdown" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="absolute z-50 w-full mt-1 bg-popover text-popover-foreground border rounded-md shadow-md" style="display: none;">
+                          <ul class="p-1 bg-white rounded-md shadow-md">
+                            <li @click="selectNewsSource('Tất cả', '')" class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedNewsSource === 'Tất cả'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Tất cả
+                            </li>
+                            <li @click="selectNewsSource('Tin tức địa phương', 'tin-tuc-dia-phuong')" class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedNewsSource === 'Tin tức địa phương'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Tin tức địa phương
+                            </li>
+                            <li @click="selectNewsSource('VnExpress', 'vnexpress')" class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedNewsSource === 'VnExpress'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              VnExpress
+                            </li>
+                            <li @click="selectNewsSource('Tuổi Trẻ', 'tuoi-tre')" class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedNewsSource === 'Tuổi Trẻ'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Tuổi Trẻ
+                            </li>
+                            <li @click="selectNewsSource('Thanh Niên', 'thanh-nien')" class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedNewsSource === 'Thanh Niên'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Thanh Niên
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="location-filter" class="rounded-lg border bg-card text-card-foreground shadow-sm hidden">
+                <div class="flex flex-col space-y-1.5 p-6 pb-3">
+                  <div class="font-semibold tracking-tight text-base">Bộ lọc địa điểm</div>
+                </div>
+                <div class="p-6 pt-0">
+                  <div class="space-y-4">
+                    <div>
+                      <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-2 block">Loại địa điểm</label>
+                      <div class="relative">
+                        <button type="button" @click="toggleLocationTypeDropdown()" role="combobox" :aria-expanded="showLocationTypeDropdown" aria-autocomplete="none" dir="ltr" :data-state="showLocationTypeDropdown ? 'open' : 'closed'" class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1">
+                          <span style="pointer-events: none;" x-text="selectedLocationType">Tất cả</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 opacity-50 transition-transform duration-200" :class="{ 'rotate-180': showLocationTypeDropdown }" aria-hidden="true">
+                            <path d="m6 9 6 6 6-6"></path>
+                          </svg>
+                        </button>
+                        <div x-show="showLocationTypeDropdown" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="absolute z-50 w-full mt-1 bg-popover text-popover-foreground border rounded-md shadow-md" style="display: none;">
+                          <ul class="p-1 bg-white rounded-md shadow-md">
+                            <li @click="selectLocationType('Tất cả', '')" class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedLocationType === 'Tất cả'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Tất cả
+                            </li>
+                            <li @click="selectLocationType('Nhà hàng', 'nha-hang')" class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedLocationType === 'Nhà hàng'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Nhà hàng
+                            </li>
+                            <li @click="selectLocationType('Khách sạn', 'khach-san')" class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedLocationType === 'Khách sạn'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Khách sạn
+                            </li>
+                            <li @click="selectLocationType('Điểm tham quan', 'diem-tham-quan')" class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedLocationType === 'Điểm tham quan'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Điểm tham quan
+                            </li>
+                            <li @click="selectLocationType('Mua sắm', 'mua-sam')" class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedLocationType === 'Mua sắm'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              Mua sắm
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium mb-2 block">Khoảng cách (km)</label>
+                      <input 
+                        type="number" 
+                        x-model="distanceValue"
+                        @blur="handleDistanceBlur()"
+                        placeholder="Nhập khoảng cách..."
+                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
+        
+        <!-- Search Result -->
         <div class="flex-1 min-w-0">
-          <div class="py-4 border-b">
-            <div class="hidden lg:flex justify-end"></div>
-            <div class="hidden md:flex justify-between items-center lg:hidden">
-              <div class="block"><button
-                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3"><svg
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-filter h-4 w-4">
-                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
-                  </svg></button></div>
-            </div>
-            <div class="flex justify-between items-center md:hidden">
-              <div class="block"><button
-                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3"><svg
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-filter h-4 w-4">
-                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
-                  </svg></button></div>
-            </div>
-          </div>
           <div class="mt-2">
             <div class="space-y-8">
+              <div id="common-sort" class="flex items-center justify-between pb-3 border-b">
               <p>Tổng cộng có 226 kết quả được tìm thấy</p>
+              </div>
+
+              <div id="job-sort" class="flex items-center justify-between pb-3 border-b hidden">
+                <p>Tổng cộng có 60 kết quả được tìm thấy</p>
+
+                <div class="lg:flex justify-end">
+                  <div class="flex items-center gap-2">
+                    <span class="text-sm text-gray-600">Sắp xếp:</span>
+                    <div class="relative">
+                      <button type="button" 
+                              class="flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-48"
+                              @click="showJobSortDropdown = !showJobSortDropdown"
+                              @blur="setTimeout(() => showJobSortDropdown = false, 200)">
+                        <span x-text="selectedJobSort">Liên quan</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
+                          <path d="m6 9 6 6 6-6"></path>
+                        </svg>
+                      </button>
+                      
+                      <!-- Dropdown menu -->
+                      <div x-show="showJobSortDropdown" 
+                           x-transition:enter="transition ease-out duration-200"
+                           x-transition:enter-start="opacity-0 scale-95"
+                           x-transition:enter-end="opacity-100 scale-100"
+                           x-transition:leave="transition ease-in duration-150"
+                           x-transition:leave-start="opacity-100 scale-100"
+                           x-transition:leave-end="opacity-0 scale-95"
+                           class="absolute z-50 w-48 mt-1 bg-white border border-gray-200 rounded-md shadow-lg"
+                           style="display: none;">
+                        <ul class="py-1">
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectJobSort('Liên quan')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedJobSort === 'Liên quan'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Liên quan</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectJobSort('Mới nhất')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedJobSort === 'Mới nhất'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Mới nhất</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectJobSort('Lương cao -> thấp')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedJobSort === 'Lương cao -> thấp'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Lương cao -> thấp</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectJobSort('Lương thấp -> cao')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedJobSort === 'Lương thấp -> cao'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Lương thấp -> cao</span>
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="real-estate-sort" class="flex items-center justify-between pb-3 border-b hidden">
+                <p>Tổng cộng có 50 kết quả được tìm thấy</p>
+
+                <div class="lg:flex justify-end">
+                  <div class="flex items-center gap-2">
+                    <span class="text-sm text-gray-600">Sắp xếp:</span>
+                    <div class="relative">
+                      <button type="button" 
+                              class="flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-48"
+                              @click="showRealEstateSortDropdown = !showRealEstateSortDropdown"
+                              @blur="setTimeout(() => showRealEstateSortDropdown = false, 200)">
+                        <span x-text="selectedRealEstateSort">Liên quan</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
+                          <path d="m6 9 6 6 6-6"></path>
+                        </svg>
+                      </button>
+                      
+                      <!-- Dropdown menu -->
+                      <div x-show="showRealEstateSortDropdown" 
+                           x-transition:enter="transition ease-out duration-200"
+                           x-transition:enter-start="opacity-0 scale-95"
+                           x-transition:enter-end="opacity-100 scale-100"
+                           x-transition:leave="transition ease-in duration-150"
+                           x-transition:leave-start="opacity-100 scale-100"
+                           x-transition:leave-end="opacity-0 scale-95"
+                           class="absolute z-50 w-48 mt-1 bg-white border border-gray-200 rounded-md shadow-lg"
+                           style="display: none;">
+                        <ul class="py-1">
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectRealEstateSort('Liên quan')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedRealEstateSort === 'Liên quan'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Liên quan</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectRealEstateSort('Mới nhất')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedRealEstateSort === 'Mới nhất'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Mới nhất</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectRealEstateSort('Giá cao → thấp')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedRealEstateSort === 'Giá cao → thấp'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Giá cao → thấp</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectRealEstateSort('Giá thấp → cao')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedRealEstateSort === 'Giá thấp → cao'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Giá thấp → cao</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectRealEstateSort('Diện tích lớn → nhỏ')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedRealEstateSort === 'Diện tích lớn → nhỏ'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Diện tích lớn → nhỏ</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectRealEstateSort('Diện tích nhỏ → lớn')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedRealEstateSort === 'Diện tích nhỏ → lớn'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Diện tích nhỏ → lớn</span>
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="service-sort" class="flex items-center justify-between pb-3 border-b hidden">
+                <p>Tổng cộng có 7 kết quả được tìm thấy</p>
+
+                <div class="lg:flex justify-end">
+                  <div class="flex items-center gap-2">
+                    <span class="text-sm text-gray-600">Sắp xếp:</span>
+                    <div class="relative">
+                      <button type="button" 
+                              class="flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-48"
+                              @click="showServiceSortDropdown = !showServiceSortDropdown"
+                              @blur="setTimeout(() => showServiceSortDropdown = false, 200)">
+                        <span x-text="selectedServiceSort">Liên quan</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
+                          <path d="m6 9 6 6 6-6"></path>
+                        </svg>
+                      </button>
+                      
+                      <!-- Dropdown menu -->
+                      <div x-show="showServiceSortDropdown" 
+                           x-transition:enter="transition ease-out duration-200"
+                           x-transition:enter-start="opacity-0 scale-95"
+                           x-transition:enter-end="opacity-100 scale-100"
+                           x-transition:leave="transition ease-in duration-150"
+                           x-transition:leave-start="opacity-100 scale-100"
+                           x-transition:leave-end="opacity-0 scale-95"
+                           class="absolute z-50 w-48 mt-1 bg-white border border-gray-200 rounded-md shadow-lg"
+                           style="display: none;">
+                        <ul class="py-1">
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectServiceSort('Liên quan')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedServiceSort === 'Liên quan'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Liên quan</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectServiceSort('Mới nhất')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedServiceSort === 'Mới nhất'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Mới nhất</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectServiceSort('Giá cao → thấp')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedServiceSort === 'Giá cao → thấp'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Giá cao → thấp</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectServiceSort('Giá thấp → cao')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedServiceSort === 'Giá thấp → cao'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Giá thấp → cao</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectServiceSort('Đánh giá cao → thấp')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedServiceSort === 'Đánh giá cao → thấp'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Đánh giá cao → thấp</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectServiceSort('Đánh giá thấp → cao')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedServiceSort === 'Đánh giá thấp → cao'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Đánh giá thấp → cao</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectServiceSort('Phổ biến')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedServiceSort === 'Phổ biến'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Phổ biến</span>
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="company-sort" class="flex items-center justify-between pb-3 border-b hidden">
+                <p>Tổng cộng có 4 kết quả được tìm thấy</p>
+
+                <div class="lg:flex justify-end">
+                  <div class="flex items-center gap-2">
+                    <span class="text-sm text-gray-600">Sắp xếp:</span>
+                    <div class="relative">
+                      <button type="button" 
+                              class="flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-48"
+                              @click="showCompanySortDropdown = !showCompanySortDropdown"
+                              @blur="setTimeout(() => showCompanySortDropdown = false, 200)">
+                        <span x-text="selectedCompanySort">Liên quan</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
+                          <path d="m6 9 6 6 6-6"></path>
+                        </svg>
+                      </button>
+                      
+                      <!-- Dropdown menu -->
+                      <div x-show="showCompanySortDropdown" 
+                           x-transition:enter="transition ease-out duration-200"
+                           x-transition:enter-start="opacity-0 scale-95"
+                           x-transition:enter-end="opacity-100 scale-100"
+                           x-transition:leave="transition ease-in duration-150"
+                           x-transition:leave-start="opacity-100 scale-100"
+                           x-transition:leave-end="opacity-0 scale-95"
+                           class="absolute z-50 w-48 mt-1 bg-white border border-gray-200 rounded-md shadow-lg"
+                           style="display: none;">
+                        <ul class="py-1">
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectCompanySort('Liên quan')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedCompanySort === 'Liên quan'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Liên quan</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectCompanySort('Mới nhất')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedCompanySort === 'Mới nhất'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Mới nhất</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectCompanySort('Doanh thu cao → thấp')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedCompanySort === 'Doanh thu cao → thấp'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Doanh thu cao → thấp</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectCompanySort('Doanh thu thấp → cao')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedCompanySort === 'Doanh thu thấp → cao'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Doanh thu thấp → cao</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectCompanySort('Nhân sự nhiều → ít')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedCompanySort === 'Nhân sự nhiều → ít'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Nhân sự nhiều → ít</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectCompanySort('Nhân sự ít → nhiều')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedCompanySort === 'Nhân sự ít → nhiều'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Nhân sự ít → nhiều</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectCompanySort('Đánh giá cao → thấp')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedCompanySort === 'Đánh giá cao → thấp'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Đánh giá cao → thấp</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectCompanySort('Đánh giá thấp → cao')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedCompanySort === 'Đánh giá thấp → cao'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Đánh giá thấp → cao</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectCompanySort('Phổ biến')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedCompanySort === 'Phổ biến'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Phổ biến</span>
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="news-sort" class="flex items-center justify-between pb-3 border-b hidden">
+                <p>Tổng cộng có 55 kết quả được tìm thấy</p>
+
+                <div class="lg:flex justify-end">
+                  <div class="flex items-center gap-2">
+                    <span class="text-sm text-gray-600">Sắp xếp:</span>
+                    <div class="relative">
+                      <button type="button" 
+                              class="flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-48"
+                              @click="showNewsSortDropdown = !showNewsSortDropdown"
+                              @blur="setTimeout(() => showNewsSortDropdown = false, 200)">
+                        <span x-text="selectedNewsSort">Liên quan</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
+                          <path d="m6 9 6 6 6-6"></path>
+                        </svg>
+                      </button>
+                      
+                      <!-- Dropdown menu -->
+                      <div x-show="showNewsSortDropdown" 
+                           x-transition:enter="transition ease-out duration-200"
+                           x-transition:enter-start="opacity-0 scale-95"
+                           x-transition:enter-end="opacity-100 scale-100"
+                           x-transition:leave="transition ease-in duration-150"
+                           x-transition:leave-start="opacity-100 scale-100"
+                           x-transition:leave-end="opacity-0 scale-95"
+                           class="absolute z-50 w-48 mt-1 bg-white border border-gray-200 rounded-md shadow-lg"
+                           style="display: none;">
+                        <ul class="py-1">
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectNewsSort('Liên quan')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedNewsSort === 'Liên quan'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Liên quan</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectNewsSort('Mới nhất')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedNewsSort === 'Mới nhất'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Mới nhất</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectNewsSort('Cũ nhất')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedNewsSort === 'Cũ nhất'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Cũ nhất</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectNewsSort('Lượt xem cao → thấp')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedNewsSort === 'Lượt xem cao → thấp'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Lượt xem cao → thấp</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectNewsSort('Lượt xem thấp → cao')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedNewsSort === 'Lượt xem thấp → cao'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Lượt xem thấp → cao</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectNewsSort('Bình luận nhiều → ít')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedNewsSort === 'Bình luận nhiều → ít'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Bình luận nhiều → ít</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectNewsSort('Bình luận ít → nhiều')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedNewsSort === 'Bình luận ít → nhiều'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Bình luận ít → nhiều</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectNewsSort('Nổi bật')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedNewsSort === 'Nổi bật'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Nổi bật</span>
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="location-sort" class="flex items-center justify-between pb-3 border-b hidden">
+                <p>Tổng cộng có 50 kết quả được tìm thấy</p>
+
+                <div class="lg:flex justify-end">
+                  <div class="flex items-center gap-2">
+                    <span class="text-sm text-gray-600">Sắp xếp:</span>
+                    <div class="relative">
+                      <button type="button" 
+                              class="flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-48"
+                              @click="showLocationSortDropdown = !showLocationSortDropdown"
+                              @blur="setTimeout(() => showLocationSortDropdown = false, 200)">
+                        <span x-text="selectedLocationSort">Liên quan</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
+                          <path d="m6 9 6 6 6-6"></path>
+                        </svg>
+                      </button>
+                      
+                      <!-- Dropdown menu -->
+                      <div x-show="showLocationSortDropdown" 
+                           x-transition:enter="transition ease-out duration-200"
+                           x-transition:enter-start="opacity-0 scale-95"
+                           x-transition:enter-end="opacity-100 scale-100"
+                           x-transition:leave="transition ease-in duration-150"
+                           x-transition:leave-start="opacity-100 scale-100"
+                           x-transition:leave-end="opacity-0 scale-95"
+                           class="absolute z-50 w-48 mt-1 bg-white border border-gray-200 rounded-md shadow-lg"
+                           style="display: none;">
+                        <ul class="py-1">
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectLocationSort('Liên quan')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedLocationSort === 'Liên quan'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Liên quan</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectLocationSort('Mới nhất')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedLocationSort === 'Mới nhất'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Mới nhất</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectLocationSort('Gần nhất')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedLocationSort === 'Gần nhất'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Gần nhất</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectLocationSort('Đánh giá cao → thấp')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedLocationSort === 'Đánh giá cao → thấp'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Đánh giá cao → thấp</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectLocationSort('Đánh giá thấp → cao')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedLocationSort === 'Đánh giá thấp → cao'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Đánh giá thấp → cao</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectLocationSort('Giá từ cao → thấp')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedLocationSort === 'Giá từ cao → thấp'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Giá từ cao → thấp</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectLocationSort('Giá từ thấp → cao')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedLocationSort === 'Giá từ thấp → cao'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Giá từ thấp → cao</span>
+                            </button>
+                          </li>
+                          <li>
+                            <button type="button"
+                              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 flex items-center"
+                              @click="selectLocationSort('Phổ biến')">
+                              <div class="w-4 h-4 mr-2 flex items-center justify-center">
+                                <svg x-show="selectedLocationSort === 'Phổ biến'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check w-4 h-4 text-black">
+                                  <path d="M20 6 9 17l-5-5"></path>
+                                </svg>
+                              </div>
+                              <span class="flex-1">Phổ biến</span>
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <!-- Việc làm -->
               <div id="job-results" class="space-y-4 tab-content">
                 <div class="flex items-center justify-between">
@@ -6420,6 +8396,64 @@
             </div>
           </div>
         </div>
+
+        <!-- Search Not Found
+        <div class="flex-1 min-w-0">
+          <div class="py-4 border-b">
+            <div class="lg:flex justify-end"></div>
+            <div class="hidden md:flex justify-between items-center lg:hidden">
+              <div class="block">
+                <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-filter h-4 w-4">
+                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="flex justify-between items-center md:hidden">
+              <div class="block">
+                <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-filter h-4 w-4">
+                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="mt-2">
+            <div class="space-y-8">
+              <p>Tổng cộng có 0 kết quả được tìm thấy</p>
+            </div>
+          </div>
+          <div class="flex flex-col items-center justify-center py-16 px-4">
+            <div class="rounded-lg border bg-card text-card-foreground shadow-sm w-full max-w-md">
+              <div class="p-6 pt-8 pb-6 text-center">
+                <div class="flex justify-center mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search w-8 h-8 text-gray-400">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                  </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Không tìm thấy kết quả</h3>
+                <p class="text-gray-600 mb-6">Không có kết quả nào cho "<span class="font-medium">ạcqwc</span>"</p>
+                <div class="space-y-4">
+                  <div class="flex items-center gap-2 text-sm text-gray-700 mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb w-4 h-4">
+                      <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
+                      <path d="M9 18h6"></path>
+                      <path d="M10 22h4"></path>
+                    </svg>
+                    <span>Gợi ý tìm kiếm:</span>
+                  </div>
+                  <div class="grid grid-cols-2 gap-2"><button class="inline-flex items-center gap-2 whitespace-nowrap font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent rounded-md px-3 text-xs h-8 justify-start hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:text-white hover:border-transparent transition-all duration-200">Việc làm IT</button><button class="inline-flex items-center gap-2 whitespace-nowrap font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent rounded-md px-3 text-xs h-8 justify-start hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:text-white hover:border-transparent transition-all duration-200">Chung cư Quận 1</button><button class="inline-flex items-center gap-2 whitespace-nowrap font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent rounded-md px-3 text-xs h-8 justify-start hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:text-white hover:border-transparent transition-all duration-200">Dịch vụ marketing</button><button class="inline-flex items-center gap-2 whitespace-nowrap font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent rounded-md px-3 text-xs h-8 justify-start hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:text-white hover:border-transparent transition-all duration-200">Công ty công nghệ</button><button class="inline-flex items-center gap-2 whitespace-nowrap font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent rounded-md px-3 text-xs h-8 justify-start hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:text-white hover:border-transparent transition-all duration-200">Tin tức địa phương</button><button class="inline-flex items-center gap-2 whitespace-nowrap font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent rounded-md px-3 text-xs h-8 justify-start hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:text-white hover:border-transparent transition-all duration-200">Nhà hàng ngon</button></div>
+                </div>
+                <div class="mt-6 pt-4 border-t border-gray-200">
+                  <p class="text-xs text-gray-500">Mẹo: Thử sử dụng từ khóa ngắn gọn hoặc điều chỉnh bộ lọc</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>-->
       </div>
     </div>
   </div>

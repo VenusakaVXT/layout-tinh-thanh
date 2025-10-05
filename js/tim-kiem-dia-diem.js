@@ -10,6 +10,9 @@ document.addEventListener('alpine:init', () => {
     showCategoryDropdown: false,
     selectedProvince: 'Chọn tỉnh/thành phố',
     showProvinceDropdown: false,
+    selectedTransport: 'Xe máy',
+    showTransportDropdown: false,
+    maxDistance: '',
     selectedPriceLevels: [],
     selectedAmenities: [],
     isOpenNow: false,
@@ -21,10 +24,6 @@ document.addEventListener('alpine:init', () => {
     manualLat: '',
     manualLng: '',
     isManualLocation: false,
-    selectedTransport: 'motorbike',
-    showTransportDropdown: false,
-    maxDistance: '',
-    showTransportSection: false,
     currentPage: 1,
     totalPages: 5,
 
@@ -79,6 +78,21 @@ document.addEventListener('alpine:init', () => {
       };
       this.selectedProvince = provinceMap[provinceParam] || 'Chọn tỉnh/thành phố';
 
+      // Initialize transport from URL params
+      const modeParam = urlParams.get('mode');
+      const transportMap = {
+        'walk': 'Đi bộ',
+        'bike': 'Xe đạp',
+        'motorbike': 'Xe máy',
+        'car': 'Ô tô',
+        'bus': 'Xe buýt'
+      };
+      this.selectedTransport = transportMap[modeParam] || 'Xe máy';
+
+      // Initialize max distance from URL params
+      const maxDistanceParam = urlParams.get('max-distance');
+      this.maxDistance = maxDistanceParam || '';
+
       // Initialize price levels from URL params
       const priceLevelParam = urlParams.get('price-level');
       if (priceLevelParam) {
@@ -112,25 +126,6 @@ document.addEventListener('alpine:init', () => {
       // Initialize manual coordinates from URL params
       this.manualLat = latParam || '';
       this.manualLng = lngParam || '';
-      this.isManualLocation = !!(latParam && lngParam);
-
-      // Initialize transport from URL params
-      const transportParam = urlParams.get('mode');
-      const transportMap = {
-        'walk': 'walk',
-        'bike': 'bike',
-        'motorbike': 'motorbike',
-        'car': 'car',
-        'bus': 'bus'
-      };
-      this.selectedTransport = transportMap[transportParam] || 'motorbike';
-
-      // Initialize max distance from URL params
-      const maxDistanceParam = urlParams.get('distance-max');
-      this.maxDistance = maxDistanceParam || '';
-
-      // Show transport section if location is already set
-      this.showTransportSection = !!(this.currentLat && this.currentLng);
 
       // Initialize pagination from URL params
       const pageParam = urlParams.get('page');
@@ -366,6 +361,51 @@ document.addEventListener('alpine:init', () => {
       return this.selectedProvince;
     },
 
+    // Transport dropdown functions
+    toggleTransportDropdown() {
+      this.showTransportDropdown = !this.showTransportDropdown;
+    },
+
+    selectTransport(transport) {
+      this.selectedTransport = transport;
+      this.showTransportDropdown = false;
+      this.updateTransportInURL(transport);
+    },
+
+    updateTransportInURL(transport) {
+      const url = new URL(window.location);
+      const transportModeMap = {
+        'Đi bộ': 'walk',
+        'Xe đạp': 'bike',
+        'Xe máy': 'motorbike',
+        'Ô tô': 'car',
+        'Xe buýt': 'bus'
+      };
+
+      const modeParam = transportModeMap[transport];
+      if (modeParam && modeParam !== 'motorbike') {
+        url.searchParams.set('mode', modeParam);
+      } else {
+        url.searchParams.delete('mode');
+      }
+      window.history.pushState({}, '', url);
+    },
+
+    getTransportDisplayValue() {
+      return this.selectedTransport;
+    },
+
+    // Max distance functions
+    updateMaxDistanceInURL() {
+      const url = new URL(window.location);
+      if (this.maxDistance && this.maxDistance.trim() !== '') {
+        url.searchParams.set('max-distance', this.maxDistance.trim());
+      } else {
+        url.searchParams.delete('max-distance');
+      }
+      window.history.pushState({}, '', url);
+    },
+
     // Price level functions
     togglePriceLevel(level) {
       const index = this.selectedPriceLevels.indexOf(level);
@@ -499,7 +539,6 @@ document.addEventListener('alpine:init', () => {
           this.currentLat = position.coords.latitude;
           this.currentLng = position.coords.longitude;
           this.isManualLocation = false;
-          this.showTransportSection = true;
           this.updateLocationInURL();
           this.isGettingLocation = false;
           console.log('Vị trí hiện tại:', this.currentLat, this.currentLng);
@@ -557,7 +596,6 @@ document.addEventListener('alpine:init', () => {
       this.manualLat = '';
       this.manualLng = '';
       this.isManualLocation = false;
-      this.showTransportSection = false;
       this.updateLocationInURL();
     },
 
@@ -586,52 +624,8 @@ document.addEventListener('alpine:init', () => {
       this.currentLat = lat;
       this.currentLng = lng;
       this.isManualLocation = true;
-      this.showTransportSection = true;
       this.updateLocationInURL();
 
-    },
-
-    // Transport dropdown functions
-    toggleTransportDropdown() {
-      this.showTransportDropdown = !this.showTransportDropdown;
-    },
-
-    selectTransport(transport) {
-      this.selectedTransport = transport;
-      this.showTransportDropdown = false;
-      this.updateTransportInURL(transport);
-    },
-
-    updateTransportInURL(transport) {
-      const url = new URL(window.location);
-      if (transport && transport !== 'motorbike') {
-        url.searchParams.set('mode', transport);
-      } else {
-        url.searchParams.delete('mode');
-      }
-      window.history.pushState({}, '', url);
-    },
-
-    getTransportDisplayValue() {
-      const transportMap = {
-        'walk': 'Đi bộ',
-        'bike': 'Xe đạp',
-        'motorbike': 'Xe máy',
-        'car': 'Ô tô',
-        'bus': 'Xe buýt'
-      };
-      return transportMap[this.selectedTransport] || 'Xe máy';
-    },
-
-    // Max distance functions
-    updateMaxDistanceInURL() {
-      const url = new URL(window.location);
-      if (this.maxDistance && this.maxDistance.trim() !== '') {
-        url.searchParams.set('distance-max', this.maxDistance);
-      } else {
-        url.searchParams.delete('distance-max');
-      }
-      window.history.pushState({}, '', url);
     }
   }));
 });
