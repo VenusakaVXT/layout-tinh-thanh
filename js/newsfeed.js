@@ -157,6 +157,95 @@ document.addEventListener('alpine:init', () => {
   }));
 
   // ===========================================
+  // FOLLOW BUTTON COMPONENT
+  // ===========================================
+  Alpine.data('followButton', () => ({
+    isFollowing: false,
+
+    init() {
+      // Kiểm tra trạng thái ban đầu từ text content
+      this.isFollowing = this.$el.textContent.trim() === 'Đang theo dõi';
+    },
+
+    toggleFollow() {
+      this.isFollowing = !this.isFollowing;
+
+      if (this.isFollowing) {
+        this.$el.textContent = 'Đang theo dõi';
+        this.$el.classList.remove('btn-outline-primary');
+        this.$el.classList.add('bg-gray-100', 'text-gray-600', 'hover:bg-gray-200');
+      } else {
+        this.$el.textContent = 'Theo dõi';
+        this.$el.classList.remove('bg-gray-100', 'text-gray-600', 'hover:bg-gray-200');
+        this.$el.classList.add('btn-outline-primary');
+      }
+    }
+  }));
+
+  // ===========================================
+  // LIKE BUTTON COMPONENT
+  // ===========================================
+  Alpine.data('likeButton', () => ({
+    isLiked: false,
+    likeCount: 0,
+
+    init() {
+      // Lấy số like hiện tại từ phần thống kê phía trên
+      this.likeCount = this.getLikeCountFromStats();
+
+      // Kiểm tra trạng thái like hiện tại
+      this.isLiked = this.$el.classList.contains('text-red-600');
+    },
+
+    getLikeCountFromStats() {
+      // Tìm phần thống kê lượt thích trong cùng post
+      const post = this.$el.closest('.rounded-lg.border');
+      const statsElement = post.querySelector('.flex.flex-wrap.items-center.gap-x-4.gap-y-1 span');
+
+      if (statsElement) {
+        const match = statsElement.textContent.match(/(\d+)/);
+        return match ? parseInt(match[1]) : 0;
+      }
+      return 0;
+    },
+
+    toggleLike() {
+      const svg = this.$el.querySelector('svg');
+
+      if (this.isLiked) {
+        // Unlike: gỡ class red, gỡ fill-current, giảm số
+        this.$el.classList.remove('text-red-600', 'hover:text-red-700');
+        this.$el.classList.add('text-gray-600', 'hover:text-red-600');
+        svg.classList.remove('fill-current');
+        this.likeCount = Math.max(0, this.likeCount - 1);
+        this.isLiked = false;
+      } else {
+        // Like: thêm class red, thêm fill-current, tăng số
+        this.$el.classList.remove('text-gray-600', 'hover:text-red-600');
+        this.$el.classList.add('text-red-600', 'hover:text-red-700');
+        svg.classList.add('fill-current');
+        this.likeCount += 1;
+        this.isLiked = true;
+      }
+
+      // Cập nhật số lượt thích trong phần thống kê
+      this.updateLikeStats();
+    },
+
+    updateLikeStats() {
+      // Tìm và cập nhật số lượt thích trong phần thống kê
+      const post = this.$el.closest('.rounded-lg.border');
+      const statsElement = post.querySelector('.flex.flex-wrap.items-center.gap-x-4.gap-y-1 span');
+
+      if (statsElement) {
+        const currentText = statsElement.textContent;
+        const updatedText = currentText.replace(/\d+/, this.likeCount);
+        statsElement.textContent = updatedText;
+      }
+    }
+  }));
+
+  // ===========================================
   // NEWSFEED MAIN COMPONENT
   // ===========================================
   Alpine.data('newsfeedComponent', () => ({
@@ -430,6 +519,21 @@ document.addEventListener('alpine:init', () => {
         // Story chưa xem - hiển thị 0%
         return 'width: 0%';
       }
+    },
+
+    // Tính toán width của progress bars để khớp với story content
+    getProgressBarsWidth() {
+      const isDesktop = window.innerWidth >= 768;
+      const storyWidth = isDesktop ? 400 : 320; // Width của story content
+      return storyWidth;
+    },
+
+    // Tính toán width của từng progress bar
+    getSingleBarWidth() {
+      const totalWidth = this.getProgressBarsWidth();
+      const gapWidth = 4; // 4px gap giữa các bars
+      const totalGaps = 4; // 5 bars = 4 gaps
+      return (totalWidth - totalGaps) / 5;
     },
 
     markStoryAsViewed(storyId) {

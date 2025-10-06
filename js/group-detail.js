@@ -125,6 +125,55 @@ document.addEventListener('alpine:init', () => {
   }));
 
   // ===========================================
+  // LIKE BUTTON COMPONENT
+  // ===========================================
+  Alpine.data('likeButton', () => ({
+    isLiked: false,
+    likeCount: 0,
+
+    init() {
+      // Lấy số like hiện tại từ text content
+      const buttonText = this.$el.textContent.trim();
+      const match = buttonText.match(/\d+/);
+      this.likeCount = match ? parseInt(match[0]) : 0;
+
+      // Kiểm tra trạng thái like hiện tại
+      this.isLiked = this.$el.classList.contains('active');
+    },
+
+    toggleLike() {
+      const svg = this.$el.querySelector('svg');
+
+      if (this.isLiked) {
+        // Unlike: gỡ class active, gỡ fill-current, giảm số
+        this.$el.classList.remove('active');
+        svg.classList.remove('fill-current');
+        this.likeCount = Math.max(0, this.likeCount - 1);
+        this.isLiked = false;
+      } else {
+        // Like: thêm class active, thêm fill-current, tăng số
+        this.$el.classList.add('active');
+        svg.classList.add('fill-current');
+        this.likeCount += 1;
+        this.isLiked = true;
+      }
+
+      // Cập nhật text content
+      this.updateLikeText();
+    },
+
+    updateLikeText() {
+      // Tìm và cập nhật số like trong text mà không làm mất SVG
+      const textNodes = Array.from(this.$el.childNodes).filter(node => node.nodeType === Node.TEXT_NODE);
+      textNodes.forEach(node => {
+        if (node.textContent.trim().match(/\d+/)) {
+          node.textContent = node.textContent.replace(/\d+/, this.likeCount);
+        }
+      });
+    }
+  }));
+
+  // ===========================================
   // GALLERY COMPONENT FOR POST IMAGES
   // ===========================================
   Alpine.data('gallery', () => ({
@@ -133,11 +182,21 @@ document.addEventListener('alpine:init', () => {
     currentIndex: 0,
     postTitle: '',
 
+    // mở album chung
+    openModal(el, index) {
+      this.images = [...this.$refs.albumGrid.querySelectorAll("img")].map(img => ({
+        src: img.getAttribute("src"),
+        alt: img.getAttribute("alt")
+      }))
+      this.currentIndex = index
+      this.isOpen = true
+    },
+
     // mở gallery riêng trong post
     openPostGallery(el, index) {
       const galleryRoot = el.closest(".post-gallery")
       const post = galleryRoot.closest(".rounded-lg.border")
-      const titleElement = post.querySelector(".font-medium")
+      const titleElement = post.querySelector("h3.font-semibold") || post.querySelector(".font-medium")
       this.postTitle = titleElement ? `Ảnh của ${titleElement.textContent.trim()}` : 'Ảnh'
 
       // Lấy tất cả ảnh từ gallery (bao gồm cả ảnh ẩn)

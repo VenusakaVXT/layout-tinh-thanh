@@ -1045,6 +1045,15 @@
             background-repeat: no-repeat;
             }
 
+            /* Like Button */
+            .like-button {
+                @apply flex items-center gap-1 hover:text-red-600;
+            }
+
+            .like-button.active {
+                @apply text-red-600 hover:text-red-800;
+            }
+
             /* Layout Utilities */
             .flex-center {
                 @apply flex items-center justify-center;
@@ -3115,7 +3124,7 @@
                   </div>
                   <div class="px-4 py-3 border-t border-gray-100">
                     <div class="flex items-center justify-between sm:justify-around"><button
-                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent h-9 rounded-md px-3 flex-1 text-gray-600 hover:text-red-600"><svg
+                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent h-9 rounded-md px-3 flex-1 text-gray-600 hover:text-red-600" x-data="likeButton" @click="toggleLike()"><svg
                           xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                           class="lucide lucide-heart w-4 h-4 mr-2">
@@ -3221,7 +3230,7 @@
                   </div>
                   <div class="px-4 py-3 border-t border-gray-100">
                     <div class="flex items-center justify-between sm:justify-around"><button
-                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent h-9 rounded-md px-3 flex-1 text-red-600 hover:text-red-700"><svg
+                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent h-9 rounded-md px-3 flex-1 text-red-600 hover:text-red-700" x-data="likeButton" @click="toggleLike()"><svg
                           xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                           class="lucide lucide-heart w-4 h-4 mr-2 fill-current">
@@ -3340,7 +3349,7 @@
                   </div>
                   <div class="px-4 py-3 border-t border-gray-100">
                     <div class="flex items-center justify-between sm:justify-around"><button
-                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent h-9 rounded-md px-3 flex-1 text-gray-600 hover:text-red-600"><svg
+                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent h-9 rounded-md px-3 flex-1 text-gray-600 hover:text-red-600" x-data="likeButton" @click="toggleLike()"><svg
                           xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                           class="lucide lucide-heart w-4 h-4 mr-2">
@@ -3445,7 +3454,7 @@
                   </div>
                   <div class="px-4 py-3 border-t border-gray-100">
                     <div class="flex items-center justify-between sm:justify-around"><button
-                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent h-9 rounded-md px-3 flex-1 text-gray-600 hover:text-red-600"><svg
+                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent h-9 rounded-md px-3 flex-1 text-gray-600 hover:text-red-600" x-data="likeButton" @click="toggleLike()"><svg
                           xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                           class="lucide lucide-heart w-4 h-4 mr-2">
@@ -3576,7 +3585,7 @@
                   </div>
                   <div class="px-4 py-3 border-t border-gray-100">
                     <div class="flex items-center justify-between sm:justify-around"><button
-                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent h-9 rounded-md px-3 flex-1 text-red-600 hover:text-red-700"><svg
+                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent h-9 rounded-md px-3 flex-1 text-red-600 hover:text-red-700" x-data="likeButton" @click="toggleLike()"><svg
                           xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                           class="lucide lucide-heart w-4 h-4 mr-2 fill-current">
@@ -3742,9 +3751,11 @@
                         <p class="font-medium text-sm">Công ty Samsung Việt Nam</p>
                         <p class="text-xs text-gray-500">12k người theo dõi</p>
                       </div>
-                    </div><button
-                      class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 btn-outline-primary text-xs">Theo
-                      dõi</button>
+                    </div>
+                    <button
+                      class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 btn-outline-primary text-xs" x-data="followButton" @click="toggleFollow()">
+                      Theo dõi
+                    </button>
                   </div>
                   <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-3"><img
@@ -3754,9 +3765,11 @@
                         <p class="font-medium text-sm">Nhóm Việc Làm Bình Dương</p>
                         <p class="text-xs text-gray-500">8.5k thành viên</p>
                       </div>
-                    </div><button
-                      class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 btn-outline-primary text-xs">Theo
-                      dõi</button>
+                    </div>
+                    <button
+                      class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 btn-outline-primary text-xs" x-data="followButton" @click="toggleFollow()">
+                      Theo dõi
+                    </button>
                   </div>
                   <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-3"><img
@@ -3766,9 +3779,11 @@
                         <p class="font-medium text-sm">Hội BĐS Bình Dương</p>
                         <p class="text-xs text-gray-500">15k thành viên</p>
                       </div>
-                    </div><button
-                      class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 btn-outline-primary text-xs">Theo
-                      dõi</button>
+                    </div>
+                    <button
+                      class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 btn-outline-primary text-xs" x-data="followButton" @click="toggleFollow()">
+                      Theo dõi
+                    </button>
                   </div>
                 </div>
               </div>
@@ -4108,9 +4123,11 @@
     style="display: none;">
 
     <!-- Progress bars for desktop -->
-    <div class="hidden md:flex absolute top-3 left-1/2 -translate-x-1/2 gap-1 w-[640px] mt-[55px]">
+    <div class="hidden md:flex absolute top-3 left-1/2 -translate-x-1/2 gap-1 mt-[55px]" 
+         :style="'width: ' + getProgressBarsWidth() + 'px'">
       <template x-for="(bar, index) in getVisibleProgressBars()" :key="index">
-        <div class="h-[3px] flex-1 bg-white/30 rounded overflow-hidden">
+        <div class="h-[3px] bg-white/30 rounded overflow-hidden" 
+             :style="'width: ' + getSingleBarWidth() + 'px'">
           <div class="h-full bg-white transition-all duration-75 ease-linear story-progress-bar"
             :style="getBarProgressStyle(index)">
           </div>
@@ -4157,7 +4174,8 @@
       <!-- Progress bars for mobile -->
       <div class="md:hidden absolute top-2 left-2 right-2 flex gap-1 z-10">
         <template x-for="(bar, index) in getVisibleProgressBars()" :key="index">
-          <div class="h-[2px] flex-1 bg-white/30 rounded overflow-hidden">
+          <div class="h-[2px] bg-white/30 rounded overflow-hidden" 
+               :style="'width: calc((100% - 16px) / 5)'">
             <div class="h-full bg-white transition-all duration-75 ease-linear story-progress-bar"
               :style="getBarProgressStyle(index)">
             </div>
