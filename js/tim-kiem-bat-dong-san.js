@@ -16,6 +16,7 @@ document.addEventListener('alpine:init', () => {
     showFormTypeDropdown: false,
     priceMin: '',
     priceMax: '',
+    priceError: '',
     areaMin: 0,
     isDragging: false,
     selectedBedrooms: '',
@@ -295,6 +296,7 @@ document.addEventListener('alpine:init', () => {
       this.selectedFormType = '';
       this.priceMin = '';
       this.priceMax = '';
+      this.priceError = '';
       this.areaMin = 0;
       this.selectedBedrooms = '';
       this.selectedBathrooms = '';
@@ -417,7 +419,25 @@ document.addEventListener('alpine:init', () => {
     },
 
     // Price Range functions
+    validatePrice() {
+      this.priceError = '';
+
+      if (this.priceMin && this.priceMax) {
+        const min = parseFloat(this.priceMin);
+        const max = parseFloat(this.priceMax);
+
+        if (!isNaN(min) && !isNaN(max) && min >= max) {
+          this.priceError = 'Giá trị tối thiểu phải nhỏ hơn giá trị tối đa';
+          return false;
+        }
+      }
+
+      return true;
+    },
+
     updatePriceRange() {
+      this.validatePrice();
+
       const url = new URL(window.location);
 
       // Remove existing price params
@@ -452,6 +472,7 @@ document.addEventListener('alpine:init', () => {
     clearPriceRange() {
       this.priceMin = '';
       this.priceMax = '';
+      this.priceError = '';
       this.updatePriceRange();
     },
 

@@ -11,6 +11,7 @@ document.addEventListener('alpine:init', () => {
     selectedJobTypes: [],
     selectedExperiences: [],
     selectedSkills: [],
+    selectedCompany: null,
 
     // Pagination
     currentPage: 1,
@@ -108,6 +109,9 @@ document.addEventListener('alpine:init', () => {
 
       // Get salary parameter from URL
       this.initializeSalaryFromURL(urlParams);
+
+      // Get company parameter from URL
+      this.initializeCompanyFromURL(urlParams);
 
       // Update page title if keyword exists
       this.updatePageTitle();
@@ -663,6 +667,28 @@ document.addEventListener('alpine:init', () => {
         'urgent': 'Gấp'
       };
       return sortOptions[this.sortBy] || 'Liên quan nhất';
+    },
+
+    // Company parameter handling
+    initializeCompanyFromURL(urlParams) {
+      const companyParam = urlParams.get('company');
+
+      if (companyParam) {
+        // Store the company parameter for potential use
+        this.selectedCompany = companyParam;
+        console.log('Đã load company từ URL:', companyParam);
+      }
+    },
+
+    // Function to get company display name from slug
+    getCompanyDisplayName(slug) {
+      const companyMap = {
+        'samsung-electronics': 'Samsung Electronics',
+        'becamex-idc': 'Becamex IDC',
+        'fpt-software': 'FPT Software',
+        'vingroup': 'Vingroup'
+      };
+      return companyMap[slug] || slug;
     }
   }));
 });

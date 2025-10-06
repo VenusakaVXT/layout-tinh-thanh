@@ -8,6 +8,7 @@ document.addEventListener('alpine:init', () => {
     showPackageDropdown: false,
     priceMin: '',
     priceMax: '',
+    priceError: '',
     hasTrial: false,
     selectedRefundPolicy: '',
     showRefundPolicyDropdown: false,
@@ -26,7 +27,7 @@ document.addEventListener('alpine:init', () => {
     contractTerm: '',
     currentPage: 1,
     totalPages: 5,
-    
+
     categoryMap: {
       'Tất cả danh mục': '',
       'Hỗ trợ khách hàng': 'ho-tro-khach-hang',
@@ -287,6 +288,7 @@ document.addEventListener('alpine:init', () => {
       }
 
       window.history.pushState({}, '', url);
+      this.updateAppliedFilters();
     },
 
     clearCategory() {
@@ -300,6 +302,7 @@ document.addEventListener('alpine:init', () => {
       this.selectedPackage = '';
       this.priceMin = '';
       this.priceMax = '';
+      this.priceError = '';
       this.hasTrial = false;
       this.selectedRefundPolicy = '';
       this.minRating = 0;
@@ -361,6 +364,7 @@ document.addEventListener('alpine:init', () => {
       }
 
       window.history.pushState({}, '', url);
+      this.updateAppliedFilters();
     },
 
     clearPackage() {
@@ -373,7 +377,24 @@ document.addEventListener('alpine:init', () => {
     },
 
     // Price range functions
+    validatePrice() {
+      this.priceError = '';
+
+      if (this.priceMin && this.priceMax) {
+        const min = parseInt(this.priceMin);
+        const max = parseInt(this.priceMax);
+
+        if (!isNaN(min) && !isNaN(max) && min >= max) {
+          this.priceError = 'Giá trị tối thiểu phải nhỏ hơn giá trị tối đa';
+          return false;
+        }
+      }
+
+      return true;
+    },
+
     handlePriceBlur() {
+      this.validatePrice();
       this.updatePriceInURL();
     },
 
@@ -404,11 +425,13 @@ document.addEventListener('alpine:init', () => {
       }
 
       window.history.pushState({}, '', url);
+      this.updateAppliedFilters();
     },
 
     clearPriceRange() {
       this.priceMin = '';
       this.priceMax = '';
+      this.priceError = '';
       this.updatePriceInURL();
     },
 
@@ -423,6 +446,7 @@ document.addEventListener('alpine:init', () => {
       }
 
       window.history.pushState({}, '', url);
+      this.updateAppliedFilters();
     },
 
     clearTrial() {
@@ -452,6 +476,7 @@ document.addEventListener('alpine:init', () => {
       }
 
       window.history.pushState({}, '', url);
+      this.updateAppliedFilters();
     },
 
     clearRefundPolicy() {
@@ -474,6 +499,7 @@ document.addEventListener('alpine:init', () => {
       }
 
       window.history.pushState({}, '', url);
+      this.updateAppliedFilters();
     },
 
     clearMinRating() {
@@ -803,15 +829,35 @@ document.addEventListener('alpine:init', () => {
       }
 
       if (this.priceMin || this.priceMax) {
-        const minPrice = this.priceMin || '0';
-        const maxPrice = this.priceMax || 'Không giới hạn';
-        const priceLabel = this.priceMax ? `${minPrice} - ${maxPrice} VND` : `Từ ${minPrice} VND`;
+        const minPrice = parseInt(this.priceMin) || 0;
+        const maxPrice = parseInt(this.priceMax) || 0;
+        let priceLabel = '';
 
-        filters.push({
-          type: 'price',
-          label: priceLabel,
-          clearFn: () => this.clearPriceRange()
-        });
+        // Case 1: Only priceMin is set
+        if (this.priceMin && !this.priceMax) {
+          priceLabel = `Từ ${this.priceMin} VND`;
+        }
+        // Case 2: Only priceMax is set
+        else if (!this.priceMin && this.priceMax) {
+          priceLabel = `Đến ${this.priceMax} VND`;
+        }
+        // Case 3: Both are set
+        else if (this.priceMin && this.priceMax) {
+          // If max is less than min, only show min price
+          if (maxPrice < minPrice) {
+            priceLabel = `Từ ${this.priceMin} VND`;
+          } else {
+            priceLabel = `${this.priceMin} - ${this.priceMax} VND`;
+          }
+        }
+
+        if (priceLabel) {
+          filters.push({
+            type: 'price',
+            label: priceLabel,
+            clearFn: () => this.clearPriceRange()
+          });
+        }
       }
 
       if (this.hasTrial) {

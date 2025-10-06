@@ -35,7 +35,10 @@ document.addEventListener('alpine:init', () => {
         provinceMap: {
             'Tất cả tỉnh/thành': '',
             'TP. Hồ Chí Minh': 'ho-chi-minh',
-            'Bình Dương': 'binh-duong'
+            'Bình Dương': 'binh-duong',
+            'Hà Nội': 'ha-noi',
+            'Đà Nẵng': 'da-nang',
+            'Đồng Nai': 'dong-nai'
         },
         districtMap: {
             'Bình Dương': {
@@ -1159,6 +1162,22 @@ document.addEventListener('alpine:init', () => {
 
         hasActiveFilters() {
             return this.appliedFilters.length > 0;
+        },
+
+        // Clear specific filter functions
+        clearCertifications() {
+            this.selectedCertifications = [];
+            this.updateCertificationsInURL();
+        },
+
+        clearTags() {
+            this.selectedTags = [];
+            this.updateTagsInURL();
+        },
+
+        clearRating() {
+            this.minRating = 0;
+            this.updateRatingInURL();
         }
     }));
 });

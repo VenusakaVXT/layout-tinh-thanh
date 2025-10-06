@@ -2609,50 +2609,107 @@
                         <path d="m6 9 6 6 6-6"></path>
                       </svg>
                     </button>
-                    
+
                     <!-- Transport Dropdown Menu -->
                     <div x-show="showTransportDropdown" x-cloak x-transition:enter="transition ease-out duration-200"
-                      x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
-                      x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+                      x-transition:enter-start="opacity-0 translate-y-1"
+                      x-transition:enter-end="opacity-100 translate-y-0"
+                      x-transition:leave="transition ease-in duration-150"
+                      x-transition:leave-start="opacity-100 translate-y-0"
                       x-transition:leave-end="opacity-0 translate-y-1" @click.away="showTransportDropdown = false"
-                      class="absolute z-50 w-full mt-1 bg-popover text-popover-foreground border rounded-md shadow-md">
-                      <div class="p-1 bg-white rounded-md shadow-md">
-                        <button type="button" @click="selectTransport('Đi bộ')"
-                          class="flex w-full items-center justify-between rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                          <span>Đi bộ</span>
-                          <svg x-show="selectedTransport === 'Đi bộ'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
-                            <path d="M20 6 9 17l-5-5"></path>
-                          </svg>
-                        </button>
-                        <button type="button" @click="selectTransport('Xe đạp')"
-                          class="flex w-full items-center justify-between rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                          <span>Xe đạp</span>
-                          <svg x-show="selectedTransport === 'Xe đạp'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
-                            <path d="M20 6 9 17l-5-5"></path>
-                          </svg>
-                        </button>
-                        <button type="button" @click="selectTransport('Xe máy')"
-                          class="flex w-full items-center justify-between rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                          <span>Xe máy</span>
-                          <svg x-show="selectedTransport === 'Xe máy'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
-                            <path d="M20 6 9 17l-5-5"></path>
-                          </svg>
-                        </button>
-                        <button type="button" @click="selectTransport('Ô tô')"
-                          class="flex w-full items-center justify-between rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                          <span>Ô tô</span>
-                          <svg x-show="selectedTransport === 'Ô tô'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
-                            <path d="M20 6 9 17l-5-5"></path>
-                          </svg>
-                        </button>
-                        <button type="button" @click="selectTransport('Xe buýt')"
-                          class="flex w-full items-center justify-between rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                          <span>Xe buýt</span>
-                          <svg x-show="selectedTransport === 'Xe buýt'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4">
-                            <path d="M20 6 9 17l-5-5"></path>
-                      </svg>
-                    </button>
-                      </div>
+                      class="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
+                      <ul class="py-1">
+                        <li>
+                          <button type="button" @click="selectTransport('Đi bộ')"
+                            class="w-full text-left px-4 py-2 text-sm flex items-center cursor-pointer"
+                            :class="selectedTransport === 'Đi bộ' ? 'bg-blue-50 text-blue-600' : 'text-gray-900 hover:bg-gray-50'">
+                            <svg x-show="selectedTransport === 'Đi bộ'" xmlns="http://www.w3.org/2000/svg" width="16"
+                              height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                              stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4 mr-2">
+                              <path d="M20 6L9 17l-5-5"></path>
+                            </svg>
+                            <svg x-show="selectedTransport !== 'Đi bộ'" xmlns="http://www.w3.org/2000/svg" width="16"
+                              height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                              stroke-linecap="round" stroke-linejoin="round"
+                              class="lucide lucide-check h-4 w-4 mr-2 invisible">
+                              <path d="M20 6L9 17l-5-5"></path>
+                            </svg>
+                            <span>Đi bộ</span>
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" @click="selectTransport('Xe đạp')"
+                            class="w-full text-left px-4 py-2 text-sm flex items-center cursor-pointer"
+                            :class="selectedTransport === 'Xe đạp' ? 'bg-blue-50 text-blue-600' : 'text-gray-900 hover:bg-gray-50'">
+                            <svg x-show="selectedTransport === 'Xe đạp'" xmlns="http://www.w3.org/2000/svg" width="16"
+                              height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                              stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4 mr-2">
+                              <path d="M20 6L9 17l-5-5"></path>
+                            </svg>
+                            <svg x-show="selectedTransport !== 'Xe đạp'" xmlns="http://www.w3.org/2000/svg" width="16"
+                              height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                              stroke-linecap="round" stroke-linejoin="round"
+                              class="lucide lucide-check h-4 w-4 mr-2 invisible">
+                              <path d="M20 6L9 17l-5-5"></path>
+                            </svg>
+                            <span>Xe đạp</span>
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" @click="selectTransport('Xe máy')"
+                            class="w-full text-left px-4 py-2 text-sm flex items-center cursor-pointer"
+                            :class="selectedTransport === 'Xe máy' ? 'bg-blue-50 text-blue-600' : 'text-gray-900 hover:bg-gray-50'">
+                            <svg x-show="selectedTransport === 'Xe máy'" xmlns="http://www.w3.org/2000/svg" width="16"
+                              height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                              stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4 mr-2">
+                              <path d="M20 6L9 17l-5-5"></path>
+                            </svg>
+                            <svg x-show="selectedTransport !== 'Xe máy'" xmlns="http://www.w3.org/2000/svg" width="16"
+                              height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                              stroke-linecap="round" stroke-linejoin="round"
+                              class="lucide lucide-check h-4 w-4 mr-2 invisible">
+                              <path d="M20 6L9 17l-5-5"></path>
+                            </svg>
+                            <span>Xe máy</span>
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" @click="selectTransport('Ô tô')"
+                            class="w-full text-left px-4 py-2 text-sm flex items-center cursor-pointer"
+                            :class="selectedTransport === 'Ô tô' ? 'bg-blue-50 text-blue-600' : 'text-gray-900 hover:bg-gray-50'">
+                            <svg x-show="selectedTransport === 'Ô tô'" xmlns="http://www.w3.org/2000/svg" width="16"
+                              height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                              stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4 mr-2">
+                              <path d="M20 6L9 17l-5-5"></path>
+                            </svg>
+                            <svg x-show="selectedTransport !== 'Ô tô'" xmlns="http://www.w3.org/2000/svg" width="16"
+                              height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                              stroke-linecap="round" stroke-linejoin="round"
+                              class="lucide lucide-check h-4 w-4 mr-2 invisible">
+                              <path d="M20 6L9 17l-5-5"></path>
+                            </svg>
+                            <span>Ô tô</span>
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" @click="selectTransport('Xe buýt')"
+                            class="w-full text-left px-4 py-2 text-sm flex items-center cursor-pointer"
+                            :class="selectedTransport === 'Xe buýt' ? 'bg-blue-50 text-blue-600' : 'text-gray-900 hover:bg-gray-50'">
+                            <svg x-show="selectedTransport === 'Xe buýt'" xmlns="http://www.w3.org/2000/svg" width="16"
+                              height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                              stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-4 w-4 mr-2">
+                              <path d="M20 6L9 17l-5-5"></path>
+                            </svg>
+                            <svg x-show="selectedTransport !== 'Xe buýt'" xmlns="http://www.w3.org/2000/svg" width="16"
+                              height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                              stroke-linecap="round" stroke-linejoin="round"
+                              class="lucide lucide-check h-4 w-4 mr-2 invisible">
+                              <path d="M20 6L9 17l-5-5"></path>
+                            </svg>
+                            <span>Xe buýt</span>
+                          </button>
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </div>
@@ -4663,7 +4720,7 @@
           </div>
         </div>
 
-        <!-- Location Not Found
+        <!-- Location Not Found -->
         <div class="text-center py-6 sm:py-12 space-y-4 sm:space-y-6">
           <div class="flex justify-center">
             <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gray-100 rounded-full flex items-center justify-center"><svg
@@ -4690,30 +4747,30 @@
                 <path d="m21 21-4.3-4.3"></path>
               </svg><span>Gợi ý tìm kiếm:</span></div>
             <div class="flex flex-wrap justify-center gap-1 sm:gap-2 max-w-md mx-auto">
-              <div
-                class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground cursor-pointer hover:bg-gray-50 transition-colors text-xs px-2 py-1">
-                chợ bến thành</div>
-              <div
-                class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground cursor-pointer hover:bg-gray-50 transition-colors text-xs px-2 py-1">
-                nhà hàng quận 1</div>
-              <div
-                class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground cursor-pointer hover:bg-gray-50 transition-colors text-xs px-2 py-1">
-                bệnh viện</div>
-              <div
-                class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground cursor-pointer hover:bg-gray-50 transition-colors text-xs px-2 py-1">
-                trường đại học</div>
-              <div
-                class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground cursor-pointer hover:bg-gray-50 transition-colors text-xs px-2 py-1">
-                ngân hàng</div>
-              <div
-                class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground cursor-pointer hover:bg-gray-50 transition-colors text-xs px-2 py-1">
-                công viên</div>
-              <div
-                class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground cursor-pointer hover:bg-gray-50 transition-colors text-xs px-2 py-1">
-                ga tàu</div>
-              <div
-                class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground cursor-pointer hover:bg-gray-50 transition-colors text-xs px-2 py-1">
-                UBND</div>
+              <a href="?keyword=chợ bến thành"
+                class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground cursor-pointer hover:bg-gray-50 transition-colors text-xs px-2 py-1 no-underline">
+                chợ bến thành</a>
+              <a href="?keyword=nhà hàng quận 1"
+                class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground cursor-pointer hover:bg-gray-50 transition-colors text-xs px-2 py-1 no-underline">
+                nhà hàng quận 1</a>
+              <a href="?keyword=bệnh viện"
+                class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground cursor-pointer hover:bg-gray-50 transition-colors text-xs px-2 py-1 no-underline">
+                bệnh viện</a>
+              <a href="?keyword=trường đại học"
+                class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground cursor-pointer hover:bg-gray-50 transition-colors text-xs px-2 py-1 no-underline">
+                trường đại học</a>
+              <a href="?keyword=ngân hàng"
+                class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground cursor-pointer hover:bg-gray-50 transition-colors text-xs px-2 py-1 no-underline">
+                ngân hàng</a>
+              <a href="?keyword=công viên"
+                class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground cursor-pointer hover:bg-gray-50 transition-colors text-xs px-2 py-1 no-underline">
+                công viên</a>
+              <a href="?keyword=ga tàu"
+                class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground cursor-pointer hover:bg-gray-50 transition-colors text-xs px-2 py-1 no-underline">
+                ga tàu</a>
+              <a href="?keyword=UBND"
+                class="inline-flex items-center rounded-full border font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground cursor-pointer hover:bg-gray-50 transition-colors text-xs px-2 py-1 no-underline">
+                UBND</a>
             </div>
           </div>
           <div class="flex items-center justify-center gap-2 text-xs sm:text-sm text-gray-500"><svg
@@ -4722,7 +4779,7 @@
               class="lucide lucide-filter h-3 w-3 sm:h-4 sm:w-4">
               <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
             </svg><span>Hoặc thử điều chỉnh bộ lọc để mở rộng kết quả tìm kiếm</span></div>
-        </div> -->
+        </div>
       </div>
     </div>
   </div>
