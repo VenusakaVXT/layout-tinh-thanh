@@ -3,8 +3,10 @@ document.addEventListener('alpine:init', () => {
     activeTab: 'status', // Mặc định tab "Trạng thái" active
 
     init() {
-      // Đảm bảo tab mặc định được hiển thị
-      this.showTab('status');
+      // Đảm bảo tab mặc định được hiển thị (chỉ khi có nhiều form)
+      if (document.getElementById('status-post') && document.getElementById('news-post')) {
+        this.showTab('status');
+      }
       // Khởi tạo emotion dropdown
       this.initEmotionDropdown();
       // Khởi tạo location dropdown
@@ -31,6 +33,10 @@ document.addEventListener('alpine:init', () => {
       this.initDeadlineValidation();
       // Khởi tạo contact validation
       this.initContactValidation();
+      // Khởi tạo service contact validation
+      this.initServiceContactValidation();
+      // Khởi tạo real estate contact validation
+      this.initRealEstateContactValidation();
       // Khởi tạo property type dropdown
       this.initPropertyTypeDropdown();
       // Khởi tạo property form dropdown
@@ -49,6 +55,16 @@ document.addEventListener('alpine:init', () => {
       this.initWorkingTimeDropdown();
       // Khởi tạo guarantee type dropdown
       this.initGuaranteeTypeDropdown();
+      // Khởi tạo status post validation
+      this.initStatusPostValidation();
+      // Khởi tạo news post validation
+      this.initNewsPostValidation();
+      // Khởi tạo job post validation
+      this.initJobPostValidation();
+      // Khởi tạo real estate post validation
+      this.initRealEstatePostValidation();
+      // Khởi tạo service post validation
+      this.initServicePostValidation();
     },
 
     // Chuyển đổi tab
@@ -322,6 +338,45 @@ document.addEventListener('alpine:init', () => {
       if (remoteSwitch) {
         remoteSwitch.addEventListener('click', () => {
           this.toggleSwitch(remoteSwitch);
+        });
+      }
+
+      // Real Estate switches
+      const realEstateUrgentSwitch = document.getElementById('urgentRealEstate');
+      const allowContactSwitch = document.getElementById('allowContact');
+
+      if (realEstateUrgentSwitch) {
+        realEstateUrgentSwitch.addEventListener('click', () => {
+          this.toggleSwitch(realEstateUrgentSwitch);
+        });
+      }
+
+      if (allowContactSwitch) {
+        allowContactSwitch.addEventListener('click', () => {
+          this.toggleSwitch(allowContactSwitch);
+        });
+      }
+
+      // Service switches
+      const urgentServiceSwitch = document.getElementById('urgentService');
+      const equipmentSwitch = document.getElementById('equipment');
+      const homeServiceSwitch = document.getElementById('homeService');
+
+      if (urgentServiceSwitch) {
+        urgentServiceSwitch.addEventListener('click', () => {
+          this.toggleSwitch(urgentServiceSwitch);
+        });
+      }
+
+      if (equipmentSwitch) {
+        equipmentSwitch.addEventListener('click', () => {
+          this.toggleSwitch(equipmentSwitch);
+        });
+      }
+
+      if (homeServiceSwitch) {
+        homeServiceSwitch.addEventListener('click', () => {
+          this.toggleSwitch(homeServiceSwitch);
         });
       }
     },
@@ -922,6 +977,190 @@ document.addEventListener('alpine:init', () => {
       });
     },
 
+    // Service contact validation (Email and Phone)
+    initServiceContactValidation() {
+      const emailInput = document.getElementById('contactEmailService');
+      const phoneInput = document.getElementById('contactPhoneService');
+      const emailMessage = document.getElementById('email-message-service');
+      const phoneMessage = document.getElementById('phone-message-service');
+
+      if (!emailInput || !phoneInput || !emailMessage || !phoneMessage) return;
+
+      // Email validation
+      const validateEmail = () => {
+        const email = emailInput.value.trim();
+
+        if (!email) {
+          // Empty email - show optional message
+          emailMessage.textContent = 'Nhập địa chỉ email hợp lệ (tùy chọn)';
+          emailMessage.className = 'text-sm text-gray-500';
+          return;
+        }
+
+        // Email regex pattern
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailRegex.test(email)) {
+          // Invalid email format
+          emailMessage.textContent = 'Địa chỉ email không hợp lệ';
+          emailMessage.className = 'text-sm text-red-500';
+        } else {
+          // Valid email
+          emailMessage.textContent = 'Địa chỉ email hợp lệ';
+          emailMessage.className = 'text-sm text-green-500';
+        }
+      };
+
+      // Phone validation
+      const validatePhone = () => {
+        const phone = phoneInput.value.trim();
+
+        if (!phone) {
+          // Empty phone - show optional message
+          phoneMessage.textContent = 'Nhập số điện thoại hợp lệ (tùy chọn)';
+          phoneMessage.className = 'text-sm text-gray-500';
+          return;
+        }
+
+        // Remove all non-digit characters
+        const cleanPhone = phone.replace(/\D/g, '');
+
+        // Vietnamese phone number patterns
+        const phoneRegex = /^(0[3|5|7|8|9])[0-9]{8}$/;
+
+        if (!phoneRegex.test(cleanPhone)) {
+          // Invalid phone format
+          phoneMessage.textContent = 'Số điện thoại không hợp lệ (VD: 0123456789)';
+          phoneMessage.className = 'text-sm text-red-500';
+        } else {
+          // Valid phone
+          phoneMessage.textContent = 'Số điện thoại hợp lệ';
+          phoneMessage.className = 'text-sm text-green-500';
+        }
+      };
+
+      // Email event listeners
+      emailInput.addEventListener('input', validateEmail);
+      emailInput.addEventListener('blur', validateEmail);
+
+      // Phone event listeners
+      phoneInput.addEventListener('input', validatePhone);
+      phoneInput.addEventListener('blur', validatePhone);
+
+      // Auto-format phone number on input
+      phoneInput.addEventListener('input', (e) => {
+        let value = e.target.value.replace(/\D/g, '');
+
+        // Limit to 10 digits
+        if (value.length > 10) {
+          value = value.substring(0, 10);
+        }
+
+        // Format: 0123 456 789
+        if (value.length >= 4) {
+          value = value.substring(0, 4) + ' ' + value.substring(4);
+        }
+        if (value.length >= 8) {
+          value = value.substring(0, 8) + ' ' + value.substring(8);
+        }
+
+        e.target.value = value;
+        validatePhone();
+      });
+    },
+
+    // Real Estate contact validation (Email and Phone)
+    initRealEstateContactValidation() {
+      const emailInput = document.getElementById('contactEmailRealEstate');
+      const phoneInput = document.getElementById('contactPhoneRealEstate');
+      const emailMessage = document.getElementById('email-message-real-estate');
+      const phoneMessage = document.getElementById('phone-message-real-estate');
+
+      if (!emailInput || !phoneInput || !emailMessage || !phoneMessage) return;
+
+      // Email validation
+      const validateEmail = () => {
+        const email = emailInput.value.trim();
+
+        if (!email) {
+          // Empty email - show optional message
+          emailMessage.textContent = 'Nhập địa chỉ email hợp lệ (tùy chọn)';
+          emailMessage.className = 'text-sm text-gray-500';
+          return;
+        }
+
+        // Email regex pattern
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailRegex.test(email)) {
+          // Invalid email format
+          emailMessage.textContent = 'Địa chỉ email không hợp lệ';
+          emailMessage.className = 'text-sm text-red-500';
+        } else {
+          // Valid email
+          emailMessage.textContent = 'Địa chỉ email hợp lệ';
+          emailMessage.className = 'text-sm text-green-500';
+        }
+      };
+
+      // Phone validation
+      const validatePhone = () => {
+        const phone = phoneInput.value.trim();
+
+        if (!phone) {
+          // Empty phone - show required message
+          phoneMessage.textContent = 'Số điện thoại là bắt buộc';
+          phoneMessage.className = 'text-sm text-red-500';
+          return;
+        }
+
+        // Remove all non-digit characters
+        const cleanPhone = phone.replace(/\D/g, '');
+
+        // Vietnamese phone number patterns
+        const phoneRegex = /^(0[3|5|7|8|9])[0-9]{8}$/;
+
+        if (!phoneRegex.test(cleanPhone)) {
+          // Invalid phone format
+          phoneMessage.textContent = 'Số điện thoại không hợp lệ (VD: 0123456789)';
+          phoneMessage.className = 'text-sm text-red-500';
+        } else {
+          // Valid phone
+          phoneMessage.textContent = 'Số điện thoại hợp lệ';
+          phoneMessage.className = 'text-sm text-green-500';
+        }
+      };
+
+      // Email event listeners
+      emailInput.addEventListener('input', validateEmail);
+      emailInput.addEventListener('blur', validateEmail);
+
+      // Phone event listeners
+      phoneInput.addEventListener('input', validatePhone);
+      phoneInput.addEventListener('blur', validatePhone);
+
+      // Auto-format phone number on input
+      phoneInput.addEventListener('input', (e) => {
+        let value = e.target.value.replace(/\D/g, '');
+
+        // Limit to 10 digits
+        if (value.length > 10) {
+          value = value.substring(0, 10);
+        }
+
+        // Format: 0123 456 789
+        if (value.length >= 4) {
+          value = value.substring(0, 4) + ' ' + value.substring(4);
+        }
+        if (value.length >= 8) {
+          value = value.substring(0, 8) + ' ' + value.substring(8);
+        }
+
+        e.target.value = value;
+        validatePhone();
+      });
+    },
+
     // Property type dropdown functions
     initPropertyTypeDropdown() {
       const propertyTypeSelect = document.getElementById('property-type-select');
@@ -1145,6 +1384,276 @@ document.addEventListener('alpine:init', () => {
       guaranteeTypeSelect.addEventListener('blur', () => {
         guaranteeTypeSelect.classList.remove('ring-2', 'ring-blue-500');
       });
+    },
+
+    // Status post validation (Content or Image required)
+    initStatusPostValidation() {
+      const contentTextarea = document.getElementById('content');
+      const imageUpload = document.getElementById('status-image-upload');
+      const submitBtn = document.getElementById('status-submit-btn');
+
+      if (!contentTextarea || !imageUpload || !submitBtn) return;
+
+      const validateStatusPost = () => {
+        const hasContent = contentTextarea.value.trim().length > 0;
+        const hasImages = imageUpload.files && imageUpload.files.length > 0;
+
+        // Enable submit button if there's content OR images
+        if (hasContent || hasImages) {
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('disabled:pointer-events-none', 'disabled:opacity-50');
+        } else {
+          submitBtn.disabled = true;
+          submitBtn.classList.add('disabled:pointer-events-none', 'disabled:opacity-50');
+        }
+      };
+
+      // Validate on content change
+      contentTextarea.addEventListener('input', validateStatusPost);
+      contentTextarea.addEventListener('blur', validateStatusPost);
+
+      // Validate on image upload/change
+      imageUpload.addEventListener('change', validateStatusPost);
+
+      // Initial validation
+      validateStatusPost();
+    },
+
+    // News post validation (Title, Summary, Content, Featured Image required)
+    initNewsPostValidation() {
+      const titleInput = document.getElementById('news-title');
+      const summaryTextarea = document.getElementById('news-summary');
+      const contentTextarea = document.getElementById('news-content');
+      const featuredImageInput = document.getElementById('news-featured-image');
+      const submitBtn = document.getElementById('news-submit-btn');
+
+      if (!titleInput || !summaryTextarea || !contentTextarea || !featuredImageInput || !submitBtn) return;
+
+      const validateNewsPost = () => {
+        const hasTitle = titleInput.value.trim().length > 0;
+        const hasSummary = summaryTextarea.value.trim().length > 0;
+        const hasContent = contentTextarea.value.trim().length > 0;
+        const hasFeaturedImage = featuredImageInput.files && featuredImageInput.files.length > 0;
+
+        // Enable submit button if all required fields are filled
+        if (hasTitle && hasSummary && hasContent && hasFeaturedImage) {
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('disabled:pointer-events-none', 'disabled:opacity-50');
+        } else {
+          submitBtn.disabled = true;
+          submitBtn.classList.add('disabled:pointer-events-none', 'disabled:opacity-50');
+        }
+      };
+
+      // Validate on input change
+      titleInput.addEventListener('input', validateNewsPost);
+      titleInput.addEventListener('blur', validateNewsPost);
+
+      summaryTextarea.addEventListener('input', validateNewsPost);
+      summaryTextarea.addEventListener('blur', validateNewsPost);
+
+      contentTextarea.addEventListener('input', validateNewsPost);
+      contentTextarea.addEventListener('blur', validateNewsPost);
+
+      // Validate on image upload/change
+      featuredImageInput.addEventListener('change', validateNewsPost);
+
+      // Initial validation
+      validateNewsPost();
+    },
+
+    // Job post validation (Required fields + Email format)
+    initJobPostValidation() {
+      const titleInput = document.getElementById('job-title');
+      const companyInput = document.getElementById('job-company');
+      const jobTypeSelect = document.getElementById('job-type-select');
+      const workTypeSelect = document.getElementById('work-type-select');
+      const experienceSelect = document.getElementById('experience-select');
+      const workLocationInput = document.getElementById('job-work-location');
+      const descriptionTextarea = document.getElementById('job-description');
+      const requirementsTextarea = document.getElementById('job-requirements');
+      const emailInput = document.getElementById('contactEmail');
+      const submitBtn = document.getElementById('job-submit-btn');
+
+      if (!titleInput || !companyInput || !jobTypeSelect || !workTypeSelect || !experienceSelect ||
+        !workLocationInput || !descriptionTextarea || !requirementsTextarea || !emailInput || !submitBtn) return;
+
+      const validateJobPost = () => {
+        const hasTitle = titleInput.value.trim().length > 0;
+        const hasCompany = companyInput.value.trim().length > 0;
+        const hasJobType = jobTypeSelect.value !== '';
+        const hasWorkType = workTypeSelect.value !== '';
+        const hasExperience = experienceSelect.value !== '';
+        const hasWorkLocation = workLocationInput.value.trim().length > 0;
+        const hasDescription = descriptionTextarea.value.trim().length > 0;
+        const hasRequirements = requirementsTextarea.value.trim().length > 0;
+
+        // Email validation
+        const email = emailInput.value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const hasValidEmail = email !== '' && emailRegex.test(email);
+
+        // Enable submit button if all required fields are filled and email is valid
+        if (hasTitle && hasCompany && hasJobType && hasWorkType && hasExperience &&
+          hasWorkLocation && hasDescription && hasRequirements && hasValidEmail) {
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('disabled:pointer-events-none', 'disabled:opacity-50');
+        } else {
+          submitBtn.disabled = true;
+          submitBtn.classList.add('disabled:pointer-events-none', 'disabled:opacity-50');
+        }
+      };
+
+      // Validate on input change
+      titleInput.addEventListener('input', validateJobPost);
+      titleInput.addEventListener('blur', validateJobPost);
+
+      companyInput.addEventListener('input', validateJobPost);
+      companyInput.addEventListener('blur', validateJobPost);
+
+      jobTypeSelect.addEventListener('change', validateJobPost);
+      workTypeSelect.addEventListener('change', validateJobPost);
+      experienceSelect.addEventListener('change', validateJobPost);
+
+      workLocationInput.addEventListener('input', validateJobPost);
+      workLocationInput.addEventListener('blur', validateJobPost);
+
+      descriptionTextarea.addEventListener('input', validateJobPost);
+      descriptionTextarea.addEventListener('blur', validateJobPost);
+
+      requirementsTextarea.addEventListener('input', validateJobPost);
+      requirementsTextarea.addEventListener('blur', validateJobPost);
+
+      emailInput.addEventListener('input', validateJobPost);
+      emailInput.addEventListener('blur', validateJobPost);
+
+      // Initial validation
+      validateJobPost();
+    },
+
+    // Real Estate post validation (Required fields + Images + Phone)
+    initRealEstatePostValidation() {
+      const titleInput = document.getElementById('real-estate-title');
+      const propertyTypeSelect = document.getElementById('property-type-select');
+      const propertyFormSelect = document.getElementById('property-form-select');
+      const priceInput = document.getElementById('real-estate-price');
+      const areaInput = document.getElementById('real-estate-area');
+      const addressInput = document.getElementById('real-estate-address');
+      const descriptionTextarea = document.getElementById('real-estate-description');
+      const phoneInput = document.getElementById('contactPhoneRealEstate');
+      const imagesInput = document.getElementById('real-estate-images');
+      const submitBtn = document.getElementById('real-estate-submit-btn');
+
+      if (!titleInput || !propertyTypeSelect || !propertyFormSelect || !priceInput ||
+        !areaInput || !addressInput || !descriptionTextarea || !phoneInput ||
+        !imagesInput || !submitBtn) return;
+
+      const validateRealEstatePost = () => {
+        const hasTitle = titleInput.value.trim().length > 0;
+        const hasPropertyType = propertyTypeSelect.value !== '';
+        const hasPropertyForm = propertyFormSelect.value !== '';
+        const hasPrice = priceInput.value.trim().length > 0;
+        const hasArea = areaInput.value.trim().length > 0;
+        const hasAddress = addressInput.value.trim().length > 0;
+        const hasDescription = descriptionTextarea.value.trim().length > 0;
+        const hasImages = imagesInput.files && imagesInput.files.length > 0;
+
+        // Phone validation
+        const phone = phoneInput.value.trim();
+        const cleanPhone = phone.replace(/\D/g, '');
+        const phoneRegex = /^(0[3|5|7|8|9])[0-9]{8}$/;
+        const hasValidPhone = phone !== '' && phoneRegex.test(cleanPhone);
+
+        // Enable submit button if all required fields are filled, has images, and phone is valid
+        if (hasTitle && hasPropertyType && hasPropertyForm && hasPrice &&
+          hasArea && hasAddress && hasDescription && hasValidPhone && hasImages) {
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('disabled:pointer-events-none', 'disabled:opacity-50');
+        } else {
+          submitBtn.disabled = true;
+          submitBtn.classList.add('disabled:pointer-events-none', 'disabled:opacity-50');
+        }
+      };
+
+      // Validate on input change
+      titleInput.addEventListener('input', validateRealEstatePost);
+      titleInput.addEventListener('blur', validateRealEstatePost);
+
+      propertyTypeSelect.addEventListener('change', validateRealEstatePost);
+      propertyFormSelect.addEventListener('change', validateRealEstatePost);
+
+      priceInput.addEventListener('input', validateRealEstatePost);
+      priceInput.addEventListener('blur', validateRealEstatePost);
+
+      areaInput.addEventListener('input', validateRealEstatePost);
+      areaInput.addEventListener('blur', validateRealEstatePost);
+
+      addressInput.addEventListener('input', validateRealEstatePost);
+      addressInput.addEventListener('blur', validateRealEstatePost);
+
+      descriptionTextarea.addEventListener('input', validateRealEstatePost);
+      descriptionTextarea.addEventListener('blur', validateRealEstatePost);
+
+      phoneInput.addEventListener('input', validateRealEstatePost);
+      phoneInput.addEventListener('blur', validateRealEstatePost);
+
+      // Validate on image upload/change
+      imagesInput.addEventListener('change', validateRealEstatePost);
+
+      // Initial validation
+      validateRealEstatePost();
+    },
+
+    // Service post validation (Required fields + Phone validation)
+    initServicePostValidation() {
+      const titleInput = document.getElementById('service-title');
+      const priceInput = document.getElementById('service-price');
+      const descriptionTextarea = document.getElementById('service-description');
+      const categorySelect = document.getElementById('service-category-select');
+      const phoneInput = document.getElementById('contactPhoneService');
+      const submitBtn = document.getElementById('service-submit-btn');
+
+      if (!titleInput || !priceInput || !descriptionTextarea || !categorySelect || !phoneInput || !submitBtn) return;
+
+      const validateServicePost = () => {
+        const hasTitle = titleInput.value.trim().length > 0;
+        const hasPrice = priceInput.value.trim().length > 0;
+        const hasDescription = descriptionTextarea.value.trim().length > 0;
+        const hasCategory = categorySelect.value !== '';
+
+        // Phone validation
+        const phone = phoneInput.value.trim();
+        const cleanPhone = phone.replace(/\D/g, '');
+        const phoneRegex = /^(0[3|5|7|8|9])[0-9]{8}$/;
+        const hasValidPhone = phone !== '' && phoneRegex.test(cleanPhone);
+
+        // Enable submit button if all required fields are filled and phone is valid
+        if (hasTitle && hasPrice && hasDescription && hasCategory && hasValidPhone) {
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('disabled:pointer-events-none', 'disabled:opacity-50');
+        } else {
+          submitBtn.disabled = true;
+          submitBtn.classList.add('disabled:pointer-events-none', 'disabled:opacity-50');
+        }
+      };
+
+      // Validate on input change
+      titleInput.addEventListener('input', validateServicePost);
+      titleInput.addEventListener('blur', validateServicePost);
+
+      priceInput.addEventListener('input', validateServicePost);
+      priceInput.addEventListener('blur', validateServicePost);
+
+      descriptionTextarea.addEventListener('input', validateServicePost);
+      descriptionTextarea.addEventListener('blur', validateServicePost);
+
+      categorySelect.addEventListener('change', validateServicePost);
+
+      phoneInput.addEventListener('input', validateServicePost);
+      phoneInput.addEventListener('blur', validateServicePost);
+
+      // Initial validation
+      validateServicePost();
     }
 
   }));
