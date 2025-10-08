@@ -205,28 +205,32 @@
         }
 
         /* Badge Styles */
-        .badge-default {
-          @apply inline-flex items-center border px-2.5 py-0.5 text-xs font-semibold rounded-md;
+        .badge {
+          @apply inline-flex justify-center items-center border px-2.5 py-0.5 text-xs font-semibold rounded-md;
         }
 
         .badge-primary {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-blue-100 text-blue-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-blue-100 text-blue-700 rounded-md;
         }
 
         .badge-secondary {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-gray-100 text-gray-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-gray-100 text-gray-700 rounded-md;
         }
 
         .badge-success {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-green-100 text-green-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-green-100 text-green-700 rounded-md;
         }
 
         .badge-warning {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-yellow-100 text-yellow-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-yellow-100 text-yellow-700 rounded-md;
         }
 
         .badge-danger {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-red-100 text-red-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-red-100 text-red-700 rounded-md;
+        }
+        
+        .badge-featured {
+          @apply bg-orange-500 text-white;
         }
 
         .badge-hot {
@@ -1082,40 +1086,6 @@
                 margin-top: 0.875rem;
             }
             
-            /* Size Utilities */
-            .w-fit {
-                width: fit-content;
-            }
-            
-            .h-fit {
-                height: fit-content;
-            }
-            
-            .size-4 {
-                @apply w-4 h-4;
-            }
-            
-            .size-5 {
-                @apply w-5 h-5;
-            }
-            
-            .size-6 {
-                @apply w-6 h-6;
-            }
-            
-            .size-8 {
-                @apply w-8 h-8;
-            }
-            
-            .size-10 {
-                @apply w-10 h-10;
-            }
-            
-            .size-12 {
-                @apply w-12 h-12;
-            }
-            
-                
             /* Custom scrollbar for mobile menu */
             .custom-scrollbar::-webkit-scrollbar {
                 width: 4px;
@@ -1157,12 +1127,18 @@
   <script src="js/header.js"></script>
   <!-- Homepage Component JS -->
   <script src="js/homepage.js"></script>
+  <!-- Chi tiết Bất động sản Component JS -->
+  <script src="js/chi-tiet-bat-dong-san.js"></script>
+  <!-- Blaze Slider JS -->
+  <script src="https://cdn.jsdelivr.net/npm/blaze-slider@1.9.2/dist/blaze-slider.min.js"></script>
   <!-- Lucide Icons - Custom Build -->
   <!-- <script src="js/lucide-custom.min.js"></script> -->
   <!-- Hiện tại đang Development nên tôi dùng CDN của Lucide trước -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   <!-- Link CSS -->
   <link rel="stylesheet" href="css/style.css">
+  <!-- Blaze Slider CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/blaze-slider@1.9.2/dist/blaze.css" />
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -3202,7 +3178,9 @@
                       </div>
                       <div class="text-sm text-gray-600 mb-2">
                         <p class="overflow-hidden whitespace-pre-wrap break-words"
-                          style="display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">“Dự án rất đẹp, vị trí thuận lợi, giao thông dễ dàng. Chủ đầu tư uy tín, tiến độ đúng cam kết.”</p>
+                          style="display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">
+                          “Dự án rất đẹp, vị trí thuận lợi, giao thông dễ dàng. Chủ đầu tư uy tín, tiến độ đúng cam
+                          kết.”</p>
                       </div>
                       <div class="flex items-center space-x-4 text-xs text-gray-500"><span>2 ngày trước</span><button
                           class="flex items-center text-gray-500 hover:text-blue-600"><svg
@@ -3297,7 +3275,8 @@
                       </div>
                       <div class="text-sm text-gray-600 mb-2">
                         <p class="overflow-hidden whitespace-pre-wrap break-words"
-                          style="display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">“Giá cả hợp lý, thiết kế hiện đại. Tuy nhiên cần cải thiện thêm về hệ thống tiện ích.”</p>
+                          style="display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">
+                          “Giá cả hợp lý, thiết kế hiện đại. Tuy nhiên cần cải thiện thêm về hệ thống tiện ích.”</p>
                       </div>
                       <div class="flex items-center space-x-4 text-xs text-gray-500"><span>1 tuần trước</span><button
                           class="flex items-center text-gray-500 hover:text-blue-600"><svg
@@ -3392,7 +3371,8 @@
                       </div>
                       <div class="text-sm text-gray-600 mb-2">
                         <p class="overflow-hidden whitespace-pre-wrap break-words"
-                          style="display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">Khu vực yên tĩnh, an ninh tốt. Thủ tục nhanh chóng.”</p>
+                          style="display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">
+                          Khu vực yên tĩnh, an ninh tốt. Thủ tục nhanh chóng.”</p>
                       </div>
                       <div class="flex items-center space-x-4 text-xs text-gray-500"><span>3 tuần trước</span><button
                           class="flex items-center text-gray-500 hover:text-blue-600"><svg
@@ -3468,7 +3448,8 @@
                       </div>
                       <div class="text-sm text-gray-600 mb-2">
                         <p class="overflow-hidden whitespace-pre-wrap break-words"
-                          style="display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">"Khu vực yên tĩnh, an ninh tốt. Thủ tục nhanh chóng."</p>
+                          style="display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">
+                          "Khu vực yên tĩnh, an ninh tốt. Thủ tục nhanh chóng."</p>
                       </div>
                       <div class="flex items-center space-x-4 text-xs text-gray-500"><span>3 tuần trước</span><button
                           class="flex items-center text-gray-500 hover:text-blue-600"><svg
@@ -3568,7 +3549,8 @@
                       </div>
                       <div class="text-sm text-gray-600 mb-2">
                         <p class="overflow-hidden whitespace-pre-wrap break-words"
-                          style="display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">"Giá cả hợp lý, thiết kế hiện đại. Tuy nhiên cần cải thiện thêm về hệ thống tiện ích."</p>
+                          style="display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">
+                          "Giá cả hợp lý, thiết kế hiện đại. Tuy nhiên cần cải thiện thêm về hệ thống tiện ích."</p>
                       </div>
                       <div class="flex items-center space-x-4 text-xs text-gray-500"><span>1 tuần trước</span><button
                           class="flex items-center text-gray-500 hover:text-blue-600"><svg
@@ -4039,12 +4021,9 @@
                     placeholder="VD: 3.5 tỷ" value="2.8 tỷ VNĐ"></div>
                 <div><label class="block text-sm font-medium text-gray-700 mb-1">Tỷ lệ vay (%)</label><input
                     type="number" class="custom-input w-full px-3 py-2 border border-gray-300 rounded-md"
-                    placeholder="70" min="10" max="90" 
-                    x-model="loanPercentage"
-                    @input="onNumberInput($event)">
+                    placeholder="70" min="10" max="90" x-model="loanPercentage" @input="onNumberInput($event)">
                   <div class="mt-1"><input type="range" min="10" max="90"
-                      class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" 
-                      x-model="loanPercentage"
+                      class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" x-model="loanPercentage"
                       @input="onRangeInput($event)"></div>
                 </div>
                 <div><label class="block text-sm font-medium text-gray-700 mb-1">Thời hạn vay (năm)</label><input
@@ -4612,9 +4591,6 @@
       </form>
     </div>
   </div>
-
-  <!-- Chi tiết Bất động sản Component JS -->
-  <script src="js/chi-tiet-bat-dong-san.js"></script>
 
   <!-- Initialize Lucide Icons -->
   <script>

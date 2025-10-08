@@ -216,28 +216,32 @@
         }
 
         /* Badge Styles */
-        .badge-default {
-          @apply inline-flex items-center border px-2.5 py-0.5 text-xs font-semibold rounded-md;
+        .badge {
+          @apply inline-flex justify-center items-center border px-2.5 py-0.5 text-xs font-semibold rounded-md;
         }
 
         .badge-primary {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-blue-100 text-blue-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-blue-100 text-blue-700 rounded-md;
         }
 
         .badge-secondary {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-gray-100 text-gray-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-gray-100 text-gray-700 rounded-md;
         }
 
         .badge-success {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-green-100 text-green-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-green-100 text-green-700 rounded-md;
         }
 
         .badge-warning {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-yellow-100 text-yellow-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-yellow-100 text-yellow-700 rounded-md;
         }
 
         .badge-danger {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-red-100 text-red-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-red-100 text-red-700 rounded-md;
+        }
+                
+        .badge-featured {
+          @apply bg-orange-500 text-white;
         }
 
         .badge-hot {
@@ -1076,57 +1080,6 @@
                 @apply flex flex-col items-start justify-start;
             }
             
-            /* Spacing Utilities */
-            .space-y-0\.5 > * + * {
-                margin-top: 0.125rem;
-            }
-            
-            .space-y-1\.5 > * + * {
-                margin-top: 0.375rem;
-            }
-            
-            .space-y-2\.5 > * + * {
-                margin-top: 0.625rem;
-            }
-            
-            .space-y-3\.5 > * + * {
-                margin-top: 0.875rem;
-            }
-            
-            /* Size Utilities */
-            .w-fit {
-                width: fit-content;
-            }
-            
-            .h-fit {
-                height: fit-content;
-            }
-            
-            .size-4 {
-                @apply w-4 h-4;
-            }
-            
-            .size-5 {
-                @apply w-5 h-5;
-            }
-            
-            .size-6 {
-                @apply w-6 h-6;
-            }
-            
-            .size-8 {
-                @apply w-8 h-8;
-            }
-            
-            .size-10 {
-                @apply w-10 h-10;
-            }
-            
-            .size-12 {
-                @apply w-12 h-12;
-            }
-            
-                
             /* Custom scrollbar for mobile menu */
             .custom-scrollbar::-webkit-scrollbar {
                 width: 4px;
@@ -6940,8 +6893,7 @@
       <div class="container mx-auto px-4">
         <div class="flex items-center justify-between mb-8">
           <div><a href="/viec-lam">
-              <h2
-                class="text-xl md:text-2xl md:text-3xl font-bold text-gray-900 mb-2 title-section-hover">
+              <h2 class="text-xl md:text-2xl md:text-3xl font-bold text-gray-900 mb-2 title-section-hover">
                 Việc Làm Đề Xuất
               </h2>
             </a></div>
@@ -7073,10 +7025,8 @@
                           </div>
                         </div>
                         <div class="flex flex-col gap-2 ml-2">
-                          <div
-                            class="rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white flex items-center justify-center">
-                            Gấp</div><button class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">Ứng
-                            tuyển</button>
+                          <button class="badge badge-trending">Ứng tuyển</button>
+                          <div class="badge badge-hot">Gấp</div>
                         </div>
                       </div>
                       <div class="space-y-2 mb-3">
@@ -7229,7 +7179,8 @@
                       <div class="h-[62px] flex items-start justify-between mb-3">
                         <div class="flex items-start gap-3 flex-1"><a
                             href="/viec-lam/cong-ty/công-ty-tnhh-pouchen-việt-nam"><img
-                              src="./public/images/placeholder.svg?height=60&amp;width=60" alt="Công ty TNHH Pouchen Việt Nam"
+                              src="./public/images/placeholder.svg?height=60&amp;width=60"
+                              alt="Công ty TNHH Pouchen Việt Nam"
                               class="w-12 h-12 object-cover rounded-lg flex-shrink-0 hover:opacity-90 transition-opacity"></a>
                           <div class="flex-1 min-w-0">
                             <h3 class="font-semibold text-gray-900 line-clamp-1 mb-1"><a
@@ -7242,10 +7193,8 @@
                           </div>
                         </div>
                         <div class="flex flex-col gap-2 ml-2">
-                          <div
-                            class="rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white flex items-center justify-center">
-                            Gấp</div><button class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">Ứng
-                            tuyển</button>
+                          <button class="badge badge-trending">Ứng tuyển</button>
+                          <div class="badge badge-hot">Gấp</div>
                         </div>
                       </div>
                       <div class="space-y-2 mb-3">
@@ -7392,7 +7341,8 @@
                       <div class="h-[62px] flex items-start justify-between mb-3">
                         <div class="flex items-start gap-3 flex-1"><a
                             href="/viec-lam/cong-ty/công-ty-cp-thép-hòa-phát"><img
-                              src="./public/images/placeholder.svg?height=60&amp;width=60" alt="Công ty CP Thép Hòa Phát"
+                              src="./public/images/placeholder.svg?height=60&amp;width=60"
+                              alt="Công ty CP Thép Hòa Phát"
                               class="w-12 h-12 object-cover rounded-lg flex-shrink-0 hover:opacity-90 transition-opacity"></a>
                           <div class="flex-1 min-w-0">
                             <h3 class="font-semibold text-gray-900 line-clamp-1 mb-1"><a
@@ -7404,10 +7354,8 @@
                           </div>
                         </div>
                         <div class="flex flex-col gap-2 ml-2">
-                          <div
-                            class="rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white flex items-center justify-center">
-                            Gấp</div><button class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">Ứng
-                            tuyển</button>
+                          <button class="badge badge-trending">Ứng tuyển</button>
+                          <div class="badge badge-hot">Gấp</div>
                         </div>
                       </div>
                       <div class="space-y-2 mb-3">
@@ -7481,7 +7429,8 @@
                       <div class="h-[62px] flex items-start justify-between mb-3">
                         <div class="flex items-start gap-3 flex-1"><a
                             href="/viec-lam/cong-ty/công-ty-tnhh-phần-mềm-fpt"><img
-                              src="./public/images/placeholder.svg?height=60&amp;width=60" alt="Công ty TNHH Phần mềm FPT"
+                              src="./public/images/placeholder.svg?height=60&amp;width=60"
+                              alt="Công ty TNHH Phần mềm FPT"
                               class="w-12 h-12 object-cover rounded-lg flex-shrink-0 hover:opacity-90 transition-opacity"></a>
                           <div class="flex-1 min-w-0">
                             <h3 class="font-semibold text-gray-900 line-clamp-1 mb-1"><a
@@ -7642,7 +7591,8 @@
                       <div class="h-[62px] flex items-start justify-between mb-3">
                         <div class="flex items-start gap-3 flex-1"><a
                             href="/viec-lam/cong-ty/công-ty-tnhh-denso-việt-nam"><img
-                              src="./public/images/placeholder.svg?height=60&amp;width=60" alt="Công ty TNHH Denso Việt Nam"
+                              src="./public/images/placeholder.svg?height=60&amp;width=60"
+                              alt="Công ty TNHH Denso Việt Nam"
                               class="w-12 h-12 object-cover rounded-lg flex-shrink-0 hover:opacity-90 transition-opacity"></a>
                           <div class="flex-1 min-w-0">
                             <h3 class="font-semibold text-gray-900 line-clamp-1 mb-1"><a
@@ -7654,10 +7604,8 @@
                           </div>
                         </div>
                         <div class="flex flex-col gap-2 ml-2">
-                          <div
-                            class="rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white flex items-center justify-center">
-                            Gấp</div><button class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">Ứng
-                            tuyển</button>
+                          <button class="badge badge-trending">Ứng tuyển</button>
+                          <div class="badge badge-hot">Gấp</div>
                         </div>
                       </div>
                       <div class="space-y-2 mb-3">
@@ -7811,7 +7759,8 @@
                       <div class="h-[62px] flex items-start justify-between mb-3">
                         <div class="flex items-start gap-3 flex-1"><a
                             href="/viec-lam/cong-ty/công-ty-tnhh-quảng-cáo-ogilvy"><img
-                              src="./public/images/placeholder.svg?height=60&amp;width=60" alt="Công ty TNHH Quảng cáo Ogilvy"
+                              src="./public/images/placeholder.svg?height=60&amp;width=60"
+                              alt="Công ty TNHH Quảng cáo Ogilvy"
                               class="w-12 h-12 object-cover rounded-lg flex-shrink-0 hover:opacity-90 transition-opacity"></a>
                           <div class="flex-1 min-w-0">
                             <h3 class="font-semibold text-gray-900 line-clamp-1 mb-1"><a
@@ -7893,7 +7842,8 @@
                       <div class="h-[62px] flex items-start justify-between mb-3">
                         <div class="flex items-start gap-3 flex-1"><a
                             href="/viec-lam/cong-ty/hệ-thống-siêu-thị-co.opmart"><img
-                              src="./public/images/placeholder.svg?height=60&amp;width=60" alt="Hệ thống Siêu thị Co.opmart"
+                              src="./public/images/placeholder.svg?height=60&amp;width=60"
+                              alt="Hệ thống Siêu thị Co.opmart"
                               class="w-12 h-12 object-cover rounded-lg flex-shrink-0 hover:opacity-90 transition-opacity"></a>
                           <div class="flex-1 min-w-0">
                             <h3 class="font-semibold text-gray-900 line-clamp-1 mb-1"><a
@@ -7906,10 +7856,8 @@
                           </div>
                         </div>
                         <div class="flex flex-col gap-2 ml-2">
-                          <div
-                            class="rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white flex items-center justify-center">
-                            Gấp</div><button class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">Ứng
-                            tuyển</button>
+                          <button class="badge badge-trending">Ứng tuyển</button>
+                          <div class="badge badge-hot">Gấp</div>
                         </div>
                       </div>
                       <div class="space-y-2 mb-3">
@@ -7983,7 +7931,8 @@
                       <div class="h-[62px] flex items-start justify-between mb-3">
                         <div class="flex items-start gap-3 flex-1"><a
                             href="/viec-lam/cong-ty/bệnh-viện-đa-khoa-quốc-tế-becamex"><img
-                              src="./public/images/placeholder.svg?height=60&amp;width=60" alt="Bệnh viện Đa khoa Quốc tế Becamex"
+                              src="./public/images/placeholder.svg?height=60&amp;width=60"
+                              alt="Bệnh viện Đa khoa Quốc tế Becamex"
                               class="w-12 h-12 object-cover rounded-lg flex-shrink-0 hover:opacity-90 transition-opacity"></a>
                           <div class="flex-1 min-w-0">
                             <h3 class="font-semibold text-gray-900 line-clamp-1 mb-1"><a
@@ -8065,7 +8014,8 @@
                       <div class="h-[62px] flex items-start justify-between mb-3">
                         <div class="flex items-start gap-3 flex-1"><a
                             href="/viec-lam/cong-ty/công-ty-tnhh-logistics-gemadept"><img
-                              src="./public/images/placeholder.svg?height=60&amp;width=60" alt="Công ty TNHH Logistics Gemadept"
+                              src="./public/images/placeholder.svg?height=60&amp;width=60"
+                              alt="Công ty TNHH Logistics Gemadept"
                               class="w-12 h-12 object-cover rounded-lg flex-shrink-0 hover:opacity-90 transition-opacity"></a>
                           <div class="flex-1 min-w-0">
                             <h3 class="font-semibold text-gray-900 line-clamp-1 mb-1"><a
@@ -8147,7 +8097,8 @@
                       <div class="h-[62px] flex items-start justify-between mb-3">
                         <div class="flex items-start gap-3 flex-1"><a
                             href="/viec-lam/cong-ty/công-ty-tnhh-jabil-circuit-việt-nam"><img
-                              src="./public/images/placeholder.svg?height=60&amp;width=60" alt="Công ty TNHH Jabil Circuit Việt Nam"
+                              src="./public/images/placeholder.svg?height=60&amp;width=60"
+                              alt="Công ty TNHH Jabil Circuit Việt Nam"
                               class="w-12 h-12 object-cover rounded-lg flex-shrink-0 hover:opacity-90 transition-opacity"></a>
                           <div class="flex-1 min-w-0">
                             <h3 class="font-semibold text-gray-900 line-clamp-1 mb-1"><a
@@ -8160,10 +8111,8 @@
                           </div>
                         </div>
                         <div class="flex flex-col gap-2 ml-2">
-                          <div
-                            class="rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white flex items-center justify-center">
-                            Gấp</div><button class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">Ứng
-                            tuyển</button>
+                          <button class="badge badge-trending">Ứng tuyển</button>
+                          <div class="badge badge-hot">Gấp</div>
                         </div>
                       </div>
                       <div class="space-y-2 mb-3">
@@ -8284,7 +8233,8 @@
                 <div
                   class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow group card-hover">
                   <div class="p-0">
-                    <div class="relative"><a href="/tin-tuc/1"><img src="./public/images/placeholder.svg?height=200&amp;width=300"
+                    <div class="relative"><a href="/tin-tuc/1"><img
+                          src="./public/images/placeholder.svg?height=200&amp;width=300"
                           alt="Bình Dương thu hút 2,5 tỷ USD vốn đầu tư nước ngoài trong năm 2024"
                           class="w-full h-48 object-cover rounded-t-lg group-hover:opacity-90 transition-opacity"></a><span
                         class="badge-hot absolute top-2 right-2">Hot</span></div>
@@ -8303,7 +8253,8 @@
                       </div>
                       <h3
                         class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                        <a href="/tin-tuc/1">Bình Dương thu hút 2,5 tỷ USD vốn đầu tư nước ngoài trong năm 2024</a></h3>
+                        <a href="/tin-tuc/1">Bình Dương thu hút 2,5 tỷ USD vốn đầu tư nước ngoài trong năm 2024</a>
+                      </h3>
                       <p class="text-sm text-gray-600 mb-3 line-clamp-2">Tỉnh Bình Dương tiếp tục khẳng định vị thế là
                         điểm đến hấp dẫn cho các nhà đầu tư quốc tế với nhiều dự án lớn được triển khai.</p>
                       <div class="flex items-center justify-between text-xs text-gray-500">
@@ -8326,7 +8277,8 @@
                 <div
                   class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow group card-hover">
                   <div class="p-0">
-                    <div class="relative"><a href="/tin-tuc/2"><img src="./public/images/placeholder.svg?height=200&amp;width=300"
+                    <div class="relative"><a href="/tin-tuc/2"><img
+                          src="./public/images/placeholder.svg?height=200&amp;width=300"
                           alt="Khánh thành cầu vượt Mỹ Phước - Tân Vạn, giảm ùn tắc giao thông"
                           class="w-full h-48 object-cover rounded-t-lg group-hover:opacity-90 transition-opacity"></a>
                     </div>
@@ -8345,7 +8297,8 @@
                       </div>
                       <h3
                         class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                        <a href="/tin-tuc/2">Khánh thành cầu vượt Mỹ Phước - Tân Vạn, giảm ùn tắc giao thông</a></h3>
+                        <a href="/tin-tuc/2">Khánh thành cầu vượt Mỹ Phước - Tân Vạn, giảm ùn tắc giao thông</a>
+                      </h3>
                       <p class="text-sm text-gray-600 mb-3 line-clamp-2">Cầu vượt Mỹ Phước - Tân Vạn chính thức đưa vào
                         sử dụng, góp phần giải quyết tình trạng ùn tắc giao thông tại khu vực.</p>
                       <div class="flex items-center justify-between text-xs text-gray-500">
@@ -8368,7 +8321,8 @@
                 <div
                   class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow group card-hover">
                   <div class="p-0">
-                    <div class="relative"><a href="/tin-tuc/3"><img src="./public/images/placeholder.svg?height=200&amp;width=300"
+                    <div class="relative"><a href="/tin-tuc/3"><img
+                          src="./public/images/placeholder.svg?height=200&amp;width=300"
                           alt="Lễ hội Văn hóa Dân gian Bình Dương 2024 thu hút hàng nghìn du khách"
                           class="w-full h-48 object-cover rounded-t-lg group-hover:opacity-90 transition-opacity"></a>
                     </div>
@@ -8411,7 +8365,8 @@
                 <div
                   class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow group card-hover">
                   <div class="p-0">
-                    <div class="relative"><a href="/tin-tuc/16"><img src="./public/images/placeholder.svg?height=200&amp;width=300"
+                    <div class="relative"><a href="/tin-tuc/16"><img
+                          src="./public/images/placeholder.svg?height=200&amp;width=300"
                           alt="Khu du lịch Đại Nam thu hút hơn 2 triệu lượt khách trong năm 2024"
                           class="w-full h-48 object-cover rounded-t-lg group-hover:opacity-90 transition-opacity"></a>
                     </div>
@@ -8430,7 +8385,8 @@
                       </div>
                       <h3
                         class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                        <a href="/tin-tuc/16">Khu du lịch Đại Nam thu hút hơn 2 triệu lượt khách trong năm 2024</a></h3>
+                        <a href="/tin-tuc/16">Khu du lịch Đại Nam thu hút hơn 2 triệu lượt khách trong năm 2024</a>
+                      </h3>
                       <p class="text-sm text-gray-600 mb-3 line-clamp-2">Khu du lịch Đại Nam tiếp tục là điểm đến hấp
                         dẫn với nhiều trò chơi và dịch vụ giải trí đa dạng.</p>
                       <div class="flex items-center justify-between text-xs text-gray-500">
@@ -8457,7 +8413,8 @@
                 <div
                   class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow group card-hover">
                   <div class="p-0">
-                    <div class="relative"><a href="/tin-tuc/17"><img src="./public/images/placeholder.svg?height=200&amp;width=300"
+                    <div class="relative"><a href="/tin-tuc/17"><img
+                          src="./public/images/placeholder.svg?height=200&amp;width=300"
                           alt="Chùa Bà Đen - Điểm du lịch tâm linh nổi tiếng của Tây Ninh gần Bình Dương"
                           class="w-full h-48 object-cover rounded-t-lg group-hover:opacity-90 transition-opacity"></a><span
                         class="badge-hot absolute top-2 right-2">Hot</span></div>
@@ -8477,7 +8434,8 @@
                       <h3
                         class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
                         <a href="/tin-tuc/17">Chùa Bà Đen - Điểm du lịch tâm linh nổi tiếng của Tây Ninh gần Bình
-                          Dương</a></h3>
+                          Dương</a>
+                      </h3>
                       <p class="text-sm text-gray-600 mb-3 line-clamp-2">Chùa Bà Đen với cáp treo hiện đại và không gian
                         tâm linh thanh tịnh thu hút du khách thập phương.</p>
                       <div class="flex items-center justify-between text-xs text-gray-500">
@@ -8500,7 +8458,8 @@
                 <div
                   class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow group card-hover">
                   <div class="p-0">
-                    <div class="relative"><a href="/tin-tuc/18"><img src="./public/images/placeholder.svg?height=200&amp;width=300"
+                    <div class="relative"><a href="/tin-tuc/18"><img
+                          src="./public/images/placeholder.svg?height=200&amp;width=300"
                           alt="Khu sinh thái Trăm Trứng - Thiên đường xanh giữa lòng Bình Dương"
                           class="w-full h-48 object-cover rounded-t-lg group-hover:opacity-90 transition-opacity"></a>
                     </div>
@@ -8519,7 +8478,8 @@
                       </div>
                       <h3
                         class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                        <a href="/tin-tuc/18">Khu sinh thái Trăm Trứng - Thiên đường xanh giữa lòng Bình Dương</a></h3>
+                        <a href="/tin-tuc/18">Khu sinh thái Trăm Trứng - Thiên đường xanh giữa lòng Bình Dương</a>
+                      </h3>
                       <p class="text-sm text-gray-600 mb-3 line-clamp-2">Khu sinh thái với không gian xanh mát, hồ nước
                         trong xanh và các hoạt động vui chơi hấp dẫn.</p>
                       <div class="flex items-center justify-between text-xs text-gray-500">
@@ -8542,7 +8502,8 @@
                 <div
                   class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow group card-hover">
                   <div class="p-0">
-                    <div class="relative"><a href="/tin-tuc/19"><img src="./public/images/placeholder.svg?height=200&amp;width=300"
+                    <div class="relative"><a href="/tin-tuc/19"><img
+                          src="./public/images/placeholder.svg?height=200&amp;width=300"
                           alt="Bánh tráng nướng Trang Bang - Đặc sản không thể bỏ qua khi đến Bình Dương"
                           class="w-full h-48 object-cover rounded-t-lg group-hover:opacity-90 transition-opacity"></a>
                     </div>
@@ -8562,7 +8523,8 @@
                       <h3
                         class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
                         <a href="/tin-tuc/19">Bánh tráng nướng Trang Bang - Đặc sản không thể bỏ qua khi đến Bình
-                          Dương</a></h3>
+                          Dương</a>
+                      </h3>
                       <p class="text-sm text-gray-600 mb-3 line-clamp-2">Bánh tráng nướng với hương vị đặc trưng, ăn kèm
                         với các loại rau sống và nước chấm đậm đà.</p>
                       <div class="flex items-center justify-between text-xs text-gray-500">
@@ -8585,7 +8547,8 @@
                 <div
                   class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow group card-hover">
                   <div class="p-0">
-                    <div class="relative"><a href="/tin-tuc/20"><img src="./public/images/placeholder.svg?height=200&amp;width=300"
+                    <div class="relative"><a href="/tin-tuc/20"><img
+                          src="./public/images/placeholder.svg?height=200&amp;width=300"
                           alt="Chợ đêm Thủ Dầu Một - Thiên đường ẩm thực đường phố"
                           class="w-full h-48 object-cover rounded-t-lg group-hover:opacity-90 transition-opacity"></a>
                     </div>
@@ -8604,7 +8567,8 @@
                       </div>
                       <h3
                         class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                        <a href="/tin-tuc/20">Chợ đêm Thủ Dầu Một - Thiên đường ẩm thực đường phố</a></h3>
+                        <a href="/tin-tuc/20">Chợ đêm Thủ Dầu Một - Thiên đường ẩm thực đường phố</a>
+                      </h3>
                       <p class="text-sm text-gray-600 mb-3 line-clamp-2">Chợ đêm với hàng trăm món ăn đường phố đa dạng,
                         từ truyền thống đến hiện đại.</p>
                       <div class="flex items-center justify-between text-xs text-gray-500">

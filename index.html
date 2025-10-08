@@ -214,28 +214,28 @@
         }
 
         /* Badge Styles */
-        .badge-default {
-          @apply inline-flex items-center border px-2.5 py-0.5 text-xs font-semibold rounded-md;
+        .badge {
+          @apply inline-flex justify-center items-center border px-2.5 py-0.5 text-xs font-semibold rounded-md;
         }
 
         .badge-primary {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-blue-100 text-blue-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-blue-100 text-blue-700 rounded-md;
         }
 
         .badge-secondary {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-gray-100 text-gray-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-gray-100 text-gray-700 rounded-md;
         }
 
         .badge-success {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-green-100 text-green-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-green-100 text-green-700 rounded-md;
         }
 
         .badge-warning {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-yellow-100 text-yellow-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-yellow-100 text-yellow-700 rounded-md;
         }
 
         .badge-danger {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-red-100 text-red-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-red-100 text-red-700 rounded-md;
         }
 
         .badge-hot {
@@ -1074,57 +1074,6 @@
                 @apply flex flex-col items-start justify-start;
             }
             
-            /* Spacing Utilities */
-            .space-y-0\.5 > * + * {
-                margin-top: 0.125rem;
-            }
-            
-            .space-y-1\.5 > * + * {
-                margin-top: 0.375rem;
-            }
-            
-            .space-y-2\.5 > * + * {
-                margin-top: 0.625rem;
-            }
-            
-            .space-y-3\.5 > * + * {
-                margin-top: 0.875rem;
-            }
-            
-            /* Size Utilities */
-            .w-fit {
-                width: fit-content;
-            }
-            
-            .h-fit {
-                height: fit-content;
-            }
-            
-            .size-4 {
-                @apply w-4 h-4;
-            }
-            
-            .size-5 {
-                @apply w-5 h-5;
-            }
-            
-            .size-6 {
-                @apply w-6 h-6;
-            }
-            
-            .size-8 {
-                @apply w-8 h-8;
-            }
-            
-            .size-10 {
-                @apply w-10 h-10;
-            }
-            
-            .size-12 {
-                @apply w-12 h-12;
-            }
-            
-                
             /* Custom scrollbar for mobile menu */
             .custom-scrollbar::-webkit-scrollbar {
                 width: 4px;
@@ -1168,12 +1117,16 @@
   <script src="js/homepage.js"></script>
   <!-- Việc Làm Component -->
   <script src="js/viec-lam.js"></script>
+  <!-- Blaze Slider JS -->
+  <script src="https://cdn.jsdelivr.net/npm/blaze-slider@1.9.2/dist/blaze-slider.min.js"></script>
   <!-- Lucide Icons - Custom Build -->
   <!-- <script src="js/lucide-custom.min.js"></script> -->
   <!-- Hiện tại đang Development nên tôi dùng CDN của Lucide trước -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   <!-- Link CSS -->
   <link rel="stylesheet" href="css/style.css">
+  <!-- Blaze Slider CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/blaze-slider@1.9.2/dist/blaze.css" />
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2543,7 +2496,7 @@
           <!-- Right Content - Feature Cards -->
           <div class="grid grid-cols-2 gap-3 md:gap-4 mt-8 lg:mt-0" x-data="featureCardsComponent()">
             <div class="card bg-white/10 backdrop-blur-sm border-white/20 text-white h-32 md:h-36">
-              <div class="card-content-no-header flex flex-col h-full">
+              <div class="card-content-no-header flex flex-col h-full p-4">
                 <!-- Icon và Title trên cùng 1 dòng -->
                 <div class="flex items-center mb-3">
                   <div class="size-8 md:size-10 bg-yellow-500 rounded-md flex-center mr-3">
@@ -2552,7 +2505,7 @@
                   <h3 class="font-semibold text-sm md:text-base">Tin Tức</h3>
                 </div>
                 <!-- Description ở giữa -->
-                <div class="flex-1">
+                <div class="flex-1 flex items-center">
                   <p class="text-blue-100 text-xs md:text-sm">Cập nhật tin tức mới nhất về tỉnh
                   </p>
                 </div>
@@ -2560,7 +2513,7 @@
             </div>
 
             <div class="card bg-white/10 backdrop-blur-sm border-white/20 text-white h-32 md:h-36 md:mt-8">
-              <div class="card-content-no-header flex flex-col h-full">
+              <div class="card-content-no-header flex flex-col h-full p-4">
                 <!-- Icon và Title trên cùng 1 dòng -->
                 <div class="flex items-center mb-3">
                   <div class="size-8 md:size-10 bg-orange-300 rounded-md flex-center mr-3">
@@ -2569,14 +2522,14 @@
                   <h3 class="font-semibold text-sm md:text-base">Bất Động Sản</h3>
                 </div>
                 <!-- Description ở giữa -->
-                <div class="flex-1">
+                <div class="flex-1 flex items-center">
                   <p class="text-blue-100 text-xs md:text-sm">Thông tin mua bán, cho thuê</p>
                 </div>
               </div>
             </div>
 
             <div class="card bg-white/10 backdrop-blur-sm border-white/20 text-white h-32 md:h-36 md:-mt-4">
-              <div class="card-content-no-header flex flex-col h-full">
+              <div class="card-content-no-header flex flex-col h-full p-4">
                 <!-- Icon và Title trên cùng 1 dòng -->
                 <div class="flex items-center mb-3">
                   <div class="size-8 md:size-10 bg-blue-600 rounded-md flex-center mr-3">
@@ -2585,7 +2538,7 @@
                   <h3 class="font-semibold text-sm md:text-base">Việc Làm</h3>
                 </div>
                 <!-- Description ở giữa -->
-                <div class="flex-1">
+                <div class="flex-1 flex items-center">
                   <p class="text-blue-100 text-xs md:text-sm">Cơ hội nghề nghiệp tại địa phương
                   </p>
                 </div>
@@ -2593,7 +2546,7 @@
             </div>
 
             <div class="card bg-white/10 backdrop-blur-sm border-white/20 text-white h-32 md:h-36 md:mt-4">
-              <div class="card-content-no-header flex flex-col h-full">
+              <div class="card-content-no-header flex flex-col h-full p-4">
                 <!-- Icon và Title trên cùng 1 dòng -->
                 <div class="flex items-center mb-3">
                   <div class="size-8 md:size-10 bg-pink-400 rounded-md flex-center mr-3">
@@ -2602,7 +2555,7 @@
                   <h3 class="font-semibold text-sm md:text-base">Tiện Ích</h3>
                 </div>
                 <!-- Description ở giữa -->
-                <div class="flex-1">
+                <div class="flex-1 flex items-center">
                   <p class="text-blue-100 text-xs md:text-sm">Dịch vụ công và tiện ích đời sống
                   </p>
                 </div>
@@ -2645,26 +2598,21 @@
 
         <!-- Stats Section -->
         <div
-          class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mt-12 md:mt-16 pt-12 md:pt-16 border-t border-white/20"
-          x-data="statsSectionComponent()">
+          class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mt-12 md:mt-16 pt-12 md:pt-16 border-t border-white/20">
           <div class="text-center text-white">
-            <div class="text-2xl md:text-3xl font-bold text-yellow-300" x-text="formatNumber(animatedStats.districts)">
-              35+</div>
+            <div class="text-2xl md:text-3xl font-bold text-yellow-300">35+</div>
             <div class="text-blue-100 text-sm mt-1">Xã Phường</div>
           </div>
           <div class="text-center text-white">
-            <div class="text-2xl md:text-3xl font-bold text-yellow-300" x-text="formatNumber(animatedStats.news)">1000+
-            </div>
+            <div class="text-2xl md:text-3xl font-bold text-yellow-300">1000+</div>
             <div class="text-blue-100 text-sm mt-1">Tin Tức/Tháng</div>
           </div>
           <div class="text-center text-white">
-            <div class="text-2xl md:text-3xl font-bold text-yellow-300" x-text="formatNumber(animatedStats.jobs)">500+
-            </div>
+            <div class="text-2xl md:text-3xl font-bold text-yellow-300">500+</div>
             <div class="text-blue-100 text-sm mt-1">Việc Làm</div>
           </div>
           <div class="text-center text-white">
-            <div class="text-2xl md:text-3xl font-bold text-yellow-300" x-text="formatNumber(animatedStats.population)">
-              2M+</div>
+            <div class="text-2xl md:text-3xl font-bold text-yellow-300">2M+</div>
             <div class="text-blue-100 text-sm mt-1">Dân Số</div>
           </div>
         </div>
@@ -2680,7 +2628,7 @@
                 <h2 class="text-xl md:text-2xl font-bold text-gray-900 hover:text-blue-600 transition-colors">Tin Tức
                   Nổi Bật</h2>
               </a><a href="/tin-tuc"><button
-                  class="btn-secondary btn-sm rounded-sm md:btn-md md:rounded-md flex items-center">Xem tất cả<svg
+                  class="btn btn-secondary btn-sm rounded-sm md:btn-md md:rounded-md flex items-center">Xem tất cả<svg
                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="lucide lucide-arrow-right w-4 h-4 ml-2">
@@ -2696,9 +2644,7 @@
                       class="w-full h-48 md:h-60 object-cover rounded-l-lg hover:opacity-90 transition-opacity"></a>
                   <div class="md:col-span-3 p-6">
                     <div class="flex items-center gap-2 mb-3"><a href="/tin-tuc/danh-muc/kinh-tế">
-                        <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200">
-                          Kinh Tế</div>
+                        <div class="badge badge-primary">Kinh Tế</div>
                       </a>
                       <div class="flex items-center text-sm text-gray-500"><svg xmlns="http://www.w3.org/2000/svg"
                           width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -2734,9 +2680,7 @@
                           class="w-20 h-20 object-cover rounded-lg flex-shrink-0 hover:opacity-90 transition-opacity"></a>
                       <div class="flex-1 min-w-0">
                         <div class="flex items-center gap-2 mb-2"><a href="/tin-tuc/danh-muc/giao-thông">
-                            <div
-                              class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200">
-                              Giao Thông</div>
+                            <div class="badge badge-primary">Giao Thông</div>
                           </a>
                           <div class="flex items-center text-xs text-gray-500"><svg xmlns="http://www.w3.org/2000/svg"
                               width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -2771,9 +2715,7 @@
                           class="w-20 h-20 object-cover rounded-lg flex-shrink-0 hover:opacity-90 transition-opacity"></a>
                       <div class="flex-1 min-w-0">
                         <div class="flex items-center gap-2 mb-2"><a href="/tin-tuc/danh-muc/văn-hóa">
-                            <div
-                              class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200">
-                              Văn Hóa</div>
+                            <div class="badge badge-primary">Văn Hóa</div>
                           </a>
                           <div class="flex items-center text-xs text-gray-500"><svg xmlns="http://www.w3.org/2000/svg"
                               width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -2808,9 +2750,7 @@
                           class="w-20 h-20 object-cover rounded-lg flex-shrink-0 hover:opacity-90 transition-opacity"></a>
                       <div class="flex-1 min-w-0">
                         <div class="flex items-center gap-2 mb-2"><a href="/tin-tuc/danh-muc/công-nghệ">
-                            <div
-                              class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200">
-                              Công Nghệ</div>
+                            <div class="badge badge-primary">Công Nghệ</div>
                           </a>
                           <div class="flex items-center text-xs text-gray-500"><svg xmlns="http://www.w3.org/2000/svg"
                               width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -2845,9 +2785,7 @@
                           class="w-20 h-20 object-cover rounded-lg flex-shrink-0 hover:opacity-90 transition-opacity"></a>
                       <div class="flex-1 min-w-0">
                         <div class="flex items-center gap-2 mb-2"><a href="/tin-tuc/danh-muc/kinh-tế">
-                            <div
-                              class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200">
-                              Kinh Tế</div>
+                            <div class="badge badge-primary">Kinh Tế</div>
                           </a>
                           <div class="flex items-center text-xs text-gray-500"><svg xmlns="http://www.w3.org/2000/svg"
                               width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -2882,9 +2820,7 @@
                           class="w-20 h-20 object-cover rounded-lg flex-shrink-0 hover:opacity-90 transition-opacity"></a>
                       <div class="flex-1 min-w-0">
                         <div class="flex items-center gap-2 mb-2"><a href="/tin-tuc/danh-muc/môi-trường">
-                            <div
-                              class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200">
-                              Môi Trường</div>
+                            <div class="badge badge-primary">Môi Trường</div>
                           </a>
                           <div class="flex items-center text-xs text-gray-500"><svg xmlns="http://www.w3.org/2000/svg"
                               width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -2919,9 +2855,7 @@
                           class="w-20 h-20 object-cover rounded-lg flex-shrink-0 hover:opacity-90 transition-opacity"></a>
                       <div class="flex-1 min-w-0">
                         <div class="flex items-center gap-2 mb-2"><a href="/tin-tuc/danh-muc/thương-mại">
-                            <div
-                              class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200">
-                              Thương Mại</div>
+                            <div class="badge badge-primary">Thương Mại</div>
                           </a>
                           <div class="flex items-center text-xs text-gray-500"><svg xmlns="http://www.w3.org/2000/svg"
                               width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -2956,9 +2890,7 @@
                           class="w-20 h-20 object-cover rounded-lg flex-shrink-0 hover:opacity-90 transition-opacity"></a>
                       <div class="flex-1 min-w-0">
                         <div class="flex items-center gap-2 mb-2"><a href="/tin-tuc/danh-muc/kinh-tế">
-                            <div
-                              class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200">
-                              Kinh Tế</div>
+                            <div class="badge badge-primary">Kinh Tế</div>
                           </a>
                           <div class="flex items-center text-xs text-gray-500"><svg xmlns="http://www.w3.org/2000/svg"
                               width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -2993,9 +2925,7 @@
                           class="w-20 h-20 object-cover rounded-lg flex-shrink-0 hover:opacity-90 transition-opacity"></a>
                       <div class="flex-1 min-w-0">
                         <div class="flex items-center gap-2 mb-2"><a href="/tin-tuc/danh-muc/giao-thông">
-                            <div
-                              class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200">
-                              Giao Thông</div>
+                            <div class="badge badge-primary">Giao Thông</div>
                           </a>
                           <div class="flex items-center text-xs text-gray-500"><svg xmlns="http://www.w3.org/2000/svg"
                               width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -3056,7 +2986,7 @@
                             Electronics Việt Nam</a></div>
                       </div>
                     </div>
-                    <div class="flex flex-col gap-2 ml-2"><button class="btn-primary btn-sm">Ứng tuyển</button></div>
+                    <div class="flex flex-col gap-2 ml-2"><button class="badge badge-trending">Ứng tuyển</button></div>
                   </div>
                   <div class="space-y-2 mb-3">
                     <div class="flex items-center gap-4 text-sm">
@@ -3137,10 +3067,8 @@
                       </div>
                     </div>
                     <div class="flex flex-col gap-2 ml-2">
-                      <button class="btn-primary btn-sm">Ứng tuyển</button>
-                      <div
-                        class="rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white flex items-center justify-center">
-                        Gấp</div>
+                      <button class="badge badge-trending">Ứng tuyển</button>
+                      <div class="badge badge-hot">Gấp</div>
                     </div>
                   </div>
                   <div class="space-y-2 mb-3">
@@ -3220,7 +3148,7 @@
                             Đại Quang Minh</a></div>
                       </div>
                     </div>
-                    <div class="flex flex-col gap-2 ml-2"><button class="btn-primary btn-sm">Ứng tuyển</button></div>
+                    <div class="flex flex-col gap-2 ml-2"><button class="badge badge-trending">Ứng tuyển</button></div>
                   </div>
                   <div class="space-y-2 mb-3">
                     <div class="flex items-center gap-4 text-sm">
@@ -3303,10 +3231,8 @@
                       </div>
                     </div>
                     <div class="flex flex-col gap-2 ml-2">
-                      <button class="btn-primary btn-sm">Ứng tuyển</button>
-                      <div
-                        class="rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white flex items-center justify-center">
-                        Gấp</div>
+                      <button class="badge badge-trending">Ứng tuyển</button>
+                      <div class="badge badge-hot">Gấp</div>
                     </div>
                   </div>
                   <div class="space-y-2 mb-3">
@@ -3375,7 +3301,7 @@
               </h2>
             </a>
             <div class="flex items-center gap-4"><a class="hidden md:block" href="/bat-dong-san">
-                <button class="btn-secondary btn-sm md:btn-md flex items-center">Xem tất cả<svg
+                <button class="btn-secondary btn-sm rounded-sm md:btn-md md:rounded-md flex items-center">Xem tất cả<svg
                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="lucide lucide-arrow-right w-4 h-4 ml-2">
@@ -3410,7 +3336,7 @@
                           alt="Căn hộ cao cấp Midtown Sakura Park"
                           class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity"></a>
                       <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white absolute top-2 right-2">
+                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white absolute top-2 right-2">
                         Hot</div>
                       <div
                         class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200 absolute top-2 left-2">
@@ -3490,7 +3416,7 @@
                           alt="Biệt thự đơn lập Lavilla Green City"
                           class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity"></a>
                       <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white absolute top-2 right-2">
+                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white absolute top-2 right-2">
                         Hot</div>
                       <div
                         class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200 absolute top-2 left-2">
@@ -3566,7 +3492,7 @@
                           alt="Shophouse mặt tiền đường lớn"
                           class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity"></a>
                       <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white absolute top-2 right-2">
+                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white absolute top-2 right-2">
                         Hot</div>
                       <div
                         class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200 absolute top-2 left-2">
@@ -3646,7 +3572,7 @@
                           alt="Căn hộ cao cấp Midtown Sakura Park"
                           class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity"></a>
                       <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white absolute top-2 right-2">
+                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white absolute top-2 right-2">
                         Hot</div>
                       <div
                         class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200 absolute top-2 left-2">
@@ -3726,7 +3652,7 @@
                           alt="Biệt thự đơn lập Lavilla Green City"
                           class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity"></a>
                       <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white absolute top-2 right-2">
+                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white absolute top-2 right-2">
                         Hot</div>
                       <div
                         class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200 absolute top-2 left-2">
@@ -3803,8 +3729,8 @@
               </button>
             </template>
           </div>
-          <div class="text-center mt-8 flex justify-center  block md:hidden"><a href="/real-estate"><button
-                class="btn-primary flex items-center">Xem Thêm Bài Viết<svg xmlns="http://www.w3.org/2000/svg"
+          <div class="text-center mt-8 flex justify-center  block md:hidden"><a href="/bat-dong-san.html"><button
+                class="btn btn-primary flex items-center">Xem Thêm Bài Viết<svg xmlns="http://www.w3.org/2000/svg"
                   width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                   stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4 ml-2">
                   <path d="M5 12h14"></path>
@@ -3840,7 +3766,8 @@
           <div class="grid grid-cols-2 gap-4">
             <div class="relative group cursor-pointer overflow-hidden rounded-lg"><a
                 href="/bat-dong-san/dia-diem/ha-noi"><img src="./public/images/bat-dong-san/dia-diem/ha-noi.png"
-                  alt="Hà Nội" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                  alt="Hà Nội"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                 <div class="absolute bottom-3 left-3 text-white">
                   <h3 class="text-sm md:text-base font-bold mb-1 group-hover:underline transition-all">Hà Nội</h3>
@@ -3881,8 +3808,8 @@
         </div>
         <div class="text-center mt-8"><button
             class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 btn-primary">Xem
-            tất cả địa điểm<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            tất cả địa điểm<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
               class="lucide lucide-arrow-right w-4 h-4 ml-2">
               <path d="M5 12h14"></path>
               <path d="m12 5 7 7-7 7"></path>
@@ -3927,14 +3854,12 @@
                       alt="Bình Dương thu hút 2,5 tỷ USD vốn đầu tư nước ngoài trong năm 2024"
                       class="jsx-4fb23789b5a36db8 w-full h-48 object-cover rounded-t-lg group-hover:opacity-90 transition-opacity"></a>
                   <div
-                    class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white absolute top-2 right-2">
+                    class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white absolute top-2 right-2">
                     Hot</div>
                 </div>
                 <div class="jsx-4fb23789b5a36db8 p-4">
                   <div class="jsx-4fb23789b5a36db8 flex items-center gap-2 mb-3"><a href="/tin-tuc/danh-muc/kinh-tế">
-                      <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200">
-                        Kinh Tế</div>
+                      <div class="badge badge-primary">Kinh Tế</div>
                     </a>
                     <div class="jsx-4fb23789b5a36db8 flex items-center text-xs text-gray-500"><svg
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -3975,9 +3900,7 @@
                 </div>
                 <div class="jsx-4fb23789b5a36db8 p-4">
                   <div class="jsx-4fb23789b5a36db8 flex items-center gap-2 mb-3"><a href="/tin-tuc/danh-muc/giao-thông">
-                      <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200">
-                        Giao Thông</div>
+                      <div class="badge badge-primary">Giao Thông</div>
                     </a>
                     <div class="jsx-4fb23789b5a36db8 flex items-center text-xs text-gray-500"><svg
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -4018,9 +3941,7 @@
                 </div>
                 <div class="jsx-4fb23789b5a36db8 p-4">
                   <div class="jsx-4fb23789b5a36db8 flex items-center gap-2 mb-3"><a href="/tin-tuc/danh-muc/văn-hóa">
-                      <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200">
-                        Văn Hóa</div>
+                      <div class="badge badge-primary">Văn Hóa</div>
                     </a>
                     <div class="jsx-4fb23789b5a36db8 flex items-center text-xs text-gray-500"><svg
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -4061,9 +3982,7 @@
                 </div>
                 <div class="jsx-4fb23789b5a36db8 p-4">
                   <div class="jsx-4fb23789b5a36db8 flex items-center gap-2 mb-3"><a href="/tin-tuc/danh-muc/công-nghệ">
-                      <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200">
-                        Công Nghệ</div>
+                      <div class="badge badge-primary">Công Nghệ</div>
                     </a>
                     <div class="jsx-4fb23789b5a36db8 flex items-center text-xs text-gray-500"><svg
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -4104,9 +4023,7 @@
                 </div>
                 <div class="jsx-4fb23789b5a36db8 p-4">
                   <div class="jsx-4fb23789b5a36db8 flex items-center gap-2 mb-3"><a href="/tin-tuc/danh-muc/kinh-tế">
-                      <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200">
-                        Kinh Tế</div>
+                      <div class="badge badge-primary">Kinh Tế</div>
                     </a>
                     <div class="jsx-4fb23789b5a36db8 flex items-center text-xs text-gray-500"><svg
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -4147,9 +4064,7 @@
                 </div>
                 <div class="jsx-4fb23789b5a36db8 p-4">
                   <div class="jsx-4fb23789b5a36db8 flex items-center gap-2 mb-3"><a href="/tin-tuc/danh-muc/môi-trường">
-                      <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200">
-                        Môi Trường</div>
+                      <div class="badge badge-primary">Môi Trường</div>
                     </a>
                     <div class="jsx-4fb23789b5a36db8 flex items-center text-xs text-gray-500"><svg
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -4190,9 +4105,7 @@
                 </div>
                 <div class="jsx-4fb23789b5a36db8 p-4">
                   <div class="jsx-4fb23789b5a36db8 flex items-center gap-2 mb-3"><a href="/tin-tuc/danh-muc/thương-mại">
-                      <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200">
-                        Thương Mại</div>
+                      <div class="badge badge-primary">Thương Mại</div>
                     </a>
                     <div class="jsx-4fb23789b5a36db8 flex items-center text-xs text-gray-500"><svg
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -4233,9 +4146,7 @@
                 </div>
                 <div class="jsx-4fb23789b5a36db8 p-4">
                   <div class="jsx-4fb23789b5a36db8 flex items-center gap-2 mb-3"><a href="/tin-tuc/danh-muc/kinh-tế">
-                      <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200">
-                        Kinh Tế</div>
+                      <div class="badge badge-primary">Kinh Tế</div>
                     </a>
                     <div class="jsx-4fb23789b5a36db8 flex items-center text-xs text-gray-500"><svg
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -4330,7 +4241,7 @@
                         </div>
                       </a>
                       <div
-                        class="inline-flex items-center border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white absolute -top-1 -right-1 text-xs px-2 py-1 rounded-lg">
+                        class="inline-flex items-center border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white absolute -top-1 -right-1 text-xs px-2 py-1 rounded-lg">
                         Hot
                       </div>
                     </div>
@@ -4411,7 +4322,7 @@
                         </div>
                       </a>
                       <div
-                        class="inline-flex items-center border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white absolute -top-1 -right-1 text-xs px-2 py-1 rounded-lg">
+                        class="inline-flex items-center border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white absolute -top-1 -right-1 text-xs px-2 py-1 rounded-lg">
                         Hot
                       </div>
                     </div>
@@ -4521,7 +4432,7 @@
                         </div>
                       </a>
                       <div
-                        class="inline-flex items-center border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white absolute -top-1 -right-1 text-xs px-2 py-1 rounded-lg">
+                        class="inline-flex items-center border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white absolute -top-1 -right-1 text-xs px-2 py-1 rounded-lg">
                         Hot
                       </div>
                     </div>
@@ -4716,7 +4627,7 @@
                         </div>
                       </a>
                       <div
-                        class="inline-flex items-center border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white absolute -top-1 -right-1 text-xs px-2 py-1 rounded-lg">
+                        class="inline-flex items-center border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white absolute -top-1 -right-1 text-xs px-2 py-1 rounded-lg">
                         Hot
                       </div>
                     </div>
@@ -4805,8 +4716,7 @@
       <div class="container mx-auto px-4">
         <div class="flex items-center justify-between mb-8">
           <div><a href="/viec-lam">
-              <h2
-                class="text-xl md:text-2xl md:text-3xl font-bold text-gray-900 mb-2 title-section-hover">
+              <h2 class="text-xl md:text-2xl md:text-3xl font-bold text-gray-900 mb-2 title-section-hover">
                 Việc Làm Đề Xuất
               </h2>
             </a></div>
@@ -4860,8 +4770,8 @@
                                 Electronics Việt Nam</a></div>
                           </div>
                         </div>
-                        <div class="flex flex-col gap-2 ml-2"><button
-                            class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">Ứng tuyển</button></div>
+                        <div class="flex flex-col gap-2 ml-2"><button class="badge badge-trending">Ứng tuyển</button>
+                        </div>
                       </div>
                       <div class="space-y-2 mb-3">
                         <div class="flex items-center gap-4 text-sm">
@@ -4941,11 +4851,8 @@
                           </div>
                         </div>
                         <div class="flex flex-col gap-2 ml-2">
-                          <button class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">Ứng
-                            tuyển</button>
-                          <div
-                            class="rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white flex items-center justify-center">
-                            Gấp</div>
+                          <button class="badge badge-trending">Ứng tuyển</button>
+                          <div class="badge badge-hot">Gấp</div>
                         </div>
                       </div>
                       <div class="space-y-2 mb-3">
@@ -5028,8 +4935,8 @@
                                 ốc Đại Quang Minh</a></div>
                           </div>
                         </div>
-                        <div class="flex flex-col gap-2 ml-2"><button
-                            class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">Ứng tuyển</button></div>
+                        <div class="flex flex-col gap-2 ml-2"><button class="badge badge-trending">Ứng tuyển</button>
+                        </div>
                       </div>
                       <div class="space-y-2 mb-3">
                         <div class="flex items-center gap-4 text-sm">
@@ -5112,11 +5019,8 @@
                           </div>
                         </div>
                         <div class="flex flex-col gap-2 ml-2">
-                          <button class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">Ứng
-                            tuyển</button>
-                          <div
-                            class="rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white flex items-center justify-center">
-                            Gấp</div>
+                          <button class="badge badge-trending">Ứng tuyển</button>
+                          <div class="badge badge-hot">Gấp</div>
                         </div>
                       </div>
                       <div class="space-y-2 mb-3">
@@ -5193,8 +5097,8 @@
                                 href="/viec-lam/cong-ty/trường-quốc-tế-việt-úc">Trường Quốc tế Việt Úc</a></div>
                           </div>
                         </div>
-                        <div class="flex flex-col gap-2 ml-2"><button
-                            class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">Ứng tuyển</button></div>
+                        <div class="flex flex-col gap-2 ml-2"><button class="badge badge-trending">Ứng tuyển</button>
+                        </div>
                       </div>
                       <div class="space-y-2 mb-3">
                         <div class="flex items-center gap-4 text-sm">
@@ -5276,11 +5180,8 @@
                           </div>
                         </div>
                         <div class="flex flex-col gap-2 ml-2">
-                          <button class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">Ứng
-                            tuyển</button>
-                          <div
-                            class="rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white flex items-center justify-center">
-                            Gấp</div>
+                          <button class="badge badge-trending">Ứng tuyển</button>
+                          <div class="badge badge-hot">Gấp</div>
                         </div>
                       </div>
                       <div class="space-y-2 mb-3">
@@ -5366,8 +5267,8 @@
                                 href="/viec-lam/cong-ty/công-ty-tnhh-phần-mềm-fpt">Công ty TNHH Phần mềm FPT</a></div>
                           </div>
                         </div>
-                        <div class="flex flex-col gap-2 ml-2"><button
-                            class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">Ứng tuyển</button></div>
+                        <div class="flex flex-col gap-2 ml-2"><button class="badge badge-trending">Ứng tuyển</button>
+                        </div>
                       </div>
                       <div class="space-y-2 mb-3">
                         <div class="flex items-center gap-4 text-sm">
@@ -5446,8 +5347,8 @@
                                 href="/viec-lam/cong-ty/tập-đoàn-vingroup">Tập đoàn Vingroup</a></div>
                           </div>
                         </div>
-                        <div class="flex flex-col gap-2 ml-2"><button
-                            class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">Ứng tuyển</button></div>
+                        <div class="flex flex-col gap-2 ml-2"><button class="badge badge-trending">Ứng tuyển</button>
+                        </div>
                       </div>
                       <div class="space-y-2 mb-3">
                         <div class="flex items-center gap-4 text-sm">
@@ -5529,11 +5430,8 @@
                           </div>
                         </div>
                         <div class="flex flex-col gap-2 ml-2">
-                          <button class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">Ứng
-                            tuyển</button>
-                          <div
-                            class="rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white flex items-center justify-center">
-                            Gấp</div>
+                          <button class="badge badge-trending">Ứng tuyển</button>
+                          <div class="badge badge-hot">Gấp</div>
                         </div>
                       </div>
                       <div class="space-y-2 mb-3">
@@ -5617,8 +5515,8 @@
                                 động sản Novaland</a></div>
                           </div>
                         </div>
-                        <div class="flex flex-col gap-2 ml-2"><button
-                            class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">Ứng tuyển</button></div>
+                        <div class="flex flex-col gap-2 ml-2"><button class="badge badge-trending">Ứng tuyển</button>
+                        </div>
                       </div>
                       <div class="space-y-2 mb-3">
                         <div class="flex items-center gap-4 text-sm">
@@ -5700,8 +5598,8 @@
                             </div>
                           </div>
                         </div>
-                        <div class="flex flex-col gap-2 ml-2"><button
-                            class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">Ứng tuyển</button></div>
+                        <div class="flex flex-col gap-2 ml-2"><button class="badge badge-trending">Ứng tuyển</button>
+                        </div>
                       </div>
                       <div class="space-y-2 mb-3">
                         <div class="flex items-center gap-4 text-sm">
@@ -5784,11 +5682,8 @@
                           </div>
                         </div>
                         <div class="flex flex-col gap-2 ml-2">
-                          <button class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">Ứng
-                            tuyển</button>
-                          <div
-                            class="rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white flex items-center justify-center">
-                            Gấp</div>
+                          <button class="badge badge-trending">Ứng tuyển</button>
+                          <div class="badge badge-hot">Gấp</div>
                         </div>
                       </div>
                       <div class="space-y-2 mb-3">
@@ -5875,8 +5770,8 @@
                                 Becamex</a></div>
                           </div>
                         </div>
-                        <div class="flex flex-col gap-2 ml-2"><button
-                            class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">Ứng tuyển</button></div>
+                        <div class="flex flex-col gap-2 ml-2"><button class="badge badge-trending">Ứng tuyển</button>
+                        </div>
                       </div>
                       <div class="space-y-2 mb-3">
                         <div class="flex items-center gap-4 text-sm">
@@ -5958,8 +5853,8 @@
                                 Gemadept</a></div>
                           </div>
                         </div>
-                        <div class="flex flex-col gap-2 ml-2"><button
-                            class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">Ứng tuyển</button></div>
+                        <div class="flex flex-col gap-2 ml-2"><button class="badge badge-trending">Ứng tuyển</button>
+                        </div>
                       </div>
                       <div class="space-y-2 mb-3">
                         <div class="flex items-center gap-4 text-sm">
@@ -6042,11 +5937,8 @@
                           </div>
                         </div>
                         <div class="flex flex-col gap-2 ml-2">
-                          <button class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">Ứng
-                            tuyển</button>
-                          <div
-                            class="rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white flex items-center justify-center">
-                            Gấp</div>
+                          <button class="badge badge-trending">Ứng tuyển</button>
+                          <div class="badge badge-hot">Gấp</div>
                         </div>
                       </div>
                       <div class="space-y-2 mb-3">
@@ -6137,8 +6029,7 @@
       <div class="container mx-auto px-4">
         <div class="flex items-center justify-between mb-8">
           <div><a href="/dich-vu-thanh-vien">
-              <h2
-                class="text-xl md:text-2xl md:text-3xl font-bold text-gray-900 mb-2 title-section-hover">
+              <h2 class="text-xl md:text-2xl md:text-3xl font-bold text-gray-900 mb-2 title-section-hover">
                 Dịch Vụ Bình Dương
               </h2>
             </a>
@@ -6183,7 +6074,7 @@
                             alt="Thiết kế website chuyên nghiệp"
                             class="w-full h-32 object-cover rounded-lg hover:opacity-90 transition-opacity"></a>
                         <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-orange-500 text-white absolute top-2 right-2 text-xs">
+                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-orange-500 text-white absolute top-2 right-2 text-xs">
                           Hot</div>
                         <div
                           class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-blue-100 text-blue-700 absolute top-2 left-2 text-xs">
@@ -6258,7 +6149,7 @@
                               </path>
                             </svg><span class="text-xs text-gray-600 ml-1">4.8 (45)</span></div><a
                             href="/dich-vu-thanh-vien/1"><button
-                              class="btn-primary btn-sm text-xs px-3 py-1 flex items-center"><svg
+                              class="btn btn-primary btn-sm text-xs px-3 py-1 flex items-center"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="lucide lucide-message-circle w-3 h-3 mr-1">
@@ -6276,7 +6167,7 @@
                             alt="Dịch vụ SEO tăng thứ hạng Google"
                             class="w-full h-32 object-cover rounded-lg hover:opacity-90 transition-opacity"></a>
                         <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-orange-500 text-white absolute top-2 right-2 text-xs">
+                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-orange-500 text-white absolute top-2 right-2 text-xs">
                           Hot</div>
                         <div
                           class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-blue-100 text-blue-700 absolute top-2 left-2 text-xs">
@@ -6352,7 +6243,7 @@
                               </path>
                             </svg><span class="text-xs text-gray-600 ml-1">4.9 (67)</span></div><a
                             href="/dich-vu-thanh-vien/2"><button
-                              class="btn-primary btn-sm text-xs px-3 py-1 flex items-center"><svg
+                              class="btn btn-primary btn-sm text-xs px-3 py-1 flex items-center"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="lucide lucide-message-circle w-3 h-3 mr-1">
@@ -6370,7 +6261,7 @@
                             alt="Chụp ảnh sản phẩm chuyên nghiệp"
                             class="w-full h-32 object-cover rounded-lg hover:opacity-90 transition-opacity"></a>
                         <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-orange-500 text-white absolute top-2 right-2 text-xs">
+                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-orange-500 text-white absolute top-2 right-2 text-xs">
                           Hot</div>
                         <div
                           class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-blue-100 text-blue-700 absolute top-2 left-2 text-xs">
@@ -6445,7 +6336,7 @@
                               </path>
                             </svg><span class="text-xs text-gray-600 ml-1">4.7 (89)</span></div><a
                             href="/dich-vu-thanh-vien/3"><button
-                              class="btn-primary btn-sm text-xs px-3 py-1 flex items-center"><svg
+                              class="btn btn-primary btn-sm text-xs px-3 py-1 flex items-center"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="lucide lucide-message-circle w-3 h-3 mr-1">
@@ -6463,7 +6354,7 @@
                             alt="Thiết kế logo và nhận diện thương hiệu"
                             class="w-full h-32 object-cover rounded-lg hover:opacity-90 transition-opacity"></a>
                         <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-orange-500 text-white absolute top-2 right-2 text-xs">
+                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-orange-500 text-white absolute top-2 right-2 text-xs">
                           Hot</div>
                         <div
                           class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-blue-100 text-blue-700 absolute top-2 left-2 text-xs">
@@ -6539,7 +6430,7 @@
                               </path>
                             </svg><span class="text-xs text-gray-600 ml-1">4.6 (34)</span></div><a
                             href="/dich-vu-thanh-vien/4"><button
-                              class="btn-primary btn-sm text-xs px-3 py-1 flex items-center"><svg
+                              class="btn btn-primary btn-sm text-xs px-3 py-1 flex items-center"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="lucide lucide-message-circle w-3 h-3 mr-1">
@@ -6557,7 +6448,7 @@
                             alt="Dịch vụ kế toán doanh nghiệp"
                             class="w-full h-32 object-cover rounded-lg hover:opacity-90 transition-opacity"></a>
                         <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-orange-500 text-white absolute top-2 right-2 text-xs">
+                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-orange-500 text-white absolute top-2 right-2 text-xs">
                           Hot</div>
                         <div
                           class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-blue-100 text-blue-700 absolute top-2 left-2 text-xs">
@@ -6632,7 +6523,7 @@
                               </path>
                             </svg><span class="text-xs text-gray-600 ml-1">4.8 (56)</span></div><a
                             href="/dich-vu-thanh-vien/5"><button
-                              class="btn-primary btn-sm text-xs px-3 py-1 flex items-center"><svg
+                              class="btn btn-primary btn-sm text-xs px-3 py-1 flex items-center"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="lucide lucide-message-circle w-3 h-3 mr-1">
@@ -6650,7 +6541,7 @@
                             alt="Dịch vụ quay phim sự kiện"
                             class="w-full h-32 object-cover rounded-lg hover:opacity-90 transition-opacity"></a>
                         <div
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-orange-500 text-white absolute top-2 right-2 text-xs">
+                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-orange-500 text-white absolute top-2 right-2 text-xs">
                           Hot</div>
                         <div
                           class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-blue-100 text-blue-700 absolute top-2 left-2 text-xs">
@@ -6725,7 +6616,7 @@
                               </path>
                             </svg><span class="text-xs text-gray-600 ml-1">4.9 (78)</span></div><a
                             href="/dich-vu-thanh-vien/6"><button
-                              class="btn-primary btn-sm text-xs px-3 py-1 flex items-center"><svg
+                              class="btn btn-primary btn-sm text-xs px-3 py-1 flex items-center"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="lucide lucide-message-circle w-3 h-3 mr-1">
@@ -6815,7 +6706,7 @@
                               </path>
                             </svg><span class="text-xs text-gray-600 ml-1">4.5 (123)</span></div><a
                             href="/dich-vu-thanh-vien/7"><button
-                              class="btn-primary btn-sm text-xs px-3 py-1 flex items-center"><svg
+                              class="btn btn-primary btn-sm text-xs px-3 py-1 flex items-center"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="lucide lucide-message-circle w-3 h-3 mr-1">
@@ -6905,7 +6796,7 @@
                               </path>
                             </svg><span class="text-xs text-gray-600 ml-1">4.4 (67)</span></div><a
                             href="/dich-vu-thanh-vien/8"><button
-                              class="btn-primary btn-sm text-xs px-3 py-1 flex items-center"><svg
+                              class="btn btn-primary btn-sm text-xs px-3 py-1 flex items-center"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="lucide lucide-message-circle w-3 h-3 mr-1">
@@ -7000,7 +6891,7 @@
                               </path>
                             </svg><span class="text-xs text-gray-600 ml-1">4.7 (45)</span></div><a
                             href="/dich-vu-thanh-vien/9"><button
-                              class="btn-primary btn-sm text-xs px-3 py-1 flex items-center"><svg
+                              class="btn btn-primary btn-sm text-xs px-3 py-1 flex items-center"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="lucide lucide-message-circle w-3 h-3 mr-1">
@@ -7090,7 +6981,7 @@
                               </path>
                             </svg><span class="text-xs text-gray-600 ml-1">4.8 (92)</span></div><a
                             href="/dich-vu-thanh-vien/10"><button
-                              class="btn-primary btn-sm text-xs px-3 py-1 flex items-center"><svg
+                              class="btn btn-primary btn-sm text-xs px-3 py-1 flex items-center"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="lucide lucide-message-circle w-3 h-3 mr-1">
@@ -7180,7 +7071,7 @@
                               </path>
                             </svg><span class="text-xs text-gray-600 ml-1">4.3 (156)</span></div><a
                             href="/dich-vu-thanh-vien/11"><button
-                              class="btn-primary btn-sm text-xs px-3 py-1 flex items-center"><svg
+                              class="btn btn-primary btn-sm text-xs px-3 py-1 flex items-center"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="lucide lucide-message-circle w-3 h-3 mr-1">
@@ -7270,7 +7161,7 @@
                               </path>
                             </svg><span class="text-xs text-gray-600 ml-1">4.6 (78)</span></div><a
                             href="/dich-vu-thanh-vien/12"><button
-                              class="btn-primary btn-sm text-xs px-3 py-1 flex items-center"><svg
+                              class="btn btn-primary btn-sm text-xs px-3 py-1 flex items-center"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="lucide lucide-message-circle w-3 h-3 mr-1">
@@ -7307,8 +7198,7 @@
       <div class="container mx-auto px-4">
         <div class="flex items-center justify-between mb-8">
           <div><a href="/doanh-nghiep">
-              <h2
-                class="text-xl md:text-2xl md:text-3xl font-bold text-gray-900 mb-2 title-section-hover">
+              <h2 class="text-xl md:text-2xl md:text-3xl font-bold text-gray-900 mb-2 title-section-hover">
                 Danh Bạ Doanh Nghiệp
               </h2>
             </a>
@@ -7370,7 +7260,7 @@
                               class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-blue-100 text-blue-700 text-xs">
                               Điện tử - Công nghệ</div>
                             <div
-                              class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-orange-500 text-white text-xs">
+                              class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-orange-500 text-white text-xs">
                               Hot</div>
                           </div>
                         </div>
@@ -7460,7 +7350,7 @@
                               d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z">
                             </path>
                           </svg><span class="text-sm text-gray-600 ml-1">4.8</span></div><a
-                          href="/doanh-nghiep/1"><button class="btn-primary btn-sm text-xs px-3 py-1">Chi
+                          href="/doanh-nghiep/1"><button class="btn btn-primary btn-sm text-xs px-3 py-1">Chi
                             tiết</button></a>
                       </div>
                     </div>
@@ -7489,7 +7379,7 @@
                               class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-blue-100 text-blue-700 text-xs">
                               Bất động sản - Đầu tư</div>
                             <div
-                              class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-orange-500 text-white text-xs">
+                              class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-orange-500 text-white text-xs">
                               Hot</div>
                           </div>
                         </div>
@@ -7579,7 +7469,7 @@
                               d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z">
                             </path>
                           </svg><span class="text-sm text-gray-600 ml-1">4.6</span></div><a
-                          href="/doanh-nghiep/2"><button class="btn-primary btn-sm text-xs px-3 py-1">Chi
+                          href="/doanh-nghiep/2"><button class="btn btn-primary btn-sm text-xs px-3 py-1">Chi
                             tiết</button></a>
                       </div>
                     </div>
@@ -7609,7 +7499,7 @@
                               class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-blue-100 text-blue-700 text-xs">
                               Bất động sản</div>
                             <div
-                              class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-orange-500 text-white text-xs">
+                              class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-orange-500 text-white text-xs">
                               Hot</div>
                           </div>
                         </div>
@@ -7699,7 +7589,7 @@
                               d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z">
                             </path>
                           </svg><span class="text-sm text-gray-600 ml-1">4.4</span></div><a
-                          href="/doanh-nghiep/3"><button class="btn-primary btn-sm text-xs px-3 py-1">Chi
+                          href="/doanh-nghiep/3"><button class="btn btn-primary btn-sm text-xs px-3 py-1">Chi
                             tiết</button></a>
                       </div>
                     </div>
@@ -7729,7 +7619,7 @@
                               class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-blue-100 text-blue-700 text-xs">
                               Sản xuất giày dép</div>
                             <div
-                              class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-orange-500 text-white text-xs">
+                              class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-orange-500 text-white text-xs">
                               Hot</div>
                           </div>
                         </div>
@@ -7811,7 +7701,7 @@
                               d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z">
                             </path>
                           </svg><span class="text-sm text-gray-600 ml-1">4.2</span></div><a
-                          href="/doanh-nghiep/4"><button class="btn-primary btn-sm text-xs px-3 py-1">Chi
+                          href="/doanh-nghiep/4"><button class="btn btn-primary btn-sm text-xs px-3 py-1">Chi
                             tiết</button></a>
                       </div>
                     </div>
@@ -7840,7 +7730,7 @@
                               class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-blue-100 text-blue-700 text-xs">
                               Giáo dục</div>
                             <div
-                              class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-orange-500 text-white text-xs">
+                              class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-orange-500 text-white text-xs">
                               Hot</div>
                           </div>
                         </div>
@@ -7930,7 +7820,7 @@
                               d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z">
                             </path>
                           </svg><span class="text-sm text-gray-600 ml-1">4.7</span></div><a
-                          href="/doanh-nghiep/5"><button class="btn-primary btn-sm text-xs px-3 py-1">Chi
+                          href="/doanh-nghiep/5"><button class="btn btn-primary btn-sm text-xs px-3 py-1">Chi
                             tiết</button></a>
                       </div>
                     </div>
@@ -7959,7 +7849,7 @@
                               class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-primary bg-blue-100 text-blue-700 text-xs">
                               Sản xuất thép</div>
                             <div
-                              class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-orange-500 text-white text-xs">
+                              class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-orange-500 text-white text-xs">
                               Hot</div>
                           </div>
                         </div>
@@ -8049,7 +7939,7 @@
                               d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z">
                             </path>
                           </svg><span class="text-sm text-gray-600 ml-1">4.3</span></div><a
-                          href="/doanh-nghiep/6"><button class="btn-primary btn-sm text-xs px-3 py-1">Chi
+                          href="/doanh-nghiep/6"><button class="btn btn-primary btn-sm text-xs px-3 py-1">Chi
                             tiết</button></a>
                       </div>
                     </div>
@@ -8169,7 +8059,7 @@
                               d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z">
                             </path>
                           </svg><span class="text-sm text-gray-600 ml-1">4.5</span></div><a
-                          href="/doanh-nghiep/7"><button class="btn-primary btn-sm text-xs px-3 py-1">Chi
+                          href="/doanh-nghiep/7"><button class="btn btn-primary btn-sm text-xs px-3 py-1">Chi
                             tiết</button></a>
                       </div>
                     </div>
@@ -8285,7 +8175,7 @@
                               d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z">
                             </path>
                           </svg><span class="text-sm text-gray-600 ml-1">4.6</span></div><a
-                          href="/doanh-nghiep/8"><button class="btn-primary btn-sm text-xs px-3 py-1">Chi
+                          href="/doanh-nghiep/8"><button class="btn btn-primary btn-sm text-xs px-3 py-1">Chi
                             tiết</button></a>
                       </div>
                     </div>
@@ -8402,7 +8292,7 @@
                               d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z">
                             </path>
                           </svg><span class="text-sm text-gray-600 ml-1">4.4</span></div><a
-                          href="/doanh-nghiep/9"><button class="btn-primary btn-sm text-xs px-3 py-1">Chi
+                          href="/doanh-nghiep/9"><button class="btn btn-primary btn-sm text-xs px-3 py-1">Chi
                             tiết</button></a>
                       </div>
                     </div>
@@ -8519,7 +8409,7 @@
                               d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z">
                             </path>
                           </svg><span class="text-sm text-gray-600 ml-1">4.2</span></div><a
-                          href="/doanh-nghiep/10"><button class="btn-primary btn-sm text-xs px-3 py-1">Chi
+                          href="/doanh-nghiep/10"><button class="btn btn-primary btn-sm text-xs px-3 py-1">Chi
                             tiết</button></a>
                       </div>
                     </div>
@@ -8636,7 +8526,7 @@
                               d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z">
                             </path>
                           </svg><span class="text-sm text-gray-600 ml-1">4.3</span></div><a
-                          href="/doanh-nghiep/11"><button class="btn-primary btn-sm text-xs px-3 py-1">Chi
+                          href="/doanh-nghiep/11"><button class="btn btn-primary btn-sm text-xs px-3 py-1">Chi
                             tiết</button></a>
                       </div>
                     </div>
@@ -8753,7 +8643,7 @@
                               d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z">
                             </path>
                           </svg><span class="text-sm text-gray-600 ml-1">4.1</span></div><a
-                          href="/doanh-nghiep/12"><button class="btn-primary btn-sm text-xs px-3 py-1">Chi
+                          href="/doanh-nghiep/12"><button class="btn btn-primary btn-sm text-xs px-3 py-1">Chi
                             tiết</button></a>
                       </div>
                     </div>
@@ -8874,7 +8764,7 @@
                               d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z">
                             </path>
                           </svg><span class="text-sm text-gray-600 ml-1">4.8</span></div><a
-                          href="/doanh-nghiep/13"><button class="btn-primary btn-sm text-xs px-3 py-1">Chi
+                          href="/doanh-nghiep/13"><button class="btn btn-primary btn-sm text-xs px-3 py-1">Chi
                             tiết</button></a>
                       </div>
                     </div>
@@ -8990,7 +8880,7 @@
                               d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z">
                             </path>
                           </svg><span class="text-sm text-gray-600 ml-1">4</span></div><a
-                          href="/doanh-nghiep/14"><button class="btn-primary btn-sm text-xs px-3 py-1">Chi
+                          href="/doanh-nghiep/14"><button class="btn btn-primary btn-sm text-xs px-3 py-1">Chi
                             tiết</button></a>
                       </div>
                     </div>
@@ -9107,7 +8997,7 @@
                               d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z">
                             </path>
                           </svg><span class="text-sm text-gray-600 ml-1">4.2</span></div><a
-                          href="/doanh-nghiep/15"><button class="btn-primary btn-sm text-xs px-3 py-1">Chi
+                          href="/doanh-nghiep/15"><button class="btn btn-primary btn-sm text-xs px-3 py-1">Chi
                             tiết</button></a>
                       </div>
                     </div>
@@ -9138,8 +9028,7 @@
     <section class="py-12 md:py-16 bg-white" x-data="dichVuCongTrucTuyenCarousel()">
       <div class="container mx-auto px-4">
         <div class="text-center mb-8"><a href="/dich-vu">
-            <h2
-              class="text-xl md:text-2xl md:text-3xl font-bold mb-4 title-section">
+            <h2 class="text-xl md:text-2xl md:text-3xl font-bold mb-4 title-section">
               Dịch vụ công trực tuyến
             </h2>
           </a>
@@ -9185,7 +9074,7 @@
                         </div>
                       </a>
                       <div
-                        class="inline-flex items-center border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white absolute -top-1 -right-1 text-xs px-2 py-1 rounded-lg">
+                        class="inline-flex items-center border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white absolute -top-1 -right-1 text-xs px-2 py-1 rounded-lg">
                         Hot</div>
                     </div>
                     <h3 class="font-semibold text-gray-900 mb-2 text-sm sm:text-base"><a
@@ -9293,7 +9182,7 @@
                         </div>
                       </a>
                       <div
-                        class="inline-flex items-center border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white absolute -top-1 -right-1 text-xs px-2 py-1 rounded-lg">
+                        class="inline-flex items-center border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white absolute -top-1 -right-1 text-xs px-2 py-1 rounded-lg">
                         Hot</div>
                     </div>
                     <h3 class="font-semibold text-gray-900 mb-2 text-sm sm:text-base"><a
@@ -9387,7 +9276,7 @@
                         </div>
                       </a>
                       <div
-                        class="inline-flex items-center border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white absolute -top-1 -right-1 text-xs px-2 py-1 rounded-lg">
+                        class="inline-flex items-center border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white absolute -top-1 -right-1 text-xs px-2 py-1 rounded-lg">
                         Hot</div>
                     </div>
                     <h3 class="font-semibold text-gray-900 mb-2 text-sm sm:text-base"><a
@@ -9446,7 +9335,7 @@
                   <div class="flex items-center gap-2 mb-1">
                     <h3 class="font-semibold text-gray-900 text-sm line-clamp-1">Cảnh sát</h3>
                     <div
-                      class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white text-xs px-1.5 py-0.5">
+                      class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white text-xs px-1.5 py-0.5">
                       !</div>
                   </div>
                   <div class="text-base font-bold text-blue-600 mb-1">113</div>
@@ -9473,7 +9362,7 @@
                   <div class="flex items-center gap-2 mb-1">
                     <h3 class="font-semibold text-gray-900 text-sm line-clamp-1">Cứu hỏa</h3>
                     <div
-                      class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white text-xs px-1.5 py-0.5">
+                      class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white text-xs px-1.5 py-0.5">
                       !</div>
                   </div>
                   <div class="text-base font-bold text-blue-600 mb-1">114</div>
@@ -9500,7 +9389,7 @@
                   <div class="flex items-center gap-2 mb-1">
                     <h3 class="font-semibold text-gray-900 text-sm line-clamp-1">Cấp cứu</h3>
                     <div
-                      class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white text-xs px-1.5 py-0.5">
+                      class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white text-xs px-1.5 py-0.5">
                       !</div>
                   </div>
                   <div class="text-base font-bold text-blue-600 mb-1">115</div>
@@ -9527,7 +9416,7 @@
                   <div class="flex items-center gap-2 mb-1">
                     <h3 class="font-semibold text-gray-900 text-sm line-clamp-1">Khẩn cấp</h3>
                     <div
-                      class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white text-xs px-1.5 py-0.5">
+                      class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white text-xs px-1.5 py-0.5">
                       !</div>
                   </div>
                   <div class="text-base font-bold text-blue-600 mb-1">112</div>
@@ -9557,7 +9446,7 @@
                   <div class="flex items-center gap-2 mb-1">
                     <h3 class="font-semibold text-gray-900 text-sm line-clamp-1">Cứu hộ</h3>
                     <div
-                      class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white text-xs px-1.5 py-0.5">
+                      class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white text-xs px-1.5 py-0.5">
                       !</div>
                   </div>
                   <div class="text-base font-bold text-blue-600 mb-1">1022</div>
@@ -9584,7 +9473,7 @@
                   <div class="flex items-center gap-2 mb-1">
                     <h3 class="font-semibold text-gray-900 text-sm line-clamp-1">Điện lực</h3>
                     <div
-                      class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white text-xs px-1.5 py-0.5">
+                      class="inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white text-xs px-1.5 py-0.5">
                       !</div>
                   </div>
                   <div class="text-base font-bold text-blue-600 mb-1">19001909</div>

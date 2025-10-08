@@ -205,28 +205,32 @@
         }
 
         /* Badge Styles */
-        .badge-default {
-          @apply inline-flex items-center border px-2.5 py-0.5 text-xs font-semibold rounded-md;
+        .badge {
+          @apply inline-flex justify-center items-center border px-2.5 py-0.5 text-xs font-semibold rounded-md;
         }
 
         .badge-primary {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-blue-100 text-blue-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-blue-100 text-blue-700 rounded-md;
         }
 
         .badge-secondary {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-gray-100 text-gray-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-gray-100 text-gray-700 rounded-md;
         }
 
         .badge-success {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-green-100 text-green-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-green-100 text-green-700 rounded-md;
         }
 
         .badge-warning {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-yellow-100 text-yellow-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-yellow-100 text-yellow-700 rounded-md;
         }
 
         .badge-danger {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-red-100 text-red-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-red-100 text-red-700 rounded-md;
+        }
+                
+        .badge-featured {
+          @apply bg-orange-500 text-white;
         }
 
         .badge-hot {
@@ -1035,87 +1039,7 @@
             background-position: center;
             background-repeat: no-repeat;
             }
-
-            /* Layout Utilities */
-            .flex-center {
-                @apply flex items-center justify-center;
-            }
-            
-            .flex-between {
-                @apply flex items-center justify-between;
-            }
-            
-            .flex-around {
-                @apply flex items-center justify-around;
-            }
-            
-            .flex-start {
-                @apply flex items-center justify-start;
-            }
-            
-            .flex-end {
-                @apply flex items-center justify-end;
-            }
-            
-            .flex-col-center {
-                @apply flex flex-col items-center justify-center;
-            }
-            
-            .flex-col-start {
-                @apply flex flex-col items-start justify-start;
-            }
-            
-            /* Spacing Utilities */
-            .space-y-0\.5 > * + * {
-                margin-top: 0.125rem;
-            }
-            
-            .space-y-1\.5 > * + * {
-                margin-top: 0.375rem;
-            }
-            
-            .space-y-2\.5 > * + * {
-                margin-top: 0.625rem;
-            }
-            
-            .space-y-3\.5 > * + * {
-                margin-top: 0.875rem;
-            }
-            
-            /* Size Utilities */
-            .w-fit {
-                width: fit-content;
-            }
-            
-            .h-fit {
-                height: fit-content;
-            }
-            
-            .size-4 {
-                @apply w-4 h-4;
-            }
-            
-            .size-5 {
-                @apply w-5 h-5;
-            }
-            
-            .size-6 {
-                @apply w-6 h-6;
-            }
-            
-            .size-8 {
-                @apply w-8 h-8;
-            }
-            
-            .size-10 {
-                @apply w-10 h-10;
-            }
-            
-            .size-12 {
-                @apply w-12 h-12;
-            }
-            
-                
+ 
             /* Custom scrollbar for mobile menu */
             .custom-scrollbar::-webkit-scrollbar {
                 width: 4px;
@@ -2514,7 +2438,7 @@
             <button type="button" @click="toggleCategory()" aria-haspopup="listbox"
               :aria-expanded="showCategoryDropdown"
               class="flex h-10 w-full items-center justify-between rounded-md border border-input px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 bg-white text-gray-900">
-               <span class="category-display" style="pointer-events:none">Tất cả danh mục</span>
+              <span class="category-display" style="pointer-events:none">Tất cả danh mục</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                 class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
@@ -2526,11 +2450,14 @@
             <div x-show="showCategoryDropdown" x-transition x-cloak
               class="absolute mt-2 right-0 left-0 z-50 bg-white text-gray-900 rounded shadow-lg max-h-60 overflow-auto">
               <ul role="listbox" class="py-1">
-                <li @click="selectCategory('Tất cả danh mục')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer">Tất cả danh mục</li>
+                <li @click="selectCategory('Tất cả danh mục')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer">Tất cả
+                  danh mục</li>
                 <li @click="selectCategory('Kinh tế')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer">Kinh tế</li>
-                <li @click="selectCategory('Chính trị')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer">Chính trị</li>
+                <li @click="selectCategory('Chính trị')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer">Chính trị
+                </li>
                 <li @click="selectCategory('Văn hóa')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer">Văn hóa</li>
-                <li @click="selectCategory('Giao thông')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer">Giao thông</li>
+                <li @click="selectCategory('Giao thông')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer">Giao thông
+                </li>
                 <li @click="selectCategory('Giáo dục')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer">Giáo dục</li>
               </ul>
             </div>
@@ -2540,7 +2467,7 @@
           <div class="relative">
             <button type="button" @click="toggleTime()" aria-haspopup="listbox" :aria-expanded="showTimeDropdown"
               class="flex h-10 w-full items-center justify-between rounded-md border border-input px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 bg-white text-gray-900">
-               <span class="time-display" style="pointer-events:none">Tất cả</span>
+              <span class="time-display" style="pointer-events:none">Tất cả</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                 class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
@@ -2597,12 +2524,18 @@
             <div x-cloak x-show="showSortDropdown" x-transition data-sort-menu style="display:none"
               class="absolute mt-2 right-0 z-50 bg-white text-gray-900 rounded shadow-lg w-40">
               <ul role="listbox" class="py-1">
-                <li @click="selectSort('Mới nhất')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm">Mới nhất</li>
-                <li @click="selectSort('Cũ nhất')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm">Cũ nhất</li>
-                <li @click="selectSort('Xem nhiều')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm">Xem nhiều</li>
-                <li @click="selectSort('Nổi bật')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm">Nổi bật</li>
-                <li @click="selectSort('Tên A-Z')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm">Tên A-Z</li>
-                <li @click="selectSort('Tên Z-A')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm">Tên Z-A</li>
+                <li @click="selectSort('Mới nhất')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm">Mới nhất
+                </li>
+                <li @click="selectSort('Cũ nhất')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm">Cũ nhất
+                </li>
+                <li @click="selectSort('Xem nhiều')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm">Xem
+                  nhiều</li>
+                <li @click="selectSort('Nổi bật')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm">Nổi bật
+                </li>
+                <li @click="selectSort('Tên A-Z')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm">Tên A-Z
+                </li>
+                <li @click="selectSort('Tên Z-A')" class="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm">Tên Z-A
+                </li>
               </ul>
             </div>
           </div>
@@ -2627,7 +2560,8 @@
               <div class="space-y-3">
                 <div>
                   <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                    <a href="/tin-tuc/1">Bình Dương thu hút 2,5 tỷ USD vốn đầu tư nước ngoài trong năm 2024</a></h3>
+                    <a href="/tin-tuc/1">Bình Dương thu hút 2,5 tỷ USD vốn đầu tư nước ngoài trong năm 2024</a>
+                  </h3>
                   <p class="text-gray-600 text-sm mb-3 line-clamp-2">Tỉnh Bình Dương tiếp tục khẳng định vị thế là điểm
                     đến hấp dẫn cho các nhà đầu tư quốc tế với nhiều dự án lớn được triển khai.</p>
                 </div>
@@ -2690,7 +2624,8 @@
               <div class="space-y-3">
                 <div>
                   <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                    <a href="/tin-tuc/41">Bình Dương thu hút 2,5 tỷ USD vốn đầu tư nước ngoài trong năm 2024</a></h3>
+                    <a href="/tin-tuc/41">Bình Dương thu hút 2,5 tỷ USD vốn đầu tư nước ngoài trong năm 2024</a>
+                  </h3>
                   <p class="text-gray-600 text-sm mb-3 line-clamp-2">Tỉnh Bình Dương tiếp tục khẳng định vị thế là điểm
                     đến hấp dẫn cho các nhà đầu tư quốc tế với nhiều dự án lớn được triển khai.</p>
                 </div>
@@ -2753,7 +2688,8 @@
               <div class="space-y-3">
                 <div>
                   <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                    <a href="/tin-tuc/31">Bình Dương thu hút 2,5 tỷ USD vốn đầu tư nước ngoài trong năm 2024</a></h3>
+                    <a href="/tin-tuc/31">Bình Dương thu hút 2,5 tỷ USD vốn đầu tư nước ngoài trong năm 2024</a>
+                  </h3>
                   <p class="text-gray-600 text-sm mb-3 line-clamp-2">Tỉnh Bình Dương tiếp tục khẳng định vị thế là điểm
                     đến hấp dẫn cho các nhà đầu tư quốc tế với nhiều dự án lớn được triển khai.</p>
                 </div>
@@ -2816,7 +2752,8 @@
               <div class="space-y-3">
                 <div>
                   <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                    <a href="/tin-tuc/2">Khánh thành cầu vượt Mỹ Phước - Tân Vạn, giảm ùn tắc giao thông</a></h3>
+                    <a href="/tin-tuc/2">Khánh thành cầu vượt Mỹ Phước - Tân Vạn, giảm ùn tắc giao thông</a>
+                  </h3>
                   <p class="text-gray-600 text-sm mb-3 line-clamp-2">Cầu vượt Mỹ Phước - Tân Vạn chính thức đưa vào sử
                     dụng, góp phần giải quyết tình trạng ùn tắc giao thông tại khu vực.</p>
                 </div>
@@ -2879,7 +2816,8 @@
               <div class="space-y-3">
                 <div>
                   <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                    <a href="/tin-tuc/42">Khánh thành cầu vượt Mỹ Phước - Tân Vạn, giảm ùn tắc giao thông</a></h3>
+                    <a href="/tin-tuc/42">Khánh thành cầu vượt Mỹ Phước - Tân Vạn, giảm ùn tắc giao thông</a>
+                  </h3>
                   <p class="text-gray-600 text-sm mb-3 line-clamp-2">Cầu vượt Mỹ Phước - Tân Vạn chính thức đưa vào sử
                     dụng, góp phần giải quyết tình trạng ùn tắc giao thông tại khu vực.</p>
                 </div>
@@ -2942,7 +2880,8 @@
               <div class="space-y-3">
                 <div>
                   <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                    <a href="/tin-tuc/32">Khánh thành cầu vượt Mỹ Phước - Tân Vạn, giảm ùn tắc giao thông</a></h3>
+                    <a href="/tin-tuc/32">Khánh thành cầu vượt Mỹ Phước - Tân Vạn, giảm ùn tắc giao thông</a>
+                  </h3>
                   <p class="text-gray-600 text-sm mb-3 line-clamp-2">Cầu vượt Mỹ Phước - Tân Vạn chính thức đưa vào sử
                     dụng, góp phần giải quyết tình trạng ùn tắc giao thông tại khu vực.</p>
                 </div>
@@ -3005,7 +2944,8 @@
               <div class="space-y-3">
                 <div>
                   <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                    <a href="/tin-tuc/3">Lễ hội Văn hóa Dân gian Bình Dương 2024 thu hút hàng nghìn du khách</a></h3>
+                    <a href="/tin-tuc/3">Lễ hội Văn hóa Dân gian Bình Dương 2024 thu hút hàng nghìn du khách</a>
+                  </h3>
                   <p class="text-gray-600 text-sm mb-3 line-clamp-2">Lễ hội diễn ra tại Trung tâm Văn hóa tỉnh với nhiều
                     hoạt động đặc sắc, giới thiệu văn hóa truyền thống địa phương.</p>
                 </div>
@@ -3068,7 +3008,8 @@
               <div class="space-y-3">
                 <div>
                   <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                    <a href="/tin-tuc/43">Lễ hội Văn hóa Dân gian Bình Dương 2024 thu hút hàng nghìn du khách</a></h3>
+                    <a href="/tin-tuc/43">Lễ hội Văn hóa Dân gian Bình Dương 2024 thu hút hàng nghìn du khách</a>
+                  </h3>
                   <p class="text-gray-600 text-sm mb-3 line-clamp-2">Lễ hội diễn ra tại Trung tâm Văn hóa tỉnh với nhiều
                     hoạt động đặc sắc, giới thiệu văn hóa truyền thống địa phương.</p>
                 </div>
@@ -3131,7 +3072,8 @@
               <div class="space-y-3">
                 <div>
                   <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                    <a href="/tin-tuc/33">Lễ hội Văn hóa Dân gian Bình Dương 2024 thu hút hàng nghìn du khách</a></h3>
+                    <a href="/tin-tuc/33">Lễ hội Văn hóa Dân gian Bình Dương 2024 thu hút hàng nghìn du khách</a>
+                  </h3>
                   <p class="text-gray-600 text-sm mb-3 line-clamp-2">Lễ hội diễn ra tại Trung tâm Văn hóa tỉnh với nhiều
                     hoạt động đặc sắc, giới thiệu văn hóa truyền thống địa phương.</p>
                 </div>
@@ -3191,7 +3133,8 @@
               <div class="space-y-3">
                 <div>
                   <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                    <a href="/tin-tuc/25">Công viên Gia Định - Không gian xanh lý tưởng cho gia đình</a></h3>
+                    <a href="/tin-tuc/25">Công viên Gia Định - Không gian xanh lý tưởng cho gia đình</a>
+                  </h3>
                   <p class="text-gray-600 text-sm mb-3 line-clamp-2">Công viên với nhiều trò chơi dành cho trẻ em và
                     không gian thư giãn cho người lớn.</p>
                 </div>
@@ -3254,7 +3197,8 @@
               <div class="space-y-3">
                 <div>
                   <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                    <a href="/tin-tuc/4">Triển khai dự án Smart City tại TP. Thủ Dầu Một</a></h3>
+                    <a href="/tin-tuc/4">Triển khai dự án Smart City tại TP. Thủ Dầu Một</a>
+                  </h3>
                   <p class="text-gray-600 text-sm mb-3 line-clamp-2">Dự án thành phố thông minh được kh��i động với
                     nhiều giải pháp công nghệ hiện đại.</p>
                 </div>
@@ -3317,7 +3261,8 @@
               <div class="space-y-3">
                 <div>
                   <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                    <a href="/tin-tuc/5">Khu công nghiệp VSIP III chính thức đi vào hoạt động</a></h3>
+                    <a href="/tin-tuc/5">Khu công nghiệp VSIP III chính thức đi vào hoạt động</a>
+                  </h3>
                   <p class="text-gray-600 text-sm mb-3 line-clamp-2">Khu công nghiệp mới với quy mô 1.000 ha sẽ tạo việc
                     làm cho hàng nghìn lao động.</p>
                 </div>
@@ -3691,7 +3636,8 @@
                       </div>
                       <h3
                         class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                        <a href="/tin-tuc/1">Bình Dương thu hút 2,5 tỷ USD vốn đầu tư nước ngoài trong năm 2024</a></h3>
+                        <a href="/tin-tuc/1">Bình Dương thu hút 2,5 tỷ USD vốn đầu tư nước ngoài trong năm 2024</a>
+                      </h3>
                       <p class="text-sm text-gray-600 mb-3 line-clamp-2">Tỉnh Bình Dương tiếp tục khẳng định vị thế là
                         điểm đến hấp dẫn cho các nhà đầu tư quốc tế với nhiều dự án lớn được triển khai.</p>
                       <div class="flex items-center justify-between text-xs text-gray-500">
@@ -3740,7 +3686,8 @@
                       </div>
                       <h3
                         class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                        <a href="/tin-tuc/2">Khánh thành cầu vượt Mỹ Phước - Tân Vạn, giảm ùn tắc giao thông</a></h3>
+                        <a href="/tin-tuc/2">Khánh thành cầu vượt Mỹ Phước - Tân Vạn, giảm ùn tắc giao thông</a>
+                      </h3>
                       <p class="text-sm text-gray-600 mb-3 line-clamp-2">Cầu vượt Mỹ Phước - Tân Vạn chính thức đưa vào
                         sử dụng, góp phần giải quyết tình trạng ùn tắc giao thông tại khu vực.</p>
                       <div class="flex items-center justify-between text-xs text-gray-500">
@@ -3839,7 +3786,8 @@
                       </div>
                       <h3
                         class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                        <a href="/tin-tuc/4">Triển khai dự án Smart City tại TP. Thủ Dầu Một</a></h3>
+                        <a href="/tin-tuc/4">Triển khai dự án Smart City tại TP. Thủ Dầu Một</a>
+                      </h3>
                       <p class="text-sm text-gray-600 mb-3 line-clamp-2">Dự án thành phố thông minh được kh��i động với
                         nhiều giải pháp công nghệ hiện đại.</p>
                       <div class="flex items-center justify-between text-xs text-gray-500">
@@ -3895,7 +3843,8 @@
                       </div>
                       <h3
                         class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                        <a href="/tin-tuc/5">Khu công nghiệp VSIP III chính thức đi vào hoạt động</a></h3>
+                        <a href="/tin-tuc/5">Khu công nghiệp VSIP III chính thức đi vào hoạt động</a>
+                      </h3>
                       <p class="text-sm text-gray-600 mb-3 line-clamp-2">Khu công nghiệp mới với quy mô 1.000 ha sẽ tạo
                         việc làm cho hàng nghìn lao động.</p>
                       <div class="flex items-center justify-between text-xs text-gray-500">
@@ -3944,7 +3893,8 @@
                       </div>
                       <h3
                         class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                        <a href="/tin-tuc/6">Bình Dương đạt giải thưởng Thành phố Xanh ASEAN 2024</a></h3>
+                        <a href="/tin-tuc/6">Bình Dương đạt giải thưởng Thành phố Xanh ASEAN 2024</a>
+                      </h3>
                       <p class="text-sm text-gray-600 mb-3 line-clamp-2">Tỉnh Bình Dương vinh dự nhận giải thưởng Thành
                         phố Xanh ASEAN nhờ những nỗ lực bảo vệ môi trường.</p>
                       <div class="flex items-center justify-between text-xs text-gray-500">
@@ -3993,7 +3943,8 @@
                       </div>
                       <h3
                         class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                        <a href="/tin-tuc/7">Khai trương Trung tâm Thương mại Aeon Mall Bình Dương Canary</a></h3>
+                        <a href="/tin-tuc/7">Khai trương Trung tâm Thương mại Aeon Mall Bình Dương Canary</a>
+                      </h3>
                       <p class="text-sm text-gray-600 mb-3 line-clamp-2">Trung tâm thương mại quy mô lớn nhất tỉnh chính
                         thức khai trương với nhiều thương hiệu nổi tiếng.</p>
                       <div class="flex items-center justify-between text-xs text-gray-500">
@@ -4257,10 +4208,11 @@
                         </div>
                         <div class="flex flex-col gap-1 sm:gap-2 ml-2">
                           <button class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">
-                              Ứng tuyển
+                            Ứng tuyển
                           </button>
-                          <div class="rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white flex items-center justify-center">
-                              Gấp
+                          <div
+                            class="rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white flex items-center justify-center">
+                            Gấp
                           </div>
                         </div>
                       </div>
@@ -4472,10 +4424,11 @@
                         </div>
                         <div class="flex flex-col gap-1 sm:gap-2 ml-2">
                           <button class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">
-                              Ứng tuyển
+                            Ứng tuyển
                           </button>
-                          <div class="rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white flex items-center justify-center">
-                              Gấp
+                          <div
+                            class="rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white flex items-center justify-center">
+                            Gấp
                           </div>
                         </div>
                       </div>
@@ -4745,7 +4698,8 @@
                     <div class="mb-2">
                       <h3 class="font-semibold text-gray-900 line-clamp-2 text-sm sm:text-base leading-5 sm:leading-6">
                         <a class="hover:text-blue-600 transition-colors" href="/bat-dong-san/1">Căn hộ cao cấp Midtown
-                          Sakura Park</a></h3>
+                          Sakura Park</a>
+                      </h3>
                     </div>
                     <div class="flex items-center text-xs sm:text-sm text-gray-500 mb-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -4795,7 +4749,8 @@
                     <div class="mb-2">
                       <h3 class="font-semibold text-gray-900 line-clamp-2 text-sm sm:text-base leading-5 sm:leading-6">
                         <a class="hover:text-blue-600 transition-colors" href="/bat-dong-san/2">Nhà phố thương mại
-                          Golden Center City</a></h3>
+                          Golden Center City</a>
+                      </h3>
                     </div>
                     <div class="flex items-center text-xs sm:text-sm text-gray-500 mb-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -4848,7 +4803,8 @@
                     <div class="mb-2">
                       <h3 class="font-semibold text-gray-900 line-clamp-2 text-sm sm:text-base leading-5 sm:leading-6">
                         <a class="hover:text-blue-600 transition-colors" href="/bat-dong-san/3">Biệt thự đơn lập Lavilla
-                          Green City</a></h3>
+                          Green City</a>
+                      </h3>
                     </div>
                     <div class="flex items-center text-xs sm:text-sm text-gray-500 mb-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -4898,7 +4854,8 @@
                     <div class="mb-2">
                       <h3 class="font-semibold text-gray-900 line-clamp-2 text-sm sm:text-base leading-5 sm:leading-6">
                         <a class="hover:text-blue-600 transition-colors" href="/bat-dong-san/4">Đất nền dự án Eco City
-                          Premia</a></h3>
+                          Premia</a>
+                      </h3>
                     </div>
                     <div class="flex items-center text-xs sm:text-sm text-gray-500 mb-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -4941,7 +4898,8 @@
                     <div class="mb-2">
                       <h3 class="font-semibold text-gray-900 line-clamp-2 text-sm sm:text-base leading-5 sm:leading-6">
                         <a class="hover:text-blue-600 transition-colors" href="/bat-dong-san/5">Shophouse mặt tiền đường
-                          lớn</a></h3>
+                          lớn</a>
+                      </h3>
                     </div>
                     <div class="flex items-center text-xs sm:text-sm text-gray-500 mb-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -4991,7 +4949,8 @@
                     <div class="mb-2">
                       <h3 class="font-semibold text-gray-900 line-clamp-2 text-sm sm:text-base leading-5 sm:leading-6">
                         <a class="hover:text-blue-600 transition-colors" href="/bat-dong-san/6">Căn hộ studio The Manor
-                          Central Park</a></h3>
+                          Central Park</a>
+                      </h3>
                     </div>
                     <div class="flex items-center text-xs sm:text-sm text-gray-500 mb-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -5044,7 +5003,8 @@
                     <div class="mb-2">
                       <h3 class="font-semibold text-gray-900 line-clamp-2 text-sm sm:text-base leading-5 sm:leading-6">
                         <a class="hover:text-blue-600 transition-colors" href="/bat-dong-san/11">Căn hộ cao cấp Midtown
-                          Sakura Park</a></h3>
+                          Sakura Park</a>
+                      </h3>
                     </div>
                     <div class="flex items-center text-xs sm:text-sm text-gray-500 mb-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -5094,7 +5054,8 @@
                     <div class="mb-2">
                       <h3 class="font-semibold text-gray-900 line-clamp-2 text-sm sm:text-base leading-5 sm:leading-6">
                         <a class="hover:text-blue-600 transition-colors" href="/bat-dong-san/12">Nhà phố thương mại
-                          Golden Center City</a></h3>
+                          Golden Center City</a>
+                      </h3>
                     </div>
                     <div class="flex items-center text-xs sm:text-sm text-gray-500 mb-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -5147,7 +5108,8 @@
                     <div class="mb-2">
                       <h3 class="font-semibold text-gray-900 line-clamp-2 text-sm sm:text-base leading-5 sm:leading-6">
                         <a class="hover:text-blue-600 transition-colors" href="/bat-dong-san/13">Biệt thự đơn lập
-                          Lavilla Green City</a></h3>
+                          Lavilla Green City</a>
+                      </h3>
                     </div>
                     <div class="flex items-center text-xs sm:text-sm text-gray-500 mb-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -5197,7 +5159,8 @@
                     <div class="mb-2">
                       <h3 class="font-semibold text-gray-900 line-clamp-2 text-sm sm:text-base leading-5 sm:leading-6">
                         <a class="hover:text-blue-600 transition-colors" href="/bat-dong-san/14">Đất nền dự án Eco City
-                          Premia</a></h3>
+                          Premia</a>
+                      </h3>
                     </div>
                     <div class="flex items-center text-xs sm:text-sm text-gray-500 mb-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"

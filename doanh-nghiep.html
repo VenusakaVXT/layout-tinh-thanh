@@ -214,28 +214,32 @@
         }
 
         /* Badge Styles */
-        .badge-default {
-          @apply inline-flex items-center border px-2.5 py-0.5 text-xs font-semibold rounded-md;
+        .badge {
+          @apply inline-flex justify-center items-center border px-2.5 py-0.5 text-xs font-semibold rounded-md;
         }
 
         .badge-primary {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-blue-100 text-blue-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-blue-100 text-blue-700 rounded-md;
         }
 
         .badge-secondary {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-gray-100 text-gray-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-gray-100 text-gray-700 rounded-md;
         }
 
         .badge-success {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-green-100 text-green-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-green-100 text-green-700 rounded-md;
         }
 
         .badge-warning {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-yellow-100 text-yellow-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-yellow-100 text-yellow-700 rounded-md;
         }
 
         .badge-danger {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-red-100 text-red-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-red-100 text-red-700 rounded-md;
+        }
+                
+        .badge-featured {
+          @apply bg-orange-500 text-white;
         }
 
         .badge-hot {
@@ -1091,40 +1095,6 @@
                 margin-top: 0.875rem;
             }
             
-            /* Size Utilities */
-            .w-fit {
-                width: fit-content;
-            }
-            
-            .h-fit {
-                height: fit-content;
-            }
-            
-            .size-4 {
-                @apply w-4 h-4;
-            }
-            
-            .size-5 {
-                @apply w-5 h-5;
-            }
-            
-            .size-6 {
-                @apply w-6 h-6;
-            }
-            
-            .size-8 {
-                @apply w-8 h-8;
-            }
-            
-            .size-10 {
-                @apply w-10 h-10;
-            }
-            
-            .size-12 {
-                @apply w-12 h-12;
-            }
-            
-                
             /* Custom scrollbar for mobile menu */
             .custom-scrollbar::-webkit-scrollbar {
                 width: 4px;
@@ -4422,8 +4392,7 @@
       <div class="container mx-auto px-4">
         <div class="flex items-center justify-between mb-8">
           <div><a href="/dich-vu-thanh-vien">
-              <h2
-                class="text-xl md:text-2xl md:text-3xl font-bold text-gray-900 mb-2 title-section-hover">
+              <h2 class="text-xl md:text-2xl md:text-3xl font-bold text-gray-900 mb-2 title-section-hover">
                 Dịch Vụ Nổi Bật
               </h2>
             </a></div>
@@ -4544,8 +4513,7 @@
       <div class="container mx-auto px-4">
         <div class="flex items-center justify-between mb-8">
           <div><a href="/viec-lam">
-              <h2
-                class="text-xl md:text-2xl md:text-3xl font-bold text-gray-900 mb-2 title-section-hover">
+              <h2 class="text-xl md:text-2xl md:text-3xl font-bold text-gray-900 mb-2 title-section-hover">
                 Việc Làm Đề Xuất
               </h2>
             </a></div>
@@ -4598,12 +4566,8 @@
                               </div>
                             </div>
                             <div class="flex flex-col gap-2 ml-2">
-                              <button class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">
-                                Ứng tuyển
-                            </button>
-                            <div class="rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white flex items-center justify-center">
-                                Gấp
-                            </div>
+                              <button class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">Ứng tuyển</button>
+                              <span class="badge-hot flex items-center justify-center">Gấp</span>
                             </div>
                           </div>
                           <div class="space-y-2 mb-3">
@@ -4685,12 +4649,8 @@
                               </div>
                             </div>
                             <div class="flex flex-col gap-2 ml-2">
-                              <button class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">
-                                  Ứng tuyển
-                              </button>
-                              <div class="rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white flex items-center justify-center">
-                                  Gấp
-                              </div>
+                              <button class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">Ứng tuyển</button>
+                              <span class="badge-hot flex items-center justify-center">Gấp</span>
                             </div>
                           </div>
                           <div class="space-y-2 mb-3">
@@ -4846,12 +4806,8 @@
                               </div>
                             </div>
                             <div class="flex flex-col gap-2 ml-2">
-                              <button class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">
-                                Ứng tuyển
-                              </button>
-                              <div class="rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white flex items-center justify-center">
-                                  Gấp
-                              </div>
+                              <button class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">Ứng tuyển</button>
+                              <span class="badge-hot flex items-center justify-center">Gấp</span>
                             </div>
                           </div>
                           <div class="space-y-2 mb-3">
@@ -5001,12 +4957,8 @@
                               </div>
                             </div>
                             <div class="flex flex-col gap-2 ml-2">
-                              <button class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">
-                                  Ứng tuyển
-                              </button>
-                              <div class="rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white flex items-center justify-center">
-                                  Gấp
-                              </div>
+                              <button class="btn-primary btn-sm text-white text-xs px-3 py-1 rounded-lg">Ứng tuyển</button>
+                              <span class="badge-hot flex items-center justify-center">Gấp</span>
                             </div>
                           </div>
                           <div class="space-y-2 mb-3">
@@ -5097,7 +5049,7 @@
   <section class="py-12 md:py-16 bg-gray-50">
     <div class="container mx-auto px-4">
       <div class="text-center mb-8">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4 title-section">  
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 title-section">
           Tin Tức Bình Dương
         </h2>
         <p class="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">Cập nhật những tin tức mới nhất về kinh tế,
@@ -5142,7 +5094,7 @@
                         </a>
                         <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                         <div x-show="newsItem.featured"
-                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge-default bg-red-500 text-white absolute top-2 right-2">
+                          class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white absolute top-2 right-2">
                           Hot</div>
                       </div>
                       <div class="p-4">

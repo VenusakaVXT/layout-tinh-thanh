@@ -214,28 +214,32 @@
         }
 
         /* Badge Styles */
-        .badge-default {
-          @apply inline-flex items-center border px-2.5 py-0.5 text-xs font-semibold rounded-md;
+        .badge {
+          @apply inline-flex justify-center items-center border px-2.5 py-0.5 text-xs font-semibold rounded-md;
         }
 
         .badge-primary {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-blue-100 text-blue-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-blue-100 text-blue-700 rounded-md;
         }
 
         .badge-secondary {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-gray-100 text-gray-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-gray-100 text-gray-700 rounded-md;
         }
 
         .badge-success {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-green-100 text-green-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-green-100 text-green-700 rounded-md;
         }
 
         .badge-warning {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-yellow-100 text-yellow-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-yellow-100 text-yellow-700 rounded-md;
         }
 
         .badge-danger {
-          @apply inline-flex items-center px-2.5 py-0.5 text-xs font-semibold bg-red-100 text-red-700 rounded-md;
+          @apply inline-flex justify-center items-center px-2.5 py-0.5 text-xs font-semibold bg-red-100 text-red-700 rounded-md;
+        }
+                
+        .badge-featured {
+          @apply bg-orange-500 text-white;
         }
 
         .badge-hot {
@@ -1086,57 +1090,7 @@
             .flex-col-start {
                 @apply flex flex-col items-start justify-start;
             }
-            
-            /* Spacing Utilities */
-            .space-y-0\.5 > * + * {
-                margin-top: 0.125rem;
-            }
-            
-            .space-y-1\.5 > * + * {
-                margin-top: 0.375rem;
-            }
-            
-            .space-y-2\.5 > * + * {
-                margin-top: 0.625rem;
-            }
-            
-            .space-y-3\.5 > * + * {
-                margin-top: 0.875rem;
-            }
-            
-            /* Size Utilities */
-            .w-fit {
-                width: fit-content;
-            }
-            
-            .h-fit {
-                height: fit-content;
-            }
-            
-            .size-4 {
-                @apply w-4 h-4;
-            }
-            
-            .size-5 {
-                @apply w-5 h-5;
-            }
-            
-            .size-6 {
-                @apply w-6 h-6;
-            }
-            
-            .size-8 {
-                @apply w-8 h-8;
-            }
-            
-            .size-10 {
-                @apply w-10 h-10;
-            }
-            
-            .size-12 {
-                @apply w-12 h-12;
-            }
-                
+             
             /* Custom scrollbar for mobile menu */
             .custom-scrollbar::-webkit-scrollbar {
                 width: 4px;
@@ -2543,9 +2497,10 @@
               <div class="font-semibold tracking-tight text-xl">Chọn Loại Nội Dung</div>
             </div>
             <div class="p-0">
-               <!-- Tabs -->
-               <div class="border-b">
-                <div class="flex flex-nowrap gap-0 overflow-x-auto scrollbar-hide touch-pan-x overscroll-x-contain snap-x snap-mandatory [-webkit-overflow-scrolling:touch]">
+              <!-- Tabs -->
+              <div class="border-b">
+                <div
+                  class="flex flex-nowrap gap-0 overflow-x-auto scrollbar-hide touch-pan-x overscroll-x-contain snap-x snap-mandatory [-webkit-overflow-scrolling:touch]">
                   <a href="./post-status.html" class="tab inactive">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                       stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -2620,8 +2575,8 @@
                 </div>
               </div>
 
-               <!-- Service Post -->
-               <div id="service-post" class="p-6" x-data="postTabs">
+              <!-- Service Post -->
+              <div id="service-post" class="p-6" x-data="postTabs">
                 <form class="space-y-6">
                   <div class="space-y-2"><label
                       class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -2656,21 +2611,23 @@
                             <select id="price-unit-select"
                               class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 appearance-none cursor-pointer">
                               <option value="VND" selected>VND</option>
-                            <option value="USD">USD</option>
-                          </select>
+                              <option value="USD">USD</option>
+                            </select>
                             <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 opacity-50"
+                                aria-hidden="true">
                                 <path d="m6 9 6 6 6-6"></path>
                               </svg>
-                        </div>
-                      </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                       <div class="flex items-center space-x-2">
                         <label class="flex items-center space-x-2 cursor-pointer">
-                          <input type="checkbox" id="negotiable" class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
+                          <input type="checkbox" id="negotiable"
+                            class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
                           <span class="text-sm font-medium leading-none">Có thể thương lượng</span>
                         </label>
                       </div>
@@ -2680,7 +2637,8 @@
                       class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                       for="description">Mô tả dịch vụ *</label><textarea
                       class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm min-h-[120px]"
-                      id="service-description" placeholder="Mô tả chi tiết về dịch vụ của bạn..." required=""></textarea></div>
+                      id="service-description" placeholder="Mô tả chi tiết về dịch vụ của bạn..."
+                      required=""></textarea></div>
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="space-y-2">
                       <label
@@ -2779,83 +2737,103 @@
                           vực phục vụ</label>
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
                           <label class="flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" id="Quận 1" class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
+                            <input type="checkbox" id="Quận 1"
+                              class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
                             <span class="font-medium text-sm">Quận 1</span>
                           </label>
                           <label class="flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" id="Quận 2" class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
+                            <input type="checkbox" id="Quận 2"
+                              class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
                             <span class="font-medium text-sm">Quận 2</span>
                           </label>
                           <label class="flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" id="Quận 3" class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
+                            <input type="checkbox" id="Quận 3"
+                              class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
                             <span class="font-medium text-sm">Quận 3</span>
                           </label>
                           <label class="flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" id="Quận 4" class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
+                            <input type="checkbox" id="Quận 4"
+                              class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
                             <span class="font-medium text-sm">Quận 4</span>
                           </label>
                           <label class="flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" id="Quận 5" class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
+                            <input type="checkbox" id="Quận 5"
+                              class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
                             <span class="font-medium text-sm">Quận 5</span>
                           </label>
                           <label class="flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" id="Quận 6" class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
+                            <input type="checkbox" id="Quận 6"
+                              class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
                             <span class="font-medium text-sm">Quận 6</span>
                           </label>
                           <label class="flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" id="Quận 7" class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
+                            <input type="checkbox" id="Quận 7"
+                              class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
                             <span class="font-medium text-sm">Quận 7</span>
                           </label>
                           <label class="flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" id="Quận 8" class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
+                            <input type="checkbox" id="Quận 8"
+                              class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
                             <span class="font-medium text-sm">Quận 8</span>
                           </label>
                           <label class="flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" id="Quận 9" class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
+                            <input type="checkbox" id="Quận 9"
+                              class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
                             <span class="font-medium text-sm">Quận 9</span>
                           </label>
                           <label class="flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" id="Quận 10" class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
+                            <input type="checkbox" id="Quận 10"
+                              class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
                             <span class="font-medium text-sm">Quận 10</span>
                           </label>
                           <label class="flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" id="Quận 11" class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
+                            <input type="checkbox" id="Quận 11"
+                              class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
                             <span class="font-medium text-sm">Quận 11</span>
                           </label>
                           <label class="flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" id="Quận 12" class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
+                            <input type="checkbox" id="Quận 12"
+                              class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
                             <span class="font-medium text-sm">Quận 12</span>
                           </label>
                           <label class="flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" id="Quận Bình Thạnh" class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
+                            <input type="checkbox" id="Quận Bình Thạnh"
+                              class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
                             <span class="font-medium text-sm">Quận Bình Thạnh</span>
                           </label>
                           <label class="flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" id="Quận Gò Vấp" class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
+                            <input type="checkbox" id="Quận Gò Vấp"
+                              class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
                             <span class="font-medium text-sm">Quận Gò Vấp</span>
                           </label>
                           <label class="flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" id="Quận Phú Nhuận" class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
+                            <input type="checkbox" id="Quận Phú Nhuận"
+                              class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
                             <span class="font-medium text-sm">Quận Phú Nhuận</span>
                           </label>
                           <label class="flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" id="Quận Tân Bình" class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
+                            <input type="checkbox" id="Quận Tân Bình"
+                              class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
                             <span class="font-medium text-sm">Quận Tân Bình</span>
                           </label>
                           <label class="flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" id="Quận Tân Phú" class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
+                            <input type="checkbox" id="Quận Tân Phú"
+                              class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
                             <span class="font-medium text-sm">Quận Tân Phú</span>
                           </label>
                           <label class="flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" id="Thủ Đức" class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
+                            <input type="checkbox" id="Thủ Đức"
+                              class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
                             <span class="font-medium text-sm">Thủ Đức</span>
                           </label>
                           <label class="flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" id="Bình Dương" class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
+                            <input type="checkbox" id="Bình Dương"
+                              class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
                             <span class="font-medium text-sm">Bình Dương</span>
                           </label>
                           <label class="flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" id="Đồng Nai" class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
+                            <input type="checkbox" id="Đồng Nai"
+                              class="h-4 w-4 rounded border-gray-300 text-primary focus:outline-none">
                             <span class="font-medium text-sm">Đồng Nai</span>
                           </label>
                         </div>
@@ -2979,7 +2957,8 @@
                               class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm pl-10"
                               id="contactEmailService" placeholder="email@example.com" type="email" value="">
                           </div>
-                          <p id="email-message-service" class="text-sm text-gray-500">Nhập địa chỉ email hợp lệ (tùy chọn)</p>
+                          <p id="email-message-service" class="text-sm text-gray-500">Nhập địa chỉ email hợp lệ (tùy
+                            chọn)</p>
                         </div>
                         <div class="space-y-2"><label
                             class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -3033,7 +3012,7 @@
                       type="submit" id="service-submit-btn" disabled="">Đăng dịch vụ</button></div>
                 </form>
               </div>
-              
+
             </div>
           </div>
           <div
