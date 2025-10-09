@@ -3293,7 +3293,7 @@
           </div>
         </div>
       </div>
-      <div class="bg-gray-50 py-8" x-data="realEstateCarousel()">
+      <div class="bg-gray-50 py-8" x-data="batDongSanNoiBatComponent()">
         <div class="container mx-auto px-4">
           <div class="flex items-center justify-between mb-6"><a href="/bat-dong-san">
               <h2 class="text-xl md:text-2xl font-bold text-gray-900 title-section-hover">
@@ -3308,14 +3308,14 @@
                     <path d="M5 12h14"></path>
                     <path d="m12 5 7 7-7 7"></path>
                   </svg></button></a>
-              <div class="flex gap-2"><button :class="getPrevButtonClass()" :disabled="!canPrev()" @click="prevSlide()"
+              <div class="flex gap-2"><button @click="prevSlide()" :disabled="isPrevDisabled()"
                   class="btn-outline-primary btn-sm w-10 h-10 p-0 flex items-center justify-center"><svg
                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="lucide lucide-chevron-left w-4 h-4">
                     <path d="m15 18-6-6 6-6"></path>
                   </svg></button>
-                <button :class="getNextButtonClass()" :disabled="!canNext()" @click="nextSlide()"
+                <button @click="nextSlide()" :disabled="isNextDisabled()"
                   class="btn-outline-primary btn-sm w-10 h-10 p-0 flex items-center justify-center"><svg
                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -3325,396 +3325,390 @@
               </div>
             </div>
           </div>
-          <div class="relative overflow-hidden">
-            <div class="flex transition-transform duration-500 ease-in-out"
-              style="transform: translateX(0%); width: 200%;">
-              <div class="flex-shrink-0 px-2" style="width: 10%;">
-                <div
-                  class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col card-hover">
-                  <div class="p-0 flex flex-col h-full">
-                    <div class="relative"><a href="/bat-dong-san/1"><img src="./public/images/hero-bg.webp"
-                          alt="Căn hộ cao cấp Midtown Sakura Park"
-                          class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity"></a>
-                      <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white absolute top-2 right-2">
-                        Hot</div>
-                      <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200 absolute top-2 left-2">
-                        Sắp bàn giao</div>
-                    </div>
-                    <div class="p-4 flex-1 flex flex-col">
-                      <div class="h-12 mb-2 flex items-start">
-                        <h3 class="font-semibold text-gray-900 line-clamp-2 leading-6 text-sm"><a
-                            class="hover:text-blue-600 transition-colors" href="/bat-dong-san/1">Căn hộ cao cấp Midtown
-                            Sakura Park</a></h3>
-                      </div>
-                      <div class="flex items-center text-sm text-gray-500 mb-2"><svg xmlns="http://www.w3.org/2000/svg"
-                          width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                          stroke-linecap="round" stroke-linejoin="round"
-                          class="lucide lucide-map-pin w-4 h-4 mr-1 flex-shrink-0">
-                          <path
-                            d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
-                          </path>
-                          <circle cx="12" cy="10" r="3"></circle>
-                        </svg><span class="line-clamp-1"><a class="hover:text-blue-600 transition-colors"
-                            href="/bat-dong-san/khu-vuc/phú-hữu,-tp.-thủ-dầu-một">Phú Hữu, TP. Thủ Dầu Một</a></span>
-                      </div>
-                      <div class="flex items-center justify-between mb-3">
-                        <div class="text-lg font-bold text-blue-600">2.8 tỷ VNĐ</div>
-                        <div class="text-sm text-gray-500">75m²</div>
-                      </div>
-                      <div class="flex items-center gap-4 text-sm text-gray-500 mt-auto"><span>2 PN</span><span>2
-                          WC</span><span class="capitalize"><a class="hover:text-blue-600 transition-colors"
-                            href="/bat-dong-san/loai-hinh/căn-hộ">Căn hộ</a></span></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="flex-shrink-0 px-2" style="width: 10%;">
-                <div
-                  class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col card-hover">
-                  <div class="p-0 flex flex-col h-full">
-                    <div class="relative"><a href="/bat-dong-san/2"><img src="./public/images/hero-bg.webp"
-                          alt="Nhà phố thương mại Golden Center City"
-                          class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity"></a>
-                      <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200 absolute top-2 left-2">
-                        Đang bán</div>
-                    </div>
-                    <div class="p-4 flex-1 flex flex-col">
-                      <div class="h-12 mb-2 flex items-start">
-                        <h3 class="font-semibold text-gray-900 line-clamp-2 leading-6 text-sm"><a
-                            class="hover:text-blue-600 transition-colors" href="/bat-dong-san/2">Nhà phố thương mại
-                            Golden Center City</a></h3>
-                      </div>
-                      <div class="flex items-center text-sm text-gray-500 mb-2"><svg xmlns="http://www.w3.org/2000/svg"
-                          width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                          stroke-linecap="round" stroke-linejoin="round"
-                          class="lucide lucide-map-pin w-4 h-4 mr-1 flex-shrink-0">
-                          <path
-                            d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
-                          </path>
-                          <circle cx="12" cy="10" r="3"></circle>
-                        </svg><span class="line-clamp-1"><a class="hover:text-blue-600 transition-colors"
-                            href="/bat-dong-san/khu-vuc/bến-cát,-bình-dương">Bến Cát, Bình Dương</a></span></div>
-                      <div class="flex items-center justify-between mb-3">
-                        <div class="text-lg font-bold text-blue-600">4.5 tỷ VNĐ</div>
-                        <div class="text-sm text-gray-500">120m²</div>
-                      </div>
-                      <div class="flex items-center gap-4 text-sm text-gray-500 mt-auto"><span>3 PN</span><span>4
-                          WC</span><span class="capitalize"><a class="hover:text-blue-600 transition-colors"
-                            href="/bat-dong-san/loai-hinh/nhà-phố">Nhà phố</a></span></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="flex-shrink-0 px-2" style="width: 10%;">
-                <div
-                  class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col card-hover">
-                  <div class="p-0 flex flex-col h-full">
-                    <div class="relative"><a href="/bat-dong-san/3"><img src="./public/images/hero-bg.webp"
-                          alt="Biệt thự đơn lập Lavilla Green City"
-                          class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity"></a>
-                      <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white absolute top-2 right-2">
-                        Hot</div>
-                      <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200 absolute top-2 left-2">
-                        Sắp mở bán</div>
-                    </div>
-                    <div class="p-4 flex-1 flex flex-col">
-                      <div class="h-12 mb-2 flex items-start">
-                        <h3 class="font-semibold text-gray-900 line-clamp-2 leading-6 text-sm"><a
-                            class="hover:text-blue-600 transition-colors" href="/bat-dong-san/3">Biệt thự đơn lập
-                            Lavilla Green City</a></h3>
-                      </div>
-                      <div class="flex items-center text-sm text-gray-500 mb-2"><svg xmlns="http://www.w3.org/2000/svg"
-                          width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                          stroke-linecap="round" stroke-linejoin="round"
-                          class="lucide lucide-map-pin w-4 h-4 mr-1 flex-shrink-0">
-                          <path
-                            d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
-                          </path>
-                          <circle cx="12" cy="10" r="3"></circle>
-                        </svg><span class="line-clamp-1"><a class="hover:text-blue-600 transition-colors"
-                            href="/bat-dong-san/khu-vuc/tân-uyên,-bình-dương">Tân Uyên, Bình Dương</a></span></div>
-                      <div class="flex items-center justify-between mb-3">
-                        <div class="text-lg font-bold text-blue-600">8.2 tỷ VNĐ</div>
-                        <div class="text-sm text-gray-500">200m²</div>
-                      </div>
-                      <div class="flex items-center gap-4 text-sm text-gray-500 mt-auto"><span>4 PN</span><span>5
-                          WC</span><span class="capitalize"><a class="hover:text-blue-600 transition-colors"
-                            href="/bat-dong-san/loai-hinh/biệt-thự">Biệt thự</a></span></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="flex-shrink-0 px-2" style="width: 10%;">
-                <div
-                  class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col card-hover">
-                  <div class="p-0 flex flex-col h-full">
-                    <div class="relative"><a href="/bat-dong-san/4"><img src="./public/images/hero-bg.webp"
-                          alt="Đất nền dự án Eco City Premia"
-                          class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity"></a>
-                      <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200 absolute top-2 left-2">
-                        Đang bán</div>
-                    </div>
-                    <div class="p-4 flex-1 flex flex-col">
-                      <div class="h-12 mb-2 flex items-start">
-                        <h3 class="font-semibold text-gray-900 line-clamp-2 leading-6 text-sm"><a
-                            class="hover:text-blue-600 transition-colors" href="/bat-dong-san/4">Đất nền dự án Eco City
-                            Premia</a></h3>
-                      </div>
-                      <div class="flex items-center text-sm text-gray-500 mb-2"><svg xmlns="http://www.w3.org/2000/svg"
-                          width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                          stroke-linecap="round" stroke-linejoin="round"
-                          class="lucide lucide-map-pin w-4 h-4 mr-1 flex-shrink-0">
-                          <path
-                            d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
-                          </path>
-                          <circle cx="12" cy="10" r="3"></circle>
-                        </svg><span class="line-clamp-1"><a class="hover:text-blue-600 transition-colors"
-                            href="/bat-dong-san/khu-vuc/bàu-bàng,-bình-dương">Bàu Bàng, Bình Dương</a></span></div>
-                      <div class="flex items-center justify-between mb-3">
-                        <div class="text-lg font-bold text-blue-600">1.8 tỷ VNĐ</div>
-                        <div class="text-sm text-gray-500">100m²</div>
+          <div class="relative">
+            <div class="overflow-hidden">
+              <div class="flex transition-transform duration-500 ease-in-out" x-ref="track"
+                style="transform: translateX(0%);">
+                <div class="w-full flex-shrink-0">
+                  <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+                    <div
+                      class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col card-hover">
+                      <div class="p-0 flex flex-col h-full">
+                        <div class="relative"><a href="/bat-dong-san/1"><img src="./public/images/hero-bg.webp"
+                              alt="Căn hộ cao cấp Midtown Sakura Park"
+                              class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity"></a>
+                          <div
+                            class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white absolute top-2 right-2">
+                            Hot</div>
+                          <div
+                            class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200 absolute top-2 left-2">
+                            Sắp bàn giao</div>
+                        </div>
+                        <div class="p-4 flex-1 flex flex-col">
+                          <div class="h-12 mb-2 flex items-start">
+                            <h3 class="font-semibold text-gray-900 line-clamp-2 leading-6 text-sm"><a
+                                class="hover:text-blue-600 transition-colors" href="/bat-dong-san/1">Căn hộ cao cấp
+                                Midtown
+                                Sakura Park</a></h3>
+                          </div>
+                          <div class="flex items-center text-sm text-gray-500 mb-2"><svg
+                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                              class="lucide lucide-map-pin w-4 h-4 mr-1 flex-shrink-0">
+                              <path
+                                d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
+                              </path>
+                              <circle cx="12" cy="10" r="3"></circle>
+                            </svg><span class="line-clamp-1"><a class="hover:text-blue-600 transition-colors"
+                                href="/bat-dong-san/khu-vuc/phú-hữu,-tp.-thủ-dầu-một">Phú Hữu, TP. Thủ Dầu
+                                Một</a></span>
+                          </div>
+                          <div class="flex items-center justify-between mb-3">
+                            <div class="text-lg font-bold text-blue-600">2.8 tỷ VNĐ</div>
+                            <div class="text-sm text-gray-500">75m²</div>
+                          </div>
+                          <div class="flex items-center gap-4 text-sm text-gray-500 mt-auto"><span>2 PN</span><span>2
+                              WC</span><span class="capitalize"><a class="hover:text-blue-600 transition-colors"
+                                href="/bat-dong-san/loai-hinh/căn-hộ">Căn hộ</a></span></div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="flex-shrink-0 px-2" style="width: 10%;">
-                <div
-                  class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col card-hover">
-                  <div class="p-0 flex flex-col h-full">
-                    <div class="relative"><a href="/bat-dong-san/5"><img src="./public/images/hero-bg.webp"
-                          alt="Shophouse mặt tiền đường lớn"
-                          class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity"></a>
-                      <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white absolute top-2 right-2">
-                        Hot</div>
-                      <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200 absolute top-2 left-2">
-                        Đang bán</div>
+                    <div
+                      class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col card-hover">
+                      <div class="p-0 flex flex-col h-full">
+                        <div class="relative"><a href="/bat-dong-san/2"><img src="./public/images/hero-bg.webp"
+                              alt="Nhà phố thương mại Golden Center City"
+                              class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity"></a>
+                          <div
+                            class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200 absolute top-2 left-2">
+                            Đang bán</div>
+                        </div>
+                        <div class="p-4 flex-1 flex flex-col">
+                          <div class="h-12 mb-2 flex items-start">
+                            <h3 class="font-semibold text-gray-900 line-clamp-2 leading-6 text-sm"><a
+                                class="hover:text-blue-600 transition-colors" href="/bat-dong-san/2">Nhà phố thương mại
+                                Golden Center City</a></h3>
+                          </div>
+                          <div class="flex items-center text-sm text-gray-500 mb-2"><svg
+                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                              class="lucide lucide-map-pin w-4 h-4 mr-1 flex-shrink-0">
+                              <path
+                                d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
+                              </path>
+                              <circle cx="12" cy="10" r="3"></circle>
+                            </svg><span class="line-clamp-1"><a class="hover:text-blue-600 transition-colors"
+                                href="/bat-dong-san/khu-vuc/bến-cát,-bình-dương">Bến Cát, Bình Dương</a></span></div>
+                          <div class="flex items-center justify-between mb-3">
+                            <div class="text-lg font-bold text-blue-600">4.5 tỷ VNĐ</div>
+                            <div class="text-sm text-gray-500">120m²</div>
+                          </div>
+                          <div class="flex items-center gap-4 text-sm text-gray-500 mt-auto"><span>3 PN</span><span>4
+                              WC</span><span class="capitalize"><a class="hover:text-blue-600 transition-colors"
+                                href="/bat-dong-san/loai-hinh/nhà-phố">Nhà phố</a></span></div>
+                        </div>
+                      </div>
                     </div>
-                    <div class="p-4 flex-1 flex flex-col">
-                      <div class="h-12 mb-2 flex items-start">
-                        <h3 class="font-semibold text-gray-900 line-clamp-2 leading-6 text-sm"><a
-                            class="hover:text-blue-600 transition-colors" href="/bat-dong-san/5">Shophouse mặt tiền
-                            đường lớn</a></h3>
+                    <div
+                      class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col card-hover">
+                      <div class="p-0 flex flex-col h-full">
+                        <div class="relative"><a href="/bat-dong-san/3"><img src="./public/images/hero-bg.webp"
+                              alt="Biệt thự đơn lập Lavilla Green City"
+                              class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity"></a>
+                          <div
+                            class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white absolute top-2 right-2">
+                            Hot</div>
+                          <div
+                            class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200 absolute top-2 left-2">
+                            Sắp mở bán</div>
+                        </div>
+                        <div class="p-4 flex-1 flex flex-col">
+                          <div class="h-12 mb-2 flex items-start">
+                            <h3 class="font-semibold text-gray-900 line-clamp-2 leading-6 text-sm"><a
+                                class="hover:text-blue-600 transition-colors" href="/bat-dong-san/3">Biệt thự đơn lập
+                                Lavilla Green City</a></h3>
+                          </div>
+                          <div class="flex items-center text-sm text-gray-500 mb-2"><svg
+                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                              class="lucide lucide-map-pin w-4 h-4 mr-1 flex-shrink-0">
+                              <path
+                                d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
+                              </path>
+                              <circle cx="12" cy="10" r="3"></circle>
+                            </svg><span class="line-clamp-1"><a class="hover:text-blue-600 transition-colors"
+                                href="/bat-dong-san/khu-vuc/tân-uyên,-bình-dương">Tân Uyên, Bình Dương</a></span></div>
+                          <div class="flex items-center justify-between mb-3">
+                            <div class="text-lg font-bold text-blue-600">8.2 tỷ VNĐ</div>
+                            <div class="text-sm text-gray-500">200m²</div>
+                          </div>
+                          <div class="flex items-center gap-4 text-sm text-gray-500 mt-auto"><span>4 PN</span><span>5
+                              WC</span><span class="capitalize"><a class="hover:text-blue-600 transition-colors"
+                                href="/bat-dong-san/loai-hinh/biệt-thự">Biệt thự</a></span></div>
+                        </div>
                       </div>
-                      <div class="flex items-center text-sm text-gray-500 mb-2"><svg xmlns="http://www.w3.org/2000/svg"
-                          width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                          stroke-linecap="round" stroke-linejoin="round"
-                          class="lucide lucide-map-pin w-4 h-4 mr-1 flex-shrink-0">
-                          <path
-                            d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
-                          </path>
-                          <circle cx="12" cy="10" r="3"></circle>
-                        </svg><span class="line-clamp-1"><a class="hover:text-blue-600 transition-colors"
-                            href="/bat-dong-san/khu-vuc/dĩ-an,-bình-dương">Dĩ An, Bình Dương</a></span></div>
-                      <div class="flex items-center justify-between mb-3">
-                        <div class="text-lg font-bold text-blue-600">6.5 tỷ VNĐ</div>
-                        <div class="text-sm text-gray-500">150m²</div>
-                      </div>
-                      <div class="flex items-center gap-4 text-sm text-gray-500 mt-auto"><span>3 PN</span><span>3
-                          WC</span><span class="capitalize"><a class="hover:text-blue-600 transition-colors"
-                            href="/bat-dong-san/loai-hinh/shophouse">Shophouse</a></span></div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="flex-shrink-0 px-2" style="width: 10%;">
-                <div
-                  class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col card-hover">
-                  <div class="p-0 flex flex-col h-full">
-                    <div class="relative"><a href="/bat-dong-san/6"><img src="./public/images/hero-bg.webp"
-                          alt="Căn hộ studio The Manor Central Park"
-                          class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity"></a>
-                      <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200 absolute top-2 left-2">
-                        Đang bán</div>
+                    <div
+                      class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col card-hover">
+                      <div class="p-0 flex flex-col h-full">
+                        <div class="relative"><a href="/bat-dong-san/4"><img src="./public/images/hero-bg.webp"
+                              alt="Đất nền dự án Eco City Premia"
+                              class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity"></a>
+                          <div
+                            class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200 absolute top-2 left-2">
+                            Đang bán</div>
+                        </div>
+                        <div class="p-4 flex-1 flex flex-col">
+                          <div class="h-12 mb-2 flex items-start">
+                            <h3 class="font-semibold text-gray-900 line-clamp-2 leading-6 text-sm"><a
+                                class="hover:text-blue-600 transition-colors" href="/bat-dong-san/4">Đất nền dự án Eco
+                                City
+                                Premia</a></h3>
+                          </div>
+                          <div class="flex items-center text-sm text-gray-500 mb-2"><svg
+                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                              class="lucide lucide-map-pin w-4 h-4 mr-1 flex-shrink-0">
+                              <path
+                                d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
+                              </path>
+                              <circle cx="12" cy="10" r="3"></circle>
+                            </svg><span class="line-clamp-1"><a class="hover:text-blue-600 transition-colors"
+                                href="/bat-dong-san/khu-vuc/bàu-bàng,-bình-dương">Bàu Bàng, Bình Dương</a></span></div>
+                          <div class="flex items-center justify-between mb-3">
+                            <div class="text-lg font-bold text-blue-600">1.8 tỷ VNĐ</div>
+                            <div class="text-sm text-gray-500">100m²</div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div class="p-4 flex-1 flex flex-col">
-                      <div class="h-12 mb-2 flex items-start">
-                        <h3 class="font-semibold text-gray-900 line-clamp-2 leading-6 text-sm"><a
-                            class="hover:text-blue-600 transition-colors" href="/bat-dong-san/6">Căn hộ studio The Manor
-                            Central Park</a></h3>
+                    <div
+                      class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col card-hover">
+                      <div class="p-0 flex flex-col h-full">
+                        <div class="relative"><a href="/bat-dong-san/5"><img src="./public/images/hero-bg.webp"
+                              alt="Shophouse mặt tiền đường lớn"
+                              class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity"></a>
+                          <div
+                            class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white absolute top-2 right-2">
+                            Hot</div>
+                          <div
+                            class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200 absolute top-2 left-2">
+                            Đang bán</div>
+                        </div>
+                        <div class="p-4 flex-1 flex flex-col">
+                          <div class="h-12 mb-2 flex items-start">
+                            <h3 class="font-semibold text-gray-900 line-clamp-2 leading-6 text-sm"><a
+                                class="hover:text-blue-600 transition-colors" href="/bat-dong-san/5">Shophouse mặt tiền
+                                đường lớn</a></h3>
+                          </div>
+                          <div class="flex items-center text-sm text-gray-500 mb-2"><svg
+                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                              class="lucide lucide-map-pin w-4 h-4 mr-1 flex-shrink-0">
+                              <path
+                                d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
+                              </path>
+                              <circle cx="12" cy="10" r="3"></circle>
+                            </svg><span class="line-clamp-1"><a class="hover:text-blue-600 transition-colors"
+                                href="/bat-dong-san/khu-vuc/dĩ-an,-bình-dương">Dĩ An, Bình Dương</a></span></div>
+                          <div class="flex items-center justify-between mb-3">
+                            <div class="text-lg font-bold text-blue-600">6.5 tỷ VNĐ</div>
+                            <div class="text-sm text-gray-500">150m²</div>
+                          </div>
+                          <div class="flex items-center gap-4 text-sm text-gray-500 mt-auto"><span>3 PN</span><span>3
+                              WC</span><span class="capitalize"><a class="hover:text-blue-600 transition-colors"
+                                href="/bat-dong-san/loai-hinh/shophouse">Shophouse</a></span></div>
+                        </div>
                       </div>
-                      <div class="flex items-center text-sm text-gray-500 mb-2"><svg xmlns="http://www.w3.org/2000/svg"
-                          width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                          stroke-linecap="round" stroke-linejoin="round"
-                          class="lucide lucide-map-pin w-4 h-4 mr-1 flex-shrink-0">
-                          <path
-                            d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
-                          </path>
-                          <circle cx="12" cy="10" r="3"></circle>
-                        </svg><span class="line-clamp-1"><a class="hover:text-blue-600 transition-colors"
-                            href="/bat-dong-san/khu-vuc/phú-hòa,-tp.-thủ-dầu-một">Phú Hòa, TP. Thủ Dầu Một</a></span>
-                      </div>
-                      <div class="flex items-center justify-between mb-3">
-                        <div class="text-lg font-bold text-blue-600">1.2 tỷ VNĐ</div>
-                        <div class="text-sm text-gray-500">35m²</div>
-                      </div>
-                      <div class="flex items-center gap-4 text-sm text-gray-500 mt-auto"><span>1 PN</span><span>1
-                          WC</span><span class="capitalize"><a class="hover:text-blue-600 transition-colors"
-                            href="/bat-dong-san/loai-hinh/căn-hộ">Căn hộ</a></span></div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="flex-shrink-0 px-2" style="width: 10%;">
-                <div
-                  class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col card-hover">
-                  <div class="p-0 flex flex-col h-full">
-                    <div class="relative"><a href="/bat-dong-san/11"><img src="./public/images/hero-bg.webp"
-                          alt="Căn hộ cao cấp Midtown Sakura Park"
-                          class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity"></a>
-                      <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white absolute top-2 right-2">
-                        Hot</div>
-                      <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200 absolute top-2 left-2">
-                        Sắp bàn giao</div>
+                    <div
+                      class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col card-hover">
+                      <div class="p-0 flex flex-col h-full">
+                        <div class="relative"><a href="/bat-dong-san/6"><img src="./public/images/hero-bg.webp"
+                              alt="Căn hộ studio The Manor Central Park"
+                              class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity"></a>
+                          <div
+                            class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200 absolute top-2 left-2">
+                            Đang bán</div>
+                        </div>
+                        <div class="p-4 flex-1 flex flex-col">
+                          <div class="h-12 mb-2 flex items-start">
+                            <h3 class="font-semibold text-gray-900 line-clamp-2 leading-6 text-sm"><a
+                                class="hover:text-blue-600 transition-colors" href="/bat-dong-san/6">Căn hộ studio The
+                                Manor
+                                Central Park</a></h3>
+                          </div>
+                          <div class="flex items-center text-sm text-gray-500 mb-2"><svg
+                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                              class="lucide lucide-map-pin w-4 h-4 mr-1 flex-shrink-0">
+                              <path
+                                d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
+                              </path>
+                              <circle cx="12" cy="10" r="3"></circle>
+                            </svg><span class="line-clamp-1"><a class="hover:text-blue-600 transition-colors"
+                                href="/bat-dong-san/khu-vuc/phú-hòa,-tp.-thủ-dầu-một">Phú Hòa, TP. Thủ Dầu
+                                Một</a></span>
+                          </div>
+                          <div class="flex items-center justify-between mb-3">
+                            <div class="text-lg font-bold text-blue-600">1.2 tỷ VNĐ</div>
+                            <div class="text-sm text-gray-500">35m²</div>
+                          </div>
+                          <div class="flex items-center gap-4 text-sm text-gray-500 mt-auto"><span>1 PN</span><span>1
+                              WC</span><span class="capitalize"><a class="hover:text-blue-600 transition-colors"
+                                href="/bat-dong-san/loai-hinh/căn-hộ">Căn hộ</a></span></div>
+                        </div>
+                      </div>
                     </div>
-                    <div class="p-4 flex-1 flex flex-col">
-                      <div class="h-12 mb-2 flex items-start">
-                        <h3 class="font-semibold text-gray-900 line-clamp-2 leading-6 text-sm"><a
-                            class="hover:text-blue-600 transition-colors" href="/bat-dong-san/11">Căn hộ cao cấp Midtown
-                            Sakura Park</a></h3>
+                    <div
+                      class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col card-hover">
+                      <div class="p-0 flex flex-col h-full">
+                        <div class="relative"><a href="/bat-dong-san/11"><img src="./public/images/hero-bg.webp"
+                              alt="Căn hộ cao cấp Midtown Sakura Park"
+                              class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity"></a>
+                          <div
+                            class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white absolute top-2 right-2">
+                            Hot</div>
+                          <div
+                            class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200 absolute top-2 left-2">
+                            Sắp bàn giao</div>
+                        </div>
+                        <div class="p-4 flex-1 flex flex-col">
+                          <div class="h-12 mb-2 flex items-start">
+                            <h3 class="font-semibold text-gray-900 line-clamp-2 leading-6 text-sm"><a
+                                class="hover:text-blue-600 transition-colors" href="/bat-dong-san/11">Căn hộ cao cấp
+                                Midtown
+                                Sakura Park</a></h3>
+                          </div>
+                          <div class="flex items-center text-sm text-gray-500 mb-2"><svg
+                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                              class="lucide lucide-map-pin w-4 h-4 mr-1 flex-shrink-0">
+                              <path
+                                d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
+                              </path>
+                              <circle cx="12" cy="10" r="3"></circle>
+                            </svg><span class="line-clamp-1"><a class="hover:text-blue-600 transition-colors"
+                                href="/bat-dong-san/khu-vuc/phú-hữu,-tp.-thủ-dầu-một">Phú Hữu, TP. Thủ Dầu
+                                Một</a></span>
+                          </div>
+                          <div class="flex items-center justify-between mb-3">
+                            <div class="text-lg font-bold text-blue-600">2.8 tỷ VNĐ</div>
+                            <div class="text-sm text-gray-500">75m²</div>
+                          </div>
+                          <div class="flex items-center gap-4 text-sm text-gray-500 mt-auto"><span>2 PN</span><span>2
+                              WC</span><span class="capitalize"><a class="hover:text-blue-600 transition-colors"
+                                href="/bat-dong-san/loai-hinh/căn-hộ">Căn hộ</a></span></div>
+                        </div>
                       </div>
-                      <div class="flex items-center text-sm text-gray-500 mb-2"><svg xmlns="http://www.w3.org/2000/svg"
-                          width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                          stroke-linecap="round" stroke-linejoin="round"
-                          class="lucide lucide-map-pin w-4 h-4 mr-1 flex-shrink-0">
-                          <path
-                            d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
-                          </path>
-                          <circle cx="12" cy="10" r="3"></circle>
-                        </svg><span class="line-clamp-1"><a class="hover:text-blue-600 transition-colors"
-                            href="/bat-dong-san/khu-vuc/phú-hữu,-tp.-thủ-dầu-một">Phú Hữu, TP. Thủ Dầu Một</a></span>
-                      </div>
-                      <div class="flex items-center justify-between mb-3">
-                        <div class="text-lg font-bold text-blue-600">2.8 tỷ VNĐ</div>
-                        <div class="text-sm text-gray-500">75m²</div>
-                      </div>
-                      <div class="flex items-center gap-4 text-sm text-gray-500 mt-auto"><span>2 PN</span><span>2
-                          WC</span><span class="capitalize"><a class="hover:text-blue-600 transition-colors"
-                            href="/bat-dong-san/loai-hinh/căn-hộ">Căn hộ</a></span></div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="flex-shrink-0 px-2" style="width: 10%;">
-                <div
-                  class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col card-hover">
-                  <div class="p-0 flex flex-col h-full">
-                    <div class="relative"><a href="/bat-dong-san/12"><img src="./public/images/hero-bg.webp"
-                          alt="Nhà phố thương mại Golden Center City"
-                          class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity"></a>
-                      <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200 absolute top-2 left-2">
-                        Đang bán</div>
-                    </div>
-                    <div class="p-4 flex-1 flex flex-col">
-                      <div class="h-12 mb-2 flex items-start">
-                        <h3 class="font-semibold text-gray-900 line-clamp-2 leading-6 text-sm"><a
-                            class="hover:text-blue-600 transition-colors" href="/bat-dong-san/12">Nhà phố thương mại
-                            Golden Center City</a></h3>
+                    <div
+                      class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col card-hover">
+                      <div class="p-0 flex flex-col h-full">
+                        <div class="relative"><a href="/bat-dong-san/12"><img src="./public/images/hero-bg.webp"
+                              alt="Nhà phố thương mại Golden Center City"
+                              class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity"></a>
+                          <div
+                            class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200 absolute top-2 left-2">
+                            Đang bán</div>
+                        </div>
+                        <div class="p-4 flex-1 flex flex-col">
+                          <div class="h-12 mb-2 flex items-start">
+                            <h3 class="font-semibold text-gray-900 line-clamp-2 leading-6 text-sm"><a
+                                class="hover:text-blue-600 transition-colors" href="/bat-dong-san/12">Nhà phố thương mại
+                                Golden Center City</a></h3>
+                          </div>
+                          <div class="flex items-center text-sm text-gray-500 mb-2"><svg
+                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                              class="lucide lucide-map-pin w-4 h-4 mr-1 flex-shrink-0">
+                              <path
+                                d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
+                              </path>
+                              <circle cx="12" cy="10" r="3"></circle>
+                            </svg><span class="line-clamp-1"><a class="hover:text-blue-600 transition-colors"
+                                href="/bat-dong-san/khu-vuc/bến-cát,-bình-dương">Bến Cát, Bình Dương</a></span></div>
+                          <div class="flex items-center justify-between mb-3">
+                            <div class="text-lg font-bold text-blue-600">4.5 tỷ VNĐ</div>
+                            <div class="text-sm text-gray-500">120m²</div>
+                          </div>
+                          <div class="flex items-center gap-4 text-sm text-gray-500 mt-auto"><span>3 PN</span><span>4
+                              WC</span><span class="capitalize"><a class="hover:text-blue-600 transition-colors"
+                                href="/bat-dong-san/loai-hinh/nhà-phố">Nhà phố</a></span></div>
+                        </div>
                       </div>
-                      <div class="flex items-center text-sm text-gray-500 mb-2"><svg xmlns="http://www.w3.org/2000/svg"
-                          width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                          stroke-linecap="round" stroke-linejoin="round"
-                          class="lucide lucide-map-pin w-4 h-4 mr-1 flex-shrink-0">
-                          <path
-                            d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
-                          </path>
-                          <circle cx="12" cy="10" r="3"></circle>
-                        </svg><span class="line-clamp-1"><a class="hover:text-blue-600 transition-colors"
-                            href="/bat-dong-san/khu-vuc/bến-cát,-bình-dương">Bến Cát, Bình Dương</a></span></div>
-                      <div class="flex items-center justify-between mb-3">
-                        <div class="text-lg font-bold text-blue-600">4.5 tỷ VNĐ</div>
-                        <div class="text-sm text-gray-500">120m²</div>
-                      </div>
-                      <div class="flex items-center gap-4 text-sm text-gray-500 mt-auto"><span>3 PN</span><span>4
-                          WC</span><span class="capitalize"><a class="hover:text-blue-600 transition-colors"
-                            href="/bat-dong-san/loai-hinh/nhà-phố">Nhà phố</a></span></div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="flex-shrink-0 px-2" style="width: 10%;">
-                <div
-                  class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col card-hover">
-                  <div class="p-0 flex flex-col h-full">
-                    <div class="relative"><a href="/bat-dong-san/13"><img src="./public/images/hero-bg.webp"
-                          alt="Biệt thự đơn lập Lavilla Green City"
-                          class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity"></a>
-                      <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white absolute top-2 right-2">
-                        Hot</div>
-                      <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200 absolute top-2 left-2">
-                        Sắp mở bán</div>
-                    </div>
-                    <div class="p-4 flex-1 flex flex-col">
-                      <div class="h-12 mb-2 flex items-start">
-                        <h3 class="font-semibold text-gray-900 line-clamp-2 leading-6 text-sm"><a
-                            class="hover:text-blue-600 transition-colors" href="/bat-dong-san/13">Biệt thự đơn lập
-                            Lavilla Green City</a></h3>
+                    <div
+                      class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col card-hover">
+                      <div class="p-0 flex flex-col h-full">
+                        <div class="relative"><a href="/bat-dong-san/13"><img src="./public/images/hero-bg.webp"
+                              alt="Biệt thự đơn lập Lavilla Green City"
+                              class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity"></a>
+                          <div
+                            class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent hover:bg-primary/80 badge bg-red-500 text-white absolute top-2 right-2">
+                            Hot</div>
+                          <div
+                            class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200 absolute top-2 left-2">
+                            Sắp mở bán</div>
+                        </div>
+                        <div class="p-4 flex-1 flex flex-col">
+                          <div class="h-12 mb-2 flex items-start">
+                            <h3 class="font-semibold text-gray-900 line-clamp-2 leading-6 text-sm"><a
+                                class="hover:text-blue-600 transition-colors" href="/bat-dong-san/13">Biệt thự đơn lập
+                                Lavilla Green City</a></h3>
+                          </div>
+                          <div class="flex items-center text-sm text-gray-500 mb-2"><svg
+                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                              class="lucide lucide-map-pin w-4 h-4 mr-1 flex-shrink-0">
+                              <path
+                                d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
+                              </path>
+                              <circle cx="12" cy="10" r="3"></circle>
+                            </svg><span class="line-clamp-1"><a class="hover:text-blue-600 transition-colors"
+                                href="/bat-dong-san/khu-vuc/tân-uyên,-bình-dương">Tân Uyên, Bình Dương</a></span></div>
+                          <div class="flex items-center justify-between mb-3">
+                            <div class="text-lg font-bold text-blue-600">8.2 tỷ VNĐ</div>
+                            <div class="text-sm text-gray-500">200m²</div>
+                          </div>
+                          <div class="flex items-center gap-4 text-sm text-gray-500 mt-auto"><span>4 PN</span><span>5
+                              WC</span><span class="capitalize"><a class="hover:text-blue-600 transition-colors"
+                                href="/bat-dong-san/loai-hinh/biệt-thự">Biệt thự</a></span></div>
+                        </div>
                       </div>
-                      <div class="flex items-center text-sm text-gray-500 mb-2"><svg xmlns="http://www.w3.org/2000/svg"
-                          width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                          stroke-linecap="round" stroke-linejoin="round"
-                          class="lucide lucide-map-pin w-4 h-4 mr-1 flex-shrink-0">
-                          <path
-                            d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
-                          </path>
-                          <circle cx="12" cy="10" r="3"></circle>
-                        </svg><span class="line-clamp-1"><a class="hover:text-blue-600 transition-colors"
-                            href="/bat-dong-san/khu-vuc/tân-uyên,-bình-dương">Tân Uyên, Bình Dương</a></span></div>
-                      <div class="flex items-center justify-between mb-3">
-                        <div class="text-lg font-bold text-blue-600">8.2 tỷ VNĐ</div>
-                        <div class="text-sm text-gray-500">200m²</div>
-                      </div>
-                      <div class="flex items-center gap-4 text-sm text-gray-500 mt-auto"><span>4 PN</span><span>5
-                          WC</span><span class="capitalize"><a class="hover:text-blue-600 transition-colors"
-                            href="/bat-dong-san/loai-hinh/biệt-thự">Biệt thự</a></span></div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="flex-shrink-0 px-2" style="width: 10%;">
-                <div
-                  class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col card-hover">
-                  <div class="p-0 flex flex-col h-full">
-                    <div class="relative"><a href="/bat-dong-san/14"><img src="./public/images/hero-bg.webp"
-                          alt="Đất nền dự án Eco City Premia"
-                          class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity"></a>
-                      <div
-                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200 absolute top-2 left-2">
-                        Đang bán</div>
-                    </div>
-                    <div class="p-4 flex-1 flex flex-col">
-                      <div class="h-12 mb-2 flex items-start">
-                        <h3 class="font-semibold text-gray-900 line-clamp-2 leading-6 text-sm"><a
-                            class="hover:text-blue-600 transition-colors" href="/bat-dong-san/14">Đất nền dự án Eco City
-                            Premia</a></h3>
-                      </div>
-                      <div class="flex items-center text-sm text-gray-500 mb-2"><svg xmlns="http://www.w3.org/2000/svg"
-                          width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                          stroke-linecap="round" stroke-linejoin="round"
-                          class="lucide lucide-map-pin w-4 h-4 mr-1 flex-shrink-0">
-                          <path
-                            d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
-                          </path>
-                          <circle cx="12" cy="10" r="3"></circle>
-                        </svg><span class="line-clamp-1"><a class="hover:text-blue-600 transition-colors"
-                            href="/bat-dong-san/khu-vuc/bàu-bàng,-bình-dương">Bàu Bàng, Bình Dương</a></span></div>
-                      <div class="flex items-center justify-between mb-3">
-                        <div class="text-lg font-bold text-blue-600">1.8 tỷ VNĐ</div>
-                        <div class="text-sm text-gray-500">100m²</div>
+                    <div
+                      class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col card-hover">
+                      <div class="p-0 flex flex-col h-full">
+                        <div class="relative"><a href="/bat-dong-san/14"><img src="./public/images/hero-bg.webp"
+                              alt="Đất nền dự án Eco City Premia"
+                              class="w-full h-48 object-cover rounded-t-lg hover:opacity-90 transition-opacity"></a>
+                          <div
+                            class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent badge-primary bg-blue-100 text-blue-700 hover:bg-blue-200 absolute top-2 left-2">
+                            Đang bán</div>
+                        </div>
+                        <div class="p-4 flex-1 flex flex-col">
+                          <div class="h-12 mb-2 flex items-start">
+                            <h3 class="font-semibold text-gray-900 line-clamp-2 leading-6 text-sm"><a
+                                class="hover:text-blue-600 transition-colors" href="/bat-dong-san/14">Đất nền dự án Eco
+                                City
+                                Premia</a></h3>
+                          </div>
+                          <div class="flex items-center text-sm text-gray-500 mb-2"><svg
+                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                              class="lucide lucide-map-pin w-4 h-4 mr-1 flex-shrink-0">
+                              <path
+                                d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
+                              </path>
+                              <circle cx="12" cy="10" r="3"></circle>
+                            </svg><span class="line-clamp-1"><a class="hover:text-blue-600 transition-colors"
+                                href="/bat-dong-san/khu-vuc/bàu-bàng,-bình-dương">Bàu Bàng, Bình Dương</a></span></div>
+                          <div class="flex items-center justify-between mb-3">
+                            <div class="text-lg font-bold text-blue-600">1.8 tỷ VNĐ</div>
+                            <div class="text-sm text-gray-500">100m²</div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -3741,19 +3735,20 @@
     </section>
 
     <!-- Bất động sản theo địa điểm -->
-    <section class="py-12 md:py-16 bg-white">
+    <section class="py-12 md:py-8 lg:py-16 bg-white">
       <div class="container mx-auto px-4">
-        <div class="text-center mb-8">
+        <div class="text-center mb-8 md:mb-6 lg:mb-8">
           <h2 class="text-2xl md:text-3xl font-bold mb-4 title-section">
             Bất động sản theo địa điểm
           </h2>
           <p class="text-gray-600 max-w-2xl mx-auto">Khám phá các khu vực bất động sản hot nhất tại các thành phố lớn
           </p>
         </div>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:h-[500px]">
-          <div class="lg:col-span-2 relative group cursor-pointer overflow-hidden rounded-lg h-[174px] md:h-full"><a
-              href="/bat-dong-san/dia-diem/ho-chi-minh"><img src="./public/images/bat-dong-san/dia-diem/ho-chi-minh.png"
-                alt="TP. Hồ Chí Minh"
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:h-[350px] lg:h-[500px]">
+          <div
+            class="lg:col-span-2 relative group cursor-pointer overflow-hidden rounded-lg h-[174px] md:h-[200px] lg:h-full">
+            <a href="/bat-dong-san/dia-diem/ho-chi-minh"><img
+                src="./public/images/bat-dong-san/dia-diem/ho-chi-minh.png" alt="TP. Hồ Chí Minh"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
               <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
               <div class="absolute bottom-6 left-6 text-white">
@@ -3762,9 +3757,10 @@
                 <p class="text-lg opacity-90 group-hover:underline transition-all">15.420 bất động sản</p>
                 <p class="text-sm opacity-75 mt-1">Trung tâm kinh tế lớn nhất Việt Nam</p>
               </div>
-            </a></div>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="relative group cursor-pointer overflow-hidden rounded-lg"><a
+            </a>
+          </div>
+          <div class="grid grid-cols-2 gap-4 md:h-[140px] lg:h-auto">
+            <div class="relative group cursor-pointer overflow-hidden rounded-lg md:h-[65px] lg:h-auto"><a
                 href="/bat-dong-san/dia-diem/ha-noi"><img src="./public/images/bat-dong-san/dia-diem/ha-noi.png"
                   alt="Hà Nội"
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -3774,7 +3770,7 @@
                   <p class="text-xs opacity-90 group-hover:underline transition-all">8.750 BĐS</p>
                 </div>
               </a></div>
-            <div class="relative group cursor-pointer overflow-hidden rounded-lg"><a
+            <div class="relative group cursor-pointer overflow-hidden rounded-lg md:h-[65px] lg:h-auto"><a
                 href="/bat-dong-san/dia-diem/da-nang"><img src="./public/images/bat-dong-san/dia-diem/da-nang.png"
                   alt="Đà Nẵng"
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -3784,7 +3780,7 @@
                   <p class="text-xs opacity-90 group-hover:underline transition-all">3.240 BĐS</p>
                 </div>
               </a></div>
-            <div class="relative group cursor-pointer overflow-hidden rounded-lg"><a
+            <div class="relative group cursor-pointer overflow-hidden rounded-lg md:h-[65px] lg:h-auto"><a
                 href="/bat-dong-san/dia-diem/binh-duong"><img src="./public/images/bat-dong-san/dia-diem/binh-duong.png"
                   alt="Bình Dương"
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -3794,7 +3790,7 @@
                   <p class="text-xs opacity-90 group-hover:underline transition-all">5.680 BĐS</p>
                 </div>
               </a></div>
-            <div class="relative group cursor-pointer overflow-hidden rounded-lg"><a
+            <div class="relative group cursor-pointer overflow-hidden rounded-lg md:h-[65px] lg:h-auto"><a
                 href="/bat-dong-san/dia-diem/dong-nai"><img src="./public/images/bat-dong-san/dia-diem/dong-nai.png"
                   alt="Đồng Nai"
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -4748,9 +4744,9 @@
         </div>
         <div class="relative">
           <div class="overflow-hidden">
-            <div class="flex transition-transform duration-500 ease-in-out" style="transform: translateX(-100%);">
+            <div class="flex transition-transform duration-500 ease-in-out" x-ref="track">
               <div class="w-full flex-shrink-0">
-                <div class="grid gap-4 grid-cols-3 grid-rows-2">
+                <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
                   <div
                     class="rounded-lg border text-card-foreground shadow-sm hover:shadow-lg transition-shadow bg-white card-hover">
                     <div class="p-4">
@@ -5248,7 +5244,7 @@
                 </div>
               </div>
               <div class="w-full flex-shrink-0">
-                <div class="grid gap-4 grid-cols-3 grid-rows-2">
+                <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
                   <div
                     class="rounded-lg border text-card-foreground shadow-sm hover:shadow-lg transition-shadow bg-white card-hover">
                     <div class="p-4">
@@ -5750,7 +5746,7 @@
                 </div>
               </div>
               <div class="w-full flex-shrink-0">
-                <div class="grid gap-4 grid-cols-3 grid-rows-2">
+                <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
                   <div
                     class="rounded-lg border text-card-foreground shadow-sm hover:shadow-lg transition-shadow bg-white card-hover">
                     <div class="p-4">
@@ -6024,7 +6020,7 @@
       </div>
     </section>
 
-    <!-- Dịch Vụ Nổi Bật -->
+    <!-- Dịch Vụ Bình Dương -->
     <section class="py-12 md:py-16 bg-white" x-data="dichVuCarousel()">
       <div class="container mx-auto px-4">
         <div class="flex items-center justify-between mb-8">
@@ -6063,9 +6059,10 @@
         </div>
         <div class="relative">
           <div class="overflow-hidden">
-            <div class="flex transition-transform duration-500 ease-in-out" style="transform: translateX(0%);">
+            <div class="flex transition-transform duration-500 ease-in-out" x-ref="track"
+              style="transform: translateX(0%);">
               <div class="w-full flex-shrink-0">
-                <div class="grid gap-4 grid-cols-4 grid-rows-2">
+                <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                   <div
                     class="rounded-lg border text-card-foreground shadow-sm hover:shadow-lg transition-shadow bg-white card-hover">
                     <div class="p-4">
@@ -6809,7 +6806,7 @@
                 </div>
               </div>
               <div class="w-full flex-shrink-0">
-                <div class="grid gap-4 grid-cols-4 grid-rows-2">
+                <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                   <div
                     class="rounded-lg border text-card-foreground shadow-sm hover:shadow-lg transition-shadow bg-white card-hover">
                     <div class="p-4">
@@ -7232,9 +7229,10 @@
         </div>
         <div class="relative">
           <div class="overflow-hidden">
-            <div class="flex transition-transform duration-500 ease-in-out" style="transform: translateX(0%);">
+            <div class="flex transition-transform duration-500 ease-in-out" x-ref="track"
+              style="transform: translateX(0%);">
               <div class="w-full flex-shrink-0">
-                <div class="grid gap-4 grid-cols-3 grid-rows-2">
+                <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
                   <div
                     class="rounded-lg border text-card-foreground shadow-sm hover:shadow-lg transition-shadow bg-white card-hover">
                     <div class="p-4">
@@ -7947,7 +7945,7 @@
                 </div>
               </div>
               <div class="w-full flex-shrink-0">
-                <div class="grid gap-4 grid-cols-3 grid-rows-2">
+                <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
                   <div
                     class="rounded-lg border text-card-foreground shadow-sm hover:shadow-lg transition-shadow bg-white card-hover">
                     <div class="p-4">
@@ -8651,7 +8649,7 @@
                 </div>
               </div>
               <div class="w-full flex-shrink-0">
-                <div class="grid gap-4 grid-cols-3 grid-rows-2">
+                <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
                   <div
                     class="rounded-lg border text-card-foreground shadow-sm hover:shadow-lg transition-shadow bg-white card-hover">
                     <div class="p-4">

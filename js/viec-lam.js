@@ -600,22 +600,124 @@ document.addEventListener('alpine:init', () => {
   // ===========================================
   Alpine.data('danhMucViecLamComponent', () => ({
     currentSlide: 0,
-    totalSlides: 2,
-    itemsPerSlide: 6,
+    totalSlides: 1,
+    groupSize: 6,
+    items: [],
+    totalItems: 0,
+    resizeHandler: null,
+    isTransitioning: false,
 
-    init() { this.updateSlidePosition(); },
+    init() {
+      this.items = Array.from(this.$refs.slideContainer?.children || []);
+      this.totalItems = this.items.length;
 
-    nextSlide() { if (this.currentSlide < this.totalSlides - 1) { this.currentSlide++; this.updateSlidePosition(); } },
-    prevSlide() { if (this.currentSlide > 0) { this.currentSlide--; this.updateSlidePosition(); } },
-    goToSlide(index) { if (index >= 0 && index < this.totalSlides) { this.currentSlide = index; this.updateSlidePosition(); } },
+      this.resizeHandler = () => {
+        this.setupResponsive();
+      };
+
+      this.$nextTick(() => {
+        this.setupResponsive();
+      });
+
+      window.addEventListener('resize', this.resizeHandler);
+
+      Alpine.onCleanup(() => {
+        if (this.resizeHandler) {
+          window.removeEventListener('resize', this.resizeHandler);
+        }
+      });
+    },
+
+    setupResponsive() {
+      if (!this.totalItems) {
+        this.totalItems = this.items.length;
+      }
+
+      const width = window.innerWidth;
+      let newGroupSize = 6;
+
+      if (width < 768) {
+        newGroupSize = 1;
+      } else if (width < 1024) {
+        newGroupSize = 3;
+      }
+
+      const groupChanged = newGroupSize !== this.groupSize;
+      this.groupSize = newGroupSize;
+
+      this.totalSlides = Math.max(Math.ceil(this.totalItems / this.groupSize), 1);
+
+      if (groupChanged) {
+        this.currentSlide = 0;
+      } else {
+        this.currentSlide = Math.min(this.currentSlide, this.totalSlides - 1);
+      }
+
+      this.applyLayout();
+    },
+
+    applyLayout() {
+      const container = this.$refs.slideContainer;
+      if (!container) return;
+
+      container.style.width = `${this.totalSlides * 100}%`;
+
+      const itemWidth = 100 / (this.totalSlides * this.groupSize);
+      this.items.forEach((item) => {
+        item.style.width = `${itemWidth}%`;
+      });
+
+      this.updateSlidePosition();
+    },
+
+    nextSlide() {
+      if (this.isTransitioning || !this.canNext()) return;
+
+      this.isTransitioning = true;
+      this.currentSlide += 1;
+      this.updateSlidePosition();
+
+      setTimeout(() => {
+        this.isTransitioning = false;
+      }, 500);
+    },
+
+    prevSlide() {
+      if (this.isTransitioning || !this.canPrev()) return;
+
+      this.isTransitioning = true;
+      this.currentSlide -= 1;
+      this.updateSlidePosition();
+
+      setTimeout(() => {
+        this.isTransitioning = false;
+      }, 500);
+    },
+
+    goToSlide(index) {
+      if (this.isTransitioning || index < 0 || index >= this.totalSlides) return;
+
+      this.isTransitioning = true;
+      this.currentSlide = index;
+      this.updateSlidePosition();
+
+      setTimeout(() => {
+        this.isTransitioning = false;
+      }, 500);
+    },
 
     updateSlidePosition() {
       const container = this.$refs.slideContainer;
-      if (container) container.style.transform = `translateX(-${this.currentSlide * (100 / this.totalSlides)}%)`;
+      if (!container) return;
+
+      const step = 100 / this.totalSlides;
+      container.style.transform = `translateX(-${this.currentSlide * step}%)`;
     },
 
-    isPrevDisabled() { return this.currentSlide === 0; },
-    isNextDisabled() { return this.currentSlide === this.totalSlides - 1; },
+    canNext() { return this.currentSlide < this.totalSlides - 1; },
+    canPrev() { return this.currentSlide > 0; },
+    isPrevDisabled() { return !this.canPrev(); },
+    isNextDisabled() { return !this.canNext(); },
     getPaginationDots() { return Array.from({ length: this.totalSlides }, (_, i) => i); },
     isDotActive(index) { return this.currentSlide === index; }
   }));

@@ -213,26 +213,99 @@ document.addEventListener('alpine:init', () => {
     }));
 
     // ===========================================
-    // REAL ESTATE CAROUSEL COMPONENT
+    // BAT DONG SAN NOI BAT COMPONENT
     // ===========================================
-    Alpine.data('realEstateCarousel', () => ({
+    Alpine.data('batDongSanNoiBatComponent', () => ({
         currentSlide: 0,
-        totalSlides: 2, // 10 items / 5 items per slide = 2 slides
-        itemsPerSlide: 5,
-        totalItems: 10,
+        totalSlides: 1,
+        groupSize: 5,
+        totalItems: 0,
+        items: [],
         isTransitioning: false,
+        resizeHandler: null,
 
         init() {
-            console.log('Real Estate Carousel component initialized.');
+            console.log('Bat Dong San Noi Bat component initialized.');
+
+            // Get all individual card items from both containers
+            this.items = Array.from(this.$el.querySelectorAll('.grid > div'));
+            
+            this.totalItems = this.items.length;
+
+            console.log(`Found ${this.totalItems} items in carousel`);
+
+            this.resizeHandler = () => {
+                this.setupResponsive();
+            };
+
+            this.$nextTick(() => {
+                this.setupResponsive();
+            });
+
+            window.addEventListener('resize', this.resizeHandler);
+
+            Alpine.onCleanup(() => {
+                if (this.resizeHandler) {
+                    window.removeEventListener('resize', this.resizeHandler);
+                }
+            });
+        },
+
+        setupResponsive() {
+            if (!this.totalItems) {
+                this.totalItems = this.items.length;
+            }
+
+            const width = window.innerWidth;
+            let newGroupSize = 5; // Desktop default
+
+            if (width < 768) {
+                newGroupSize = 1; // Mobile
+            } else if (width < 1024) {
+                newGroupSize = 3; // Tablet
+            }
+
+            const groupChanged = newGroupSize !== this.groupSize;
+            this.groupSize = newGroupSize;
+
+            this.totalSlides = Math.max(Math.ceil(this.totalItems / this.groupSize), 1);
+
+            console.log(`Total items: ${this.totalItems}, Group size: ${this.groupSize}, Total slides: ${this.totalSlides}`);
+
+            if (groupChanged) {
+                this.currentSlide = 0;
+            } else {
+                this.currentSlide = Math.min(this.currentSlide, this.totalSlides - 1);
+            }
+
+            this.applyLayout();
+        },
+
+        applyLayout() {
+            // Hide all items first
+            this.items.forEach((item) => {
+                item.style.display = 'none';
+            });
+
+            // Show only items for current slide
+            const startIndex = this.currentSlide * this.groupSize;
+            const endIndex = Math.min(startIndex + this.groupSize, this.totalItems);
+
+            for (let i = startIndex; i < endIndex; i++) {
+                if (this.items[i]) {
+                    this.items[i].style.display = 'block';
+                }
+            }
+
             this.updateCarousel();
         },
 
         nextSlide() {
-            if (this.isTransitioning) return;
+            if (this.isTransitioning || !this.canNext()) return;
 
             this.isTransitioning = true;
-            this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
-            this.updateCarousel();
+            this.currentSlide += 1;
+            this.applyLayout();
 
             setTimeout(() => {
                 this.isTransitioning = false;
@@ -240,11 +313,11 @@ document.addEventListener('alpine:init', () => {
         },
 
         prevSlide() {
-            if (this.isTransitioning) return;
+            if (this.isTransitioning || !this.canPrev()) return;
 
             this.isTransitioning = true;
-            this.currentSlide = this.currentSlide === 0 ? this.totalSlides - 1 : this.currentSlide - 1;
-            this.updateCarousel();
+            this.currentSlide -= 1;
+            this.applyLayout();
 
             setTimeout(() => {
                 this.isTransitioning = false;
@@ -252,14 +325,7 @@ document.addEventListener('alpine:init', () => {
         },
 
         updateCarousel() {
-            const carouselContainer = this.$el.querySelector('.flex.transition-transform');
-            if (!carouselContainer) return;
-
-            // Each item is 10% width, so 5 items = 50% per slide
-            const translateX = -this.currentSlide * 50;
-            carouselContainer.style.transform = `translateX(${translateX}%)`;
-
-            console.log(`Carousel moved to slide ${this.currentSlide + 1}/${this.totalSlides}, translateX: ${translateX}%`);
+            console.log(`Carousel moved to slide ${this.currentSlide + 1}/${this.totalSlides}`);
         },
 
         canNext() {
@@ -270,14 +336,12 @@ document.addEventListener('alpine:init', () => {
             return this.currentSlide > 0;
         },
 
-        getNextButtonClass() {
-            const baseClass = 'btn-outline-primary btn-sm w-10 h-10 p-0 flex items-center justify-center';
-            return this.canNext() ? baseClass : baseClass + ' opacity-50 cursor-not-allowed';
+        isPrevDisabled() {
+            return this.currentSlide === 0;
         },
 
-        getPrevButtonClass() {
-            const baseClass = 'btn-outline-primary btn-sm w-10 h-10 p-0 flex items-center justify-center';
-            return this.canPrev() ? baseClass : baseClass + ' opacity-50 cursor-not-allowed';
+        isNextDisabled() {
+            return this.currentSlide === this.totalSlides - 1;
         },
 
         goToSlide(slideIndex) {
@@ -285,7 +349,7 @@ document.addEventListener('alpine:init', () => {
 
             this.isTransitioning = true;
             this.currentSlide = slideIndex;
-            this.updateCarousel();
+            this.applyLayout();
 
             setTimeout(() => {
                 this.isTransitioning = false;
@@ -294,74 +358,173 @@ document.addEventListener('alpine:init', () => {
     }));
 
     // ===========================================
-    // JOB CAROUSEL COMPONENT
+    // JOB CAROUSEL COMPONENT (fixed)
     // ===========================================
     Alpine.data('viecLamDeXuatComponent', () => ({
         currentSlide: 0,
-        totalSlides: 3, // 15 items / 5 items per slide = 3 slides
-        itemsPerSlide: 5,
-        totalItems: 15,
+        totalSlides: 1,
+        groupSize: 3,
+        totalItems: 0,
+        items: [],
         isTransitioning: false,
+        resizeHandler: null,
+        container: null,
+        _normalized: false,
 
         init() {
-            console.log('Job Carousel component initialized.');
+            this.container = this.$refs.track; // <-- lấy đúng track
+            this.normalizeStructure();
+
+            this.resizeHandler = () => this.setupResponsive();
+            this.$nextTick(() => this.setupResponsive());
+            window.addEventListener('resize', this.resizeHandler);
+
+            Alpine.onCleanup(() => {
+                if (this.resizeHandler) window.removeEventListener('resize', this.resizeHandler);
+            });
+        },
+
+        // “Phẳng hóa” mọi card thành 1 dải item ngang
+        normalizeStructure() {
+            if (!this.container) return;
+            if (this._normalized) {
+                this.items = Array.from(this.container.children);
+                this.totalItems = this.items.length;
+                return;
+            }
+
+            const cards = [];
+            const existingSlides = Array.from(this.container.children);
+
+            // Lấy trực tiếp các card bằng class .card-hover (ổn định hơn .grid > div)
+            existingSlides.forEach((slide) => {
+                slide.querySelectorAll('.card-hover').forEach((card) => cards.push(card));
+            });
+
+            if (!cards.length) {
+                // fallback: coi mỗi child là 1 item (ít gặp)
+                this.items = Array.from(this.container.children);
+                this.totalItems = this.items.length;
+                this._normalized = true;
+                return;
+            }
+
+            // Tạo wrapper cho từng card (để set % width)
+            const fragment = document.createDocumentFragment();
+            cards.forEach((card) => {
+                const wrap = document.createElement('div');
+                wrap.className = 'flex-shrink-0 px-2 md:px-3 pb-4';
+                wrap.style.boxSizing = 'border-box';
+                wrap.style.display = 'flex';
+                wrap.style.flexDirection = 'column';
+                wrap.style.height = '100%';
+                wrap.appendChild(card);           // di chuyển card ra khỏi grid
+                fragment.appendChild(wrap);
+            });
+
+            // Đặt lại track chỉ còn các wrapper item
+            this.container.innerHTML = '';
+            this.container.appendChild(fragment);
+
+            this.items = Array.from(this.container.children);
+            this.totalItems = this.items.length;
+            this._normalized = true;
+        },
+
+        setupResponsive() {
+            if (!this.container) return;
+
+            this.normalizeStructure();
+
+            const width = window.innerWidth;
+            let newGroupSize = 3;
+            if (width < 640) {
+                // mobile
+                newGroupSize = 1;
+            } else if (width < 1024) {
+                // tablet
+                newGroupSize = 2;
+            } else {
+                // desktop
+                newGroupSize = 3;
+            }
+
+            const groupChanged = newGroupSize !== this.groupSize;
+            this.groupSize = newGroupSize;
+
+            this.totalItems = this.items.length;
+            this.totalSlides = Math.max(Math.ceil(this.totalItems / this.groupSize), 1);
+
+            this.currentSlide = groupChanged ? 0 : Math.min(this.currentSlide, this.totalSlides - 1);
+
+            this.applyLayout();
+        },
+
+        applyLayout() {
+            if (!this.container) return;
+
+            const itemWidth = 100 / this.groupSize;
+
+            this.container.style.display = 'flex';
+            this.container.style.gap = '0'; // tránh spacing bất ngờ
+            this.container.style.transform = 'translateX(0)'; // không dùng translate để “trượt”
+
+            this.items.forEach((item) => {
+                item.style.width = `${itemWidth}%`;
+                item.style.flexShrink = '0';
+            });
+
             this.updateCarousel();
         },
 
         nextSlide() {
-            if (this.isTransitioning) return;
-
+            if (this.isTransitioning || !this.canNext()) return;
             this.isTransitioning = true;
-            this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+            this.currentSlide += 1;
             this.updateCarousel();
-
-            setTimeout(() => {
-                this.isTransitioning = false;
-            }, 500);
+            setTimeout(() => (this.isTransitioning = false), 300);
         },
 
         prevSlide() {
-            if (this.isTransitioning) return;
-
+            if (this.isTransitioning || !this.canPrev()) return;
             this.isTransitioning = true;
-            this.currentSlide = this.currentSlide === 0 ? this.totalSlides - 1 : this.currentSlide - 1;
+            this.currentSlide -= 1;
             this.updateCarousel();
-
-            setTimeout(() => {
-                this.isTransitioning = false;
-            }, 500);
+            setTimeout(() => (this.isTransitioning = false), 300);
         },
 
         updateCarousel() {
-            const carouselContainer = this.$el.querySelector('.flex.transition-transform');
-            if (!carouselContainer) return;
+            if (!this.container) return;
 
-            // Each slide is 100% width, so we move by 100% per slide
-            const translateX = -this.currentSlide * 100;
-            carouselContainer.style.transform = `translateX(${translateX}%)`;
+            const start = this.currentSlide * this.groupSize;
+            const end = start + this.groupSize;
 
-            console.log(`Job carousel moved to slide ${this.currentSlide + 1}/${this.totalSlides}, translateX: ${translateX}%`);
+            // Chỉ hiển thị đúng số card trong 1 slide
+            this.items.forEach((item, index) => {
+                item.style.display = index >= start && index < end ? '' : 'none';
+            });
         },
 
+        canNext() {
+            return this.currentSlide < this.totalSlides - 1;
+        },
+        canPrev() {
+            return this.currentSlide > 0;
+        },
         isNextDisabled() {
-            return this.currentSlide >= this.totalSlides - 1;
+            return !this.canNext();
         },
-
         isPrevDisabled() {
-            return this.currentSlide <= 0;
+            return !this.canPrev();
         },
 
-        goToSlide(slideIndex) {
-            if (this.isTransitioning || slideIndex < 0 || slideIndex >= this.totalSlides) return;
-
+        goToSlide(i) {
+            if (this.isTransitioning || i < 0 || i >= this.totalSlides) return;
             this.isTransitioning = true;
-            this.currentSlide = slideIndex;
+            this.currentSlide = i;
             this.updateCarousel();
-
-            setTimeout(() => {
-                this.isTransitioning = false;
-            }, 500);
-        }
+            setTimeout(() => (this.isTransitioning = false), 300);
+        },
     }));
 
     // ===========================================
@@ -511,21 +674,84 @@ document.addEventListener('alpine:init', () => {
     // ===========================================
     Alpine.data('dichVuCongTrucTuyenCarousel', () => ({
         currentSlide: 0,
-        totalSlides: 2, // 12 items / 6 items per slide = 2 slides
-        itemsPerSlide: 6,
-        totalItems: 12,
+        totalSlides: 1,
+        groupSize: 6,
+        totalItems: 0,
+        items: [],
         isTransitioning: false,
+        resizeHandler: null,
 
         init() {
             console.log('Dich Vu Cong Truc Tuyen Carousel component initialized.');
+
+            const containerSelector = '.flex.transition-transform';
+            this.items = Array.from(this.$el.querySelectorAll(`${containerSelector} > .flex-shrink-0`));
+            this.totalItems = this.items.length;
+
+            this.resizeHandler = () => {
+                this.setupResponsive();
+            };
+
+            this.$nextTick(() => {
+                this.setupResponsive();
+            });
+
+            window.addEventListener('resize', this.resizeHandler);
+
+            Alpine.onCleanup(() => {
+                if (this.resizeHandler) {
+                    window.removeEventListener('resize', this.resizeHandler);
+                }
+            });
+        },
+
+        setupResponsive() {
+            if (!this.totalItems) {
+                this.totalItems = this.items.length;
+            }
+
+            const width = window.innerWidth;
+            let newGroupSize = 6;
+
+            if (width < 768) {
+                newGroupSize = 1;
+            } else if (width < 1024) {
+                newGroupSize = 3;
+            }
+
+            const groupChanged = newGroupSize !== this.groupSize;
+            this.groupSize = newGroupSize;
+
+            this.totalSlides = Math.max(Math.ceil(this.totalItems / this.groupSize), 1);
+
+            if (groupChanged) {
+                this.currentSlide = 0;
+            } else {
+                this.currentSlide = Math.min(this.currentSlide, this.totalSlides - 1);
+            }
+
+            this.applyLayout();
+        },
+
+        applyLayout() {
+            const carouselContainer = this.$el.querySelector('.flex.transition-transform');
+            if (!carouselContainer) return;
+
+            carouselContainer.style.width = `${this.totalSlides * 100}%`;
+
+            const itemWidth = 100 / (this.totalSlides * this.groupSize);
+            this.items.forEach((item) => {
+                item.style.width = `${itemWidth}%`;
+            });
+
             this.updateCarousel();
         },
 
         nextSlide() {
-            if (this.isTransitioning) return;
+            if (this.isTransitioning || !this.canNext()) return;
 
             this.isTransitioning = true;
-            this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+            this.currentSlide += 1;
             this.updateCarousel();
 
             setTimeout(() => {
@@ -534,10 +760,10 @@ document.addEventListener('alpine:init', () => {
         },
 
         prevSlide() {
-            if (this.isTransitioning) return;
+            if (this.isTransitioning || !this.canPrev()) return;
 
             this.isTransitioning = true;
-            this.currentSlide = this.currentSlide === 0 ? this.totalSlides - 1 : this.currentSlide - 1;
+            this.currentSlide -= 1;
             this.updateCarousel();
 
             setTimeout(() => {
@@ -549,19 +775,27 @@ document.addEventListener('alpine:init', () => {
             const carouselContainer = this.$el.querySelector('.flex.transition-transform');
             if (!carouselContainer) return;
 
-            // Each slide is 100% width, so we move by 100% per slide
-            const translateX = -this.currentSlide * 100;
+            const step = 100 / this.totalSlides;
+            const translateX = -(this.currentSlide * step);
             carouselContainer.style.transform = `translateX(${translateX}%)`;
 
             console.log(`Dich Vu Cong Truc Tuyen carousel moved to slide ${this.currentSlide + 1}/${this.totalSlides}, translateX: ${translateX}%`);
         },
 
+        canNext() {
+            return this.currentSlide < this.totalSlides - 1;
+        },
+
+        canPrev() {
+            return this.currentSlide > 0;
+        },
+
         isNextDisabled() {
-            return this.currentSlide >= this.totalSlides - 1;
+            return !this.canNext();
         },
 
         isPrevDisabled() {
-            return this.currentSlide <= 0;
+            return !this.canPrev();
         },
 
         goToSlide(slideIndex) {
@@ -812,4 +1046,678 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize scroll animations
     window.HomepageUtils.animateOnScroll();
+
+    // Fallback for real estate carousel if Alpine.js is not available
+    const realEstateCarouselContainer = document.querySelector('[x-data*="realEstateCarousel"]');
+    if (realEstateCarouselContainer && !realEstateCarouselContainer.__x) {
+        console.log('Initializing fallback real estate carousel logic');
+
+        let currentSlide = 0;
+        const totalSlides = 2;
+        let isTransitioning = false;
+
+        const carouselElement = realEstateCarouselContainer.querySelector('.flex.transition-transform');
+        const prevButton = realEstateCarouselContainer.querySelector('button[\\@click*="prevSlide"]');
+        const nextButton = realEstateCarouselContainer.querySelector('button[\\@click*="nextSlide"]');
+
+        function updateCarousel() {
+            if (!carouselElement) return;
+            const translateX = -currentSlide * 50;
+            carouselElement.style.transform = `translateX(${translateX}%)`;
+            console.log(`Fallback real estate carousel moved to slide ${currentSlide + 1}/${totalSlides}`);
+        }
+
+        function canNext() {
+            return currentSlide < totalSlides - 1;
+        }
+
+        function canPrev() {
+            return currentSlide > 0;
+        }
+
+        function updateButtons() {
+            if (prevButton) {
+                prevButton.disabled = !canPrev();
+                prevButton.classList.toggle('opacity-50', !canPrev());
+                prevButton.classList.toggle('cursor-not-allowed', !canPrev());
+            }
+            if (nextButton) {
+                nextButton.disabled = !canNext();
+                nextButton.classList.toggle('opacity-50', !canNext());
+                nextButton.classList.toggle('cursor-not-allowed', !canNext());
+            }
+        }
+
+        function nextSlide() {
+            if (isTransitioning || !canNext()) return;
+            isTransitioning = true;
+            currentSlide++;
+            updateCarousel();
+            updateButtons();
+            updateDots();
+            setTimeout(() => { isTransitioning = false; }, 500);
+        }
+
+        function prevSlide() {
+            if (isTransitioning || !canPrev()) return;
+            isTransitioning = true;
+            currentSlide--;
+            updateCarousel();
+            updateButtons();
+            updateDots();
+            setTimeout(() => { isTransitioning = false; }, 500);
+        }
+
+        function goToSlide(slideIndex) {
+            if (isTransitioning || slideIndex < 0 || slideIndex >= totalSlides) return;
+            isTransitioning = true;
+            currentSlide = slideIndex;
+            updateCarousel();
+            updateButtons();
+            updateDots();
+            setTimeout(() => { isTransitioning = false; }, 500);
+        }
+
+        // Add event listeners
+        if (prevButton) {
+            prevButton.addEventListener('click', prevSlide);
+        }
+        if (nextButton) {
+            nextButton.addEventListener('click', nextSlide);
+        }
+
+        // Create dots pagination fallback
+        const dotsContainer = realEstateCarouselContainer.querySelector('.flex.justify-center.mt-6.gap-2');
+        if (dotsContainer && !dotsContainer.querySelector('button[data-dot]')) {
+            // Clear existing dots
+            dotsContainer.innerHTML = '';
+
+            // Create dots
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'w-2 h-2 rounded-full transition-colors';
+                dot.setAttribute('data-dot', i);
+                dot.style.backgroundColor = i === currentSlide ? '#3b82f6' : '#d1d5db';
+
+                dot.addEventListener('click', () => {
+                    goToSlide(i);
+                });
+
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function updateDots() {
+            const dots = dotsContainer.querySelectorAll('button[data-dot]');
+            dots.forEach((dot, index) => {
+                dot.style.backgroundColor = index === currentSlide ? '#3b82f6' : '#d1d5db';
+            });
+        }
+
+        // Initialize
+        updateCarousel();
+        updateButtons();
+        updateDots();
+    }
+
+    // Fallback for job carousel if Alpine.js is not available
+    const jobCarouselContainer = document.querySelector('[x-data*="viecLamDeXuatComponent"]');
+    if (jobCarouselContainer && !jobCarouselContainer.__x) {
+        console.log('Initializing fallback job carousel logic');
+
+        let currentSlide = 0;
+        const totalSlides = 3;
+        let isTransitioning = false;
+
+        const carouselElement = jobCarouselContainer.querySelector('.flex.transition-transform');
+        const prevButton = jobCarouselContainer.querySelector('button[\\@click*="prevSlide"]');
+        const nextButton = jobCarouselContainer.querySelector('button[\\@click*="nextSlide"]');
+
+        function updateCarousel() {
+            if (!carouselElement) return;
+            const translateX = -currentSlide * 100;
+            carouselElement.style.transform = `translateX(${translateX}%)`;
+            console.log(`Fallback job carousel moved to slide ${currentSlide + 1}/${totalSlides}`);
+        }
+
+        function canNext() {
+            return currentSlide < totalSlides - 1;
+        }
+
+        function canPrev() {
+            return currentSlide > 0;
+        }
+
+        function updateButtons() {
+            if (prevButton) {
+                prevButton.disabled = !canPrev();
+                prevButton.classList.toggle('opacity-50', !canPrev());
+                prevButton.classList.toggle('cursor-not-allowed', !canPrev());
+            }
+            if (nextButton) {
+                nextButton.disabled = !canNext();
+                nextButton.classList.toggle('opacity-50', !canNext());
+                nextButton.classList.toggle('cursor-not-allowed', !canNext());
+            }
+        }
+
+        function nextSlide() {
+            if (isTransitioning || !canNext()) return;
+            isTransitioning = true;
+            currentSlide++;
+            updateCarousel();
+            updateButtons();
+            updateDots();
+            setTimeout(() => { isTransitioning = false; }, 500);
+        }
+
+        function prevSlide() {
+            if (isTransitioning || !canPrev()) return;
+            isTransitioning = true;
+            currentSlide--;
+            updateCarousel();
+            updateButtons();
+            updateDots();
+            setTimeout(() => { isTransitioning = false; }, 500);
+        }
+
+        // Add event listeners
+        if (prevButton) {
+            prevButton.addEventListener('click', prevSlide);
+        }
+        if (nextButton) {
+            nextButton.addEventListener('click', nextSlide);
+        }
+
+        // Initialize
+        updateCarousel();
+        updateButtons();
+
+        // Create dots pagination fallback
+        const dotsContainer = jobCarouselContainer.querySelector('.flex.justify-center.mt-6.gap-2');
+        if (dotsContainer && !dotsContainer.querySelector('button[data-dot]')) {
+            // Clear existing dots
+            dotsContainer.innerHTML = '';
+
+            // Create dots
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'w-2 h-2 rounded-full transition-colors';
+                dot.setAttribute('data-dot', i);
+                dot.style.backgroundColor = i === currentSlide ? '#3b82f6' : '#d1d5db';
+
+                dot.addEventListener('click', () => {
+                    if (isTransitioning) return;
+                    isTransitioning = true;
+                    currentSlide = i;
+                    updateCarousel();
+                    updateButtons();
+                    updateDots();
+                    setTimeout(() => { isTransitioning = false; }, 500);
+                });
+
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function updateDots() {
+            const dots = dotsContainer.querySelectorAll('button[data-dot]');
+            dots.forEach((dot, index) => {
+                dot.style.backgroundColor = index === currentSlide ? '#3b82f6' : '#d1d5db';
+            });
+        }
+    }
+
+    // Fallback for Dich Vu Carousel
+    const dichVuCarouselContainer = document.querySelector('[x-data*="dichVuCarousel"]');
+    if (dichVuCarouselContainer && !dichVuCarouselContainer.__x) {
+        console.log('Initializing fallback dich vu carousel logic');
+
+        let currentSlide = 0;
+        const totalSlides = 2; // 8 items / 4 items per slide = 2 slides
+        let isTransitioning = false;
+
+        const carouselElement = dichVuCarouselContainer.querySelector('.flex.transition-transform');
+        const prevButton = dichVuCarouselContainer.querySelector('button[\\@click*="prevSlide"]');
+        const nextButton = dichVuCarouselContainer.querySelector('button[\\@click*="nextSlide"]');
+
+        function updateCarousel() {
+            if (!carouselElement) return;
+            const translateX = -currentSlide * 100;
+            carouselElement.style.transform = `translateX(${translateX}%)`;
+            console.log(`Fallback dich vu carousel moved to slide ${currentSlide + 1}/${totalSlides}`);
+        }
+
+        function canNext() {
+            return currentSlide < totalSlides - 1;
+        }
+
+        function canPrev() {
+            return currentSlide > 0;
+        }
+
+        function updateButtons() {
+            if (prevButton) {
+                prevButton.disabled = !canPrev();
+                prevButton.classList.toggle('opacity-50', !canPrev());
+                prevButton.classList.toggle('cursor-not-allowed', !canPrev());
+            }
+            if (nextButton) {
+                nextButton.disabled = !canNext();
+                nextButton.classList.toggle('opacity-50', !canNext());
+                nextButton.classList.toggle('cursor-not-allowed', !canNext());
+            }
+        }
+
+        function nextSlide() {
+            if (isTransitioning || !canNext()) return;
+            isTransitioning = true;
+            currentSlide++;
+            updateCarousel();
+            updateButtons();
+            updateDots();
+            setTimeout(() => { isTransitioning = false; }, 500);
+        }
+
+        function prevSlide() {
+            if (isTransitioning || !canPrev()) return;
+            isTransitioning = true;
+            currentSlide--;
+            updateCarousel();
+            updateButtons();
+            updateDots();
+            setTimeout(() => { isTransitioning = false; }, 500);
+        }
+
+        // Add event listeners
+        if (prevButton) {
+            prevButton.addEventListener('click', prevSlide);
+        }
+        if (nextButton) {
+            nextButton.addEventListener('click', nextSlide);
+        }
+
+        // Initialize
+        updateCarousel();
+        updateButtons();
+
+        // Create dots pagination fallback
+        const dotsContainer = dichVuCarouselContainer.querySelector('.flex.justify-center.mt-6.gap-2');
+        if (dotsContainer && !dotsContainer.querySelector('button[data-dot]')) {
+            // Clear existing dots
+            dotsContainer.innerHTML = '';
+
+            // Create dots
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'w-2 h-2 rounded-full transition-colors';
+                dot.setAttribute('data-dot', i);
+                dot.style.backgroundColor = i === currentSlide ? '#3b82f6' : '#d1d5db';
+
+                dot.addEventListener('click', () => {
+                    if (isTransitioning) return;
+                    isTransitioning = true;
+                    currentSlide = i;
+                    updateCarousel();
+                    updateButtons();
+                    updateDots();
+                    setTimeout(() => { isTransitioning = false; }, 500);
+                });
+
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function updateDots() {
+            const dots = dotsContainer.querySelectorAll('button[data-dot]');
+            dots.forEach((dot, index) => {
+                dot.style.backgroundColor = index === currentSlide ? '#3b82f6' : '#d1d5db';
+            });
+        }
+    }
+
+    // Fallback for Doanh Nghiep Carousel
+    const doanhNghiepCarouselContainer = document.querySelector('[x-data*="doanhNghiepCarousel"]');
+    if (doanhNghiepCarouselContainer && !doanhNghiepCarouselContainer.__x) {
+        console.log('Initializing fallback doanh nghiep carousel logic');
+
+        let currentSlide = 0;
+        const totalSlides = 2; // 6 items / 3 items per slide = 2 slides
+        let isTransitioning = false;
+
+        const carouselElement = doanhNghiepCarouselContainer.querySelector('.flex.transition-transform');
+        const prevButton = doanhNghiepCarouselContainer.querySelector('button[\\@click*="prevSlide"]');
+        const nextButton = doanhNghiepCarouselContainer.querySelector('button[\\@click*="nextSlide"]');
+
+        function updateCarousel() {
+            if (!carouselElement) return;
+            const translateX = -currentSlide * 100;
+            carouselElement.style.transform = `translateX(${translateX}%)`;
+            console.log(`Fallback doanh nghiep carousel moved to slide ${currentSlide + 1}/${totalSlides}`);
+        }
+
+        function canNext() {
+            return currentSlide < totalSlides - 1;
+        }
+
+        function canPrev() {
+            return currentSlide > 0;
+        }
+
+        function updateButtons() {
+            if (prevButton) {
+                prevButton.disabled = !canPrev();
+                prevButton.classList.toggle('opacity-50', !canPrev());
+                prevButton.classList.toggle('cursor-not-allowed', !canPrev());
+            }
+            if (nextButton) {
+                nextButton.disabled = !canNext();
+                nextButton.classList.toggle('opacity-50', !canNext());
+                nextButton.classList.toggle('cursor-not-allowed', !canNext());
+            }
+        }
+
+        function nextSlide() {
+            if (isTransitioning || !canNext()) return;
+            isTransitioning = true;
+            currentSlide++;
+            updateCarousel();
+            updateButtons();
+            updateDots();
+            setTimeout(() => { isTransitioning = false; }, 500);
+        }
+
+        function prevSlide() {
+            if (isTransitioning || !canPrev()) return;
+            isTransitioning = true;
+            currentSlide--;
+            updateCarousel();
+            updateButtons();
+            updateDots();
+            setTimeout(() => { isTransitioning = false; }, 500);
+        }
+
+        // Add event listeners
+        if (prevButton) {
+            prevButton.addEventListener('click', prevSlide);
+        }
+        if (nextButton) {
+            nextButton.addEventListener('click', nextSlide);
+        }
+
+        // Initialize
+        updateCarousel();
+        updateButtons();
+
+        // Create dots pagination fallback
+        const dotsContainer = doanhNghiepCarouselContainer.querySelector('.flex.justify-center.mt-6.gap-2');
+        if (dotsContainer && !dotsContainer.querySelector('button[data-dot]')) {
+            // Clear existing dots
+            dotsContainer.innerHTML = '';
+
+            // Create dots
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'w-2 h-2 rounded-full transition-colors';
+                dot.setAttribute('data-dot', i);
+                dot.style.backgroundColor = i === currentSlide ? '#3b82f6' : '#d1d5db';
+
+                dot.addEventListener('click', () => {
+                    if (isTransitioning) return;
+                    isTransitioning = true;
+                    currentSlide = i;
+                    updateCarousel();
+                    updateButtons();
+                    updateDots();
+                    setTimeout(() => { isTransitioning = false; }, 500);
+                });
+
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function updateDots() {
+            const dots = dotsContainer.querySelectorAll('button[data-dot]');
+            dots.forEach((dot, index) => {
+                dot.style.backgroundColor = index === currentSlide ? '#3b82f6' : '#d1d5db';
+            });
+        }
+    }
+
+    // Fallback for Dich Vu Cong Truc Tuyen Carousel
+    const dichVuCongTrucTuyenCarouselContainer = document.querySelector('[x-data*="dichVuCongTrucTuyenCarousel"]');
+    if (dichVuCongTrucTuyenCarouselContainer && !dichVuCongTrucTuyenCarouselContainer.__x) {
+        console.log('Initializing fallback dich vu cong truc tuyen carousel logic');
+
+        let currentSlide = 0;
+        const totalSlides = 2; // 12 items / 6 items per slide = 2 slides
+        let isTransitioning = false;
+
+        const carouselElement = dichVuCongTrucTuyenCarouselContainer.querySelector('.flex.transition-transform');
+        const prevButton = dichVuCongTrucTuyenCarouselContainer.querySelector('button[\\@click*="prevSlide"]');
+        const nextButton = dichVuCongTrucTuyenCarouselContainer.querySelector('button[\\@click*="nextSlide"]');
+
+        function updateCarousel() {
+            if (!carouselElement) return;
+            // Each slide shows 6 items, total 12 items = 2 slides
+            // Each item is 8.33333% width, so 6 items = 50% per slide
+            // Container width is 200%, so we move by 50% per slide
+            const translateX = -currentSlide * 50;
+            carouselElement.style.transform = `translateX(${translateX}%)`;
+            console.log(`Fallback dich vu cong truc tuyen carousel moved to slide ${currentSlide + 1}/${totalSlides}`);
+        }
+
+        function canNext() {
+            return currentSlide < totalSlides - 1;
+        }
+
+        function canPrev() {
+            return currentSlide > 0;
+        }
+
+        function updateButtons() {
+            if (prevButton) {
+                prevButton.disabled = !canPrev();
+                prevButton.classList.toggle('opacity-50', !canPrev());
+                prevButton.classList.toggle('cursor-not-allowed', !canPrev());
+            }
+            if (nextButton) {
+                nextButton.disabled = !canNext();
+                nextButton.classList.toggle('opacity-50', !canNext());
+                nextButton.classList.toggle('cursor-not-allowed', !canNext());
+            }
+        }
+
+        function nextSlide() {
+            if (isTransitioning || !canNext()) return;
+            isTransitioning = true;
+            currentSlide++;
+            updateCarousel();
+            updateButtons();
+            updateDots();
+            setTimeout(() => { isTransitioning = false; }, 500);
+        }
+
+        function prevSlide() {
+            if (isTransitioning || !canPrev()) return;
+            isTransitioning = true;
+            currentSlide--;
+            updateCarousel();
+            updateButtons();
+            updateDots();
+            setTimeout(() => { isTransitioning = false; }, 500);
+        }
+
+        // Add event listeners
+        if (prevButton) {
+            prevButton.addEventListener('click', prevSlide);
+        }
+        if (nextButton) {
+            nextButton.addEventListener('click', nextSlide);
+        }
+
+        // Initialize
+        updateCarousel();
+        updateButtons();
+
+        // Create dots pagination fallback
+        const dotsContainer = dichVuCongTrucTuyenCarouselContainer.querySelector('.flex.justify-center.mt-6.gap-2');
+        if (dotsContainer && !dotsContainer.querySelector('button[data-dot]')) {
+            // Clear existing dots
+            dotsContainer.innerHTML = '';
+
+            // Create dots
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'w-2 h-2 rounded-full transition-colors';
+                dot.setAttribute('data-dot', i);
+                dot.style.backgroundColor = i === currentSlide ? '#3b82f6' : '#d1d5db';
+
+                dot.addEventListener('click', () => {
+                    if (isTransitioning) return;
+                    isTransitioning = true;
+                    currentSlide = i;
+                    updateCarousel();
+                    updateButtons();
+                    updateDots();
+                    setTimeout(() => { isTransitioning = false; }, 500);
+                });
+
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function updateDots() {
+            const dots = dotsContainer.querySelectorAll('button[data-dot]');
+            dots.forEach((dot, index) => {
+                dot.style.backgroundColor = index === currentSlide ? '#3b82f6' : '#d1d5db';
+            });
+        }
+    }
+
+    // Fallback for Phone Contact Toggle
+    const phoneContactContainer = document.querySelector('[x-data*="phoneContactToggle"]');
+    if (phoneContactContainer && !phoneContactContainer.__x) {
+        console.log('Initializing fallback phone contact toggle logic');
+
+        let isExpanded = false;
+        const initialItems = 8;
+        const totalItems = 22;
+
+        const toggleButton = phoneContactContainer.querySelector('button[\\@click*="toggleExpanded"]');
+        const allItems = phoneContactContainer.querySelectorAll('.grid > div');
+
+        function hideAdditionalItems() {
+            allItems.forEach((item, index) => {
+                if (index >= initialItems) {
+                    item.style.display = 'none';
+                } else {
+                    item.style.display = 'block';
+                }
+            });
+        }
+
+        function showAllItems() {
+            allItems.forEach((item) => {
+                item.style.display = 'block';
+            });
+        }
+
+        function updateButton() {
+            if (!toggleButton) return;
+
+            const buttonText = isExpanded ? 'Thu gọn' : `Xem Thêm (${totalItems - initialItems} số khác)`;
+            const iconClass = isExpanded ? 'lucide-chevron-up' : 'lucide-chevron-down';
+
+            // Update button text - chỉ cập nhật nếu không có x-text
+            const textSpan = toggleButton.querySelector('span[x-text]');
+            if (textSpan) {
+                // Nếu có x-text, chỉ cập nhật nội dung span
+                textSpan.textContent = buttonText;
+            } else {
+                // Nếu không có x-text, cập nhật text node
+                const textNode = toggleButton.childNodes[0];
+                if (textNode && textNode.nodeType === Node.TEXT_NODE) {
+                    textNode.textContent = buttonText;
+                }
+            }
+
+            // Update icon
+            const icon = toggleButton.querySelector('svg');
+            if (icon) {
+                icon.className = `lucide ${iconClass} w-4 h-4 ml-2`;
+            }
+        }
+
+        function toggleExpanded() {
+            isExpanded = !isExpanded;
+
+            if (isExpanded) {
+                showAllItems();
+            } else {
+                hideAdditionalItems();
+            }
+
+            updateButton();
+        }
+
+        // Add event listener
+        if (toggleButton) {
+            toggleButton.addEventListener('click', toggleExpanded);
+        }
+
+        // Initialize
+        hideAdditionalItems();
+        updateButton();
+    }
+
+    // Fallback for Development History Toggle
+    const developmentHistoryContainer = document.querySelector('[x-data*="developmentHistoryToggle"]');
+    if (developmentHistoryContainer && !developmentHistoryContainer.__x) {
+        console.log('Initializing fallback development history toggle logic');
+
+        let isExpanded = true;
+
+        const toggleButton = developmentHistoryContainer.querySelector('button[\\@click*="toggleExpanded"]');
+        const historyContent = developmentHistoryContainer.querySelector('.space-y-2');
+
+        function updateButton() {
+            if (!toggleButton) return;
+
+            const iconClass = isExpanded ? 'lucide-chevron-up' : 'lucide-chevron-down';
+
+            // Update icon
+            const icon = toggleButton.querySelector('svg');
+            if (icon) {
+                icon.className = `lucide ${iconClass} w-4 h-4`;
+            }
+        }
+
+        function updateContent() {
+            if (!historyContent) return;
+
+            if (isExpanded) {
+                historyContent.classList.remove('hidden');
+                historyContent.classList.add('block');
+            } else {
+                historyContent.classList.remove('block');
+                historyContent.classList.add('hidden');
+            }
+        }
+
+        function toggleExpanded() {
+            isExpanded = !isExpanded;
+            updateButton();
+            updateContent();
+        }
+
+        // Add event listener
+        if (toggleButton) {
+            toggleButton.addEventListener('click', toggleExpanded);
+        }
+
+        // Initialize
+        updateButton();
+        updateContent();
+    }
 });
