@@ -529,13 +529,6 @@ document.addEventListener('alpine:init', () => {
     // ===========================================
     Alpine.data('newsFilterComponent', () => ({
         activeCategory: 'Tin Nổi Bật',
-        categories: [
-            { id: 'noi-bat', name: 'Tin Nổi Bật', class: 'bg-blue-500 text-white shadow-md' },
-            { id: 'du-lich', name: 'Du Lịch', class: 'bg-gray-100 text-gray-600 hover:bg-gray-200' },
-            { id: 'am-thuc', name: 'Ẩm Thực', class: 'bg-gray-100 text-gray-600 hover:bg-gray-200' },
-            { id: 'dac-san', name: 'Đặc Sản', class: 'bg-gray-100 text-gray-600 hover:bg-gray-200' },
-            { id: 'vui-choi', name: 'Vui Chơi', class: 'bg-gray-100 text-gray-600 hover:bg-gray-200' }
-        ],
 
         init() {
             console.log('News Filter component initialized.');
@@ -547,19 +540,16 @@ document.addEventListener('alpine:init', () => {
         },
 
         getButtonClass(categoryName) {
-            const baseClass = "px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition-all duration-200";
             if (this.activeCategory === categoryName) {
-                return baseClass + " bg-blue-500 text-white shadow-md";
+                return " bg-blue-500 text-white shadow-md";
             } else {
-                return baseClass + " bg-gray-100 text-gray-600 hover:bg-gray-200";
+                return " bg-gray-100 text-gray-600 hover:bg-gray-200";
             }
         },
 
         filterNewsByCategory(categoryName) {
-            // Lấy tất cả các news items
             const newsItems = document.querySelectorAll('.news-item');
 
-            // Mapping category names to data-category values
             const categoryMapping = {
                 'Tin Nổi Bật': 'noi-bat',
                 'Du Lịch': 'du-lich',
@@ -574,10 +564,8 @@ document.addEventListener('alpine:init', () => {
                 const itemCategory = item.getAttribute('data-category');
 
                 if (categoryName === 'Tin Nổi Bật') {
-                    // Hiển thị tất cả items cho Tin Nổi Bật
                     item.style.display = 'block';
                 } else {
-                    // Ẩn/hiện dựa trên category
                     if (itemCategory === targetCategory) {
                         item.style.display = 'block';
                     } else {
@@ -586,7 +574,6 @@ document.addEventListener('alpine:init', () => {
                 }
             });
 
-            // Scroll to top of news section
             const newsSection = document.querySelector('.news-section');
             if (newsSection) {
                 newsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -834,55 +821,5 @@ document.addEventListener('DOMContentLoaded', () => {
         // Initialize
         hideAdditionalItems();
         updateButton();
-    }
-
-    // Fallback for Development History Toggle
-    const developmentHistoryContainer = document.querySelector('[x-data*="developmentHistoryToggle"]');
-    if (developmentHistoryContainer && !developmentHistoryContainer.__x) {
-        console.log('Initializing fallback development history toggle logic');
-
-        let isExpanded = true;
-
-        const toggleButton = developmentHistoryContainer.querySelector('button[\\@click*="toggleExpanded"]');
-        const historyContent = developmentHistoryContainer.querySelector('.space-y-2');
-
-        function updateButton() {
-            if (!toggleButton) return;
-
-            const iconClass = isExpanded ? 'lucide-chevron-up' : 'lucide-chevron-down';
-
-            // Update icon
-            const icon = toggleButton.querySelector('svg');
-            if (icon) {
-                icon.className = `lucide ${iconClass} w-4 h-4`;
-            }
-        }
-
-        function updateContent() {
-            if (!historyContent) return;
-
-            if (isExpanded) {
-                historyContent.classList.remove('hidden');
-                historyContent.classList.add('block');
-            } else {
-                historyContent.classList.remove('block');
-                historyContent.classList.add('hidden');
-            }
-        }
-
-        function toggleExpanded() {
-            isExpanded = !isExpanded;
-            updateButton();
-            updateContent();
-        }
-
-        // Add event listener
-        if (toggleButton) {
-            toggleButton.addEventListener('click', toggleExpanded);
-        }
-
-        // Initialize
-        updateButton();
-        updateContent();
     }
 });

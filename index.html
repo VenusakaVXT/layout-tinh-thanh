@@ -4072,49 +4072,49 @@
     </section>
 
     <!-- Tin Tức Bình Dương Section-->
-    <section class="jsx-4fb23789b5a36db8 py-12 md:py-16 bg-white news-section" x-data="newsFilterComponent">
-      <div class="jsx-4fb23789b5a36db8 container mx-auto px-4">
-        <div class="jsx-4fb23789b5a36db8 text-center mb-8">
-          <h2 class="jsx-4fb23789b5a36db8 text-xl md:text-2xl md:text-3xl font-bold title-section mb-4">
+    <section class="py-12 md:py-16 bg-white news-section" x-data="newsFilterComponent">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-8">
+          <h2 class="text-xl md:text-2xl md:text-3xl font-bold title-section mb-4">
             Tin Tức Bình Dương
           </h2>
-          <p class="jsx-4fb23789b5a36db8 text-gray-600 max-w-2xl mx-auto">Cập nhật những tin tức mới nhất về du lịch, ẩm
+          <p class="text-gray-600 max-w-2xl mx-auto">Cập nhật những tin tức mới nhất về du lịch, ẩm
             thực và văn hóa tỉnh Bình Dương</p>
         </div>
-        <div class="jsx-4fb23789b5a36db8 mb-8">
-          <div class="jsx-4fb23789b5a36db8 relative">
-            <div class="jsx-4fb23789b5a36db8 flex overflow-x-auto scrollbar-hide pb-2 -mb-2">
-              <div class="jsx-4fb23789b5a36db8 flex space-x-1 min-w-max px-1">
-                <template x-for="category in categories" :key="category.id">
-                  <button :class="getButtonClass(category.name) + ' jsx-4fb23789b5a36db8'"
-                    @click="selectCategory(category.name)" x-text="category.name">
-                  </button>
-                </template>
+        <div class="mb-8">
+          <div class="relative">
+            <div class="flex overflow-x-auto scrollbar-hide pb-2 -mb-2">
+              <div class="flex space-x-1 min-w-max px-1">
+                <button class="px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition-all duration-200" :class="getButtonClass('Tin Nổi Bật')" @click="selectCategory('Tin Nổi Bật')">Tin Nổi Bật</button>
+                <button class="px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition-all duration-200" :class="getButtonClass('Du Lịch')" @click="selectCategory('Du Lịch')">Du Lịch</button>
+                <button class="px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition-all duration-200" :class="getButtonClass('Ẩm Thực')" @click="selectCategory('Ẩm Thực')">Ẩm Thực</button>
+                <button class="px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition-all duration-200" :class="getButtonClass('Đặc Sản')" @click="selectCategory('Đặc Sản')">Đặc Sản</button>
+                <button class="px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition-all duration-200" :class="getButtonClass('Vui Chơi')" @click="selectCategory('Vui Chơi')">Vui Chơi</button>
               </div>
             </div>
             <div
-              class="jsx-4fb23789b5a36db8 absolute right-0 top-0 bottom-2 w-8 bg-gradient-to-l from-white to-transparent pointer-events-none md:hidden">
+              class="absolute right-0 top-0 bottom-2 w-8 bg-gradient-to-l from-white to-transparent pointer-events-none md:hidden">
             </div>
           </div>
         </div>
-        <div class="jsx-4fb23789b5a36db8 mb-8">
-          <div class="jsx-4fb23789b5a36db8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div class="mb-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             <div
               class="news-card bg-card text-card-foreground group card-hover news-item"
               data-category="noi-bat">
               <div class="news-card__root">
-                <div class="jsx-4fb23789b5a36db8 relative"><a href="/tin-tuc/1"><img
+                <div class="relative"><a href="/tin-tuc/1"><img
                       src="./public/images/placeholder.svg?height=200&amp;width=300"
                       alt="Bình Dương thu hút 2,5 tỷ USD vốn đầu tư nước ngoài trong năm 2024"
-                      class="jsx-4fb23789b5a36db8 news-card__image"></a>
+                      class="news-card__image"></a>
                   <div class="badge badge-hot absolute top-2 right-2">
                     Hot</div>
                 </div>
-                <div class="jsx-4fb23789b5a36db8 news-card__content">
-                  <div class="jsx-4fb23789b5a36db8 news-card__header"><a href="/tin-tuc/danh-muc/kinh-tế">
+                <div class="news-card__content">
+                  <div class="news-card__header"><a href="/tin-tuc/danh-muc/kinh-tế">
                       <div class="badge badge-primary">Kinh Tế</div>
                     </a>
-                    <div class="jsx-4fb23789b5a36db8 news-card__meta-line"><svg
+                    <div class="news-card__meta-line"><svg
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-clock news-card__icon">
@@ -4123,14 +4123,13 @@
                       </svg>21-12</div>
                   </div>
                   <h3
-                    class="jsx-4fb23789b5a36db8 news-card__title">
+                    class="news-card__title">
                     <a href="/tin-tuc/1">Bình Dương thu hút 2,5 tỷ USD vốn đầu tư nước ngoài trong năm 2024</a>
                   </h3>
-                  <p class="jsx-4fb23789b5a36db8 news-card__excerpt">Tỉnh Bình Dương tiếp tục khẳng
+                  <p class="news-card__excerpt">Tỉnh Bình Dương tiếp tục khẳng
                     định vị thế là điểm đến hấp dẫn cho các nhà đầu tư quốc tế với nhiều dự án lớn được triển khai.</p>
-                  <div class="jsx-4fb23789b5a36db8 news-card__footer"><span
-                      class="jsx-4fb23789b5a36db8">Bởi Nguyễn Văn A</span>
-                    <div class="jsx-4fb23789b5a36db8 flex items-center"><svg xmlns="http://www.w3.org/2000/svg"
+                  <div class="news-card__footer"><span>Bởi Nguyễn Văn A</span>
+                    <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg"
                         width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye news-card__icon">
                         <path
@@ -4146,16 +4145,16 @@
               class="news-card bg-card text-card-foreground group card-hover news-item"
               data-category="noi-bat">
               <div class="news-card__root">
-                <div class="jsx-4fb23789b5a36db8 relative"><a href="/tin-tuc/2"><img
+                <div class="relative"><a href="/tin-tuc/2"><img
                       src="./public/images/placeholder.svg?height=200&amp;width=300"
                       alt="Khánh thành cầu vượt Mỹ Phước - Tân Vạn, giảm ùn tắc giao thông"
-                      class="jsx-4fb23789b5a36db8 news-card__image"></a>
+                      class="news-card__image"></a>
                 </div>
-                <div class="jsx-4fb23789b5a36db8 news-card__content">
-                  <div class="jsx-4fb23789b5a36db8 news-card__header"><a href="/tin-tuc/danh-muc/giao-thông">
+                <div class="news-card__content">
+                  <div class="news-card__header"><a href="/tin-tuc/danh-muc/giao-thông">
                       <div class="badge badge-primary">Giao Thông</div>
                     </a>
-                    <div class="jsx-4fb23789b5a36db8 news-card__meta-line"><svg
+                    <div class="news-card__meta-line"><svg
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-clock news-card__icon">
@@ -4164,14 +4163,13 @@
                       </svg>21-12</div>
                   </div>
                   <h3
-                    class="jsx-4fb23789b5a36db8 news-card__title">
+                    class="news-card__title">
                     <a href="/tin-tuc/2">Khánh thành cầu vượt Mỹ Phước - Tân Vạn, giảm ùn tắc giao thông</a>
                   </h3>
-                  <p class="jsx-4fb23789b5a36db8 news-card__excerpt">Cầu vượt Mỹ Phước - Tân Vạn
+                  <p class="news-card__excerpt">Cầu vượt Mỹ Phước - Tân Vạn
                     chính thức đưa vào sử dụng, góp phần giải quyết tình trạng ùn tắc giao thông tại khu vực.</p>
-                  <div class="jsx-4fb23789b5a36db8 news-card__footer"><span
-                      class="jsx-4fb23789b5a36db8">Bởi Trần Thị B</span>
-                    <div class="jsx-4fb23789b5a36db8 flex items-center"><svg xmlns="http://www.w3.org/2000/svg"
+                  <div class="news-card__footer"><span>Bởi Trần Thị B</span>
+                    <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg"
                         width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye news-card__icon">
                         <path
@@ -4187,16 +4185,16 @@
               class="news-card bg-card text-card-foreground group card-hover news-item"
               data-category="du-lich">
               <div class="news-card__root">
-                <div class="jsx-4fb23789b5a36db8 relative"><a href="/tin-tuc/3"><img
+                <div class="relative"><a href="/tin-tuc/3"><img
                       src="./public/images/placeholder.svg?height=200&amp;width=300"
                       alt="Lễ hội Văn hóa Dân gian Bình Dương 2024 thu hút hàng nghìn du khách"
-                      class="jsx-4fb23789b5a36db8 news-card__image"></a>
+                      class="news-card__image"></a>
                 </div>
-                <div class="jsx-4fb23789b5a36db8 news-card__content">
-                  <div class="jsx-4fb23789b5a36db8 news-card__header"><a href="/tin-tuc/danh-muc/văn-hóa">
+                <div class="news-card__content">
+                  <div class="news-card__header"><a href="/tin-tuc/danh-muc/văn-hóa">
                       <div class="badge badge-primary">Văn Hóa</div>
                     </a>
-                    <div class="jsx-4fb23789b5a36db8 news-card__meta-line"><svg
+                    <div class="news-card__meta-line"><svg
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-clock news-card__icon">
@@ -4205,14 +4203,13 @@
                       </svg>21-12</div>
                   </div>
                   <h3
-                    class="jsx-4fb23789b5a36db8 news-card__title">
+                    class="news-card__title">
                     <a href="/tin-tuc/3">Lễ hội Văn hóa Dân gian Bình Dương 2024 thu hút hàng nghìn du khách</a>
                   </h3>
-                  <p class="jsx-4fb23789b5a36db8 news-card__excerpt">Lễ hội diễn ra tại Trung tâm
+                  <p class="news-card__excerpt">Lễ hội diễn ra tại Trung tâm
                     Văn hóa tỉnh với nhiều hoạt động đặc sắc, giới thiệu văn hóa truyền thống địa phương.</p>
-                  <div class="jsx-4fb23789b5a36db8 news-card__footer"><span
-                      class="jsx-4fb23789b5a36db8">Bởi Lê Văn C</span>
-                    <div class="jsx-4fb23789b5a36db8 flex items-center"><svg xmlns="http://www.w3.org/2000/svg"
+                  <div class="news-card__footer"><span>Bởi Lê Văn C</span>
+                    <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg"
                         width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye news-card__icon">
                         <path
@@ -4228,16 +4225,16 @@
               class="news-card bg-card text-card-foreground group card-hover news-item"
               data-category="noi-bat">
               <div class="news-card__root">
-                <div class="jsx-4fb23789b5a36db8 relative"><a href="/tin-tuc/4"><img
+                <div class="relative"><a href="/tin-tuc/4"><img
                       src="./public/images/placeholder.svg?height=200&amp;width=300"
                       alt="Triển khai dự án Smart City tại TP. Thủ Dầu Một"
-                      class="jsx-4fb23789b5a36db8 news-card__image"></a>
+                      class="news-card__image"></a>
                 </div>
-                <div class="jsx-4fb23789b5a36db8 news-card__content">
-                  <div class="jsx-4fb23789b5a36db8 news-card__header"><a href="/tin-tuc/danh-muc/công-nghệ">
+                <div class="news-card__content">
+                  <div class="news-card__header"><a href="/tin-tuc/danh-muc/công-nghệ">
                       <div class="badge badge-primary">Công Nghệ</div>
                     </a>
-                    <div class="jsx-4fb23789b5a36db8 news-card__meta-line"><svg
+                    <div class="news-card__meta-line"><svg
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-clock news-card__icon">
@@ -4246,14 +4243,13 @@
                       </svg>20-12</div>
                   </div>
                   <h3
-                    class="jsx-4fb23789b5a36db8 news-card__title">
+                    class="news-card__title">
                     <a href="/tin-tuc/4">Triển khai dự án Smart City tại TP. Thủ Dầu Một</a>
                   </h3>
-                  <p class="jsx-4fb23789b5a36db8 news-card__excerpt">Dự án thành phố thông minh
+                  <p class="news-card__excerpt">Dự án thành phố thông minh
                     được kh��i động với nhiều giải pháp công nghệ hiện đại.</p>
-                  <div class="jsx-4fb23789b5a36db8 news-card__footer"><span
-                      class="jsx-4fb23789b5a36db8">Bởi Phạm Thị D</span>
-                    <div class="jsx-4fb23789b5a36db8 flex items-center"><svg xmlns="http://www.w3.org/2000/svg"
+                  <div class="news-card__footer"><span>Bởi Phạm Thị D</span>
+                    <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg"
                         width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye news-card__icon">
                         <path
@@ -4269,16 +4265,16 @@
               class="news-card bg-card text-card-foreground group card-hover news-item"
               data-category="noi-bat">
               <div class="news-card__root">
-                <div class="jsx-4fb23789b5a36db8 relative"><a href="/tin-tuc/5"><img
+                <div class="relative"><a href="/tin-tuc/5"><img
                       src="./public/images/placeholder.svg?height=200&amp;width=300"
                       alt="Khu công nghiệp VSIP III chính thức đi vào hoạt động"
-                      class="jsx-4fb23789b5a36db8 news-card__image"></a>
+                      class="news-card__image"></a>
                 </div>
-                <div class="jsx-4fb23789b5a36db8 news-card__content">
-                  <div class="jsx-4fb23789b5a36db8 news-card__header"><a href="/tin-tuc/danh-muc/kinh-tế">
+                <div class="news-card__content">
+                  <div class="news-card__header"><a href="/tin-tuc/danh-muc/kinh-tế">
                       <div class="badge badge-primary">Kinh Tế</div>
                     </a>
-                    <div class="jsx-4fb23789b5a36db8 news-card__meta-line"><svg
+                    <div class="news-card__meta-line"><svg
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-clock news-card__icon">
@@ -4287,14 +4283,13 @@
                       </svg>20-12</div>
                   </div>
                   <h3
-                    class="jsx-4fb23789b5a36db8 news-card__title">
+                    class="news-card__title">
                     <a href="/tin-tuc/5">Khu công nghiệp VSIP III chính thức đi vào hoạt động</a>
                   </h3>
-                  <p class="jsx-4fb23789b5a36db8 news-card__excerpt">Khu công nghiệp mới với quy mô
+                  <p class="news-card__excerpt">Khu công nghiệp mới với quy mô
                     1.000 ha sẽ tạo việc làm cho hàng nghìn lao động.</p>
-                  <div class="jsx-4fb23789b5a36db8 news-card__footer"><span
-                      class="jsx-4fb23789b5a36db8">Bởi Hoàng Văn E</span>
-                    <div class="jsx-4fb23789b5a36db8 flex items-center"><svg xmlns="http://www.w3.org/2000/svg"
+                  <div class="news-card__footer"><span>Bởi Hoàng Văn E</span>
+                    <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg"
                         width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye news-card__icon">
                         <path
@@ -4310,16 +4305,16 @@
               class="news-card bg-card text-card-foreground group card-hover news-item"
               data-category="am-thuc">
               <div class="news-card__root">
-                <div class="jsx-4fb23789b5a36db8 relative"><a href="/tin-tuc/6"><img
+                <div class="relative"><a href="/tin-tuc/6"><img
                       src="./public/images/placeholder.svg?height=200&amp;width=300"
                       alt="Bình Dương đạt giải thưởng Thành phố Xanh ASEAN 2024"
-                      class="jsx-4fb23789b5a36db8 news-card__image"></a>
+                      class="news-card__image"></a>
                 </div>
-                <div class="jsx-4fb23789b5a36db8 news-card__content">
-                  <div class="jsx-4fb23789b5a36db8 news-card__header"><a href="/tin-tuc/danh-muc/môi-trường">
+                <div class="news-card__content">
+                  <div class="news-card__header"><a href="/tin-tuc/danh-muc/môi-trường">
                       <div class="badge badge-primary">Môi Trường</div>
                     </a>
-                    <div class="jsx-4fb23789b5a36db8 news-card__meta-line"><svg
+                    <div class="news-card__meta-line"><svg
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-clock news-card__icon">
@@ -4328,14 +4323,13 @@
                       </svg>20-12</div>
                   </div>
                   <h3
-                    class="jsx-4fb23789b5a36db8 news-card__title">
+                    class="news-card__title">
                     <a href="/tin-tuc/6">Bình Dương đạt giải thưởng Thành phố Xanh ASEAN 2024</a>
                   </h3>
-                  <p class="jsx-4fb23789b5a36db8 news-card__excerpt">Tỉnh Bình Dương vinh dự nhận
+                  <p class="news-card__excerpt">Tỉnh Bình Dương vinh dự nhận
                     giải thưởng Thành phố Xanh ASEAN nhờ những nỗ lực bảo vệ môi trường.</p>
-                  <div class="jsx-4fb23789b5a36db8 news-card__footer"><span
-                      class="jsx-4fb23789b5a36db8">Bởi Nguyễn Thị F</span>
-                    <div class="jsx-4fb23789b5a36db8 flex items-center"><svg xmlns="http://www.w3.org/2000/svg"
+                  <div class="news-card__footer"><span>Bởi Nguyễn Thị F</span>
+                    <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg"
                         width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye news-card__icon">
                         <path
@@ -4351,16 +4345,16 @@
               class="news-card bg-card text-card-foreground group card-hover news-item"
               data-category="vui-choi">
               <div class="news-card__root">
-                <div class="jsx-4fb23789b5a36db8 relative"><a href="/tin-tuc/7"><img
+                <div class="relative"><a href="/tin-tuc/7"><img
                       src="./public/images/placeholder.svg?height=200&amp;width=300"
                       alt="Khai trương Trung tâm Thương mại Aeon Mall Bình Dương Canary"
-                      class="jsx-4fb23789b5a36db8 news-card__image"></a>
+                      class="news-card__image"></a>
                 </div>
-                <div class="jsx-4fb23789b5a36db8 news-card__content">
-                  <div class="jsx-4fb23789b5a36db8 news-card__header"><a href="/tin-tuc/danh-muc/thương-mại">
+                <div class="news-card__content">
+                  <div class="news-card__header"><a href="/tin-tuc/danh-muc/thương-mại">
                       <div class="badge badge-primary">Thương Mại</div>
                     </a>
-                    <div class="jsx-4fb23789b5a36db8 news-card__meta-line"><svg
+                    <div class="news-card__meta-line"><svg
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-clock news-card__icon">
@@ -4369,14 +4363,13 @@
                       </svg>20-12</div>
                   </div>
                   <h3
-                    class="jsx-4fb23789b5a36db8 news-card__title">
+                    class="news-card__title">
                     <a href="/tin-tuc/7">Khai trương Trung tâm Thương mại Aeon Mall Bình Dương Canary</a>
                   </h3>
-                  <p class="jsx-4fb23789b5a36db8 news-card__excerpt">Trung tâm thương mại quy mô
+                  <p class="news-card__excerpt">Trung tâm thương mại quy mô
                     lớn nhất tỉnh chính thức khai trương với nhiều thương hiệu nổi tiếng.</p>
-                  <div class="jsx-4fb23789b5a36db8 news-card__footer"><span
-                      class="jsx-4fb23789b5a36db8">Bởi Trần Văn G</span>
-                    <div class="jsx-4fb23789b5a36db8 flex items-center"><svg xmlns="http://www.w3.org/2000/svg"
+                  <div class="news-card__footer"><span>Bởi Trần Văn G</span>
+                    <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg"
                         width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye news-card__icon">
                         <path
@@ -4392,16 +4385,16 @@
               class="news-card bg-card text-card-foreground group card-hover news-item"
               data-category="dac-san">
               <div class="news-card__root">
-                <div class="jsx-4fb23789b5a36db8 relative"><a href="/tin-tuc/41"><img
+                <div class="relative"><a href="/tin-tuc/41"><img
                       src="./public/images/placeholder.svg?height=200&amp;width=300"
                       alt="Bình Dương thu hút 2,5 tỷ USD vốn đầu tư nước ngoài trong năm 2024"
-                      class="jsx-4fb23789b5a36db8 news-card__image"></a>
+                      class="news-card__image"></a>
                 </div>
-                <div class="jsx-4fb23789b5a36db8 news-card__content">
-                  <div class="jsx-4fb23789b5a36db8 news-card__header"><a href="/tin-tuc/danh-muc/kinh-tế">
+                <div class="news-card__content">
+                  <div class="news-card__header"><a href="/tin-tuc/danh-muc/kinh-tế">
                       <div class="badge badge-primary">Kinh Tế</div>
                     </a>
-                    <div class="jsx-4fb23789b5a36db8 news-card__meta-line"><svg
+                    <div class="news-card__meta-line"><svg
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-clock news-card__icon">
@@ -4410,14 +4403,13 @@
                       </svg>21-12</div>
                   </div>
                   <h3
-                    class="jsx-4fb23789b5a36db8 news-card__title">
+                    class="news-card__title">
                     <a href="/tin-tuc/41">Bình Dương thu hút 2,5 tỷ USD vốn đầu tư nước ngoài trong năm 2024</a>
                   </h3>
-                  <p class="jsx-4fb23789b5a36db8 news-card__excerpt">Tỉnh Bình Dương tiếp tục khẳng
+                  <p class="news-card__excerpt">Tỉnh Bình Dương tiếp tục khẳng
                     định vị thế là điểm đến hấp dẫn cho các nhà đầu tư quốc tế với nhiều dự án lớn được triển khai.</p>
-                  <div class="jsx-4fb23789b5a36db8 news-card__footer"><span
-                      class="jsx-4fb23789b5a36db8">Bởi Nguyễn Văn A</span>
-                    <div class="jsx-4fb23789b5a36db8 flex items-center"><svg xmlns="http://www.w3.org/2000/svg"
+                  <div class="news-card__footer"><span>Bởi Nguyễn Văn A</span>
+                    <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg"
                         width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye news-card__icon">
                         <path
@@ -4431,7 +4423,7 @@
             </div>
           </div>
         </div>
-        <div class="jsx-4fb23789b5a36db8 text-center"><a href="/tin-tuc/noi-bat"><button
+        <div class="text-center"><a href="/tin-tuc/noi-bat"><button
               class="justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 btn-primary flex items-center mx-auto">Xem
               Thêm Tin Nổi Bật<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
