@@ -1,0 +1,68 @@
+/* Feature Cards Components */
+.feature-cards-grid {
+  @apply grid grid-cols-2 gap-3 md:gap-4 mt-8 lg:mt-0;
+}
+
+.feature-card {
+  @apply card bg-white/10 backdrop-blur-sm border-white/20 text-white h-32 md:h-36;
+}
+
+.feature-card-content {
+  @apply p-6 flex flex-col h-full p-4;
+}
+
+.feature-card-header {
+  @apply flex items-center mb-3;
+}
+
+.feature-card-icon-container {
+  @apply size-8 md:size-10 rounded-md flex-center mr-3;
+}
+
+.feature-card-icon-yellow {
+  @apply bg-yellow-500;
+}
+
+.feature-card-icon-orange {
+  @apply bg-orange-300;
+}
+
+.feature-card-icon-blue {
+  @apply bg-blue-600;
+}
+
+.feature-card-icon-pink {
+  @apply bg-pink-400;
+}
+
+.feature-card-icon {
+  @apply size-4 md:size-5 text-gray-900;
+}
+
+.feature-card-icon-white {
+  @apply size-4 md:size-5 text-white;
+}
+
+.feature-card-title {
+  @apply font-semibold text-sm md:text-base;
+}
+
+.feature-card-description-container {
+  @apply flex-1 flex items-center;
+}
+
+.feature-card-description {
+  @apply text-blue-100 text-xs md:text-sm;
+}
+
+.feature-card-margin-top {
+  @apply md:mt-8;
+}
+
+.feature-card-margin-negative {
+  @apply md:-mt-4;
+}
+
+.feature-card-margin-positive {
+  @apply md:mt-4;
+}

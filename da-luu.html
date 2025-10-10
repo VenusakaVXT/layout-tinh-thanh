@@ -2481,7 +2481,9 @@
 
               <!-- Việc làm đã lưu Tab -->
               <button type="button" role="tab" @click="switchTab('jobs')" :class="getTabClasses('jobs')"
-                :aria-selected="isActive('jobs')" tabindex="0" data-orientation="horizontal">
+                :aria-selected="isActive('jobs')" tabindex="0" data-orientation="horizontal"
+                class="justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm flex items-center gap-2"  
+              >
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   class="lucide lucide-briefcase h-4 w-4">
@@ -2492,7 +2494,9 @@
 
               <!-- BĐS đã lưu Tab -->
               <button type="button" role="tab" @click="switchTab('realestate')" :class="getTabClasses('realestate')"
-                :aria-selected="isActive('realestate')" tabindex="-1" data-orientation="horizontal">
+                :aria-selected="isActive('realestate')" tabindex="-1" data-orientation="horizontal"
+                class="justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm flex items-center gap-2"  
+              >
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   class="lucide lucide-house h-4 w-4">
@@ -2505,7 +2509,9 @@
 
               <!-- Dịch vụ đã lưu Tab -->
               <button type="button" role="tab" @click="switchTab('services')" :class="getTabClasses('services')"
-                :aria-selected="isActive('services')" tabindex="-1" data-orientation="horizontal">
+                :aria-selected="isActive('services')" tabindex="-1" data-orientation="horizontal"
+                class="justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm flex items-center gap-2" 
+              >
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   class="lucide lucide-settings h-4 w-4">
@@ -2525,7 +2531,9 @@
               x-transition:enter-end="opacity-100 transform scale-100"
               x-transition:leave="transition ease-in duration-150"
               x-transition:leave-start="opacity-100 transform scale-100"
-              x-transition:leave-end="opacity-0 transform scale-95">
+              x-transition:leave-end="opacity-0 transform scale-95"
+              class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 space-y-6"  
+            >
               <div class="flex justify-between items-center">
                 <h3 class="text-lg font-semibold">Việc làm đã lưu (11)</h3>
               </div>
@@ -3095,7 +3103,9 @@
               x-transition:enter-end="opacity-100 transform scale-100"
               x-transition:leave="transition ease-in duration-150"
               x-transition:leave-start="opacity-100 transform scale-100"
-              x-transition:leave-end="opacity-0 transform scale-95">
+              x-transition:leave-end="opacity-0 transform scale-95"
+              class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 space-y-6"
+            >
               <div class="flex justify-between items-center">
                 <h3 class="text-lg font-semibold">Bất động sản đã lưu (11)</h3>
               </div>
@@ -3912,7 +3922,9 @@
               x-transition:enter-end="opacity-100 transform scale-100"
               x-transition:leave="transition ease-in duration-150"
               x-transition:leave-start="opacity-100 transform scale-100"
-              x-transition:leave-end="opacity-0 transform scale-95">
+              x-transition:leave-end="opacity-0 transform scale-95"
+              class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 space-y-6"
+            >
               <div class="flex justify-between items-center">
                 <h3 class="text-lg font-semibold">Dịch vụ đã lưu (11)</h3>
               </div>
