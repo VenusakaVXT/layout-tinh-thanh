@@ -44,32 +44,26 @@
 
 .blaze-slide>div {
   width: 100%;
-  max-width: 300px;
-  /* Restore original max-width for other sliders */
 }
 
 /* Job slider specific styles for wider cards */
 .job-slider .blaze-slide {
   padding: 0 4px;
-  /* Reduce padding to give more space to cards */
 }
 
 .job-slider .blaze-slide>div {
   width: 100%;
   max-width: none;
   min-width: 0;
-  /* Allow cards to shrink if needed */
 }
 
 /* Optimize job card layout for better width utilization */
 .job-slider .blaze-track {
   gap: 8px;
-  /* Reduce gap between slides */
 }
 
 .job-slider .blaze-container {
   padding: 0 4px;
-  /* Reduce container padding */
 }
 
 /* Ensure job cards take full available width */
@@ -79,45 +73,38 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  /* 16px gap between cards */
 }
 
 .job-slider .blaze-slide .card-hover {
   width: 100%;
   min-height: 200px;
-  /* Ensure consistent card height */
 }
 
 /* Prevent single card from stretching to fill container height */
 .job-slider .blaze-slide .grid>div,
 .job-slider .blaze-slide .slide-grid>div {
   flex: 0 0 auto;
-  /* Don't grow to fill available space */
   width: 100%;
 }
 
 /* Service slider specific styles for 2-row layout */
 .service-slider .blaze-slide {
   padding: 0 4px;
-  /* Reduce padding to give more space to cards */
 }
 
 .service-slider .blaze-slide>div {
   width: 100%;
   max-width: none;
   min-width: 0;
-  /* Allow cards to shrink if needed */
 }
 
 /* Optimize dich vu card layout for better width utilization */
 .service-slider .blaze-track {
   gap: 8px;
-  /* Reduce gap between slides */
 }
 
 .service-slider .blaze-container {
   padding: 0 4px;
-  /* Reduce container padding */
 }
 
 /* Ensure dich vu cards take full available width */
@@ -126,19 +113,16 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  /* 16px gap between cards */
 }
 
 .service-slider .blaze-slide .card-hover {
   width: 100%;
   min-height: 200px;
-  /* Ensure consistent card height */
 }
 
 /* Prevent single card from stretching to fill container height */
 .service-slider .blaze-slide .grid>div {
   flex: 0 0 auto;
-  /* Don't grow to fill available space */
   width: 100%;
 }
 
@@ -217,11 +201,11 @@
 }
 
 .blaze-prev {
-  left: -20px;
+  left: -10px;
 }
 
 .blaze-next {
-  right: -20px;
+  right: -10px;
 }
 
 .blaze-prev:hover,
@@ -246,25 +230,21 @@
 /* Company slider specific styles for 2-row layout */
 .company-slider .blaze-slide {
   padding: 0 4px;
-  /* Reduce padding to give more space to cards */
 }
 
 .company-slider .blaze-slide>div {
   width: 100%;
   max-width: none;
   min-width: 0;
-  /* Allow cards to shrink if needed */
 }
 
 /* Optimize company card layout for better width utilization */
 .company-slider .blaze-track {
   gap: 8px;
-  /* Reduce gap between slides */
 }
 
 .company-slider .blaze-container {
   padding: 0 4px;
-  /* Reduce container padding */
 }
 
 /* Ensure company cards take full available width */
@@ -273,13 +253,11 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  /* 16px gap between cards */
 }
 
 .company-slider .blaze-slide .card-hover {
   width: 100%;
   min-height: 200px;
-  /* Ensure consistent card height */
 }
 
 /* Prevent single card from stretching to fill container height */
