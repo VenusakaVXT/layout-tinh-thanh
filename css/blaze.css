@@ -73,7 +73,8 @@
 }
 
 /* Ensure job cards take full available width */
-.job-slider .blaze-slide .grid {
+.job-slider .blaze-slide .grid,
+.job-slider .blaze-slide .slide-grid {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -88,7 +89,8 @@
 }
 
 /* Prevent single card from stretching to fill container height */
-.job-slider .blaze-slide .grid>div {
+.job-slider .blaze-slide .grid>div,
+.job-slider .blaze-slide .slide-grid>div {
   flex: 0 0 auto;
   /* Don't grow to fill available space */
   width: 100%;

@@ -643,20 +643,16 @@ document.addEventListener('alpine:init', () => {
         },
 
         toggleExpanded() {
-            console.log('Toggle clicked - before:', this.isExpanded);
             this.isExpanded = !this.isExpanded;
-            console.log('Toggle clicked - after:', this.isExpanded);
         },
 
         getIconClass() {
             const iconClass = this.isExpanded ? 'lucide-chevron-up' : 'lucide-chevron-down';
-            console.log('getIconClass called - isExpanded:', this.isExpanded, 'iconClass:', iconClass);
             return iconClass;
         },
 
         getHistoryClass() {
             const historyClass = this.isExpanded ? 'block' : 'hidden';
-            console.log('getHistoryClass called - isExpanded:', this.isExpanded, 'historyClass:', historyClass);
             return historyClass;
         }
     }));
