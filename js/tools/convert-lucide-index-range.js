@@ -19,33 +19,59 @@ function getDataLucideNameFromClass(classAttr) {
 }
 
 function extractSize(attrs) {
-  const width = /\bwidth\s*=\s*"(\d+)"/i.exec(attrs);
-  const height = /\bheight\s*=\s*"(\d+)"/i.exec(attrs);
+  const width = /\bwidth\s*=\s*"(\d+(?:\.\d+)?)"/i.exec(attrs);
+  const height = /\bheight\s*=\s*"(\d+(?:\.\d+)?)"/i.exec(attrs);
   return {
     width: width ? width[1] : null,
     height: height ? height[1] : null,
   };
 }
 
-function buildClassList(classAttr) {
+function buildClassList(classAttr, sizeAttrs) {
   const classes = (classAttr || '').split(/\s+/).filter(Boolean);
   const keep = [];
+  let wClass = null;
+  let hClass = null;
+
   for (const cls of classes) {
     if (cls === 'lucide') continue;
     if (/^lucide-[a-z0-9-]+$/.test(cls)) continue; // drop lucide-* markers
-    // Drop any existing width/height utility to avoid conflicts; we'll rebuild from width/height attrs
-    if (/^w-\d+$/.test(cls)) continue;
-    if (/^h-\d+$/.test(cls)) continue;
+    const wMatch = /^w-(\d+(?:\.\d+)?)$/.exec(cls);
+    const hMatch = /^h-(\d+(?:\.\d+)?)$/.exec(cls);
+    if (wMatch) {
+      wClass = `w-${wMatch[1]}`;
+      continue;
+    }
+    if (hMatch) {
+      hClass = `h-${hMatch[1]}`;
+      continue;
+    }
     keep.push(cls);
   }
-  // Always enforce w-4 h-4 for lucide icons regardless of original SVG width/height
-  keep.unshift('h-4');
-  keep.unshift('w-4');
-  // Ensure deterministic order: size first, then others as-is
-  // Remove duplicates while preserving order
+
+  // If both w- and h- exist in class, keep them; otherwise compute from attributes
+  if (!(wClass && hClass)) {
+    const toUnit = (px) => {
+      const num = parseFloat(px);
+      if (!isFinite(num)) return null;
+      const unit = num / 4;
+      // Trim trailing .0
+      return Number.isInteger(unit) ? String(unit) : String(parseFloat(unit.toFixed(2)));
+    };
+    const compW = sizeAttrs && sizeAttrs.width ? toUnit(sizeAttrs.width) : null;
+    const compH = sizeAttrs && sizeAttrs.height ? toUnit(sizeAttrs.height) : null;
+    const fallback = '6'; // default 24px -> 6
+    const nW = compW || compH || fallback;
+    const nH = compH || compW || fallback;
+    wClass = `w-${nW}`;
+    hClass = `h-${nH}`;
+  }
+
+  // Place size first then remaining classes; de-duplicate
+  const ordered = [wClass, hClass, ...keep].filter(Boolean);
   const seen = new Set();
   const deduped = [];
-  for (const c of keep) {
+  for (const c of ordered) {
     if (!seen.has(c)) {
       seen.add(c);
       deduped.push(c);
@@ -70,26 +96,10 @@ function convertSvgToIDataLucide(segmentHtml) {
       return full; // cannot determine icon
     }
 
-    const classList = buildClassList(classAttr);
+    const size = extractSize(attrs);
+    const classList = buildClassList(classAttr, size);
     const classAttrOut = classList ? ` class="${classList}"` : '';
     return `<i data-lucide="${iconName}"${classAttrOut}></i>`;
-  });
-}
-
-function normalizeIDataLucideClasses(segmentHtml) {
-  // Fix previously converted icons that might have w-24/h-24 -> w-4/h-4
-  const iRegex = /<i\b([^>]*)data-lucide\s*=\s*"([^"]+)"([^>]*)><\/i>/gi;
-  return segmentHtml.replace(iRegex, (full, preAttrs, icon, postAttrs) => {
-    const attrs = `${preAttrs}${postAttrs}`;
-    const classMatch = /\bclass\s*=\s*"([^"]*)"/i.exec(attrs);
-    const classAttr = classMatch ? classMatch[1] : '';
-    if (!classAttr) return full;
-    const updated = classAttr
-      .replace(/\bw-\d+\b/g, 'w-4')
-      .replace(/\bh-\d+\b/g, 'h-4');
-    if (updated === classAttr) return full;
-    const newAttrs = attrs.replace(/\bclass\s*=\s*"([^"]*)"/i, `class="${updated}"`);
-    return `<i${newAttrs} data-lucide="${icon}"></i>`;
   });
 }
 
@@ -108,8 +118,7 @@ function convertRangeInFile(filePath, startLineNum, endLineNum) {
   const after = lines.slice(endIdx).join('\n');
 
   const converted = convertSvgToIDataLucide(target);
-  const normalized = normalizeIDataLucideClasses(converted);
-  const out = [before, normalized, after].filter((s) => s.length > 0).join('\n');
+  const out = [before, converted, after].filter((s) => s.length > 0).join('\n');
   writeFile(filePath, out);
 }
 
